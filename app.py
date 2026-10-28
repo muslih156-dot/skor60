@@ -193,8 +193,15 @@ with tab1:
             'match', 'liga_bener', 'negara', 'tier',
             'minute', 'menit_sekarang', 'score',
             'prob_gol', 'rekom_level', 'trading_advice',
-            'status', 'umur_menit', 'final_score', 'result'
+            'status', 'umur_menit'
         ]
+        # Tambah final_score & result kalau ada
+        if 'final_score' in df_live.columns:
+            display_cols.append('final_score')
+        if 'result' in df_live.columns:
+            display_cols.append('result')
+        # Filter hanya kolom yang ada
+        display_cols = [c for c in display_cols if c in df_live.columns]
         
         # Tambah waktu
         if 'created_at' in df_live.columns:
@@ -203,7 +210,9 @@ with tab1:
                 display_cols.append('waktu_deteksi')
             except: pass
         
-        df_show = df_live[display_cols].copy()
+        # Filter kolom yang ada aja biar ga KeyError
+        available_cols = [c for c in display_cols if c in df_live.columns]
+        df_show = df_live[available_cols].copy()
         
         # Rename kolom biar menarik
         rename_map = {
