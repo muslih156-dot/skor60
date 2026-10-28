@@ -1,0 +1,23 @@
+
+name: Bot Skor Menit 60
+
+on:
+  schedule:
+    - cron: '*/5 * * * *'  # jalan tiap 5 menit 24 jam
+  workflow_dispatch:  # bisa di-run manual juga
+
+jobs:
+  check:
+    runs-on: ubuntu-latest
+    steps:
+      - uses: actions/checkout@v3
+      - uses: actions/setup-python@v4
+        with:
+          python-version: '3.11'
+      - name: Install requests
+        run: pip install requests
+      - name: Run bot menit 60
+        env:
+          TELEGRAM_TOKEN: ${{ secrets.TELEGRAM_TOKEN }}
+          CHAT_ID: ${{ secrets.CHAT_ID }}
+        run: python check_once.py
