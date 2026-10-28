@@ -1,5 +1,5 @@
 
-import os, requests
+import os, json, requests
 from datetime import datetime, timedelta
 
 TELEGRAM_TOKEN = os.getenv("TELEGRAM_TOKEN")
@@ -23,24 +23,70 @@ def send_telegram(pesan):
     except:
         return False
 
-def already_sent_rest(mid):
+def load_local_matches():
+    for p in ["data/matches.json", "matches.json"]:
+        try:
+            if os.path.exists(p):
+                with open(p, "r", encoding="utf-8") as f:
+                    j = json.load(f)
+                    if isinstance(j, list):
+                        return j
+        except:
+            pass
+    return []
+
+def save_local_json(mid, home, away, league, minute, status_text, warning=""):
     try:
-        if not SUPABASE_URL or not SUPABASE_KEY:
-            return False
-        url = SUPABASE_URL.rstrip("/") + f"/rest/v1/matches?match_id=eq.{mid}&select=match_id"
-        headers = {"apikey": SUPABASE_KEY, "Authorization": f"Bearer {SUPABASE_KEY}"}
-        r = requests.get(url, headers=headers, timeout=10)
-        if r.status_code == 200:
-            data = r.json()
-            return len(data) > 0
+        os.makedirs("data", exist_ok=True)
+        matches = load_local_matches()
+        # Cek sudah ada?
+        if any(str(m.get("match_id")) == str(mid) for m in matches):
+            print(f"Skip local {mid} sudah ada di JSON")
+            return True
+        
+        full_status = status_text
+        if warning:
+            full_status = f"{status_text} | {warning}"
+        
+        new_entry = {
+            "match_id": str(mid),
+            "home_team": home,
+            "away_team": away,
+            "league": league,
+            "minute": minute,
+            "score": "0-0",
+            "status": full_status,
+            "created_at": datetime.utcnow().isoformat(),
+            "source": "github_json_fallback"
+        }
+        matches.insert(0, new_entry)  # terbaru di atas
+        # Keep max 200
+        matches = matches[:200]
+        
+        with open("data/matches.json", "w", encoding="utf-8") as f:
+            json.dump(matches, f, indent=2, default=str)
+        print(f"✅ Saved LOCAL JSON {mid} {home} vs {away} Menit {minute} {league} {warning} -> data/matches.json")
+        return True
+    except Exception as e:
+        print(f"Local JSON save error {e}")
+        import traceback
+        traceback.print_exc()
         return False
+
+def already_sent_local(mid):
+    try:
+        matches = load_local_matches()
+        return any(str(m.get("match_id")) == str(mid) for m in matches)
     except:
         return False
 
 def save_to_supabase_rest(mid, home, away, league, minute, status_text, warning=""):
+    # Coba Supabase REST, kalau gagal DNS, fallback ke local JSON
     try:
         if not SUPABASE_URL or not SUPABASE_KEY:
-            return
+            print("SUPABASE_URL/KEY kosong, pakai local JSON aja")
+            return save_local_json(mid, home, away, league, minute, status_text, warning)
+        
         full_status = status_text
         if warning:
             full_status = f"{status_text} | {warning}"
@@ -52,13 +98,36 @@ def save_to_supabase_rest(mid, home, away, league, minute, status_text, warning=
             "Prefer": "resolution=merge-duplicates"
         }
         data = {"match_id": str(mid), "home_team": home, "away_team": away, "league": league, "minute": minute, "score": "0-0", "status": full_status}
-        r = requests.post(url, headers=headers, json=data, timeout=15)
+        r = requests.post(url, headers=headers, json=data, timeout=10)
         if r.status_code in [200,201,204]:
-            print(f"Saved {mid} {home} vs {away} Menit {minute} {league} {warning}")
+            print(f"✅ Saved SUPABASE {mid} {home} vs {away} Menit {minute} {league} {warning}")
+            # Juga save ke local sebagai backup
+            save_local_json(mid, home, away, league, minute, status_text, warning)
+            return True
         else:
-            print(f"Save failed {r.status_code} {r.text[:200]}")
+            print(f"Supabase save failed {r.status_code} {r.text[:200]} - fallback ke local JSON")
+            return save_local_json(mid, home, away, league, minute, status_text, warning)
     except Exception as e:
-        print(f"Save error {e}")
+        print(f"Supabase save error {e} - fallback ke local JSON")
+        return save_local_json(mid, home, away, league, minute, status_text, warning)
+
+def already_sent(mid):
+    # Cek local dulu, baru Supabase
+    if already_sent_local(mid):
+        return True
+    # Coba Supabase kalau bisa
+    try:
+        if not SUPABASE_URL or not SUPABASE_KEY:
+            return False
+        url = SUPABASE_URL.rstrip("/") + f"/rest/v1/matches?match_id=eq.{mid}&select=match_id"
+        headers = {"apikey": SUPABASE_KEY, "Authorization": f"Bearer {SUPABASE_KEY}"}
+        r = requests.get(url, headers=headers, timeout=8)
+        if r.status_code == 200:
+            data = r.json()
+            return len(data) > 0
+        return False
+    except:
+        return False
 
 def parse_clock(clock_str, detail_str=""):
     try:
@@ -209,15 +278,15 @@ def cek_all_leagues():
 
 if __name__=="__main__":
     wita,utc = wita_now()
-    print(f"Phase 1 - ESPN V8.3 REST FIX - WITA {wita}")
+    print(f"Phase 1 - ESPN V8.4 GITHUB JSON FALLBACK - WITA {wita} - Supabase DNS fail -> pakai local JSON")
     matches = cek_all_leagues()
     print(f"Found {len(matches)} match di jendela 55-68 0-0")
     for m in matches:
-        if already_sent_rest(m["id"]):
+        if already_sent(m["id"]):
             print(f"Skip {m['id']} sudah ada")
             continue
         save_to_supabase_rest(m["id"], m["home"], m["away"], m["league"], m["minute"], "AKTIF", m["warning"])
         warning_text = f"\n\n{m['warning']}" if m["warning"] else ""
         pesan = f"⚽ <b>MENIT 60 - 0-0</b>\n\n🏟️ {m['home']} vs {m['away']}\n🏆 {m['league']} ({m['slug']})\n⏱️ Menit {m['minute']}{warning_text}\n\nID: {m['id']}"
         send_telegram(pesan)
-    print("Done V8.3 REST")
+    print("Done V8.4 GITHUB JSON FALLBACK - data/matches.json updated")
