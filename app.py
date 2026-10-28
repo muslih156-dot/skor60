@@ -6,10 +6,10 @@ import json, os
 
 WITA = timezone(timedelta(hours=8))
 
-st.set_page_config(page_title="Skor60 - Level 5 Dashboard", page_icon="⚽", layout="wide")
+st.set_page_config(page_title="Trading Bola Menit 60 - Last Goal System", page_icon="⚽", layout="wide")
 
-st.title("⚽ Skor60 - Level 5 AI Dashboard")
-st.caption(f"Bot detektor menit 60 skor 0-0 | Live dari GitHub + Supabase | Update tiap 5 menit | {datetime.now(WITA).strftime('%d %b %Y %H:%M WITA')}")
+st.title("⚽ Trading Bola Menit 60 - Last Goal System")
+st.caption(f"Detektor peluang Last Goal menit 60 skor 0-0 | Live AI System | Update tiap 5 menit | {datetime.now(WITA).strftime('%d %b %Y %H:%M WITA')}")
 
 @st.cache_data(ttl=60)
 def load_data():
@@ -28,32 +28,35 @@ def load_data():
 df = load_data()
 
 if df.empty:
-    st.info("📭 Belum ada data - bot baru jalan. Data akan muncul otomatis pas ada bola menit 60 0-0 (jam 19:00-02:00 WITA)")
-    st.success(f"✅ Bot GitHub Actions jalan tiap 5 menit | Supabase table matches sudah ada | Menunggu match pertama... | Jam server: {datetime.now(WITA).strftime('%H:%M WITA')}")
+    st.info("📭 Belum ada peluang Last Goal - bot baru jalan. Data akan muncul otomatis pas ada bola menit 60 0-0 (jam 19:00-02:00 WITA)")
+    st.success(f"✅ Last Goal System aktif | Bot jalan tiap 5 menit | Supabase ready | Jam: {datetime.now(WITA).strftime('%H:%M WITA')}")
 else:
     col1, col2, col3, col4 = st.columns(4)
-    col1.metric("Total Terdeteksi", len(df))
+    col1.metric("Total Peluang", len(df))
     finished = df[df['final_score_home'].notna()] if 'final_score_home' in df.columns else pd.DataFrame()
     col2.metric("Sudah Selesai", len(finished))
     if not finished.empty and 'goal_after_60' in finished.columns:
         gol = finished[finished['goal_after_60'] == True]
         pct = len(gol) / len(finished) * 100 if len(finished) > 0 else 0
-        col3.metric("Jadi Gol Setelah 60'", f"{pct:.1f}%", f"{len(gol)} dari {len(finished)}")
+        col3.metric("Win Rate Last Goal", f"{pct:.1f}%", f"{len(gol)}/{len(finished)}")
     else:
-        col3.metric("Jadi Gol Setelah 60'", "Menunggu hasil...")
+        col3.metric("Win Rate", "Menunggu...")
     aktif = df[df['status'] == 'AKTIF'] if 'status' in df.columns else pd.DataFrame()
     col4.metric("AKTIF 🔥", len(aktif))
     
-    st.subheader("📋 20 Match Terakhir Menit 60 0-0")
+    st.subheader("📋 20 Peluang Last Goal Terakhir")
     cols_show = [c for c in ['created_at','home_team','away_team','league','minute','status','shots_total','dangerous_attacks','final_status','goal_after_60'] if c in df.columns]
     show_df = df.head(20)[cols_show].copy()
     if 'created_at' in show_df.columns:
-        show_df['created_at'] = pd.to_datetime(show_df['created_at']).dt.tz_localize(None).dt.tz_localize('UTC').dt.tz_convert('Asia/Makassar').dt.strftime('%d/%m %H:%M')
+        try:
+            show_df['created_at'] = pd.to_datetime(show_df['created_at']).dt.tz_localize(None).dt.tz_localize('UTC').dt.tz_convert('Asia/Makassar').dt.strftime('%d/%m %H:%M')
+        except:
+            show_df['created_at'] = pd.to_datetime(show_df['created_at']).dt.strftime('%d/%m %H:%M')
     st.dataframe(show_df, use_container_width=True, hide_index=True)
 
-st.sidebar.title("Skor60 Level 5")
-st.sidebar.success("Phase 1 ✅ Memory\nPhase 2 ✅ Tracking\nPhase 3 ✅ Dashboard\nPhase 4 ⏳ ML Model (butuh 50 data)")
-st.sidebar.info(f"Jam WITA: {datetime.now(WITA).strftime('%H:%M:%S')}\nBot jalan 24 jam gratis\nGitHub Actions → Supabase → JSON → Dashboard")
+st.sidebar.title("Last Goal System")
+st.sidebar.success("Phase 1 ✅ Memory\nPhase 2 ✅ Tracking\nPhase 3 ✅ Dashboard\nPhase 4 ⏳ ML Model")
+st.sidebar.info(f"Trading Bola Menit 60 - Last Goal System\nJam WITA: {datetime.now(WITA).strftime('%H:%M:%S')}\nBot 24 jam gratis")
 if st.sidebar.button("🔄 Refresh Data"):
     st.cache_data.clear()
     st.rerun()
