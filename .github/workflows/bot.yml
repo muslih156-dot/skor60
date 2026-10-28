@@ -1,3 +1,4 @@
+Download
 name: Bot Skor Menit 60
 on:
   schedule:
@@ -24,6 +25,11 @@ jobs:
           SUPABASE_URL: ${{ secrets.SUPABASE_URL }}
           SUPABASE_KEY: ${{ secrets.SUPABASE_KEY }}
         run: python check_once.py
+      - name: Test Koneksi Supabase - INSERT TEST_GITHUB
+        env:
+          SUPABASE_URL: ${{ secrets.SUPABASE_URL }}
+          SUPABASE_KEY: ${{ secrets.SUPABASE_KEY }}
+        run: python test_supabase.py
       - name: Update final scores
         env:
           SUPABASE_URL: ${{ secrets.SUPABASE_URL }}
