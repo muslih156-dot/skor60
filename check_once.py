@@ -114,6 +114,31 @@ def parse_clock(clock_str, detail_str=""):
     except:
         return 0
 
+
+LEAGUE_NAMES = {'eng.1': '🏴\U000d0067\U000d0062\U000d0065\U000d006e\U000d0067\U000d007f Premier League', 'eng.2': '🏴\U000d0067\U000d0062\U000d0065\U000d006e\U000d0067\U000d007f Championship', 'eng.3': '🏴\U000d0067\U000d0062\U000d0065\U000d006e\U000d0067\U000d007f League One', 'eng.4': '🏴\U000d0067\U000d0062\U000d0065\U000d006e\U000d0067\U000d007f League Two', 'eng.fa': '🏴\U000d0067\U000d0062\U000d0065\U000d006e\U000d0067\U000d007f FA Cup', 'eng.league_cup': '🏴\U000d0067\U000d0062\U000d0065\U000d006e\U000d0067\U000d007f Carabao Cup', 'ger.1': '🇩🇪 Bundesliga', 'ger.2': '🇩🇪 2. Bundesliga', 'ger.dfb_pokal': '🇩🇪 DFB Pokal', 'esp.1': '🇪🇸 LaLiga', 'esp.2': '🇪🇸 LaLiga 2', 'esp.copa_del_rey': '🇪🇸 Copa del Rey', 'ita.1': '🇮🇹 Serie A', 'ita.2': '🇮🇹 Serie B', 'ita.coppa_italia': '🇮🇹 Coppa Italia', 'fra.1': '🇫🇷 Ligue 1', 'fra.2': '🇫🇷 Ligue 2', 'fra.coupe_de_france': '🇫🇷 Coupe de France', 'ned.1': '🇳🇱 Eredivisie', 'ned.cup': '🇳🇱 KNVB Cup', 'por.1': '🇵🇹 Primeira Liga', 'bel.1': '🇧🇪 Jupiler Pro League', 'tur.1': '🇹🇷 Süper Lig', 'sco.1': '🏴\U000d0067\U000d0062\U000d0073\U000d0063\U000d0074\U000d007f Scottish Premiership', 'uefa.champions': '🏆 Champions League', 'uefa.europa': '🏆 Europa League', 'uefa.europa.conf': '🏆 Conference League', 'uefa.champions.qual': '🏆 UCL Qualifiers', 'uefa.nations': '🌍 Nations League', 'uefa.euro': '🌍 Euro', 'usa.1': '🇺🇸 MLS', 'usa.2': '🇺🇸 USL Championship', 'bra.1': '🇧🇷 Brasileirão', 'arg.1': '🇦🇷 Liga Profesional', 'mex.1': '🇲🇽 Liga MX', 'jpn.1': '🇯🇵 J1 League', 'kor.1': '🇰🇷 K League 1', 'aus.1': '🇦🇺 A-League', 'chn.1': '🇨🇳 Super League', 'idn.1': '🇮🇩 Liga 1', 'ind.1': '🇮🇳 ISL', 'tha.1': '🇹🇭 Thai League 1', 'mys.1': '🇲🇾 Liga Super', 'vie.1': '🇻🇳 V-League', 'sgp.1': '🇸🇬 Premier League', 'phi.1': '🇵🇭 PFL', 'sau.1': '🇸🇦 Pro League', 'qat.1': '🇶🇦 Stars League', 'uae.1': '🇦🇪 Pro League', 'egy.1': '🇪🇬 Premier League', 'nga.1': '🇳🇬 NPFL', 'rsa.1': '🇿🇦 PSL', 'aut.1': '🇦🇹 Bundesliga', 'sui.1': '🇨🇭 Super League', 'den.1': '🇩🇰 Superliga', 'swe.1': '🇸🇪 Allsvenskan', 'nor.1': '🇳🇴 Eliteserien', 'pol.1': '🇵🇱 Ekstraklasa', 'cze.1': '🇨🇿 First League', 'gre.1': '🇬🇷 Super League', 'por.cup': '🇵🇹 Taça de Portugal', 'bel.cup': '🇧🇪 Belgian Cup', 'tur.cup': '🇹🇷 Turkish Cup'}
+
+def get_pretty_league(slug, raw_name=""):
+    # Jika raw_name bagus (bukan slug), pakai raw_name
+    if raw_name and raw_name != slug and len(raw_name) > 3 and "." not in raw_name:
+        # Bersihin nama aneh
+        if raw_name.lower() not in ["soccer", "football"]:
+            return raw_name
+    # Mapping
+    if slug in LEAGUE_NAMES:
+        return LEAGUE_NAMES[slug]
+    # Fallback: ita.1 -> ITA 1 -> Serie A
+    pretty = slug.replace(".", " ").replace("_", " ").title()
+    # Tambah emoji flag dari kode negara
+    if slug.startswith("ita"): return f"🇮🇹 {pretty}"
+    if slug.startswith("eng"): return f"🏴󐁧󐁢󐁥󐁮󐁧󐁿 {pretty}"
+    if slug.startswith("ger"): return f"🇩🇪 {pretty}"
+    if slug.startswith("esp"): return f"🇪🇸 {pretty}"
+    if slug.startswith("fra"): return f"🇫🇷 {pretty}"
+    if slug.startswith("uefa"): return f"🏆 {pretty}"
+    if slug.startswith("usa"): return f"🇺🇸 {pretty}"
+    return pretty
+
+
 def get_warning_flags(league_name, home, away, league_code=""):
     warnings = []
     low_league = league_name.lower()
@@ -210,7 +235,8 @@ def cek_parallel():
             aws = int(away.get("score",0) or 0)
             hname = home.get("team",{}).get("displayName","Home")
             aname = away.get("team",{}).get("displayName","Away")
-            real_league = (ev.get("leagues",[{}])[0].get("name") if ev.get("leagues") else lname) or slug
+            raw_league_name = (ev.get("leagues",[{}])[0].get("name") if ev.get("leagues") else "") or lname or ""
+            real_league = get_pretty_league(slug, raw_league_name)
             if "IN_PROGRESS" in tname or state=="in":
                 warning = get_warning_flags(real_league, hname, aname, slug)
                 line = f"{hname} {hs}-{aws} {aname} Menit {minute} {real_league} [{slug}] {warning}"
