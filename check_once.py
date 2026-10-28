@@ -11,74 +11,85 @@ def wita_now():
     wita = utc + timedelta(hours=8)
     return wita, utc
 
-def load_local_matches(path="data/matches.json"):
+def load_local_matches(path):
     try:
         if os.path.exists(path):
             with open(path, "r", encoding="utf-8") as f:
                 j = json.load(f)
                 if isinstance(j, list):
                     return j
-    except:
-        pass
+    except Exception as e:
+        print(f"Load {path} error {e}")
     return []
 
-def save_with_monthly_archive(mid, home, away, league, minute, status_text, warning=""):
+# FIX V8.9: Save batch sekaligus biar ga ketimpa!
+def save_batch(new_matches):
+    if not new_matches:
+        return
     try:
         wita, utc = wita_now()
         month_key = wita.strftime("%Y-%m")
-        full_status = status_text
-        if warning:
-            full_status = f"{status_text} | {warning}"
-        new_entry = {
-            "match_id": str(mid),
-            "home_team": home,
-            "away_team": away,
-            "league": league,
-            "minute": minute,
-            "score": "0-0",
-            "status": full_status,
-            "created_at": wita.isoformat(),
-            "wita_date": wita.strftime("%Y-%m-%d"),
-            "month": month_key
-        }
         os.makedirs("data", exist_ok=True)
-        matches = load_local_matches("data/matches.json")
-        if any(str(m.get("match_id")) == str(mid) for m in matches):
-            return True
-        matches.insert(0, new_entry)
-        matches = matches[:200]
-        with open("data/matches.json", "w", encoding="utf-8") as f:
-            json.dump(matches, f, indent=2, default=str)
         os.makedirs("data/archive", exist_ok=True)
-        archive_path = f"data/archive/{month_key}.json"
-        archive = load_local_matches(archive_path)
-        archive.insert(0, new_entry)
-        with open(archive_path, "w", encoding="utf-8") as f:
-            json.dump(archive, f, indent=2, default=str)
-        all_time_path = "data/archive/all_time.json"
-        all_time = load_local_matches(all_time_path)
-        all_time.insert(0, new_entry)
-        with open(all_time_path, "w", encoding="utf-8") as f:
-            json.dump(all_time, f, indent=2, default=str)
-        print(f"✅ Saved UNLIMITED: {mid} {home} vs {away}")
-        return True
+        
+        # Load sekali, bukan tiap match!
+        existing_dash = load_local_matches("data/matches.json")
+        existing_month = load_local_matches(f"data/archive/{month_key}.json")
+        existing_all = load_local_matches("data/archive/all_time.json")
+        
+        # Filter yang sudah ada
+        existing_ids = set(str(m.get("match_id")) for m in existing_dash)
+        filtered = [m for m in new_matches if str(m["id"]) not in existing_ids]
+        
+        if not filtered:
+            print("Semua match sudah ada, skip")
+            return
+        
+        # Buat entries baru
+        new_entries = []
+        for m in filtered:
+            full_status = m["status"]
+            if m["warning"]:
+                full_status = f"{m['status']} | {m['warning']}"
+            entry = {
+                "match_id": str(m["id"]),
+                "home_team": m["home"],
+                "away_team": m["away"],
+                "league": m["league"],
+                "minute": m["minute"],
+                "score": "0-0",
+                "status": full_status,
+                "created_at": wita.isoformat(),
+                "wita_date": wita.strftime("%Y-%m-%d"),
+                "month": month_key
+            }
+            new_entries.append(entry)
+        
+        # Insert semua di depan (terbaru dulu)
+        # Dashboard: 200 terbaru
+        updated_dash = new_entries + existing_dash
+        updated_dash = updated_dash[:200]
+        with open("data/matches.json", "w", encoding="utf-8") as f:
+            json.dump(updated_dash, f, indent=2, default=str)
+        
+        # Monthly: UNLIMITED
+        updated_month = new_entries + existing_month
+        with open(f"data/archive/{month_key}.json", "w", encoding="utf-8") as f:
+            json.dump(updated_month, f, indent=2, default=str)
+        
+        # All time: UNLIMITED
+        updated_all = new_entries + existing_all
+        with open("data/archive/all_time.json", "w", encoding="utf-8") as f:
+            json.dump(updated_all, f, indent=2, default=str)
+        
+        print(f"✅ Saved BATCH: {len(new_entries)} new | dash {len(updated_dash)} | month {len(updated_month)} | all_time {len(updated_all)}")
+        for e in new_entries:
+            print(f"  - {e['match_id']} {e['home_team']} vs {e['away_team']} {e['league']} Menit {e['minute']}")
+        
     except Exception as e:
-        print(f"Save error {e}")
-        return False
-
-def already_sent(mid):
-    try:
-        matches = load_local_matches("data/matches.json")
-        if any(str(m.get("match_id")) == str(mid) for m in matches):
-            return True
-        wita, _ = wita_now()
-        month_key = wita.strftime("%Y-%m")
-        archive = load_local_matches(f"data/archive/{month_key}.json")
-        if any(str(m.get("match_id")) == str(mid) for m in archive):
-            return True
-        return False
-    except:
-        return False
+        print(f"Save batch error {e}")
+        import traceback
+        traceback.print_exc()
 
 def parse_clock(clock_str, detail_str=""):
     try:
@@ -166,7 +177,7 @@ def fetch_league(league_tuple):
 def cek_parallel():
     wita, utc = wita_now()
     start = time.time()
-    print(f"WITA {wita} | UTC {utc} - SCAN 220 LIGA PARALLEL 25 THREAD")
+    print(f"WITA {wita} | UTC {utc} - SCAN 220 LIGA PARALLEL 25 THREAD V8.9 FIX BATCH")
     leagues = fetch_all_leagues()
     print(f"Total {len(leagues)} liga")
     all_events={}
@@ -175,7 +186,6 @@ def cek_parallel():
         for fut in as_completed(futures):
             slug, lname, evs = fut.result()
             if evs:
-                print(f"{slug} -> {len(evs)}")
                 for ev in evs:
                     all_events[ev.get("id")]=(ev,slug,lname)
     elapsed = time.time()-start
@@ -209,19 +219,17 @@ def cek_parallel():
             continue
     inprog_sorted = sorted(inprog, key=lambda x: x[0])
     print(f"--- {len(inprog_sorted)} IN-PROGRESS in {elapsed:.1f}s ---")
-    for minute, line, ev, hs, aws, hname, aname, real_league, slug, warning in inprog_sorted[:50]:
+    for minute, line, ev, hs, aws, hname, aname, real_league, slug, warning in inprog_sorted[:30]:
         print(line)
         if 55 <= minute <= 68 and hs==0 and aws==0:
-            out.append({"id": ev.get("id"), "home": hname, "away": aname, "league": real_league, "minute": minute, "warning": warning, "slug": slug})
+            out.append({"id": ev.get("id"), "home": hname, "away": aname, "league": real_league, "minute": minute, "warning": warning, "slug": slug, "status": "AKTIF"})
+    print(f"Found {len(out)} match 55-68 0-0")
     return out
 
 if __name__=="__main__":
     wita,utc = wita_now()
-    print(f"V8.7 220 LIGA PARALLEL KONSISTEN - WITA {wita}")
+    print(f"V8.9 FIX BATCH - 220 LIGA - WITA {wita}")
     matches = cek_parallel()
-    print(f"Found {len(matches)} match 55-68 0-0")
-    for m in matches:
-        if already_sent(m["id"]):
-            continue
-        save_with_monthly_archive(m["id"], m["home"], m["away"], m["league"], m["minute"], "AKTIF", m["warning"])
-    print("Done V8.7")
+    # Save batch sekaligus biar ga ketimpa!
+    save_batch(matches)
+    print("Done V8.9 BATCH FIX")
