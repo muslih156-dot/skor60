@@ -1,3 +1,4 @@
+
 name: Bot Skor Menit 60
 on:
   schedule:
@@ -15,34 +16,37 @@ jobs:
       - uses: actions/setup-python@v4
         with:
           python-version: '3.11'
+      - name: Fix DNS for Supabase (bypass NameResolutionError)
+        run: |
+          echo "=== Fix DNS ==="
+          echo "nameserver 1.1.1.1" | sudo tee /etc/resolv.conf
+          echo "nameserver 8.8.8.8" | sudo tee -a /etc/resolv.conf
+          echo "nameserver 8.8.4.4" | sudo tee -a /etc/resolv.conf
+          cat /etc/resolv.conf
+          echo "=== Test DNS Supabase ==="
+          nslookup osujspgrzyrjpzkwwupo.supabase.co || dig osujspgrzyrjpzkwwupo.supabase.co || getent hosts osujspgrzyrjpzkwwupo.supabase.co || echo "DNS still failing - will use GitHub JSON fallback"
       - name: Install deps
         run: pip install -r requirements.txt
-      - name: Run bot menit 60 - REST FIX
+      - name: Run bot menit 60 - GITHUB JSON FALLBACK
         env:
           TELEGRAM_TOKEN: ${{ secrets.TELEGRAM_TOKEN }}
           CHAT_ID: ${{ secrets.CHAT_ID }}
           SUPABASE_URL: ${{ secrets.SUPABASE_URL }}
           SUPABASE_KEY: ${{ secrets.SUPABASE_KEY }}
         run: python check_once.py
-      - name: Test Koneksi Supabase REST
+      - name: Export to JSON for dashboard - GITHUB JSON
         env:
           SUPABASE_URL: ${{ secrets.SUPABASE_URL }}
           SUPABASE_KEY: ${{ secrets.SUPABASE_KEY }}
-        run: python test_supabase.py
-      - name: Update final scores REST
-        env:
-          SUPABASE_URL: ${{ secrets.SUPABASE_URL }}
-          SUPABASE_KEY: ${{ secrets.SUPABASE_KEY }}
-        run: python update_results.py
-      - name: Export to JSON for dashboard REST
-        env:
-          SUPABASE_URL: ${{ secrets.SUPABASE_URL }}
-          SUPABASE_KEY: ${{ secrets.SUPABASE_KEY }}
-        run: python export_to_json.py
+        run: |
+          echo "=== Export - coba Supabase kalau bisa, kalau tidak pakai local JSON yang sudah ada ==="
+          python export_to_json.py || echo "Export failed - local JSON sudah ada dari check_once.py"
+          ls -lh data/matches.json || echo "No data/matches.json"
+          cat data/matches.json | head -100
       - name: Commit JSON to repo
         run: |
           git config user.name "bot-skor60"
           git config user.email "bot@skor60.com"
           git add data/matches.json || git add matches.json || true
-          git diff --staged --quiet || git commit -m "Update matches.json [skip ci]"
+          git diff --staged --quiet || git commit -m "Update matches.json V8.4 GITHUB FALLBACK [skip ci]"
           git push || echo "No changes to push"
