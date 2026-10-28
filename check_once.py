@@ -1,6 +1,6 @@
 
 import os, requests
-from datetime import datetime
+from datetime import datetime, timedelta
 from supabase import create_client
 
 TELEGRAM_TOKEN = os.getenv("TELEGRAM_TOKEN")
@@ -13,6 +13,12 @@ if SUPABASE_URL and SUPABASE_KEY:
     supabase = create_client(SUPABASE_URL, SUPABASE_KEY)
     print("Supabase connected")
 
+def wita_now():
+    # UTC +8
+    utc = datetime.utcnow()
+    wita = utc + timedelta(hours=8)
+    return wita, utc
+
 def send_telegram(pesan):
     if not TELEGRAM_TOKEN or not CHAT_ID:
         return False
@@ -21,129 +27,148 @@ def send_telegram(pesan):
         data = {"chat_id": CHAT_ID, "text": pesan, "parse_mode": "HTML"}
         r = requests.post(url, data=data, timeout=10)
         return r.status_code == 200
-    except:
+    except Exception as e:
+        print(f"Telegram error {e}")
         return False
 
-def already_sent(match_id):
+def already_sent(mid):
     if not supabase:
         return False
     try:
-        res = supabase.table("matches").select("match_id").eq("match_id", str(match_id)).execute()
+        res = supabase.table("matches").select("match_id").eq("match_id", str(mid)).execute()
         return len(res.data) > 0
     except:
         return False
 
-def save_to_supabase(match_id, home, away, league, minute, status_text):
+def save_to_supabase(mid, home, away, league, minute, status_text):
     if not supabase:
         return
     try:
         data = {
-            "match_id": str(match_id),
+            "match_id": str(mid),
             "home_team": home,
             "away_team": away,
             "league": league,
             "minute": minute,
             "score": "0-0",
             "status": status_text,
-            "shots_total": 0,
-            "dangerous_attacks": 0,
-            "sot_total": 0,
-            "xg": 0
         }
         supabase.table("matches").upsert(data, on_conflict="match_id").execute()
-        print(f"Saved {match_id} {home} vs {away} Menit {minute}")
+        print(f"Saved {mid} {home} vs {away} Menit {minute} {league}")
     except Exception as e:
-        print(f"Supabase save error: {e}")
+        print(f"Save error {e}")
 
 def parse_clock(clock_str, detail_str=""):
-    # ESPN bisa: "60:00", "60'", "60", "HT", "45+2", "90+3"
     try:
         s = (clock_str or detail_str or "").strip()
         if not s:
             return 0
-        if "HT" in s.upper():
+        su = s.upper()
+        if "HT" in su:
             return 45
-        if "FT" in s.upper():
+        if "FT" in su or "FINAL" in su:
             return 90
         s = s.replace("'", "").replace('"', "").replace("’", "")
         if ":" in s:
             return int(s.split(":")[0])
         if "+" in s:
             return int(s.split("+")[0])
-        # angka murni
         return int(float(s))
     except:
         return 0
 
-def fetch_espn():
-    url = "https://site.api.espn.com/apis/site/v2/sports/soccer/all/scoreboard"
+def fetch_espn_league(league_code, date_str):
+    # league_code = all, eng.1, esp.1, ger.1, ita.1, fra.1, etc
+    url = f"https://site.api.espn.com/apis/site/v2/sports/soccer/{league_code}/scoreboard"
+    if date_str:
+        url += f"?dates={date_str}"
     try:
         r = requests.get(url, timeout=15)
-        print(f"ESPN {url} -> {r.status_code} len {len(r.text)}")
-        data = r.json()
-        events = data.get("events", [])
-        print(f"Total events dari ESPN: {len(events)}")
-        return events
+        if r.status_code != 200:
+            print(f"ESPN {league_code} {date_str} -> {r.status_code}")
+            return []
+        j = r.json()
+        evs = j.get("events", [])
+        print(f"ESPN {league_code} dates={date_str} -> {len(evs)} events")
+        return evs
     except Exception as e:
-        print(f"ESPN error: {e}")
+        print(f"ESPN {league_code} error {e}")
         return []
 
 def cek():
-    events = fetch_espn()
+    wita, utc = wita_now()
+    print(f"WITA NOW: {wita.strftime('%Y-%m-%d %H:%M:%S')} WITA | UTC: {utc.strftime('%Y-%m-%d %H:%M:%S')} UTC")
+    # ESPN butuh YYYYMMDD
+    date_wita = wita.strftime("%Y%m%d")
+    date_wita_yesterday = (wita - timedelta(days=1)).strftime("%Y%m%d")
+    date_utc = utc.strftime("%Y%m%d")
+
+    all_events = {}
+    leagues = ["all", "eng.1", "eng.2", "esp.1", "ger.1", "ita.1", "fra.1", "uefa.champions", "uefa.europa", "conmebol.libertadores", "mex.1", "usa.1", "bra.1"]
+    for lg in leagues:
+        for d in [date_wita, date_wita_yesterday, date_utc]:
+            evs = fetch_espn_league(lg, d)
+            for ev in evs:
+                all_events[ev.get("id")] = ev
+    print(f"Total UNIQUE events gabungan: {len(all_events)}")
+
     out = []
-    inprog_list = []
-    for ev in events:
+    inprog = []
+    scheduled = 0
+    finished = 0
+    for ev in all_events.values():
         try:
             comp = ev.get("competitions", [{}])[0]
             status = comp.get("status", {})
-            type_name = status.get("type", {}).get("name", "")
+            tname = status.get("type", {}).get("name", "")
             state = status.get("type", {}).get("state", "")
             clock = status.get("displayClock", "") or status.get("clock", "") or ""
             detail = status.get("type", {}).get("shortDetail", "") or status.get("type", {}).get("detail", "") or ""
             minute = parse_clock(clock, detail)
-            competitors = comp.get("competitors", [])
-            if len(competitors) < 2:
+            comps = comp.get("competitors", [])
+            if len(comps) < 2:
                 continue
-            home = next((c for c in competitors if c.get("homeAway") == "home"), competitors[0])
-            away = next((c for c in competitors if c.get("homeAway") == "away"), competitors[1])
+            home = next((c for c in comps if c.get("homeAway") == "home"), comps[0])
+            away = next((c for c in comps if c.get("homeAway") == "away"), comps[1])
             hs = int(home.get("score", 0) or 0)
             aws = int(away.get("score", 0) or 0)
-            home_name = home.get("team", {}).get("displayName", "Home")
-            away_name = away.get("team", {}).get("displayName", "Away")
-            league = ev.get("leagues", [{}])[0].get("name") if ev.get("leagues") else "Soccer"
+            hname = home.get("team", {}).get("displayName", "Home")
+            aname = away.get("team", {}).get("displayName", "Away")
+            league_name = (ev.get("leagues", [{}])[0].get("name") if ev.get("leagues") else comp.get("league", {}).get("name", "Soccer"))
 
-            is_live = "IN_PROGRESS" in type_name or state == "in"
-            if is_live:
-                inprog_list.append(f"{home_name} {hs}-{aws} {away_name} Menit {minute} ({clock}/{detail}) {league}")
-                if 55 <= minute <= 68 and hs == 0 and aws == 0:
-                    out.append({"id": ev.get("id"), "home": home_name, "away": away_name, "league": league, "minute": minute})
+            if "IN_PROGRESS" in tname or state == "in":
+                line = f"{hname} {hs}-{aws} {aname} Menit {minute} ({clock}/{detail}) [{tname}/{state}] {league_name}"
+                inprog.append((minute, line, ev, hs, aws, hname, aname, league_name))
+            elif "PRE" in tname or state == "pre":
+                scheduled += 1
+            elif "POST" in tname or state == "post":
+                finished += 1
         except Exception as e:
-            print(f"Parse error: {e}")
+            print(f"parse err {e}")
             continue
-    print(f"--- {len(inprog_list)} IN-PROGRESS sekarang jam 00:09 WITA ---")
-    for line in inprog_list[:20]:
+
+    inprog_sorted = sorted(inprog, key=lambda x: x[0])
+    print(f"--- {len(inprog_sorted)} IN-PROGRESS | {scheduled} SCHEDULED | {finished} FINISHED | WITA {wita.strftime('%H:%M')} ---")
+    for minute, line, ev, hs, aws, hname, aname, league_name in inprog_sorted[:30]:
         print(line)
-    print(f"--- end list ---")
+        if 55 <= minute <= 68 and hs == 0 and aws == 0:
+            out.append({"id": ev.get("id"), "home": hname, "away": aname, "league": league_name, "minute": minute})
+
+    if len(inprog_sorted) > 30:
+        print(f"... dan {len(inprog_sorted)-30} lagi tidak ditampilkan")
+    print("--- end list ---")
     return out
 
 if __name__ == "__main__":
-    print(f"Phase 1 - ESPN V5 DETAIL 00:09 WITA - {datetime.now()}")
+    wita, utc = wita_now()
+    print(f"Phase 1 - ESPN V6 FIX DATE - WITA {wita} | UTC {utc}")
     matches = cek()
-    print(f"Found {len(matches)} match di jendela 55-68")
+    print(f"Found {len(matches)} match di jendela 55-68 0-0")
     for m in matches:
         if already_sent(m["id"]):
             print(f"Skip {m['id']} sudah ada")
             continue
         save_to_supabase(m["id"], m["home"], m["away"], m["league"], m["minute"], "AKTIF")
-        pesan = f"""⚽ <b>TRADING BOLA MENIT 60 - 0-0</b>
-
-🏟️ {m['home']} vs {m['away']}
-🏆 {m['league']}
-⏱️ Menit {m['minute']}
-
-📊 AKTIF 🔥 Potensi Last Goal!
-
-ID: {m['id']}"""
-        ok = send_telegram(pesan)
-        print(f"Telegram {m['id']}: {ok}")
-    print("Done V5")
+        pesan = f"⚽ <b>MENIT 60 - 0-0</b>\n\n🏟️ {m['home']} vs {m['away']}\n🏆 {m['league']}\n⏱️ Menit {m['minute']}\n\nID: {m['id']}"
+        send_telegram(pesan)
+    print("Done V6")
