@@ -6,7 +6,7 @@ on:
   workflow_dispatch:
 
 concurrency:
-  group: skor60-220-parallel
+  group: skor60-v89-batch
   cancel-in-progress: false
 
 jobs:
@@ -22,44 +22,48 @@ jobs:
         with:
           python-version: '3.11'
       
-      - name: Fix DNS + Show Time WITA
+      - name: Fix DNS + Show Time
         run: |
           echo "nameserver 1.1.1.1" | sudo tee /etc/resolv.conf
           echo "nameserver 8.8.8.8" | sudo tee -a /etc/resolv.conf
-          echo "UTC: $(date -u)"
-          echo "WITA: $(TZ='Asia/Makassar' date)"
+          echo "UTC: $(date -u) | WITA: $(TZ='Asia/Makassar' date)"
       
       - name: Install deps
         run: pip install -r requirements.txt
       
-      - name: Run bot V8.8 220 LIGA PARALLEL UNLIMITED
+      - name: Run bot V8.9 BATCH FIX
         env:
           TELEGRAM_TOKEN: ${{ secrets.TELEGRAM_TOKEN }}
           CHAT_ID: ${{ secrets.CHAT_ID }}
         run: |
-          echo "=== START SCAN 220 LIGA PARALLEL UNLIMITED ==="
-          echo "UTC: $(date -u) | WITA: $(TZ='Asia/Makassar' date)"
+          echo "=== START V8.9 BATCH FIX ==="
           python check_once.py
-          echo "=== END ==="
-          echo "=== Files created ==="
+          echo "=== Files ==="
           ls -lh data/ || echo "no data"
           ls -lh data/archive/ || echo "no archive"
-          cat data/matches.json | head -20
+          echo "=== matches.json content ==="
+          cat data/matches.json || echo "no file"
       
-      - name: Commit UNLIMITED - FORCE ADD bypass .gitignore
+      - name: Commit - FORCE ADD bypass gitignore
         run: |
           git config user.name "bot-skor60"
           git config user.email "bot@skor60.com"
-          echo "=== .gitignore check ==="
-          cat .gitignore || echo "no .gitignore"
-          echo "=== Force add with -f to bypass .gitignore ==="
-          git add -f data/matches.json || git add -f data/ || true
-          git add -f data/archive/ || true
+          echo "=== .gitignore ==="
+          cat .gitignore 2>/dev/null || echo "no gitignore"
+          echo "=== git status before ==="
           git status
+          echo "=== FORCE ADD ==="
+          git add -f data/matches.json
+          git add -f data/archive/ || true
+          echo "=== git status after add ==="
+          git status
+          echo "=== git diff staged ==="
+          git diff --staged --stat
           if git diff --staged --quiet; then
-            echo "No changes - skip commit"
+            echo "No changes to commit"
           else
-            echo "Committing changes..."
-            git commit -m "V8.8 FIX WEB KOSONG - FORCE ADD data/ $(date -u +%Y-%m-%d_%H:%M_UTC) [skip ci]"
-            git push || (sleep 10 && git push) || true
+            git commit -m "V8.9 FIX BATCH - $(date -u +%Y-%m-%d_%H:%M_UTC) - 2 matches no overwrite [skip ci]"
+            echo "=== Pushing ==="
+            git push || (sleep 10 && git push) || (sleep 20 && git push)
+            echo "=== Push done ==="
           fi
