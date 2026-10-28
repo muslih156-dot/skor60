@@ -4,8 +4,6 @@ from datetime import datetime, timedelta
 
 TELEGRAM_TOKEN = os.getenv("TELEGRAM_TOKEN")
 CHAT_ID = os.getenv("CHAT_ID")
-SUPABASE_URL = os.getenv("SUPABASE_URL")
-SUPABASE_KEY = os.getenv("SUPABASE_KEY")
 
 def wita_now():
     utc = datetime.utcnow()
@@ -23,27 +21,21 @@ def send_telegram(pesan):
     except:
         return False
 
-def load_local_matches():
-    for p in ["data/matches.json", "matches.json"]:
-        try:
-            if os.path.exists(p):
-                with open(p, "r", encoding="utf-8") as f:
-                    j = json.load(f)
-                    if isinstance(j, list):
-                        return j
-        except:
-            pass
+def load_local_matches(path="data/matches.json"):
+    try:
+        if os.path.exists(path):
+            with open(path, "r", encoding="utf-8") as f:
+                j = json.load(f)
+                if isinstance(j, list):
+                    return j
+    except:
+        pass
     return []
 
-def save_local_json(mid, home, away, league, minute, status_text, warning=""):
+def save_with_monthly_archive(mid, home, away, league, minute, status_text, warning=""):
     try:
-        os.makedirs("data", exist_ok=True)
-        matches = load_local_matches()
-        # Cek sudah ada?
-        if any(str(m.get("match_id")) == str(mid) for m in matches):
-            print(f"Skip local {mid} sudah ada di JSON")
-            return True
-        
+        wita, utc = wita_now()
+        month_key = wita.strftime("%Y-%m")  # 2026-10
         full_status = status_text
         if warning:
             full_status = f"{status_text} | {warning}"
@@ -56,75 +48,60 @@ def save_local_json(mid, home, away, league, minute, status_text, warning=""):
             "minute": minute,
             "score": "0-0",
             "status": full_status,
-            "created_at": datetime.utcnow().isoformat(),
-            "source": "github_json_fallback"
+            "created_at": wita.isoformat(),
+            "wita_date": wita.strftime("%Y-%m-%d"),
+            "month": month_key
         }
-        matches.insert(0, new_entry)  # terbaru di atas
-        # Keep max 200
-        matches = matches[:200]
         
+        # 1. Save ke data/matches.json (200 terbaru buat dashboard cepat)
+        os.makedirs("data", exist_ok=True)
+        matches = load_local_matches("data/matches.json")
+        if any(str(m.get("match_id")) == str(mid) for m in matches):
+            print(f"Skip {mid} sudah ada")
+            return True
+        matches.insert(0, new_entry)
+        matches = matches[:200]  # dashboard max 200
         with open("data/matches.json", "w", encoding="utf-8") as f:
             json.dump(matches, f, indent=2, default=str)
-        print(f"✅ Saved LOCAL JSON {mid} {home} vs {away} Menit {minute} {league} {warning} -> data/matches.json")
+        print(f"✅ Saved dashboard 200 terbaru: {mid} {home} vs {away} {league}")
+        
+        # 2. Save ke archive bulanan (TIDAK PERNAH KETIMPA! buat summary bulanan)
+        os.makedirs("data/archive", exist_ok=True)
+        archive_path = f"data/archive/{month_key}.json"
+        archive = load_local_matches(archive_path)
+        archive.insert(0, new_entry)
+        # Archive bulanan TIDAK dibatasi - simpan semua!
+        with open(archive_path, "w", encoding="utf-8") as f:
+            json.dump(archive, f, indent=2, default=str)
+        print(f"✅ Saved archive bulanan {month_key}: {len(archive)} total bulan ini -> {archive_path}")
+        
+        # 3. Save ke all_time.json (semua match dari awal, buat summary total)
+        all_time_path = "data/archive/all_time.json"
+        all_time = load_local_matches(all_time_path)
+        all_time.insert(0, new_entry)
+        # All time UNLIMITED - semua dari awal kesimpen! (ga pernah ketimpa)
+        with open(all_time_path, "w", encoding="utf-8") as f:
+            json.dump(all_time, f, indent=2, default=str)
+        print(f"✅ Saved all_time: {len(all_time)} total semua waktu")
+        
         return True
     except Exception as e:
-        print(f"Local JSON save error {e}")
+        print(f"Save error {e}")
         import traceback
         traceback.print_exc()
         return False
 
-def already_sent_local(mid):
-    try:
-        matches = load_local_matches()
-        return any(str(m.get("match_id")) == str(mid) for m in matches)
-    except:
-        return False
-
-def save_to_supabase_rest(mid, home, away, league, minute, status_text, warning=""):
-    # Coba Supabase REST, kalau gagal DNS, fallback ke local JSON
-    try:
-        if not SUPABASE_URL or not SUPABASE_KEY:
-            print("SUPABASE_URL/KEY kosong, pakai local JSON aja")
-            return save_local_json(mid, home, away, league, minute, status_text, warning)
-        
-        full_status = status_text
-        if warning:
-            full_status = f"{status_text} | {warning}"
-        url = SUPABASE_URL.rstrip("/") + "/rest/v1/matches"
-        headers = {
-            "apikey": SUPABASE_KEY,
-            "Authorization": f"Bearer {SUPABASE_KEY}",
-            "Content-Type": "application/json",
-            "Prefer": "resolution=merge-duplicates"
-        }
-        data = {"match_id": str(mid), "home_team": home, "away_team": away, "league": league, "minute": minute, "score": "0-0", "status": full_status}
-        r = requests.post(url, headers=headers, json=data, timeout=10)
-        if r.status_code in [200,201,204]:
-            print(f"✅ Saved SUPABASE {mid} {home} vs {away} Menit {minute} {league} {warning}")
-            # Juga save ke local sebagai backup
-            save_local_json(mid, home, away, league, minute, status_text, warning)
-            return True
-        else:
-            print(f"Supabase save failed {r.status_code} {r.text[:200]} - fallback ke local JSON")
-            return save_local_json(mid, home, away, league, minute, status_text, warning)
-    except Exception as e:
-        print(f"Supabase save error {e} - fallback ke local JSON")
-        return save_local_json(mid, home, away, league, minute, status_text, warning)
-
 def already_sent(mid):
-    # Cek local dulu, baru Supabase
-    if already_sent_local(mid):
-        return True
-    # Coba Supabase kalau bisa
     try:
-        if not SUPABASE_URL or not SUPABASE_KEY:
-            return False
-        url = SUPABASE_URL.rstrip("/") + f"/rest/v1/matches?match_id=eq.{mid}&select=match_id"
-        headers = {"apikey": SUPABASE_KEY, "Authorization": f"Bearer {SUPABASE_KEY}"}
-        r = requests.get(url, headers=headers, timeout=8)
-        if r.status_code == 200:
-            data = r.json()
-            return len(data) > 0
+        matches = load_local_matches("data/matches.json")
+        if any(str(m.get("match_id")) == str(mid) for m in matches):
+            return True
+        # Cek juga archive bulan ini
+        wita, _ = wita_now()
+        month_key = wita.strftime("%Y-%m")
+        archive = load_local_matches(f"data/archive/{month_key}.json")
+        if any(str(m.get("match_id")) == str(mid) for m in archive):
+            return True
         return False
     except:
         return False
@@ -187,7 +164,6 @@ def fetch_all_espn_leagues():
     all_leagues = []
     try:
         r = requests.get("https://sports.core.api.espn.com/v2/sports/soccer/leagues?limit=500", timeout=15)
-        print(f"Fetch leagues -> {r.status_code} len {len(r.text)}")
         if r.status_code == 200:
             j = r.json()
             items = j.get("items", [])
@@ -278,15 +254,15 @@ def cek_all_leagues():
 
 if __name__=="__main__":
     wita,utc = wita_now()
-    print(f"Phase 1 - ESPN V8.4 GITHUB JSON FALLBACK - WITA {wita} - Supabase DNS fail -> pakai local JSON")
+    print(f"Phase 1 - V8.5 MONTHLY ARCHIVE - WITA {wita} - 200 terbaru + archive bulanan ga ketimpa!")
     matches = cek_all_leagues()
     print(f"Found {len(matches)} match di jendela 55-68 0-0")
     for m in matches:
         if already_sent(m["id"]):
             print(f"Skip {m['id']} sudah ada")
             continue
-        save_to_supabase_rest(m["id"], m["home"], m["away"], m["league"], m["minute"], "AKTIF", m["warning"])
+        save_with_monthly_archive(m["id"], m["home"], m["away"], m["league"], m["minute"], "AKTIF", m["warning"])
         warning_text = f"\n\n{m['warning']}" if m["warning"] else ""
         pesan = f"⚽ <b>MENIT 60 - 0-0</b>\n\n🏟️ {m['home']} vs {m['away']}\n🏆 {m['league']} ({m['slug']})\n⏱️ Menit {m['minute']}{warning_text}\n\nID: {m['id']}"
         send_telegram(pesan)
-    print("Done V8.4 GITHUB JSON FALLBACK - data/matches.json updated")
+    print("Done V8.5 - dashboard + archive bulanan")
