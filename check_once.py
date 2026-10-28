@@ -6,6 +6,10 @@ from concurrent.futures import ThreadPoolExecutor, as_completed
 TELEGRAM_TOKEN = os.getenv("TELEGRAM_TOKEN")
 CHAT_ID = os.getenv("CHAT_ID")
 
+# V9.0 - WINDOW LEBIH LEBAR SAMPE MENIT 80!
+MIN_MINUTE = 50
+MAX_MINUTE = 80
+
 def wita_now():
     utc = datetime.utcnow()
     wita = utc + timedelta(hours=8)
@@ -22,30 +26,30 @@ def load_local_matches(path):
         print(f"Load {path} error {e}")
     return []
 
-# FIX V8.9: Save batch sekaligus biar ga ketimpa!
 def save_batch(new_matches):
-    if not new_matches:
-        return
     try:
         wita, utc = wita_now()
         month_key = wita.strftime("%Y-%m")
         os.makedirs("data", exist_ok=True)
         os.makedirs("data/archive", exist_ok=True)
         
-        # Load sekali, bukan tiap match!
+        # Pastikan file exists biar ga error ls
+        if not os.path.exists("data/matches.json"):
+            with open("data/matches.json", "w") as f:
+                json.dump([], f)
+        
         existing_dash = load_local_matches("data/matches.json")
         existing_month = load_local_matches(f"data/archive/{month_key}.json")
         existing_all = load_local_matches("data/archive/all_time.json")
         
-        # Filter yang sudah ada
         existing_ids = set(str(m.get("match_id")) for m in existing_dash)
         filtered = [m for m in new_matches if str(m["id"]) not in existing_ids]
         
         if not filtered:
-            print("Semua match sudah ada, skip")
+            print(f"Ga ada yang baru - window {MIN_MINUTE}-{MAX_MINUTE} 0-0 tidak ada yang baru")
+            # Tetap pastikan file ada
             return
         
-        # Buat entries baru
         new_entries = []
         for m in filtered:
             full_status = m["status"]
@@ -65,19 +69,15 @@ def save_batch(new_matches):
             }
             new_entries.append(entry)
         
-        # Insert semua di depan (terbaru dulu)
-        # Dashboard: 200 terbaru
         updated_dash = new_entries + existing_dash
         updated_dash = updated_dash[:200]
         with open("data/matches.json", "w", encoding="utf-8") as f:
             json.dump(updated_dash, f, indent=2, default=str)
         
-        # Monthly: UNLIMITED
         updated_month = new_entries + existing_month
         with open(f"data/archive/{month_key}.json", "w", encoding="utf-8") as f:
             json.dump(updated_month, f, indent=2, default=str)
         
-        # All time: UNLIMITED
         updated_all = new_entries + existing_all
         with open("data/archive/all_time.json", "w", encoding="utf-8") as f:
             json.dump(updated_all, f, indent=2, default=str)
@@ -177,9 +177,9 @@ def fetch_league(league_tuple):
 def cek_parallel():
     wita, utc = wita_now()
     start = time.time()
-    print(f"WITA {wita} | UTC {utc} - SCAN 220 LIGA PARALLEL 25 THREAD V8.9 FIX BATCH")
+    print(f"WITA {wita} | UTC {utc} - SCAN 220 LIGA PARALLEL V9.0 WINDOW {MIN_MINUTE}-{MAX_MINUTE} MENIT!")
     leagues = fetch_all_leagues()
-    print(f"Total {len(leagues)} liga")
+    print(f"Total {len(leagues)} liga - window {MIN_MINUTE}-{MAX_MINUTE}")
     all_events={}
     with ThreadPoolExecutor(max_workers=25) as ex:
         futures = {ex.submit(fetch_league, lt): lt for lt in leagues}
@@ -219,17 +219,17 @@ def cek_parallel():
             continue
     inprog_sorted = sorted(inprog, key=lambda x: x[0])
     print(f"--- {len(inprog_sorted)} IN-PROGRESS in {elapsed:.1f}s ---")
-    for minute, line, ev, hs, aws, hname, aname, real_league, slug, warning in inprog_sorted[:30]:
+    for minute, line, ev, hs, aws, hname, aname, real_league, slug, warning in inprog_sorted[:50]:
         print(line)
-        if 55 <= minute <= 68 and hs==0 and aws==0:
+        # V9.0: WINDOW SAMPE 80!
+        if MIN_MINUTE <= minute <= MAX_MINUTE and hs==0 and aws==0:
             out.append({"id": ev.get("id"), "home": hname, "away": aname, "league": real_league, "minute": minute, "warning": warning, "slug": slug, "status": "AKTIF"})
-    print(f"Found {len(out)} match 55-68 0-0")
+    print(f"Found {len(out)} match {MIN_MINUTE}-{MAX_MINUTE} 0-0 (V9.0 sampe menit 80!)")
     return out
 
 if __name__=="__main__":
     wita,utc = wita_now()
-    print(f"V8.9 FIX BATCH - 220 LIGA - WITA {wita}")
+    print(f"V9.0 WINDOW {MIN_MINUTE}-{MAX_MINUTE} - WITA {wita}")
     matches = cek_parallel()
-    # Save batch sekaligus biar ga ketimpa!
     save_batch(matches)
-    print("Done V8.9 BATCH FIX")
+    print(f"Done V9.0 WINDOW {MIN_MINUTE}-{MAX_MINUTE}")
