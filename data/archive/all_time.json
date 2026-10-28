@@ -1,0 +1,26 @@
+[
+  {
+    "match_id": "401874965",
+    "home_team": "Parma",
+    "away_team": "Udinese",
+    "league": "ita.1",
+    "minute": 77,
+    "score": "0-0",
+    "status": "AKTIF",
+    "created_at": "2026-10-29T03:04:03.126761",
+    "wita_date": "2026-10-29",
+    "month": "2026-10"
+  },
+  {
+    "match_id": "401874773",
+    "home_team": "Venezia",
+    "away_team": "Internazionale",
+    "league": "ita.1",
+    "minute": 77,
+    "score": "0-0",
+    "status": "AKTIF",
+    "created_at": "2026-10-29T03:04:03.126761",
+    "wita_date": "2026-10-29",
+    "month": "2026-10"
+  }
+]
