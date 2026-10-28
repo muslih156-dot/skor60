@@ -1,3 +1,4 @@
+Download
 
 import streamlit as st
 import pandas as pd
@@ -20,7 +21,7 @@ st.markdown("""
 """, unsafe_allow_html=True)
 
 st.title("⚽ Trading Bola Menit 60 - Last Goal System VIP")
-st.caption(f"V9.4 15 KOLOM LENGKAP - AI Learning - {now_wita.strftime('%d %b %Y %H:%M WITA')} | 220 Liga | Window 50-80")
+st.caption(f"V9.5 RESULT CHECKER - WIN/LOSE AI Learning - AI Learning - {now_wita.strftime('%d %b %Y %H:%M WITA')} | 220 Liga | Window 50-80")
 
 GITHUB_RAW_BASE = "https://raw.githubusercontent.com/muslih156-dot/skor60/main"
 
@@ -193,7 +194,7 @@ with tab1:
             'match', 'liga_bener', 'negara', 'tier',
             'minute', 'menit_sekarang', 'score',
             'prob_gol', 'rekom_level', 'trading_advice',
-            'status', 'umur_menit'
+            'status', 'umur_menit', 'final_score', 'result'
         ]
         
         # Tambah waktu
@@ -292,4 +293,4 @@ with tab4:
         
         st.success(f"💰 {total} match x {win_rate}% win x {odds} odds = Rp {profit:,.0f} rb profit!")
 
-st.caption("V9.4 15 KOLOM - Match, Liga, Negara, Tier, Menit Awal, Menit Skrg, Skor, Prob Gol%, Rekom Level, Advice, Status, Umur, Deteksi, Avg Goals, Country - VIP System")
+st.caption("V9.5 15 KOLOM + RESULT - Match, Liga, Negara, Tier, Menit Awal, Menit Skrg, Skor, Prob Gol%, Rekom Level, Advice, Status, Umur, Deteksi, Avg Goals, Country - VIP System")
