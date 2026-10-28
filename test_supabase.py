@@ -1,29 +1,43 @@
 
-import os
-from supabase import create_client
+import os, requests
 
 SUPABASE_URL = os.getenv("SUPABASE_URL")
 SUPABASE_KEY = os.getenv("SUPABASE_KEY")
 
-supabase = create_client(SUPABASE_URL, SUPABASE_KEY)
-print(f"Supabase connected to {SUPABASE_URL}")
+print(f"Testing REST API - URL: {SUPABASE_URL}")
 
-# Insert TEST_GITHUB
+url = SUPABASE_URL.rstrip("/") + "/rest/v1/matches"
+headers = {
+    "apikey": SUPABASE_KEY,
+    "Authorization": f"Bearer {SUPABASE_KEY}",
+    "Content-Type": "application/json",
+    "Prefer": "resolution=merge-duplicates"
+}
+
 data = {
     "match_id": "TEST_GITHUB",
     "home_team": "GitHub",
     "away_team": "Supabase",
-    "league": "Test Koneksi",
+    "league": "Test Koneksi REST",
     "minute": 60,
     "score": "0-0",
-    "status": "TEST KONEKSI - Bisa dihapus lagi | ⚠️ TEST - Hati-hati"
+    "status": "TEST KONEKSI REST - Bisa dihapus | ⚠️ TEST"
 }
 
-res = supabase.table("matches").upsert(data, on_conflict="match_id").execute()
-print(f"Inserted TEST_GITHUB: {res.data}")
+try:
+    r = requests.post(url, headers=headers, json=data, timeout=15)
+    print(f"INSERT {r.status_code} {r.text[:500]}")
+    if r.status_code in [200,201,204]:
+        print("✅ INSERT BERHASIL via REST!")
 
-# Baca balik
-res2 = supabase.table("matches").select("*").eq("match_id", "TEST_GITHUB").execute()
-print(f"Verify TEST_GITHUB ada: {len(res2.data)} row - {res2.data}")
-
-print("Done - Sekarang cek Supabase Table Editor, harusnya ada TEST_GITHUB. Kalau ada, berarti GitHub KONEK 100%! Hapus lagi di Table Editor > Delete kalau sudah yakin.")
+    verify_url = SUPABASE_URL.rstrip("/") + "/rest/v1/matches?match_id=eq.TEST_GITHUB&select=*"
+    r2 = requests.get(verify_url, headers={"apikey": SUPABASE_KEY, "Authorization": f"Bearer {SUPABASE_KEY}"}, timeout=10)
+    print(f"VERIFY {r2.status_code} {r2.text[:1000]}")
+    if "TEST_GITHUB" in r2.text:
+        print("✅ VERIFY OK - GitHub KONEK 100% via REST!")
+    else:
+        print("❌ VERIFY GAGAL")
+except Exception as e:
+    print(f"ERROR {e}")
+    import traceback
+    traceback.print_exc()
