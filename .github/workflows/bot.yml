@@ -1,3 +1,4 @@
+Download
 name: Bot Skor Menit 60
 on:
   schedule:
@@ -31,25 +32,34 @@ jobs:
       - name: Install deps
         run: pip install -r requirements.txt
       
-      - name: Run bot V8.7 220 LIGA PARALLEL
+      - name: Run bot V8.8 220 LIGA PARALLEL UNLIMITED
         env:
           TELEGRAM_TOKEN: ${{ secrets.TELEGRAM_TOKEN }}
           CHAT_ID: ${{ secrets.CHAT_ID }}
         run: |
-          echo "=== START SCAN 220 LIGA PARALLEL ==="
+          echo "=== START SCAN 220 LIGA PARALLEL UNLIMITED ==="
           echo "UTC: $(date -u) | WITA: $(TZ='Asia/Makassar' date)"
           python check_once.py
           echo "=== END ==="
+          echo "=== Files created ==="
+          ls -lh data/ || echo "no data"
+          ls -lh data/archive/ || echo "no archive"
+          cat data/matches.json | head -20
       
-      - name: Commit UNLIMITED
+      - name: Commit UNLIMITED - FORCE ADD bypass .gitignore
         run: |
           git config user.name "bot-skor60"
           git config user.email "bot@skor60.com"
-          git add data/matches.json data/archive/ || true
+          echo "=== .gitignore check ==="
+          cat .gitignore || echo "no .gitignore"
+          echo "=== Force add with -f to bypass .gitignore ==="
+          git add -f data/matches.json || git add -f data/ || true
+          git add -f data/archive/ || true
+          git status
           if git diff --staged --quiet; then
             echo "No changes - skip commit"
           else
             echo "Committing changes..."
-            git commit -m "V8.7 220 LIGA PARALLEL $(date -u +%Y-%m-%d_%H:%M_UTC) [skip ci]"
+            git commit -m "V8.8 FIX WEB KOSONG - FORCE ADD data/ $(date -u +%Y-%m-%d_%H:%M_UTC) [skip ci]"
             git push || (sleep 10 && git push) || true
           fi
