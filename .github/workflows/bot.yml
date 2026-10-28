@@ -2,35 +2,54 @@ name: Bot Skor Menit 60
 on:
   schedule:
     - cron: '*/5 * * * *'
-    - cron: '0 */2 * * *'
   workflow_dispatch:
+
+concurrency:
+  group: skor60-220-parallel
+  cancel-in-progress: false
 
 jobs:
   check:
     runs-on: ubuntu-latest
+    timeout-minutes: 4
     steps:
       - uses: actions/checkout@v3
         with:
           token: ${{ secrets.GITHUB_TOKEN }}
+      
       - uses: actions/setup-python@v4
         with:
           python-version: '3.11'
-      - name: Fix DNS
+      
+      - name: Fix DNS + Show Time WITA
         run: |
           echo "nameserver 1.1.1.1" | sudo tee /etc/resolv.conf
           echo "nameserver 8.8.8.8" | sudo tee -a /etc/resolv.conf
-          cat /etc/resolv.conf
+          echo "UTC: $(date -u)"
+          echo "WITA: $(TZ='Asia/Makassar' date)"
+      
       - name: Install deps
         run: pip install -r requirements.txt
-      - name: Run bot V8.5 MONTHLY ARCHIVE
+      
+      - name: Run bot V8.7 220 LIGA PARALLEL
         env:
           TELEGRAM_TOKEN: ${{ secrets.TELEGRAM_TOKEN }}
           CHAT_ID: ${{ secrets.CHAT_ID }}
-        run: python check_once.py
-      - name: Commit JSON + Archive
+        run: |
+          echo "=== START SCAN 220 LIGA PARALLEL ==="
+          echo "UTC: $(date -u) | WITA: $(TZ='Asia/Makassar' date)"
+          python check_once.py
+          echo "=== END ==="
+      
+      - name: Commit UNLIMITED
         run: |
           git config user.name "bot-skor60"
           git config user.email "bot@skor60.com"
           git add data/matches.json data/archive/ || true
-          git diff --staged --quiet || git commit -m "Update matches.json + monthly archive V8.5 [skip ci]"
-          git push || echo "No changes"
+          if git diff --staged --quiet; then
+            echo "No changes - skip commit"
+          else
+            echo "Committing changes..."
+            git commit -m "V8.7 220 LIGA PARALLEL $(date -u +%Y-%m-%d_%H:%M_UTC) [skip ci]"
+            git push || (sleep 10 && git push) || true
+          fi
