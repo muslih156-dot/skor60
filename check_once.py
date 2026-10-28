@@ -1,3 +1,4 @@
+
 import os
 import requests
 from datetime import datetime
@@ -114,7 +115,7 @@ if __name__ == "__main__":
         # 1. Simpan ke database dulu
         save_to_supabase(m["id"], m["home"], m["away"], m["league"], m["minute"], status_simple, stats)
         # 2. Baru kirim Telegram
-        pesan = f"""⚽ <b>MENIT 60 - 0-0</b>
+        pesan = f"""⚽ <b>TRADING BOLA MENIT 60 - LAST GOAL SYSTEM - 0-0</b>
 
 🏟️ {m['home']} vs {m['away']}
 🏆 {m['league']}
