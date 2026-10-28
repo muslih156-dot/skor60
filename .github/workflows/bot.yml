@@ -10,23 +10,34 @@ jobs:
     runs-on: ubuntu-latest
     steps:
       - uses: actions/checkout@v3
+        with:
+          token: ${{ secrets.GITHUB_TOKEN }}
       - uses: actions/setup-python@v4
         with:
           python-version: '3.11'
       - name: Install deps
-        run: |
-          pip install -r requirements.txt
+        run: pip install -r requirements.txt
       - name: Run bot menit 60
         env:
           TELEGRAM_TOKEN: ${{ secrets.TELEGRAM_TOKEN }}
           CHAT_ID: ${{ secrets.CHAT_ID }}
           SUPABASE_URL: ${{ secrets.SUPABASE_URL }}
           SUPABASE_KEY: ${{ secrets.SUPABASE_KEY }}
-        run: |
-          python check_once.py
-      - name: Update final scores (Phase 2)
+        run: python check_once.py
+      - name: Update final scores
         env:
           SUPABASE_URL: ${{ secrets.SUPABASE_URL }}
           SUPABASE_KEY: ${{ secrets.SUPABASE_KEY }}
+        run: python update_results.py
+      - name: Export to JSON for dashboard
+        env:
+          SUPABASE_URL: ${{ secrets.SUPABASE_URL }}
+          SUPABASE_KEY: ${{ secrets.SUPABASE_KEY }}
+        run: python export_to_json.py
+      - name: Commit JSON to repo
         run: |
-          python update_results.py
+          git config user.name "bot-skor60"
+          git config user.email "bot@skor60.com"
+          git add data/matches.json || git add matches.json || true
+          git diff --staged --quiet || git commit -m "Update matches.json [skip ci]"
+          git push || echo "No changes to push"
