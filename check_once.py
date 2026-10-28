@@ -253,9 +253,114 @@ def cek_parallel():
     print(f"Found {len(out)} match {MIN_MINUTE}-{MAX_MINUTE} 0-0 (V9.0 sampe menit 80!)")
     return out
 
+
+def check_final_result(match_id, home, away):
+    """Cek hasil final dari ESPN untuk tau WIN/LOSE Over 0.5"""
+    try:
+        # Coba semua liga
+        leagues = fetch_all_leagues()
+        for slug, lname in leagues[:50]:  # cek 50 liga top aja biar cepat
+            url = f"https://site.api.espn.com/apis/site/v2/sports/soccer/{slug}/scoreboard"
+            try:
+                r = requests.get(url, timeout=5)
+                if r.status_code == 200:
+                    evs = r.json().get("events", [])
+                    for ev in evs:
+                        if str(ev.get("id")) == str(match_id):
+                            comp = ev.get("competitions", [{}])[0]
+                            status = comp.get("status", {}).get("type", {}).get("name", "")
+                            comps = comp.get("competitors", [])
+                            if len(comps) >= 2:
+                                home_c = next((c for c in comps if c.get("homeAway")=="home"), comps[0])
+                                away_c = next((c for c in comps if c.get("homeAway")=="away"), comps[1])
+                                hs = int(home_c.get("score",0) or 0)
+                                aws = int(away_c.get("score",0) or 0)
+                                is_ft = "FINAL" in status or "FT" in status
+                                final_score = f"{hs}-{aws}"
+                                # WIN kalau bukan 0-0
+                                result = "WIN" if (hs+aws) > 0 else "LOSE"
+                                return {"final_score": final_score, "result": result, "is_ft": is_ft, "home_score": hs, "away_score": aws}
+            except:
+                continue
+        return None
+    except Exception as e:
+        print(f"Check result error {match_id}: {e}")
+        return None
+
+def update_expired_results():
+    """Update hasil FT untuk match yang sudah expired >40 menit"""
+    try:
+        wita, utc = wita_now()
+        all_matches = load_local_matches("data/matches.json")
+        if not all_matches:
+            return
+        
+        updated = 0
+        for m in all_matches:
+            # Cek umur
+            try:
+                created = datetime.fromisoformat(m.get('created_at','').replace('Z','+00:00'))
+                if created.tzinfo is None:
+                    created = created.replace(tzinfo=timezone(timedelta(hours=8)))
+                umur = (wita - created).total_seconds() / 60
+            except:
+                umur = 0
+            
+            # Kalau umur >35 menit dan belum ada hasil final, cek
+            if umur > 35 and not m.get('final_checked'):
+                res = check_final_result(m.get('match_id'), m.get('home_team'), m.get('away_team'))
+                if res:
+                    m['final_score'] = res['final_score']
+                    m['result'] = res['result']
+                    m['final_checked'] = True
+                    m['is_ft'] = res['is_ft']
+                    m['checked_at'] = wita.isoformat()
+                    print(f"✅ Result {m['match_id']} {m['home_team']} vs {m['away_team']} FT {res['final_score']} = {res['result']}")
+                    updated += 1
+        
+        if updated > 0:
+            # Save updated
+            with open("data/matches.json", "w", encoding="utf-8") as f:
+                json.dump(all_matches, f, indent=2, default=str)
+            
+            # Update archive juga
+            month_key = wita.strftime("%Y-%m")
+            archive_path = f"data/archive/{month_key}.json"
+            if os.path.exists(archive_path):
+                archive = load_local_matches(archive_path)
+                for am in archive:
+                    for um in all_matches:
+                        if str(am.get('match_id')) == str(um.get('match_id')) and um.get('final_checked'):
+                            am['final_score'] = um.get('final_score')
+                            am['result'] = um.get('result')
+                            am['final_checked'] = True
+                with open(archive_path, "w", encoding="utf-8") as f:
+                    json.dump(archive, f, indent=2, default=str)
+            
+            all_time_path = "data/archive/all_time.json"
+            if os.path.exists(all_time_path):
+                all_time = load_local_matches(all_time_path)
+                for atm in all_time:
+                    for um in all_matches:
+                        if str(atm.get('match_id')) == str(um.get('match_id')) and um.get('final_checked'):
+                            atm['final_score'] = um.get('final_score')
+                            atm['result'] = um.get('result')
+                            atm['final_checked'] = True
+                with open(all_time_path, "w", encoding="utf-8") as f:
+                    json.dump(all_time, f, indent=2, default=str)
+            
+            print(f"Updated {updated} final results")
+    except Exception as e:
+        print(f"Update expired error {e}")
+        import traceback
+        traceback.print_exc()
+
+
 if __name__=="__main__":
     wita,utc = wita_now()
-    print(f"V9.0 WINDOW {MIN_MINUTE}-{MAX_MINUTE} - WITA {wita}")
+    print(f"V9.5 WINDOW {MIN_MINUTE}-{MAX_MINUTE} + RESULT CHECKER - WITA {wita}")
     matches = cek_parallel()
     save_batch(matches)
-    print(f"Done V9.0 WINDOW {MIN_MINUTE}-{MAX_MINUTE}")
+    print("=== Checking FT results for AI learning ===")
+    update_expired_results()
+    print(f"Done V9.5 WINDOW {MIN_MINUTE}-{MAX_MINUTE} + RESULTS")
