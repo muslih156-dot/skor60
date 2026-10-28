@@ -2,27 +2,32 @@
 import streamlit as st
 import pandas as pd
 from datetime import datetime, timezone, timedelta
-import json, os
+import json, os, requests
 
 WITA = timezone(timedelta(hours=8))
 
 st.set_page_config(page_title="Trading Bola Menit 60 - Last Goal System", page_icon="⚽", layout="wide")
-
 st.title("⚽ Trading Bola Menit 60 - Last Goal System")
 st.caption(f"Detektor peluang Last Goal menit 60 skor 0-0 | Live AI System | Update tiap 5 menit | {datetime.now(WITA).strftime('%d %b %Y %H:%M WITA')}")
 
 @st.cache_data(ttl=60)
 def load_data():
+    # Coba 1: Baca dari Supabase REST langsung (paling update)
+    try:
+        url = st.secrets["SUPABASE_URL"].strip().rstrip("/") + "/rest/v1/matches?select=*&order=created_at.desc&limit=200"
+        headers = {"apikey": st.secrets["SUPABASE_KEY"], "Authorization": f"Bearer {st.secrets['SUPABASE_KEY']}"}
+        r = requests.get(url, headers=headers, timeout=10)
+        if r.status_code == 200 and r.json():
+            return pd.DataFrame(r.json())
+    except Exception as e:
+        print(f"Supabase REST fail: {e}")
+    # Coba 2: Fallback ke file JSON lokal
     try:
         if os.path.exists("data/matches.json"):
-            with open("data/matches.json", "r") as f:
-                data = json.load(f)
-                return pd.DataFrame(data)
-        if os.path.exists("matches.json"):
-            with open("matches.json", "r") as f:
+            with open("data/matches.json") as f:
                 return pd.DataFrame(json.load(f))
-    except Exception as e:
-        st.warning(f"Load local error: {e}")
+    except:
+        pass
     return pd.DataFrame()
 
 df = load_data()
@@ -43,7 +48,6 @@ else:
         col3.metric("Win Rate", "Menunggu...")
     aktif = df[df['status'] == 'AKTIF'] if 'status' in df.columns else pd.DataFrame()
     col4.metric("AKTIF 🔥", len(aktif))
-    
     st.subheader("📋 20 Peluang Last Goal Terakhir")
     cols_show = [c for c in ['created_at','home_team','away_team','league','minute','status','shots_total','dangerous_attacks','final_status','goal_after_60'] if c in df.columns]
     show_df = df.head(20)[cols_show].copy()
