@@ -135,9 +135,23 @@ now = datetime.now(WITA)
 if not df_dash.empty:
     if 'created_at' in df_dash.columns:
         try:
+            def calc_umur(s):
+                try:
+                    # Parse WITA isoformat
+                    dt = pd.to_datetime(s)
+                    if pd.isna(dt):
+                        return 0
+                    # Make timezone aware if naive
+                    if dt.tzinfo is None:
+                        dt = dt.replace(tzinfo=WITA)
+                    diff = (now - dt).total_seconds() / 60
+                    return max(0, diff)
+                except:
+                    return 0
+            df_dash['umur_menit'] = df_dash['created_at'].apply(calc_umur)
             df_dash['created_at_dt'] = pd.to_datetime(df_dash['created_at'], errors='coerce')
-            df_dash['umur_menit'] = ((now - df_dash['created_at_dt'].dt.tz_localize(None)).dt.total_seconds() / 60).fillna(0)
-        except:
+        except Exception as e:
+            print(f"umur calc error {e}")
             df_dash['umur_menit'] = 0
     else:
         df_dash['umur_menit'] = 0
@@ -152,11 +166,17 @@ if not df_dash.empty:
     df_dash['menit_sekarang'] = df_dash['menit_sekarang'].apply(lambda x: min(90, x))
     df_dash['prob_gol'] = df_dash.apply(calc_prob, axis=1)
     df_dash['rekom_level'] = df_dash.apply(rekomendasi_level, axis=1)
-    df_dash['is_expired'] = df_dash['umur_menit'] > 40
+    df_dash['is_expired'] = df_dash['umur_menit'] > 35
     df_dash['trading_advice'] = df_dash.apply(lambda r: f"OVER {r['prob_gol']}% - Stake {r['tier']}", axis=1)
     
     df_live = df_dash[~df_dash['is_expired']].copy() if 'is_expired' in df_dash.columns else df_dash.copy()
     df_expired = df_dash[df_dash['is_expired']].copy() if 'is_expired' in df_dash.columns else pd.DataFrame()
+    # Kalau ada final_score, itu FT
+    if 'final_score' in df_dash.columns:
+        has_final = df_dash['final_score'].notna() & (df_dash['final_score'] != '')
+        df_dash.loc[has_final, 'is_expired'] = True
+        df_live = df_dash[~df_dash['is_expired']].copy()
+        df_expired = df_dash[df_dash['is_expired']].copy()
 else:
     df_live = pd.DataFrame()
     df_expired = pd.DataFrame()
@@ -195,12 +215,12 @@ with tab1:
             'prob_gol', 'rekom_level', 'trading_advice',
             'status', 'umur_menit'
         ]
-        # Tambah final_score & result kalau ada
         if 'final_score' in df_live.columns:
             display_cols.append('final_score')
         if 'result' in df_live.columns:
             display_cols.append('result')
-        # Filter hanya kolom yang ada
+        if 'waktu_deteksi' in df_live.columns:
+            display_cols.append('waktu_deteksi')
         display_cols = [c for c in display_cols if c in df_live.columns]
         
         # Tambah waktu
