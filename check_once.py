@@ -42,7 +42,6 @@ def save_to_supabase(mid, home, away, league, minute, status_text, warning=""):
     if not supabase:
         return
     try:
-        # Simpan warning di status atau note
         full_status = status_text
         if warning:
             full_status = f"{status_text} | {warning}"
@@ -80,45 +79,28 @@ def get_warning_flags(league_name, home, away, league_code=""):
     low_code = league_code.lower()
     combined = f"{low_league} {low_home} {low_away} {low_code}"
 
-    # Women
-    if any(x in combined for x in ["women", "woman", "female", "putri", "wanita", " w ", " w u"]):
-        warnings.append("⚠️ LIGA WANITA - Liquiditas rendah")
-
-    # Youth / Reserve
+    if any(x in combined for x in ["women", "woman", "female", "putri", "wanita"]):
+        warnings.append("⚠️ LIGA WANITA")
     youth_keys = ["u17", "u19", "u21", "u23", "u18", "u20", "youth", "young", "junior", "reserves", "reserve", " b ", " ii", " iii", " u-", "akademi", "academy"]
     if any(x in combined for x in youth_keys):
-        warnings.append("⚠️ TIM MUDA/CADANGAN - Risiko tinggi")
-
-    # Lower division
-    if ".2" in league_code or ".3" in league_code or ".4" in league_code or "divisi 1" in low_league or "div 2" in low_league or "vtora" in low_league or "2. liga" in low_league or "serie c" in low_league or "serie d" in low_league:
-        warnings.append("⚠️ DIVISI BAWAH - Odds tidak stabil")
-
-    # Aneh / minor
-    weird_keys = ["futsal", "beach", "esports", "amateur", "persahabatan", "friendly", "uji coba", "klub teluk", "gulf", "nextgen", "pokalen"]
+        warnings.append("⚠️ TIM MUDA/CADANGAN")
+    if ".2" in league_code or ".3" in league_code or "divisi 1" in low_league or "vtora" in low_league or "2. liga" in low_league:
+        warnings.append("⚠️ DIVISI BAWAH")
+    weird_keys = ["futsal", "beach", "esports", "amateur", "persahabatan", "friendly", "uji coba", "klub teluk", "gulf", "nextgen", "pokalen", "vtor a", "meistriliiga"]
     if any(x in low_league for x in weird_keys):
-        warnings.append("⚠️ LIGA MINOR/ANEH - Hati-hati")
-
-    # Tim dengan angka romawi atau II/III
+        warnings.append("⚠️ LIGA MINOR/ANEH")
     if " ii" in low_home or " ii" in low_away or " iii" in low_home or " iii" in low_away:
-        warnings.append("⚠️ TIM II/III - Tim kedua")
-
-    # Jika tidak ada warning, tapi liga tidak top, kasih warning minor
-    top_leagues = ["eng.1", "esp.1", "ita.1", "ger.1", "fra.1", "uefa.champions", "uefa.europa", "uefa.europa.conf", "uefa.nations", "ind.1", "aus.1", "jpn.1", "kor.1", "usa.1", "bra.1", "arg.1", "mex.1", "ned.1", "por.1", "bel.1", "tur.1", "sau.1", "uefa"]
-    if league_code not in top_leagues and "all" not in league_code and not warnings:
-        # Cek apakah bukan top - kasih warning ringan
-        if not any(x in league_code for x in top_leagues):
-            warnings.append("⚠️ LIGA KECIL - Cek odds dulu")
-
+        warnings.append("⚠️ TIM II/III")
     return " | ".join(warnings) if warnings else ""
 
 def fetch_all_espn_leagues():
-    # Discovery endpoint - ESPN punya 106 pre-configured + ~228 discovered = ~334 liga
+    all_leagues = []
+    # 1. Coba core API - struktur baru
     urls = [
         "https://sports.core.api.espn.com/v2/sports/soccer/leagues?limit=500",
         "https://site.api.espn.com/apis/site/v2/sports/soccer/leagues",
-        "https://site.api.espn.com/apis/site/v2/sports/soccer/leagues?limit=500",
+        "https://site.api.espn.com/apis/site/v2/sports/soccer",
     ]
-    all_leagues = []
     for url in urls:
         try:
             r = requests.get(url, timeout=15)
@@ -126,27 +108,56 @@ def fetch_all_espn_leagues():
             if r.status_code != 200:
                 continue
             j = r.json()
-            # Struktur bisa beda
-            items = j.get("items", []) or j.get("leagues", []) or j.get("data", {}).get("leagues", [])
-            if not items and "sports" in j:
-                # Cari di dalam
+            items = []
+            # Struktur 1: core API -> items = [{"$ref": ".../leagues/eng.1", "id": "eng.1", "name": "Premier League"}] atau direct
+            if "items" in j:
+                items = j["items"]
+            elif "leagues" in j:
+                items = j["leagues"]
+            elif "sports" in j:
+                # site api /soccer -> sports[0].leagues
                 try:
                     items = j["sports"][0]["leagues"]
                 except:
-                    pass
-            print(f"Found {len(items)} leagues in {url}")
+                    items = j.get("leagues", [])
+            elif "data" in j:
+                items = j["data"].get("leagues", [])
+
+            print(f"Raw items count {len(items)} from {url}")
+            for it in items[:5]:
+                print(f"Sample item: {str(it)[:200]}")
+
             for it in items:
-                slug = it.get("slug") or it.get("abbreviation") or it.get("id")
-                name = it.get("name") or slug
-                if slug:
-                    all_leagues.append((slug, name))
+                if not isinstance(it, dict):
+                    continue
+                # Core API kadang cuma $ref
+                slug = it.get("slug") or it.get("abbreviation") or it.get("id") or it.get("name")
+                # Kalau id = "eng.1" atau ref mengandung eng.1
+                if "$ref" in it:
+                    ref = it["$ref"]
+                    # ref like .../leagues/eng.1 or .../leagues/123
+                    try:
+                        slug_from_ref = ref.split("/leagues/")[-1].split("?")[0].split("/")[0]
+                        if slug_from_ref:
+                            slug = slug_from_ref
+                    except:
+                        pass
+                name = it.get("name") or it.get("displayName") or slug
+                if slug and isinstance(slug, str) and len(slug) < 50:
+                    # Filter yang terlihat seperti kode liga, bukan angka random panjang
+                    # ESPN slug biasanya mengandung . atau huruf, bukan angka murni panjang
+                    if slug not in [x[0] for x in all_leagues]:
+                        all_leagues.append((slug, name))
+
+            print(f"Found {len(all_leagues)} leagues after parsing {url}")
             if all_leagues:
                 break
         except Exception as e:
             print(f"Leagues fetch error {url}: {e}")
+            import traceback
+            traceback.print_exc()
             continue
 
-    # Fallback hardcode top + SEA + Australia jika discovery gagal
     if not all_leagues:
         print("Discovery gagal, pakai hardcode fallback + SEA + AUS")
         fallback = ["all","eng.1","eng.2","esp.1","ger.1","ita.1","fra.1","ned.1","por.1","sco.1","bel.1","tur.1",
@@ -157,10 +168,11 @@ def fetch_all_espn_leagues():
                     "mex.1","usa.1","bra.1","arg.1","conmebol.libertadores",
                     "den.1","bul.1","est.1","aze.1","pol.1","cze.1","gre.1","rus.1"]
         all_leagues = [(c, c) for c in fallback]
-    # Deduplicate
+
     seen = {}
     for slug, name in all_leagues:
-        seen[slug] = name
+        if slug not in seen:
+            seen[slug] = name
     print(f"Total unique leagues untuk di-scan: {len(seen)}")
     return list(seen.items())
 
@@ -168,7 +180,7 @@ def fetch_espn_league_events(league_slug, date_str):
     base = f"https://site.api.espn.com/apis/site/v2/sports/soccer/{league_slug}/scoreboard"
     url = f"{base}?dates={date_str}" if date_str else base
     try:
-        r = requests.get(url, timeout=12)
+        r = requests.get(url, timeout=10)
         if r.status_code != 200:
             return []
         return r.json().get("events", [])
@@ -183,16 +195,12 @@ def cek_all_leagues():
     date_utc = utc.strftime("%Y%m%d")
 
     leagues = fetch_all_espn_leagues()
-    # Batasi 150 liga pertama biar tidak timeout di GitHub (5 menit)
-    # Prioritas: top leagues dulu, baru yang lain
     top_priority = ["all","eng.1","esp.1","ita.1","ger.1","fra.1","uefa.champions","uefa.europa","uefa.europa.conf","uefa.nations","ind.1","aus.1","jpn.1","usa.1","bra.1","mex.1","ned.1","por.1","sau.1","tha.1","mys.1","vie.1"]
-    # Sort: top priority dulu
     def sort_key(item):
         slug, name = item
         return (0 if slug in top_priority else 1, slug)
     leagues_sorted = sorted(leagues, key=sort_key)
-    # Ambil 120 liga teratas biar tidak kelamaan
-    leagues_to_scan = leagues_sorted[:120]
+    leagues_to_scan = leagues_sorted[:100]
     print(f"Scan {len(leagues_to_scan)} liga (dari {len(leagues)} total) - prioritas top + SEA + AUS + semua dunia")
 
     all_events = {}
@@ -238,7 +246,7 @@ def cek_all_leagues():
                 sched += 1
             elif "POST" in tname or state == "post":
                 fin += 1
-        except Exception as e:
+        except:
             continue
 
     inprog_sorted = sorted(inprog, key=lambda x: x[0])
@@ -255,7 +263,7 @@ def cek_all_leagues():
 
 if __name__ == "__main__":
     wita, utc = wita_now()
-    print(f"Phase 1 - ESPN V8 ALL LEAGUES WORLD + WARNING - WITA {wita} | UTC {utc}")
+    print(f"Phase 1 - ESPN V8.1 ALL LEAGUES FIX PARSER - WITA {wita} | UTC {utc}")
     matches = cek_all_leagues()
     print(f"Found {len(matches)} match di jendela 55-68 0-0 (semua liga dunia)")
     for m in matches:
@@ -266,4 +274,4 @@ if __name__ == "__main__":
         warning_text = f"\n\n{m['warning']}" if m["warning"] else ""
         pesan = f"⚽ <b>MENIT 60 - 0-0</b>\n\n🏟️ {m['home']} vs {m['away']}\n🏆 {m['league']} ({m['slug']})\n⏱️ Menit {m['minute']}{warning_text}\n\nID: {m['id']}"
         send_telegram(pesan)
-    print("Done V8 ALL LEAGUES")
+    print("Done V8.1 ALL LEAGUES")
