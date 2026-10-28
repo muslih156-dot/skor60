@@ -25,6 +25,15 @@ def send_telegram(pesan):
     except:
         return False
 
+def already_sent(match_id):
+    if not supabase:
+        return False
+    try:
+        res = supabase.table("matches").select("match_id").eq("match_id", str(match_id)).execute()
+        return len(res.data) > 0
+    except:
+        return False
+
 def save_to_supabase(match_id, home, away, league, minute, status_text, stats):
     if not supabase:
         return
@@ -36,7 +45,6 @@ def save_to_supabase(match_id, home, away, league, minute, status_text, stats):
             xg = float(stats.get("Expected goals", {}).get("home", 0) or 0) + float(stats.get("Expected goals", {}).get("away", 0) or 0)
         except:
             xg = 0
-
         data = {
             "match_id": str(match_id),
             "home_team": home,
@@ -60,18 +68,28 @@ def cek_menit_60():
         url = "https://api.sofascore.com/api/v1/sport/football/events/live"
         r = requests.get(url, headers={"User-Agent": "Mozilla/5.0"}, timeout=15)
         data = r.json()
+        events = data.get("events", [])
+        print(f"Total live events dari Sofascore: {len(events)}")
         out = []
-        for ev in data.get("events", []):
-            minute = ev.get("time", {}).get("minute", 0)
+        for ev in events:
+            minute = ev.get("time", {}).get("minute", 0) or 0
             hs = ev.get("homeScore", {}).get("current", 0)
             aws = ev.get("awayScore", {}).get("current", 0)
             status = ev.get("status", {}).get("type")
-            if status == "inprogress" and 59 <= minute <= 62 and hs == 0 and aws == 0:
+            # FIX: Jendela diperlebar 55-68 agar cron 5 menit gak kelewat
+            # Liga: SEMUA liga, tapi skip liga wanita/junior yang stats-nya kosong
+            league = ev.get("tournament", {}).get("name", "")
+            category = ev.get("tournament", {}).get("category", {}).get("name", "")
+            if status == "inprogress" and 55 <= minute <= 68 and hs == 0 and aws == 0:
+                # Skip wanita & U19/U21 biar gak spam (opsional, bisa dihapus)
+                low = (league + " " + category).lower()
+                if "women" in low or "u19" in low or "u21" in low or "u17" in low:
+                    continue
                 out.append({
                     "id": ev["id"],
                     "home": ev["homeTeam"]["name"],
                     "away": ev["awayTeam"]["name"],
-                    "league": ev["tournament"]["name"],
+                    "league": league,
                     "minute": minute
                 })
         return out
@@ -106,15 +124,16 @@ def analisa(stats):
         return f"SEDANG 😐 Shots {ts} DA {da} SoT {sot}", "SEDANG"
 
 if __name__ == "__main__":
-    print(f"Phase 1 - Check menit 60 + Save to Supabase - {datetime.now()}")
+    print(f"Phase 1 - Check menit 60 FIX - {datetime.now()}")
     matches = cek_menit_60()
-    print(f"Found {len(matches)} match")
+    print(f"Found {len(matches)} match di jendela 55-68")
     for m in matches:
+        if already_sent(m["id"]):
+            print(f"Skip {m['id']} sudah pernah dikirim")
+            continue
         stats = get_stats(m["id"])
         analisa_text, status_simple = analisa(stats)
-        # 1. Simpan ke database dulu
         save_to_supabase(m["id"], m["home"], m["away"], m["league"], m["minute"], status_simple, stats)
-        # 2. Baru kirim Telegram
         pesan = f"""⚽ <b>TRADING BOLA MENIT 60 - LAST GOAL SYSTEM - 0-0</b>
 
 🏟️ {m['home']} vs {m['away']}
@@ -126,5 +145,6 @@ if __name__ == "__main__":
 💾 Saved to DB Level 5
 
 ID: {m['id']}"""
-        send_telegram(pesan)
-    print("Done Phase 1")
+        ok = send_telegram(pesan)
+        print(f"Telegram sent {m['id']}: {ok}")
+    print("Done Phase 1 FIX")
