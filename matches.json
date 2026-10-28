@@ -1,1 +1,26 @@
-[]
+
+  {
+    "match_id": "491917032",
+    "home_team": "SC Paderborn 07",
+    "away_team": "VfB Stuttgart",
+    "league": "German DFB Pokal",
+    "minute": 63,
+    "score": "0-0",
+    "status": "AKTIF | \u26a0\ufe0f CUP",
+    "created_at": "2026-10-29T02:37:00+08:00",
+    "wita_date": "2026-10-29",
+    "month": "2026-10"
+  },
+  {
+    "match_id": "491917033",
+    "home_team": "Dynamo Dresden",
+    "away_team": "Schalke 04",
+    "league": "German DFB Pokal",
+    "minute": 62,
+    "score": "1-0",
+    "status": "AKTIF | \u26a0\ufe0f CUP",
+    "created_at": "2026-10-29T02:35:00+08:00",
+    "wita_date": "2026-10-29",
+    "month": "2026-10"
+  }
+
