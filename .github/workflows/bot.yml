@@ -5,6 +5,9 @@ on:
     - cron: '*/5 * * * *'
   workflow_dispatch:
 
+permissions:
+  contents: write
+
 concurrency:
   group: skor60-v89-batch
   cancel-in-progress: false
@@ -17,6 +20,7 @@ jobs:
       - uses: actions/checkout@v3
         with:
           token: ${{ secrets.GITHUB_TOKEN }}
+          persist-credentials: true
       
       - uses: actions/setup-python@v4
         with:
@@ -41,29 +45,22 @@ jobs:
           echo "=== Files ==="
           ls -lh data/ || echo "no data"
           ls -lh data/archive/ || echo "no archive"
-          echo "=== matches.json content ==="
           cat data/matches.json || echo "no file"
       
       - name: Commit - FORCE ADD bypass gitignore
         run: |
           git config user.name "bot-skor60"
           git config user.email "bot@skor60.com"
-          echo "=== .gitignore ==="
-          cat .gitignore 2>/dev/null || echo "no gitignore"
-          echo "=== git status before ==="
-          git status
           echo "=== FORCE ADD ==="
           git add -f data/matches.json
           git add -f data/archive/ || true
-          echo "=== git status after add ==="
           git status
-          echo "=== git diff staged ==="
           git diff --staged --stat
           if git diff --staged --quiet; then
             echo "No changes to commit"
           else
             git commit -m "V8.9 FIX BATCH - $(date -u +%Y-%m-%d_%H:%M_UTC) - 2 matches no overwrite [skip ci]"
-            echo "=== Pushing ==="
-            git push || (sleep 10 && git push) || (sleep 20 && git push)
+            echo "=== Pushing with token ==="
+            git push https://x-access-token:${{ secrets.GITHUB_TOKEN }}@github.com/${{ github.repository }}.git HEAD:main
             echo "=== Push done ==="
           fi
