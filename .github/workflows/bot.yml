@@ -42,25 +42,40 @@ jobs:
         run: |
           echo "=== START V8.9 BATCH FIX ==="
           python check_once.py
-          echo "=== Files ==="
-          ls -lh data/ || echo "no data"
-          ls -lh data/archive/ || echo "no archive"
-          cat data/matches.json || echo "no file"
+          echo "=== Files after run ==="
+          ls -R data/ || echo "no data folder"
+          echo "=== matches.json ==="
+          cat data/matches.json 2>/dev/null | head -20 || echo "no matches.json (ga ada peluang)"
       
       - name: Commit - FORCE ADD bypass gitignore
         run: |
           git config user.name "bot-skor60"
           git config user.email "bot@skor60.com"
+          
+          # FIX: ga error kalau file ga ada
           echo "=== FORCE ADD ==="
-          git add -f data/matches.json
-          git add -f data/archive/ || true
+          if [ -f "data/matches.json" ]; then
+            git add -f data/matches.json
+            echo "added matches.json"
+          else
+            echo "no matches.json - skip"
+          fi
+          
+          if [ -d "data/archive" ]; then
+            git add -f data/archive/
+            echo "added archive"
+          else
+            echo "no archive - skip"
+          fi
+          
           git status
           git diff --staged --stat
+          
           if git diff --staged --quiet; then
-            echo "No changes to commit"
+            echo "No changes to commit - ga ada peluang baru"
           else
-            git commit -m "V8.9 FIX BATCH - $(date -u +%Y-%m-%d_%H:%M_UTC) - 2 matches no overwrite [skip ci]"
-            echo "=== Pushing with token ==="
-            git push https://x-access-token:${{ secrets.GITHUB_TOKEN }}@github.com/${{ github.repository }}.git HEAD:main
+            git commit -m "V8.9 BATCH $(date -u +%Y-%m-%d_%H:%M_UTC) [skip ci]"
+            echo "=== Pushing ==="
+            git push https://x-access-token:${{ secrets.GITHUB_TOKEN }}@github.com/${{ github.repository }}.git HEAD:main || git push || (sleep 5 && git push)
             echo "=== Push done ==="
           fi
