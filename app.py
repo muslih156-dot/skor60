@@ -8,51 +8,41 @@ WITA = timezone(timedelta(hours=8))
 
 st.set_page_config(page_title="Trading Bola Menit 60", page_icon="⚽", layout="wide")
 
-# Header
 col_logo, col_title = st.columns([1,5])
 with col_logo:
     st.markdown("## ⚽")
 with col_title:
     st.title("Trading Bola Menit 60 - Last Goal System")
-    st.caption(f"V9.2 KOLOM LENGKAP - 220 LIGA - Window 50-80 - {datetime.now(WITA).strftime('%d %b %Y %H:%M WITA')}")
+    st.caption(f"V9.3 AUTO-EXPIRE - Window 50-80 - {datetime.now(WITA).strftime('%d %b %Y %H:%M WITA')}")
 
 GITHUB_RAW_BASE = "https://raw.githubusercontent.com/muslih156-dot/skor60/main"
 
 LEAGUE_MAP = {
-    "ita.1": "🇮🇹 Serie A", "ita.2": "🇮🇹 Serie B", "ita.coppa_italia": "🇮🇹 Coppa Italia",
-    "eng.1": "🏴󐁧󐁢󐁥󐁮󐁧󐁿 Premier League", "eng.2": "🏴󐁧󐁢󐁥󐁮󐁧󐁿 Championship", "eng.3": "🏴󐁧󐁢󐁥󐁮󐁧󐁿 League One",
-    "eng.fa": "🏴󐁧󐁢󐁥󐁮󐁧󐁿 FA Cup", "eng.league_cup": "🏴󐁧󐁢󐁥󐁮󐁧󐁿 Carabao Cup",
+    "ita.1": "🇮🇹 Serie A", "ita.2": "🇮🇹 Serie B",
+    "eng.1": "🏴󐁧󐁢󐁥󐁮󐁧󐁿 Premier League", "eng.2": "🏴󐁧󐁢󐁥󐁮󐁧󐁿 Championship",
     "ger.1": "🇩🇪 Bundesliga", "ger.2": "🇩🇪 2. Bundesliga", "ger.dfb_pokal": "🇩🇪 DFB Pokal",
-    "esp.1": "🇪🇸 LaLiga", "esp.2": "🇪🇸 LaLiga 2", "esp.copa_del_rey": "🇪🇸 Copa del Rey",
-    "fra.1": "🇫🇷 Ligue 1", "ned.1": "🇳🇱 Eredivisie", "por.1": "🇵🇹 Primeira Liga",
-    "bel.1": "🇧🇪 Jupiler Pro League", "tur.1": "🇹🇷 Süper Lig", "sco.1": "🏴󐁧󐁢󐁳󐁣󐁴󐁿 Premiership",
+    "esp.1": "🇪🇸 LaLiga", "fra.1": "🇫🇷 Ligue 1", "ned.1": "🇳🇱 Eredivisie",
+    "por.1": "🇵🇹 Primeira Liga", "bel.1": "🇧🇪 Jupiler Pro League",
     "uefa.champions": "🏆 Champions League", "uefa.europa": "🏆 Europa League",
-    "usa.1": "🇺🇸 MLS", "bra.1": "🇧🇷 Brasileirão", "arg.1": "🇦🇷 Liga Profesional",
-    "jpn.1": "🇯🇵 J1 League", "kor.1": "🇰🇷 K League 1", "aus.1": "🇦🇺 A-League",
-    "idn.1": "🇮🇩 Liga 1", "tha.1": "🇹🇭 Thai League 1", "mys.1": "🇲🇾 Liga Super",
-    "sau.1": "🇸🇦 Pro League", "egy.1": "🇪🇬 Premier League",
+    "afc.champions": "🏆 AFC Champions", "afc.cup": "🏆 AFC Cup",
+    "swe.1": "🇸🇪 Allsvenskan", "nor.1": "🇳🇴 Eliteserien", "den.1": "🇩🇰 Superliga",
+    "usa.1": "🇺🇸 MLS", "bra.1": "🇧🇷 Brasileirão", "jpn.1": "🇯🇵 J1 League",
+    "idn.1": "🇮🇩 Liga 1", "tha.1": "🇹🇭 Thai League", "mys.1": "🇲🇾 Liga Super",
+    "sau.1": "🇸🇦 Pro League", "qat.1": "🇶🇦 Stars League", "uae.1": "🇦🇪 Pro League",
+    "egy.1": "🇪🇬 Premier League", "nga.1": "🇳🇬 NPFL",
 }
 
 def pretty_league(s):
     if not s: return "-"
     if s in LEAGUE_MAP: return LEAGUE_MAP[s]
-    if "ita" in s.lower(): 
-        if "1" in s: return "🇮🇹 Serie A"
-        return f"🇮🇹 {s.replace('ita.','').title()}"
-    if "eng" in s.lower(): return f"🏴󐁧󐁢󐁥󐁮󐁧󐁿 {s.replace('eng.','').title()}"
-    if "ger" in s.lower(): return f"🇩🇪 {s.replace('ger.','').title()}"
-    if "esp" in s.lower(): return f"🇪🇸 {s.replace('esp.','').title()}"
-    if "uefa" in s.lower(): return f"🏆 {s.replace('uefa.','').replace('.',' ').title()}"
+    sl = s.lower()
+    if "afc" in sl: return f"🏆 {s.replace('afc.','AFC ').replace('.',' ').title()}"
+    if "ita" in sl: return "🇮🇹 Serie A" if "1" in s else f"🇮🇹 {s.title()}"
+    if "eng" in sl: return f"🏴󐁧󐁢󐁥󐁮󐁧󐁿 {s.replace('eng.','').title()}"
+    if "ger" in sl: return f"🇩🇪 {s.replace('ger.','').title()}"
+    if "esp" in sl: return f"🇪🇸 LaLiga" if "1" in s else f"🇪🇸 {s.title()}"
+    if "swe" in sl or "allsvenskan" in sl: return "🇸🇪 Allsvenskan"
     return s.replace("."," ").replace("_"," ").title()
-
-def rekomendasi_status(row):
-    status = str(row.get('status',''))
-    warning = str(row.get('status',''))  # warning ada di status
-    if '⚠️' in status:
-        return '⚠️ HATI-HATI'
-    if 'REKOMENDASI' in status or 'AKTIF' in status:
-        return '✅ REKOMENDASI - Gas Trading!'
-    return '✅ REKOMENDASI'
 
 @st.cache_data(ttl=10)
 def load_dashboard():
@@ -76,8 +66,8 @@ def load_dashboard():
                 real = [x for x in j if "TEST" not in str(x.get("match_id",""))]
                 if real:
                     return pd.DataFrame(real), f"GITHUB RAW ({len(real)})"
-    except Exception as e:
-        return pd.DataFrame(), f"Error {e}"
+    except:
+        pass
     return pd.DataFrame(), "NO DATA"
 
 @st.cache_data(ttl=20)
@@ -113,131 +103,126 @@ def load_all_archive():
 df_dash, source_dash = load_dashboard()
 df_all, source_all = load_all_archive()
 
-# Sidebar
+# AUTO-EXPIRE LOGIC - sejam lalu auto FT!
+now_wita = datetime.now(WITA)
+if not df_dash.empty and 'created_at' in df_dash.columns:
+    try:
+        df_dash['created_at_dt'] = pd.to_datetime(df_dash['created_at'], errors='coerce')
+        df_dash['umur_menit'] = (now_wita - df_dash['created_at_dt'].dt.tz_localize(None).apply(lambda x: x.replace(tzinfo=WITA) if pd.notna(x) and x.tzinfo is None else x)).dt.total_seconds() / 60
+        # Fallback kalau tz error
+        df_dash['umur_menit'] = df_dash['umur_menit'].fillna(0)
+    except:
+        df_dash['umur_menit'] = 0
+        df_dash['created_at_dt'] = now_wita
+    
+    # Tandai yang udah lewat 35 menit dari deteksi (90-77=13 + 35 = 48 menit total match, harusnya FT)
+    def update_status(row):
+        umur = row.get('umur_menit', 0)
+        minute = row.get('minute', 0)
+        if umur > 40:  # Lebih dari 40 menit sejak ke-detect -> pasti FT
+            return f"✅ FT - Selesai ({umur:.0f}m lalu)"
+        elif umur > 25:
+            return f"⏳ Menit {min(90, minute + int(umur))}' - Hampir FT ({umur:.0f}m lalu)"
+        else:
+            return row.get('status', 'AKTIF')
+    
+    df_dash['status_real'] = df_dash.apply(update_status, axis=1)
+    df_dash['is_expired'] = df_dash['umur_menit'] > 40
+    
+    # Filter: live cuma yang umur < 35 menit
+    df_live = df_dash[~df_dash['is_expired']].copy()
+    df_expired = df_dash[df_dash['is_expired']].copy()
+else:
+    df_dash['status_real'] = df_dash.get('status','')
+    df_dash['is_expired'] = False
+    df_live = df_dash.copy()
+    df_expired = pd.DataFrame()
+
+# Enrich
+if not df_dash.empty:
+    df_dash['liga_bener'] = df_dash['league'].apply(pretty_league)
+    df_dash['match'] = df_dash['home_team'] + " vs " + df_dash['away_team']
+if not df_live.empty:
+    df_live['liga_bener'] = df_live['league'].apply(pretty_league)
+    df_live['match'] = df_live['home_team'] + " vs " + df_live['away_team']
+    df_live['rekomendasi'] = df_live['status_real'].apply(lambda x: '⚠️ HATI-HATI' if '⚠️' in str(x) else ('✅ FT' if 'FT' in str(x) else '✅ REKOMENDASI - Gas!'))
+
 st.sidebar.title("⚙️ Filter & Tools")
 st.sidebar.code(f"Dashboard: {source_dash}\nArchive: {source_all}")
-st.sidebar.metric("WITA", datetime.now(WITA).strftime("%H:%M:%S"))
-st.sidebar.metric("Dash / All", f"{len(df_dash)} / {len(df_all)}")
+st.sidebar.metric("WITA", now_wita.strftime("%H:%M:%S"))
+st.sidebar.metric("Live / Expired", f"{len(df_live)} / {len(df_expired) if not df_expired.empty else 0}")
 
 if st.sidebar.button("🔄 Clear Cache & Reload"):
     st.cache_data.clear()
     st.rerun()
 
-# Enrich dashboard
-if not df_dash.empty:
-    df_dash['liga_bener'] = df_dash['league'].apply(pretty_league)
-    df_dash['rekomendasi'] = df_dash.apply(rekomendasi_status, axis=1)
-    df_dash['trading_signal'] = df_dash['minute'].apply(lambda m: f"🔥 OVER 0.5 Menit {m}'" if m else "🔥 OVER 0.5")
-    df_dash['match'] = df_dash['home_team'] + " vs " + df_dash['away_team']
-    # Format waktu
-    if 'created_at' in df_dash.columns:
-        try:
-            df_dash['waktu_wita'] = pd.to_datetime(df_dash['created_at']).dt.strftime('%H:%M WITA')
-        except:
-            df_dash['waktu_wita'] = df_dash.get('wita_date','')
+auto_hide = st.sidebar.checkbox("Auto-hide FT >40 menit", value=True)
 
-tab1, tab2, tab3 = st.tabs(["🔥 Live Dashboard - Kolom Lengkap", "📅 Monthly & All Time", "💰 Profit Calculator"])
+tab1, tab2, tab3 = st.tabs(["🔥 Live (Auto-Expire)", "📦 Expired / FT", "📅 All Time"])
 
 with tab1:
-    st.subheader(f"🔥 Live Trading - {source_dash} - V9.2 Kolom Lengkap")
+    st.subheader(f"🔥 Live Trading - {len(df_live)} aktif - V9.3 Auto-Expire 40 menit")
     
-    if df_dash.empty:
-        st.warning("Belum ada peluang 0-0 menit 50-80 - bot scan 220 liga tiap 5 menit")
-        st.info(f"Source: {source_dash} | {source_all}")
+    if df_live.empty:
+        if not df_dash.empty and not df_expired.empty:
+            st.warning(f"Semua {len(df_expired)} match sudah FT (lebih dari 40 menit lalu). Cek tab Expired!")
+            st.dataframe(df_expired[['home_team','away_team','liga_bener','minute','status_real']].head(10) if 'liga_bener' in df_expired.columns else df_expired.head(10))
+        else:
+            st.info("Belum ada peluang 0-0 menit 50-80 - bot scan tiap 5 menit PASTI!")
     else:
-        # Metrics
         c1, c2, c3, c4 = st.columns(4)
-        c1.metric("🔥 AKTIF", len(df_dash))
-        c2.metric("✅ REKOMENDASI", len(df_dash[~df_dash['status'].str.contains('⚠️', na=False)]))
-        c3.metric("⚠️ HATI-HATI", len(df_dash[df_dash['status'].str.contains('⚠️', na=False)]))
-        c4.metric("📅 Hari Ini", datetime.now(WITA).strftime("%d %b"))
+        c1.metric("🔥 Live", len(df_live))
+        c2.metric("✅ Rekomendasi", len(df_live[~df_live['status_real'].str.contains('⚠️', na=False)]))
+        c3.metric("⏱️ Umur rata", f"{df_live['umur_menit'].mean():.0f}m" if 'umur_menit' in df_live.columns else "-")
+        c4.metric("📅", now_wita.strftime("%d %b"))
         
-        st.success(f"✅ Ada {len(df_dash)} peluang trading menit 50-80!")
+        st.success(f"✅ Ada {len(df_live)} peluang LIVE (umur <40 menit)!")
         
-        # Table lengkap seperti Supabase dulu
-        display_cols = ['match', 'liga_bener', 'minute', 'score', 'rekomendasi', 'trading_signal', 'status', 'waktu_wita', 'wita_date']
-        available = [c for c in display_cols if c in df_dash.columns]
+        display_df = df_live.copy()
+        cols_show = ['match', 'liga_bener', 'minute', 'score', 'status_real', 'umur_menit']
+        if 'created_at' in display_df.columns:
+            try:
+                display_df['waktu'] = pd.to_datetime(display_df['created_at']).dt.strftime('%H:%M WITA')
+                cols_show.append('waktu')
+            except:
+                pass
         
-        # Style
         st.dataframe(
-            df_dash[available].rename(columns={
-                'match': '⚽ Match',
-                'liga_bener': '🏆 Liga',
-                'minute': '⏱️ Menit',
-                'score': '📊 Skor',
-                'rekomendasi': '💡 Rekomendasi',
-                'trading_signal': '🎯 Signal',
-                'status': '📋 Status Lengkap',
-                'waktu_wita': '🕐 Waktu',
-                'wita_date': '📅 Tanggal'
-            }).head(100),
+            display_df[cols_show].rename(columns={
+                'match': '⚽ Match', 'liga_bener': '🏆 Liga', 'minute': '⏱️ Menit Awal',
+                'score': '📊 Skor', 'status_real': '📋 Status Real', 'umur_menit': '⏳ Umur', 'waktu': '🕐 Deteksi'
+            }),
             use_container_width=True,
-            height=500
+            height=400
         )
         
-        # Detail per match
-        st.divider()
-        st.subheader("📋 Detail Peluang")
-        for idx, row in df_dash.head(5).iterrows():
-            with st.expander(f"🔥 {row['home_team']} vs {row['away_team']} - {row['liga_bener']} - Menit {row['minute']}' - {row['rekomendasi']}"):
-                cc1, cc2, cc3 = st.columns(3)
-                cc1.write(f"**Match ID:** {row['match_id']}")
-                cc1.write(f"**Liga:** {row['liga_bener']}")
-                cc1.write(f"**Menit:** {row['minute']}'")
-                cc2.write(f"**Skor:** {row['score']}")
-                cc2.write(f"**Status:** {row['status']}")
-                cc2.write(f"**Rekomendasi:** {row['rekomendasi']}")
-                cc3.write(f"**Waktu:** {row.get('waktu_wita','-')}")
-                cc3.write(f"**Signal:** {row['trading_signal']}")
-                st.info(f"💡 Trading: {row['home_team']} vs {row['away_team']} masih 0-0 di menit {row['minute']}. Peluang besar ada gol! Rekomendasi: {row['rekomendasi']}")
+        # Detail
+        for idx, row in df_live.head(3).iterrows():
+            umur = row.get('umur_menit',0)
+            st.info(f"🔥 {row['home_team']} vs {row['away_team']} - {row['liga_bener']} - Deteksi menit {row['minute']}' - Umur {umur:.0f} menit lalu - Status: {row['status_real']}")
 
 with tab2:
-    st.subheader(f"📅 Archive - {source_all}")
+    st.subheader(f"📦 Expired / FT - {len(df_expired)} match")
+    if df_expired.empty:
+        st.info("Belum ada yang expired")
+    else:
+        st.warning(f"{len(df_expired)} match sudah lewat >40 menit, otomatis FT - ga usah trading!")
+        st.dataframe(
+            df_expired[['home_team','away_team','liga_bener','minute','score','status_real','umur_menit']].rename(columns={
+                'home_team': 'Home', 'away_team': 'Away', 'liga_bener': 'Liga'
+            }) if 'liga_bener' in df_expired.columns else df_expired,
+            use_container_width=True
+        )
+
+with tab3:
+    st.subheader(f"📅 All Time - {source_all}")
     if df_all.empty:
         st.info("Archive kosong")
     else:
         df_all['liga_bener'] = df_all['league'].apply(pretty_league)
-        c1, c2 = st.columns(2)
-        c1.metric("Total Archive", len(df_all))
-        c2.metric("Bulan Ini", len(df_all[df_all['month']==datetime.now(WITA).strftime('%Y-%m')]) if 'month' in df_all.columns else len(df_all))
-        
-        st.dataframe(
-            df_all[['home_team','away_team','liga_bener','minute','score','status','wita_date']].head(200).rename(columns={
-                'home_team': 'Home', 'away_team': 'Away', 'liga_bener': 'Liga', 'minute': 'Menit'
-            }),
-            use_container_width=True, height=400
-        )
-        st.bar_chart(df_all['liga_bener'].value_counts().head(15))
+        st.dataframe(df_all[['home_team','away_team','liga_bener','minute','score','wita_date']].head(200), use_container_width=True)
+        st.bar_chart(df_all['liga_bener'].value_counts().head(10))
+        csv = df_all.to_csv(index=False).encode('utf-8')
+        st.download_button("📥 Download CSV", csv, f"skor60_{now_wita.strftime('%Y%m%d')}.csv", "text/csv")
 
-with tab3:
-    st.subheader("💰 Profit Calculator - VIP System")
-    if df_all.empty:
-        df_profit = df_dash
-    else:
-        df_profit = df_all
-    
-    if df_profit.empty:
-        st.info("Butuh data untuk hitung profit")
-    else:
-        col1, col2, col3 = st.columns(3)
-        stake = col1.number_input("Stake per match (ribu Rp)", 10, 1000, 100)
-        odds = col2.number_input("Odds Over 0.5", 1.1, 3.0, 1.75)
-        win_rate = col3.slider("Win Rate %", 50, 95, 80)
-        
-        total = len(df_profit)
-        wins = total * win_rate / 100
-        loses = total - wins
-        profit = (wins * (odds-1) * stake) - (loses * stake)
-        
-        m1, m2, m3, m4 = st.columns(4)
-        m1.metric("Total Match", total)
-        m2.metric("Win", f"{wins:.0f}")
-        m3.metric("Lose", f"{loses:.0f}")
-        m4.metric("Profit", f"Rp {profit:,.0f} rb", delta=f"{profit/total:.1f} rb/match" if total else "0")
-        
-        st.success(f"💰 Dengan {total} match, win rate {win_rate}%, odds {odds}, stake {stake}rb → Profit Rp {profit:,.0f} ribu!")
-        
-        csv = df_profit.to_csv(index=False).encode('utf-8')
-        st.download_button("📥 Download CSV Archive", csv, f"skor60_archive_{datetime.now(WITA).strftime('%Y%m%d')}.csv", "text/csv")
-
-st.caption("V9.2 KOLOM LENGKAP - Match, Liga Bener 🇮🇹 Serie A, Menit, Skor, Rekomendasi ✅, Signal 🔥, Status, Waktu WITA - Window 50-80 menit")
+st.caption("V9.3 AUTO-EXPIRE - Live cuma <40 menit, lebih dari itu auto FT - Parma 03:04 di 03:42 auto FT 38m lalu")
