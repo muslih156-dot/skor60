@@ -1,6 +1,7 @@
 
-import os, json, requests
+import os, json, requests, time
 from datetime import datetime, timedelta
+from concurrent.futures import ThreadPoolExecutor, as_completed
 
 TELEGRAM_TOKEN = os.getenv("TELEGRAM_TOKEN")
 CHAT_ID = os.getenv("CHAT_ID")
@@ -9,17 +10,6 @@ def wita_now():
     utc = datetime.utcnow()
     wita = utc + timedelta(hours=8)
     return wita, utc
-
-def send_telegram(pesan):
-    if not TELEGRAM_TOKEN or not CHAT_ID:
-        return False
-    try:
-        url = f"https://api.telegram.org/bot{TELEGRAM_TOKEN}/sendMessage"
-        data = {"chat_id": CHAT_ID, "text": pesan, "parse_mode": "HTML"}
-        r = requests.post(url, data=data, timeout=10)
-        return r.status_code == 200
-    except:
-        return False
 
 def load_local_matches(path="data/matches.json"):
     try:
@@ -35,11 +25,10 @@ def load_local_matches(path="data/matches.json"):
 def save_with_monthly_archive(mid, home, away, league, minute, status_text, warning=""):
     try:
         wita, utc = wita_now()
-        month_key = wita.strftime("%Y-%m")  # 2026-10
+        month_key = wita.strftime("%Y-%m")
         full_status = status_text
         if warning:
             full_status = f"{status_text} | {warning}"
-        
         new_entry = {
             "match_id": str(mid),
             "home_team": home,
@@ -52,43 +41,29 @@ def save_with_monthly_archive(mid, home, away, league, minute, status_text, warn
             "wita_date": wita.strftime("%Y-%m-%d"),
             "month": month_key
         }
-        
-        # 1. Save ke data/matches.json (200 terbaru buat dashboard cepat)
         os.makedirs("data", exist_ok=True)
         matches = load_local_matches("data/matches.json")
         if any(str(m.get("match_id")) == str(mid) for m in matches):
-            print(f"Skip {mid} sudah ada")
             return True
         matches.insert(0, new_entry)
-        matches = matches[:200]  # dashboard max 200
+        matches = matches[:200]
         with open("data/matches.json", "w", encoding="utf-8") as f:
             json.dump(matches, f, indent=2, default=str)
-        print(f"✅ Saved dashboard 200 terbaru: {mid} {home} vs {away} {league}")
-        
-        # 2. Save ke archive bulanan (TIDAK PERNAH KETIMPA! buat summary bulanan)
         os.makedirs("data/archive", exist_ok=True)
         archive_path = f"data/archive/{month_key}.json"
         archive = load_local_matches(archive_path)
         archive.insert(0, new_entry)
-        # Archive bulanan TIDAK dibatasi - simpan semua!
         with open(archive_path, "w", encoding="utf-8") as f:
             json.dump(archive, f, indent=2, default=str)
-        print(f"✅ Saved archive bulanan {month_key}: {len(archive)} total bulan ini -> {archive_path}")
-        
-        # 3. Save ke all_time.json (semua match dari awal, buat summary total)
         all_time_path = "data/archive/all_time.json"
         all_time = load_local_matches(all_time_path)
         all_time.insert(0, new_entry)
-        # All time UNLIMITED - semua dari awal kesimpen! (ga pernah ketimpa)
         with open(all_time_path, "w", encoding="utf-8") as f:
             json.dump(all_time, f, indent=2, default=str)
-        print(f"✅ Saved all_time: {len(all_time)} total semua waktu")
-        
+        print(f"✅ Saved UNLIMITED: {mid} {home} vs {away}")
         return True
     except Exception as e:
         print(f"Save error {e}")
-        import traceback
-        traceback.print_exc()
         return False
 
 def already_sent(mid):
@@ -96,7 +71,6 @@ def already_sent(mid):
         matches = load_local_matches("data/matches.json")
         if any(str(m.get("match_id")) == str(mid) for m in matches):
             return True
-        # Cek juga archive bulan ini
         wita, _ = wita_now()
         month_key = wita.strftime("%Y-%m")
         archive = load_local_matches(f"data/archive/{month_key}.json")
@@ -112,20 +86,10 @@ def parse_clock(clock_str, detail_str=""):
         if not s:
             return 0
         su = s.upper()
-        if "HT" in su or "PARUH" in su:
+        if "HT" in su:
             return 45
-        if "FT" in su or "FINAL" in su:
+        if "FT" in su:
             return 90
-        if "1H" in su or "1ST HALF" in su:
-            import re
-            m = re.search(r"(\d+)", s)
-            if m:
-                return int(m.group(1))
-        if "2H" in su or "2ND HALF" in su:
-            import re
-            m = re.search(r"(\d+)", s)
-            if m:
-                return 45 + int(m.group(1))
         s_clean = s.replace("'", "").replace('"', "").replace("’", "")
         if ":" in s_clean:
             return int(s_clean.split(":")[0])
@@ -146,21 +110,19 @@ def get_warning_flags(league_name, home, away, league_code=""):
     low_away = away.lower()
     low_code = league_code.lower()
     combined = f"{low_league} {low_home} {low_away} {low_code}"
-    if any(x in combined for x in ["women", "woman", "female", "putri", "wanita"]):
+    if any(x in combined for x in ["women", "female", "putri", "wanita"]):
         warnings.append("⚠️ LIGA WANITA")
-    youth_keys = ["u17", "u19", "u21", "u23", "u18", "u20", "youth", "young", "junior", "reserves", "reserve", " b ", " ii", " iii", " u-", "akademi", "academy"]
+    youth_keys = ["u17", "u19", "u21", "u23", "u18", "u20", "youth", "reserves", " ii", " iii", " u-"]
     if any(x in combined for x in youth_keys):
         warnings.append("⚠️ TIM MUDA/CADANGAN")
-    if "cup" in low_league or "pokal" in low_league or "copa" in low_league or "dfb" in low_code or "fa" in low_code:
-        warnings.append("⚠️ CUP")
-    weird_keys = ["futsal", "beach", "esports", "amateur", "persahabatan", "friendly", "uji coba", "klub teluk", "gulf", "nextgen", "pokalen", "corners"]
+    weird_keys = ["futsal", "beach", "esports", "amateur", "friendly", "nextgen", "corners"]
     if any(x in low_league for x in weird_keys):
         warnings.append("⚠️ LIGA MINOR/ANEH")
     if " ii" in low_home or " ii" in low_away or " iii" in low_home or " iii" in low_away:
         warnings.append("⚠️ TIM II/III")
     return " | ".join(warnings) if warnings else ""
 
-def fetch_all_espn_leagues():
+def fetch_all_leagues():
     all_leagues = []
     try:
         r = requests.get("https://sports.core.api.espn.com/v2/sports/soccer/leagues?limit=500", timeout=15)
@@ -176,49 +138,51 @@ def fetch_all_espn_leagues():
                         pass
                 else:
                     slug = it.get("id")
-                if slug and len(slug) < 50:
+                if slug and len(slug) < 50 and "." in slug:
                     all_leagues.append((slug, slug))
-    except Exception as e:
-        print(f"Leagues error {e}")
-    if not all_leagues:
-        fallback = ["all","eng.1","eng.fa","ger.1","ger.dfb_pokal","ita.1","fra.1","esp.1","ned.1","por.1","sco.1","uefa.champions","uefa.europa","uefa.europa.conf","uefa.nations","ind.1","tha.1","mys.1","vie.1","sgp.1","phi.1","jpn.1","kor.1","aus.1","fin.1","egy.1","aut.1","aut.cup","den.1","den.cup","gre.1","gre.cup","svk.1","svk.cup","cze.1","pol.1","bul.1"]
+    except:
+        pass
+    if len(all_leagues) < 80:
+        fallback = ["eng.1","eng.2","eng.fa","ger.1","ger.2","ger.dfb_pokal","esp.1","esp.2","ita.1","fra.1","ned.1","por.1","bel.1","tur.1","sco.1","uefa.champions","uefa.europa","uefa.europa.conf","uefa.nations","ind.1","tha.1","mys.1","vie.1","sgp.1","phi.1","jpn.1","kor.1","aus.1","usa.1","bra.1","arg.1","mex.1","egy.1","fin.1","aut.1","den.1","gre.1","svk.1","cze.1","pol.1","bul.1","nor.1","swe.1","sui.1","qat.1","sau.1","uae.1","chn.1","rus.1","ukr.1","rou.1","cro.1","srb.1","hun.1","irl.1","qat.1","isr.1","mar.1","nga.1","rsa.1","col.1","chi.1","per.1","uru.1","conmebol.libertadores","afc.champions","caf.champions","eng.3","eng.4","eng.league_cup","esp.copa_del_rey","ita.coppa_italia","fra.coupe_de_france","ned.cup","por.cup","bel.cup","tur.cup","sco.cup","jpn.2","kor.2","aus.2","nzl.1","chn.2","usa.2","bra.2","arg.2","mex.2","egy.2","fin.2","aut.2","den.2","gre.2","cze.2","pol.2","nor.2","swe.2","sui.2","irl.2","tha.2","mys.2","vie.2","ind.2","aut.cup","den.cup","gre.cup","svk.cup","cze.cup","pol.cup","bul.cup","srb.cup","rou.cup","ukr.cup","rus.cup","nor.cup","swe.cup","sui.cup","irl.cup","jpn.cup","kor.fa_cup","aus.cup","usa.open_cup","bra.cup","arg.cup","mex.cup","egy.cup","fin.cup","qat.cup","sau.cup","uae.cup","isr.cup","tha.fa_cup","mys.fa_cup","vie.cup","sgp.cup","phi.cup","idn.1","idn.2","chn.fa_cup","jpn.league_cup","kor.super_cup","aus.2.1","usa.super_cup","bra.super_cup","arg.super_cup","mex.super_cup","egy.super_cup","tur.super_cup","ned.super_cup","por.super_cup","bel.super_cup","sco.league_cup","jpn.super_cup","chn.super_cup","ind.super_cup","tha.league_cup","mys.cup","uefa.champions.qual","uefa.europa.qual","uefa.euro","uefa.euro.qual","uefa.super_cup","uefa.youth","conmebol.sudamericana","conmebol.recopa","caf.confed","afc.cup","fin.league_cup","aut.super_cup","den.super_cup","gre.super_cup","svk.super_cup","cze.super_cup","pol.super_cup","bul.super_cup","nor.super_cup","swe.super_cup","sui.super_cup","usa.3","bra.3","arg.1","col.2","ecu.1","bol.1","ven.1","par.1","mar.2","tun.1","alg.1","ken.1","jor.1","kuw.1","bhr.1","omn.1","irn.1","irq.1","qat.2","sau.2","uae.2","isr.2","slo.1","bih.1","mne.1","mac.1","mlt.1","cyp.1","geo.1","arm.1","aze.1","kaz.1","uzb.1","wal.1","nir.1","wal.cup","cyp.cup","slo.2","hun.2","slo.cup","bih.1"]
         all_leagues = [(c,c) for c in fallback]
-    seen = {}
+    seen={}
     for slug,name in all_leagues:
         seen[slug]=name
-    print(f"Total unique leagues: {len(seen)}")
     return list(seen.items())
 
-def fetch_espn_league_events(league_slug):
-    url = f"https://site.api.espn.com/apis/site/v2/sports/soccer/{league_slug}/scoreboard"
+def fetch_league(league_tuple):
+    slug, lname = league_tuple
+    url = f"https://site.api.espn.com/apis/site/v2/sports/soccer/{slug}/scoreboard"
     try:
-        r = requests.get(url, timeout=8)
+        r = requests.get(url, timeout=6)
         if r.status_code==200:
-            return r.json().get("events",[])
-        return []
+            evs = r.json().get("events",[])
+            if evs:
+                return (slug, lname, evs)
+        return (slug, lname, [])
     except:
-        return []
+        return (slug, lname, [])
 
-def cek_all_leagues():
+def cek_parallel():
     wita, utc = wita_now()
-    print(f"WITA NOW: {wita} | UTC {utc}")
-    leagues = fetch_all_espn_leagues()
-    priority = ["ger.dfb_pokal","ger.1","fin.1","egy.1","aut.cup","aut.1","den.cup","den.1","gre.cup","gre.1","svk.1","eng.fa","uefa.europa","uefa.europa.conf"]
-    def sort_key(item):
-        return (0 if item[0] in priority else 1, item[0])
-    leagues_sorted = sorted(leagues, key=sort_key)
-    print(f"Scan {len(leagues_sorted)} liga FULL")
+    start = time.time()
+    print(f"WITA {wita} | UTC {utc} - SCAN 220 LIGA PARALLEL 25 THREAD")
+    leagues = fetch_all_leagues()
+    print(f"Total {len(leagues)} liga")
     all_events={}
-    for slug,lname in leagues_sorted:
-        evs = fetch_espn_league_events(slug)
-        if evs:
-            print(f"ESPN {slug} live -> {len(evs)} events")
-        for ev in evs:
-            all_events[ev.get("id")]=(ev,slug,lname)
-    print(f"Total UNIQUE events: {len(all_events)}")
+    with ThreadPoolExecutor(max_workers=25) as ex:
+        futures = {ex.submit(fetch_league, lt): lt for lt in leagues}
+        for fut in as_completed(futures):
+            slug, lname, evs = fut.result()
+            if evs:
+                print(f"{slug} -> {len(evs)}")
+                for ev in evs:
+                    all_events[ev.get("id")]=(ev,slug,lname)
+    elapsed = time.time()-start
+    print(f"Parallel done {elapsed:.1f}s - {len(all_events)} unique events")
     out=[]
     inprog=[]
-    for ev_id,(ev,league_slug,league_name_from_list) in all_events.items():
+    for ev_id,(ev,slug,lname) in all_events.items():
         try:
             comp = ev.get("competitions",[{}])[0]
             status = comp.get("status",{})
@@ -236,33 +200,28 @@ def cek_all_leagues():
             aws = int(away.get("score",0) or 0)
             hname = home.get("team",{}).get("displayName","Home")
             aname = away.get("team",{}).get("displayName","Away")
-            real_league_name = (ev.get("leagues",[{}])[0].get("name") if ev.get("leagues") else league_name_from_list) or league_slug
+            real_league = (ev.get("leagues",[{}])[0].get("name") if ev.get("leagues") else lname) or slug
             if "IN_PROGRESS" in tname or state=="in":
-                warning = get_warning_flags(real_league_name, hname, aname, league_slug)
-                line = f"{hname} {hs}-{aws} {aname} Menit {minute} {real_league_name} [{league_slug}] {warning}"
-                inprog.append((minute, line, ev, hs, aws, hname, aname, real_league_name, league_slug, warning))
+                warning = get_warning_flags(real_league, hname, aname, slug)
+                line = f"{hname} {hs}-{aws} {aname} Menit {minute} {real_league} [{slug}] {warning}"
+                inprog.append((minute, line, ev, hs, aws, hname, aname, real_league, slug, warning))
         except:
             continue
     inprog_sorted = sorted(inprog, key=lambda x: x[0])
-    print(f"--- {len(inprog_sorted)} IN-PROGRESS ---")
-    for minute, line, ev, hs, aws, hname, aname, real_league_name, league_slug, warning in inprog_sorted[:50]:
+    print(f"--- {len(inprog_sorted)} IN-PROGRESS in {elapsed:.1f}s ---")
+    for minute, line, ev, hs, aws, hname, aname, real_league, slug, warning in inprog_sorted[:50]:
         print(line)
         if 55 <= minute <= 68 and hs==0 and aws==0:
-            out.append({"id": ev.get("id"), "home": hname, "away": aname, "league": real_league_name, "minute": minute, "warning": warning, "slug": league_slug})
-    print("--- end list ---")
+            out.append({"id": ev.get("id"), "home": hname, "away": aname, "league": real_league, "minute": minute, "warning": warning, "slug": slug})
     return out
 
 if __name__=="__main__":
     wita,utc = wita_now()
-    print(f"Phase 1 - V8.5 MONTHLY ARCHIVE - WITA {wita} - 200 terbaru + archive bulanan ga ketimpa!")
-    matches = cek_all_leagues()
-    print(f"Found {len(matches)} match di jendela 55-68 0-0")
+    print(f"V8.7 220 LIGA PARALLEL KONSISTEN - WITA {wita}")
+    matches = cek_parallel()
+    print(f"Found {len(matches)} match 55-68 0-0")
     for m in matches:
         if already_sent(m["id"]):
-            print(f"Skip {m['id']} sudah ada")
             continue
         save_with_monthly_archive(m["id"], m["home"], m["away"], m["league"], m["minute"], "AKTIF", m["warning"])
-        warning_text = f"\n\n{m['warning']}" if m["warning"] else ""
-        pesan = f"⚽ <b>MENIT 60 - 0-0</b>\n\n🏟️ {m['home']} vs {m['away']}\n🏆 {m['league']} ({m['slug']})\n⏱️ Menit {m['minute']}{warning_text}\n\nID: {m['id']}"
-        send_telegram(pesan)
-    print("Done V8.5 - dashboard + archive bulanan")
+    print("Done V8.7")
