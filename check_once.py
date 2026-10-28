@@ -63,25 +63,55 @@ def save_to_supabase(match_id, home, away, league, minute, status_text, stats):
     except Exception as e:
         print(f"Supabase save error: {e}")
 
+def fetch_live_events():
+    # Coba 3 endpoint berbeda, dengan header Cloudflare bypass
+    endpoints = [
+        "https://www.sofascore.com/api/v1/sport/football/events/live",
+        "https://api.sofascore.com/api/v1/sport/football/events/live",
+        "https://api.sofascore.com/api/v1/sport/football/scheduled-events/live"
+    ]
+    headers = {
+        "User-Agent": "Mozilla/5.0 (Windows NT 10.0; Win64; x64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/122.0.0.0 Safari/537.36",
+        "X-Requested-With": "XMLHttpRequest",
+        "Referer": "https://www.sofascore.com/",
+        "Accept": "application/json, text/plain, */*",
+        "Accept-Language": "en-US,en;q=0.9",
+    }
+    for url in endpoints:
+        try:
+            r = requests.get(url, headers=headers, timeout=15)
+            print(f"Try {url} -> Status {r.status_code} len {len(r.text)}")
+            if r.status_code != 200:
+                continue
+            # Kalau kena Cloudflare challenge, text akan berisi <!DOCTYPE html> bukan json
+            if r.text.strip().startswith("<!DOCTYPE") or "cf-challenge" in r.text.lower():
+                print(f"Cloudflare challenge di {url}")
+                continue
+            data = r.json()
+            events = data.get("events", [])
+            print(f"Success {url} -> {len(events)} events")
+            return events
+        except Exception as e:
+            print(f"Error fetch {url}: {e}")
+            continue
+    return []
+
 def cek_menit_60():
     try:
-        url = "https://api.sofascore.com/api/v1/sport/football/events/live"
-        r = requests.get(url, headers={"User-Agent": "Mozilla/5.0"}, timeout=15)
-        data = r.json()
-        events = data.get("events", [])
+        events = fetch_live_events()
         print(f"Total live events dari Sofascore: {len(events)}")
         out = []
+        debug_00 = 0
         for ev in events:
             minute = ev.get("time", {}).get("minute", 0) or 0
             hs = ev.get("homeScore", {}).get("current", 0)
             aws = ev.get("awayScore", {}).get("current", 0)
             status = ev.get("status", {}).get("type")
-            # FIX: Jendela diperlebar 55-68 agar cron 5 menit gak kelewat
-            # Liga: SEMUA liga, tapi skip liga wanita/junior yang stats-nya kosong
+            if hs == 0 and aws == 0:
+                debug_00 += 1
             league = ev.get("tournament", {}).get("name", "")
             category = ev.get("tournament", {}).get("category", {}).get("name", "")
             if status == "inprogress" and 55 <= minute <= 68 and hs == 0 and aws == 0:
-                # Skip wanita & U19/U21 biar gak spam (opsional, bisa dihapus)
                 low = (league + " " + category).lower()
                 if "women" in low or "u19" in low or "u21" in low or "u17" in low:
                     continue
@@ -92,15 +122,21 @@ def cek_menit_60():
                     "league": league,
                     "minute": minute
                 })
+        print(f"Debug: {debug_00} matches currently 0-0 live (any minute)")
         return out
     except Exception as e:
-        print(f"Error: {e}")
+        print(f"Error cek_menit_60: {e}")
         return []
 
 def get_stats(event_id):
     try:
+        headers = {
+            "User-Agent": "Mozilla/5.0 (Windows NT 10.0; Win64; x64) AppleWebKit/537.36",
+            "X-Requested-With": "XMLHttpRequest",
+            "Referer": "https://www.sofascore.com/",
+        }
         url = f"https://api.sofascore.com/api/v1/event/{event_id}/statistics"
-        r = requests.get(url, headers={"User-Agent": "Mozilla/5.0"}, timeout=10)
+        r = requests.get(url, headers=headers, timeout=10)
         data = r.json()
         stats = {}
         for g in data.get("statistics", []):
@@ -124,7 +160,7 @@ def analisa(stats):
         return f"SEDANG 😐 Shots {ts} DA {da} SoT {sot}", "SEDANG"
 
 if __name__ == "__main__":
-    print(f"Phase 1 - Check menit 60 FIX - {datetime.now()}")
+    print(f"Phase 1 - Check menit 60 FIX v2 Cloudflare - {datetime.now()}")
     matches = cek_menit_60()
     print(f"Found {len(matches)} match di jendela 55-68")
     for m in matches:
@@ -147,4 +183,4 @@ if __name__ == "__main__":
 ID: {m['id']}"""
         ok = send_telegram(pesan)
         print(f"Telegram sent {m['id']}: {ok}")
-    print("Done Phase 1 FIX")
+    print("Done Phase 1 FIX v2")
