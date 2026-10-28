@@ -1,8 +1,8 @@
 name: Bot Skor Menit 60
 on:
   schedule:
-    - cron: '*/5 * * * *'  # Phase 1 tiap 5 menit
-    - cron: '0 */2 * * *'  # Phase 2 tiap 2 jam
+    - cron: '*/5 * * * *'
+    - cron: '0 */2 * * *'
   workflow_dispatch:
 
 jobs:
@@ -25,7 +25,6 @@ jobs:
         run: |
           python check_once.py
       - name: Update final scores (Phase 2)
-        if: github.event.schedule == '0 */2 * * *' || github.event_name == 'workflow_dispatch'
         env:
           SUPABASE_URL: ${{ secrets.SUPABASE_URL }}
           SUPABASE_KEY: ${{ secrets.SUPABASE_KEY }}
