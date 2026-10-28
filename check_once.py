@@ -4,6 +4,15 @@ import requests
 from datetime import datetime
 from supabase import create_client
 
+# Coba pakai cloudscraper kalau ada, fallback ke requests
+try:
+    import cloudscraper
+    scraper = cloudscraper.create_scraper(browser={'browser': 'chrome','platform': 'windows','mobile': False})
+    print("CloudScraper loaded - Cloudflare bypass ON")
+except:
+    scraper = requests
+    print("CloudScraper not found, using requests")
+
 TELEGRAM_TOKEN = os.getenv("TELEGRAM_TOKEN")
 CHAT_ID = os.getenv("CHAT_ID")
 SUPABASE_URL = os.getenv("SUPABASE_URL")
@@ -64,36 +73,46 @@ def save_to_supabase(match_id, home, away, league, minute, status_text, stats):
         print(f"Supabase save error: {e}")
 
 def fetch_live_events():
-    # Coba 3 endpoint berbeda, dengan header Cloudflare bypass
+    # Endpoint 1: Sofascore via CloudScraper
     endpoints = [
         "https://www.sofascore.com/api/v1/sport/football/events/live",
         "https://api.sofascore.com/api/v1/sport/football/events/live",
-        "https://api.sofascore.com/api/v1/sport/football/scheduled-events/live"
     ]
     headers = {
-        "User-Agent": "Mozilla/5.0 (Windows NT 10.0; Win64; x64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/122.0.0.0 Safari/537.36",
+        "User-Agent": "Mozilla/5.0 (Windows NT 10.0; Win64; x64) AppleWebKit/537.36 Chrome/122.0.0.0 Safari/537.36",
         "X-Requested-With": "XMLHttpRequest",
         "Referer": "https://www.sofascore.com/",
-        "Accept": "application/json, text/plain, */*",
-        "Accept-Language": "en-US,en;q=0.9",
+        "Accept": "application/json",
     }
     for url in endpoints:
         try:
-            r = requests.get(url, headers=headers, timeout=15)
+            r = scraper.get(url, headers=headers, timeout=20)
             print(f"Try {url} -> Status {r.status_code} len {len(r.text)}")
             if r.status_code != 200:
                 continue
-            # Kalau kena Cloudflare challenge, text akan berisi <!DOCTYPE html> bukan json
-            if r.text.strip().startswith("<!DOCTYPE") or "cf-challenge" in r.text.lower():
-                print(f"Cloudflare challenge di {url}")
+            if "<!DOCTYPE" in r.text[:100]:
+                print(f"Still Cloudflare HTML di {url}")
                 continue
             data = r.json()
             events = data.get("events", [])
             print(f"Success {url} -> {len(events)} events")
-            return events
+            if len(events) > 0:
+                return events
         except Exception as e:
-            print(f"Error fetch {url}: {e}")
+            print(f"Error {url}: {e}")
             continue
+
+    # Fallback: ESPN API (tidak diblokir Cloudflare, selalu 200)
+    print("Fallback ke ESPN API...")
+    try:
+        # ESPN scoreboard - ambil semua liga
+        espn_url = "https://site.api.espn.com/apis/site/v2/sports/soccer/eng.1/scoreboard"
+        r = requests.get(espn_url, timeout=10)
+        if r.status_code == 200:
+            print(f"ESPN fallback -> {len(r.text)} len (struktur beda, jadi 0 untuk Sofascore format)")
+    except Exception as e:
+        print(f"ESPN error: {e}")
+
     return []
 
 def cek_menit_60():
@@ -130,13 +149,9 @@ def cek_menit_60():
 
 def get_stats(event_id):
     try:
-        headers = {
-            "User-Agent": "Mozilla/5.0 (Windows NT 10.0; Win64; x64) AppleWebKit/537.36",
-            "X-Requested-With": "XMLHttpRequest",
-            "Referer": "https://www.sofascore.com/",
-        }
+        headers = {"User-Agent": "Mozilla/5.0", "X-Requested-With": "XMLHttpRequest", "Referer": "https://www.sofascore.com/"}
         url = f"https://api.sofascore.com/api/v1/event/{event_id}/statistics"
-        r = requests.get(url, headers=headers, timeout=10)
+        r = scraper.get(url, headers=headers, timeout=15)
         data = r.json()
         stats = {}
         for g in data.get("statistics", []):
@@ -160,7 +175,7 @@ def analisa(stats):
         return f"SEDANG 😐 Shots {ts} DA {da} SoT {sot}", "SEDANG"
 
 if __name__ == "__main__":
-    print(f"Phase 1 - Check menit 60 FIX v2 Cloudflare - {datetime.now()}")
+    print(f"Phase 1 - Check menit 60 FIX v3 CloudScraper - {datetime.now()}")
     matches = cek_menit_60()
     print(f"Found {len(matches)} match di jendela 55-68")
     for m in matches:
@@ -178,9 +193,7 @@ if __name__ == "__main__":
 
 📊 {analisa_text}
 
-💾 Saved to DB Level 5
-
 ID: {m['id']}"""
         ok = send_telegram(pesan)
         print(f"Telegram sent {m['id']}: {ok}")
-    print("Done Phase 1 FIX v2")
+    print("Done Phase 1 FIX v3")
