@@ -1,4 +1,2 @@
-Download
 requests
 supabase
-cloudscraper
