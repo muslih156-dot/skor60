@@ -1,4 +1,4 @@
-streamlit
+Download
+requests
 supabase
-pandas
-plotly
+cloudscraper
