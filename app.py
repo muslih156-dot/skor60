@@ -565,17 +565,40 @@ with col_right:
         profit_color = "#16a34a" if gol==True else "#dc2626" if gol==False else "#64748b"
 
         
-        # BET, ODDS, MARKET logic - FIXED: bandingkan deteksi vs FT
+        # BET, ODDS, MARKET logic - V12.1: CLARIFY deteksi 0-0 vs FT
         odds_val = m.get("odds", m.get("odds_calc", round(random.uniform(1.45, 1.85), 2)))
         m["odds_calc"] = odds_val
         
-        # Ambil skor deteksi (saat menit 60-66, harusnya 0-0) dan FT
-        skor_deteksi = m.get("score_deteksi", m.get("skor_deteksi_real", m.get("score", "0-0")))
-        ft_score = m.get("final_score", m.get("final_display", "0-0"))
-        if ft_score in ["FT", "FT 0-0 ?", "-", ""]:
-            ft_score = m.get("live_score", m.get("current_score", "0-0"))
+        # FIX: Bot hanya scan 0-0 di menit 60-66, jadi skor_deteksi HARUS 0-0
+        # Kalau data lama Skor Awal 2-1 di menit 90', itu adalah skor LIVE, bukan deteksi
+        # Skor deteksi asli tetap 0-0
+        minute_det = m.get("minute_deteksi", m.get("minute", 60))
+        if 60 <= minute_det <= 66:
+            skor_deteksi = "0-0"  # Force 0-0 karena bot hanya deteksi 0-0
+        else:
+            skor_deteksi = m.get("score_deteksi", m.get("skor_deteksi_real", m.get("score", "0-0")))
+            # Tetap force 0-0 kalau score field adalah 2-1 tapi minute_det 60-66
         
-        # Hitung gol setelah deteksi
+        # Untuk data lama yang minute field sudah 90', coba ambil minute_deteksi
+        if m.get("minute_deteksi"):
+            skor_deteksi = "0-0"
+        elif m.get("score") == "0-0" or m.get("score_deteksi") == "0-0":
+            skor_deteksi = "0-0"
+        else:
+            # Fallback: kalau memang bot scan 0-0, anggap deteksi 0-0
+            # Kecuali kalau data ini dari liga yang skor deteksi bukan 0-0 (tidak mungkin)
+            if m.get("score", "0-0") != "0-0" and m.get("minute", 90) >= 85:
+                # Ini data live score, bukan deteksi - tetap anggap deteksi 0-0
+                skor_deteksi = "0-0"
+        
+        ft_score = m.get("final_score", m.get("final_display", "0-0"))
+        if ft_score in ["FT", "FT 0-0 ?", "-", "", "FT", None]:
+            ft_score = m.get("live_score", m.get("current_score", m.get("score", "0-0")))
+        
+        # Kalau FT masih None dan status PASIF, ambil dari live_score terakhir
+        if not ft_score or ft_score in ["-", ""]:
+            ft_score = m.get("live_score", "0-0")
+        
         try:
             hg_ft, ag_ft = map(int, str(ft_score).split("-"))
             hg_det, ag_det = map(int, str(skor_deteksi).split("-"))
@@ -585,15 +608,18 @@ with col_right:
         except:
             gol_setelah = m.get("total_gol_setelah", 0)
             if gol_setelah is None:
-                gol_setelah = 0
+                # Kalau FT 2-1 dan deteksi 0-0, gol setelah = 3
+                try:
+                    hg_ft, ag_ft = map(int, str(ft_score).split("-"))
+                    gol_setelah = hg_ft + ag_ft
+                except:
+                    gol_setelah = 0
         
-        # Market: kalau deteksi 0-0 => Over 0.5, kalau deteksi sudah 2-1 => Next Goal
-        if skor_deteksi == "0-0":
-            market = "Over 0.5"
-        else:
+        # Market: karena deteksi selalu 0-0, market selalu Over 0.5
+        market = "Over 0.5"
+        if skor_deteksi != "0-0":
             market = "Next Goal"
         
-        # Profit Rp 50rb version
         bet_rp_display = f"Rp {MODAL_PER_MATCH//1000}rb"
         if gol == True:
             profit_rp_val = int(MODAL_PER_MATCH * (odds_val - 1))
@@ -602,6 +628,10 @@ with col_right:
             profit_rp = f"-Rp {MODAL_PER_MATCH//1000}rb"
         else:
             profit_rp = "LIVE"
+        
+        # Display: Skor Deteksi selalu 0-0, FT = 2-1, Gol Setelah = +3
+        skor_awal_display = f"{skor_deteksi} (60')"
+        ft_display_table = ft_score
         
         # Untuk display tabel, Skor Awal = skor_deteksi (0-0), FT = ft_score
         skor_awal_display = skor_deteksi
