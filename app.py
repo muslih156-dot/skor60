@@ -128,18 +128,58 @@ for m in matches:
             m["status_calc"] = "PASIF"
             m["final_display"] = m.get("final_score","FT")
             fs = m.get("final_score","0-0")
+            skor_deteksi = m.get("score","0-0")  # skor saat menit 60-66 deteksi awal (harusnya 0-0)
             try:
-                hg, ag = map(int, fs.split("-"))
-                m["gol_terjadi"] = (hg+ag) > 0
-                m["result_calc"] = "WIN" if (hg+ag) > 0 else "LOSE"
+                # Parse FT
+                hg_ft, ag_ft = map(int, fs.split("-"))
+                total_ft = hg_ft + ag_ft
+                # Parse skor deteksi (saat ping 0-0)
+                try:
+                    hg_det, ag_det = map(int, skor_deteksi.split("-"))
+                    total_det = hg_det + ag_det
+                except:
+                    total_det = 0
+                    skor_deteksi = "0-0"
+                
+                # LOGIC BENAR: gol terjadi SETELAH deteksi = total FT > total deteksi
+                # Contoh: deteksi 0-0 (total 0), FT 2-1 (total 3) => 3>0 => WIN ✅
+                # Contoh: deteksi 0-0 (total 0), FT 0-0 (total 0) => 0>0 false => LOSE ❌
+                # Contoh: deteksi 2-1 (total 3), FT 2-1 (total 3) => 3>3 false => LOSE ❌ (ga ada gol setelah)
+                # Contoh: deteksi 2-1 (total 3), FT 3-1 (total 4) => 4>3 => WIN ✅ (ada gol setelah)
+                m["gol_terjadi"] = total_ft > total_det
+                m["result_calc"] = "WIN" if m["gol_terjadi"] else "LOSE"
+                m["total_gol_setelah"] = total_ft - total_det
+                m["skor_deteksi_real"] = skor_deteksi
             except:
-                m["result_calc"] = m.get("result","PENDING")
-                m["gol_terjadi"] = "WIN" in str(m.get("result",""))
+                # Fallback old logic kalau parse gagal
+                try:
+                    hg, ag = map(int, fs.split("-"))
+                    m["gol_terjadi"] = (hg+ag) > 0
+                    m["result_calc"] = "WIN" if (hg+ag) > 0 else "LOSE"
+                    m["total_gol_setelah"] = 0
+                    m["skor_deteksi_real"] = skor_deteksi
+                except:
+                    m["result_calc"] = m.get("result","PENDING")
+                    m["gol_terjadi"] = "WIN" in str(m.get("result",""))
+                    m["total_gol_setelah"] = 0
+                    m["skor_deteksi_real"] = skor_deteksi
         elif umur > 40:
             m["status_calc"] = "PASIF"
-            m["final_display"] = "FT"
-            m["result_calc"] = m.get("result","LOSE")
-            m["gol_terjadi"] = False
+            m["final_display"] = m.get("final_score","FT") if m.get("final_score") else "FT 0-0 ?"
+            # Kalau sudah 40 menit dari deteksi (umur >40) tapi belum ada FT score, anggap LOSE sementara tapi tandai belum verified
+            # Nanti bot V10 akan update FT real dari ESPN
+            skor_det = m.get("score","0-0")
+            fs_fallback = m.get("final_score","0-0")
+            try:
+                hg_f, ag_f = map(int, fs_fallback.split("-"))
+                hg_d, ag_d = map(int, skor_det.split("-"))
+                m["gol_terjadi"] = (hg_f+ag_f) > (hg_d+ag_d)
+                m["result_calc"] = "WIN" if m["gol_terjadi"] else "LOSE"
+            except:
+                m["result_calc"] = m.get("result","LOSE")
+                m["gol_terjadi"] = False
+            m["total_gol_setelah"] = 0
+            m["skor_deteksi_real"] = skor_det
         elif umur > 15 or m.get("minute",0) > 75:
             m["status_calc"] = "SEDANG"
             m["final_display"] = f"{m.get('menit_sekarang', 75)}'"
@@ -524,31 +564,84 @@ with col_right:
         profit_rp = "+Rp 80rb" if gol==True else "-Rp 50rb" if gol==False else "⏳ LIVE"
         profit_color = "#16a34a" if gol==True else "#dc2626" if gol==False else "#64748b"
 
-        # BET, ODDS, MARKET logic
-        odds_val = m.get("odds", round(random.uniform(1.45, 1.85), 2))
-        # simpan odds ke match biar konsisten
+        
+        # BET, ODDS, MARKET logic - V12.1: CLARIFY deteksi 0-0 vs FT
+        odds_val = m.get("odds", m.get("odds_calc", round(random.uniform(1.45, 1.85), 2)))
         m["odds_calc"] = odds_val
-        # Market: Over 0.5 Goal di menit 60-66
-        if m.get("minute",60) <= 65:
-            market = "Over 0.5"
-        elif m.get("minute",60) <= 70:
-            market = "Over 0.5"
+        
+        # FIX: Bot hanya scan 0-0 di menit 60-66, jadi skor_deteksi HARUS 0-0
+        # Kalau data lama Skor Awal 2-1 di menit 90', itu adalah skor LIVE, bukan deteksi
+        # Skor deteksi asli tetap 0-0
+        minute_det = m.get("minute_deteksi", m.get("minute", 60))
+        if 60 <= minute_det <= 66:
+            skor_deteksi = "0-0"  # Force 0-0 karena bot hanya deteksi 0-0
         else:
-            market = "Over 0.5"
-        # Kalau skor sudah 1-0 atau lebih, tetap Next Goal
-        if "1-" in m.get("score","0-0") or "-1" in m.get("score","0-0") or m.get("score","0-0") != "0-0":
+            skor_deteksi = m.get("score_deteksi", m.get("skor_deteksi_real", m.get("score", "0-0")))
+            # Tetap force 0-0 kalau score field adalah 2-1 tapi minute_det 60-66
+        
+        # Untuk data lama yang minute field sudah 90', coba ambil minute_deteksi
+        if m.get("minute_deteksi"):
+            skor_deteksi = "0-0"
+        elif m.get("score") == "0-0" or m.get("score_deteksi") == "0-0":
+            skor_deteksi = "0-0"
+        else:
+            # Fallback: kalau memang bot scan 0-0, anggap deteksi 0-0
+            # Kecuali kalau data ini dari liga yang skor deteksi bukan 0-0 (tidak mungkin)
+            if m.get("score", "0-0") != "0-0" and m.get("minute", 90) >= 85:
+                # Ini data live score, bukan deteksi - tetap anggap deteksi 0-0
+                skor_deteksi = "0-0"
+        
+        ft_score = m.get("final_score", m.get("final_display", "0-0"))
+        if ft_score in ["FT", "FT 0-0 ?", "-", "", "FT", None]:
+            ft_score = m.get("live_score", m.get("current_score", m.get("score", "0-0")))
+        
+        # Kalau FT masih None dan status PASIF, ambil dari live_score terakhir
+        if not ft_score or ft_score in ["-", ""]:
+            ft_score = m.get("live_score", "0-0")
+        
+        try:
+            hg_ft, ag_ft = map(int, str(ft_score).split("-"))
+            hg_det, ag_det = map(int, str(skor_deteksi).split("-"))
+            total_ft = hg_ft + ag_ft
+            total_det = hg_det + ag_det
+            gol_setelah = total_ft - total_det
+        except:
+            gol_setelah = m.get("total_gol_setelah", 0)
+            if gol_setelah is None:
+                # Kalau FT 2-1 dan deteksi 0-0, gol setelah = 3
+                try:
+                    hg_ft, ag_ft = map(int, str(ft_score).split("-"))
+                    gol_setelah = hg_ft + ag_ft
+                except:
+                    gol_setelah = 0
+        
+        # Market: karena deteksi selalu 0-0, market selalu Over 0.5
+        market = "Over 0.5"
+        if skor_deteksi != "0-0":
             market = "Next Goal"
-        bet_rp_display = "Rp 50rb"
-        # Profit calc real Rp
+        
+        bet_rp_display = f"Rp {MODAL_PER_MATCH//1000}rb"
         if gol == True:
-            profit_rp_val = int(100000 * (odds_val - 1))
+            profit_rp_val = int(MODAL_PER_MATCH * (odds_val - 1))
             profit_rp = f"+Rp {profit_rp_val//1000}rb"
         elif gol == False:
-            profit_rp = "-Rp 50rb"
+            profit_rp = f"-Rp {MODAL_PER_MATCH//1000}rb"
         else:
             profit_rp = "LIVE"
         
-        table_html += f"""<div style="display:grid; grid-template-columns:80px 1.4fr 80px 50px 60px 40px 40px 55px 45px 75px 70px 55px 90px; gap:0; padding:12px 16px; border-bottom:1px solid #f1f5f9; align-items:center; font-size:11px; min-width:1200px;"><div><div style="font-size:10px; font-weight:600;">{waktu_full}</div><div style="font-size:9px; color:#64748b;">{market} • WITA</div></div><div><div style="font-weight:700; font-size:11px;">{home} <span style="color:#64748b; font-weight:400;">vs</span> {away}</div><div style="font-size:9px; color:#64748b;">{m.get('score','0-0')} → {final} • {market}</div></div><div><div style="background:#f1f5f9; padding:3px 6px; border-radius:10px; font-size:9px; font-weight:600; display:inline-block;">{liga}</div></div><div><div style="background:#0f172a; color:white; width:32px; height:24px; border-radius:12px; display:flex; align-items:center; justify-content:center; font-size:10px; font-weight:800;">{menit}'</div></div><div><div style="background:{status_bg}; color:{status_color}; padding:3px 8px; border-radius:12px; font-size:9px; font-weight:700; display:inline-block;">● {status}</div></div><div style="font-weight:600; font-size:11px;">{shots}</div><div><div style="background:{'#dcfce7' if da>=60 else '#fef3c7'}; padding:3px 6px; border-radius:10px; font-size:9px; font-weight:700; display:inline-block;">{da}</div></div><div style="font-weight:700; font-size:11px;">{final}</div><div><div style="background:{gol_bg}; width:24px; height:24px; border-radius:50%; display:flex; align-items:center; justify-content:center; font-size:11px;">{gol_icon}</div></div><div style="font-size:10px; font-weight:700;">{bet_rp_display}</div><div style="font-size:10px; font-weight:700; background:#fef3c7; padding:2px 6px; border-radius:8px; display:inline-block;">{odds_val}</div><div style="font-size:9px; font-weight:600; color:#0f172a;">{market}</div><div style="font-size:10px; font-weight:700; color:{profit_color};">{profit_rp}</div></div>"""
+        # Display: Skor Deteksi selalu 0-0, FT = 2-1, Gol Setelah = +3
+        skor_awal_display = f"{skor_deteksi} (60')"
+        ft_display_table = ft_score
+        
+        # Untuk display tabel, Skor Awal = skor_deteksi (0-0), FT = ft_score
+        skor_awal_display = skor_deteksi
+        ft_display_table = ft_score if m.get("is_ft") or m.get("status_calc")=="PASIF" else m.get("live_score", m.get("current_score", "-"))
+        
+        
+        # Display dengan logic baru: skor_deteksi (0-0) -> FT (2-1) = +3 gol setelah
+        gol_setelah_display = f"+{gol_setelah}" if gol_setelah>0 else f"{gol_setelah}" if gol_setelah<0 else "0"
+        gol_setelah_bg = "#dcfce7" if gol_setelah>0 else "#fee2e2" if gol_setelah==0 else "#f1f5f9"
+        table_html += f"""<div style="display:grid; grid-template-columns:80px 1.4fr 80px 50px 60px 40px 40px 55px 45px 75px 70px 55px 90px; gap:0; padding:12px 16px; border-bottom:1px solid #f1f5f9; align-items:center; font-size:11px; min-width:1200px;"><div><div style="font-size:10px; font-weight:600;">{waktu_full}</div><div style="font-size:9px; color:#64748b;">{market}</div></div><div><div style="font-weight:700; font-size:11px;">{home} <span style="color:#64748b; font-weight:400;">vs</span> {away}</div><div style="font-size:9px; color:#64748b;">{skor_deteksi} → {ft_score} (gol +{gol_setelah}) • {market}</div></div><div><div style="background:#f1f5f9; padding:3px 6px; border-radius:10px; font-size:9px; font-weight:600; display:inline-block;">{liga}</div></div><div><div style="background:#0f172a; color:white; width:32px; height:24px; border-radius:12px; display:flex; align-items:center; justify-content:center; font-size:10px; font-weight:800;">{menit}'</div></div><div><div style="background:{status_bg}; color:{status_color}; padding:3px 8px; border-radius:12px; font-size:9px; font-weight:700; display:inline-block;">● {status}</div></div><div style="font-weight:600; font-size:11px;">{shots}</div><div><div style="background:{'#dcfce7' if da>=60 else '#fef3c7'}; padding:3px 6px; border-radius:10px; font-size:9px; font-weight:700; display:inline-block;">{da}</div></div><div style="font-weight:700; font-size:11px;">{ft_score} <span style="font-size:9px; background:{gol_setelah_bg}; padding:2px 4px; border-radius:6px;">+{gol_setelah} gol</span></div><div><div style="background:{gol_bg}; width:24px; height:24px; border-radius:50%; display:flex; align-items:center; justify-content:center; font-size:11px;">{gol_icon}</div></div><div style="font-size:10px; font-weight:700;">{bet_rp_display}</div><div style="font-size:10px; font-weight:700; background:#fef3c7; padding:2px 6px; border-radius:8px; display:inline-block;">{odds_val}</div><div style="font-size:9px; font-weight:600; color:#0f172a;">{market}</div><div style="font-size:10px; font-weight:700; color:{profit_color};">{profit_rp}</div></div>"""
 
     table_html += "</div>"
     st.markdown(table_html, unsafe_allow_html=True)
