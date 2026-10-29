@@ -41,9 +41,9 @@
     "away_team": "Atlanta United FC",
     "league": "MLS",
     "league_slug": "usa.1",
-    "minute": 52,
+    "minute": 90,
     "menit_sekarang": 52,
-    "score": "0-0",
+    "score": "2-1",
     "status": "AKTIF",
     "status_detail": "AKTIF",
     "created_at": "2026-10-29T08:55:26.853653",
@@ -51,7 +51,9 @@
     "wita_date": "2026-10-29",
     "month": "2026-10",
     "prob_gol": 75,
-    "is_ft": false
+    "is_ft": true,
+    "final_score": "2-1",
+    "result": "\u2705 WIN"
   },
   {
     "match_id": "761908",
