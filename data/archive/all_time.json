@@ -1,5 +1,23 @@
 [
   {
+    "match_id": "761914",
+    "home_team": "Nashville SC",
+    "away_team": "Philadelphia Union",
+    "league": "MLS",
+    "league_slug": "usa.1",
+    "minute": 61,
+    "menit_sekarang": 61,
+    "score": "0-0",
+    "status": "AKTIF",
+    "status_detail": "AKTIF",
+    "created_at": "2026-10-29T10:00:44.703254",
+    "last_update": "2026-10-29T10:00:44.703254",
+    "wita_date": "2026-10-29",
+    "month": "2026-10",
+    "prob_gol": 75,
+    "is_ft": false
+  },
+  {
     "match_id": "401931124",
     "home_team": "West Florida",
     "away_team": "Central Arkansas",
@@ -23,9 +41,9 @@
     "away_team": "Atl\u00e9tico Grau",
     "league": "Per 1",
     "league_slug": "per.1",
-    "minute": 50,
+    "minute": 90,
     "menit_sekarang": 50,
-    "score": "0-0",
+    "score": "3-0",
     "status": "AKTIF",
     "status_detail": "AKTIF",
     "created_at": "2026-10-29T09:15:34.949349",
@@ -33,7 +51,9 @@
     "wita_date": "2026-10-29",
     "month": "2026-10",
     "prob_gol": 75,
-    "is_ft": false
+    "is_ft": true,
+    "final_score": "3-0",
+    "result": "\u2705 WIN"
   },
   {
     "match_id": "761905",
