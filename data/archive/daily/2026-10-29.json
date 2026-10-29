@@ -219,5 +219,22 @@
     "odds": 1.8,
     "source": "V19 partisi 12:00 WITA",
     "trading_day": "2026-10-29"
+  },
+  {
+    "match_id": "401886672",
+    "home_team": "Akron",
+    "away_team": "Eastern Michigan",
+    "league": "all",
+    "minute": 62,
+    "score": "0-0",
+    "score_deteksi": "0-0",
+    "live_score": "0-0",
+    "final_score": null,
+    "is_ft": false,
+    "result": "LIVE",
+    "created_at": "2026-10-30T07:55:29.343755+08:00",
+    "odds": 1.8,
+    "source": "V19 partisi 12:00 WITA",
+    "trading_day": "2026-10-29"
   }
 ]
