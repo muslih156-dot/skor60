@@ -267,7 +267,9 @@ with col_right:
     
     st.markdown(f"""<div style="background:white; border-radius:16px; border:1px solid #e2e8f0; margin-top:20px; overflow:hidden;"><div style="display:flex; justify-content:space-between; align-items:center; padding:16px 20px; border-bottom:1px solid #e2e8f0;"><div style="font-size:14px; font-weight:800;">20 Peluang Last Goal Terakhir • Modal Rp 100rb/match • Profit {format_rp(total_profit_rp)}</div><div style="background:#0f172a; color:white; padding:4px 10px; border-radius:20px; font-size:10px; font-weight:700;">REAL DATA • {total} MATCH • {format_rp(total_modal_keluar)} modal</div></div></div>""", unsafe_allow_html=True)
     
-    table_html = """<div style="background:white; border:1px solid #e2e8f0; border-top:none; border-radius:0 0 16px 16px; overflow:hidden;"><div style="display:grid; grid-template-columns:90px 1.5fr 100px 60px 70px 50px 40px 60px 50px 70px; gap:0; background:#f8fafc; padding:12px 20px; font-size:10px; font-weight:700; color:#64748b; border-bottom:1px solid #e2e8f0;"><div>WAKTU</div><div>HOME VS AWAY</div><div>LIGA</div><div>MENIT</div><div>STATUS</div><div>SHOTS</div><div>DA</div><div>FINAL</div><div>GOL?</div><div>PROFIT Rp</div></div>"""
+
+    # ===== TABLE WITH BET, ODDS, MARKET =====
+    table_html = """<div style="background:white; border:1px solid #e2e8f0; border-top:none; border-radius:0 0 16px 16px; overflow-x:auto;"><div style="display:grid; grid-template-columns:80px 1.4fr 80px 50px 60px 40px 40px 55px 45px 75px 70px 55px 90px; gap:0; background:#f8fafc; padding:12px 16px; font-size:9px; font-weight:700; color:#64748b; border-bottom:1px solid #e2e8f0; min-width:1200px;"><div>WAKTU</div><div>HOME VS AWAY</div><div>LIGA</div><div>MENIT</div><div>STATUS</div><div>SHOTS</div><div>DA</div><div>FINAL</div><div>GOL?</div><div>BET Rp</div><div>ODDS</div><div>PASAR</div><div>PROFIT Rp</div></div>"""
     sorted_matches = sorted(matches, key=lambda x: x.get("created_at",""), reverse=True)[:20]
     if not sorted_matches:
         sorted_matches = [{"home_team": "Man City", "away_team": "Arsenal", "liga_pretty": "Premier League", "minute": 61, "menit_sekarang": 61, "status_calc": "AKTIF", "shots": 18, "da": 68, "final_display": "1-0", "gol_terjadi": True, "created_at": "16:45"}]
@@ -288,7 +290,33 @@ with col_right:
         gol_bg = "#dcfce7" if gol==True else "#fee2e2" if gol==False else "#f1f5f9"
         profit_rp = "+Rp 80rb" if gol==True else "-Rp 100rb" if gol==False else "⏳ LIVE"
         profit_color = "#16a34a" if gol==True else "#dc2626" if gol==False else "#64748b"
-        table_html += f"""<div style="display:grid; grid-template-columns:90px 1.5fr 100px 60px 70px 50px 40px 60px 50px 70px; gap:0; padding:14px 20px; border-bottom:1px solid #f1f5f9; align-items:center; font-size:12px;"><div><div style="font-size:11px; font-weight:600;">Hari ini {jam}</div><div style="font-size:10px; color:#64748b;">WITA</div></div><div><div style="font-weight:700;">{home} <span style="color:#64748b; font-weight:400;">vs</span> {away}</div><div style="font-size:10px; color:#64748b;">Skor {m.get('score','0-0')} → {final}</div></div><div><div style="background:#f1f5f9; padding:4px 8px; border-radius:12px; font-size:10px; font-weight:600; display:inline-block;">{liga}</div></div><div><div style="background:#0f172a; color:white; width:36px; height:28px; border-radius:14px; display:flex; align-items:center; justify-content:center; font-size:11px; font-weight:800;">{menit}'</div></div><div><div style="background:{status_bg}; color:{status_color}; padding:4px 10px; border-radius:20px; font-size:10px; font-weight:700; display:inline-block;">● {status}</div></div><div style="font-weight:600;">{shots}</div><div><div style="background:{'#dcfce7' if da>=60 else '#fef3c7'}; padding:4px 8px; border-radius:12px; font-size:10px; font-weight:700; display:inline-block;">{da}</div></div><div style="font-weight:700;">{final}</div><div><div style="background:{gol_bg}; width:28px; height:28px; border-radius:50%; display:flex; align-items:center; justify-content:center; font-size:12px;">{gol_icon}</div></div><div style="font-size:10px; font-weight:700; color:{profit_color};">{profit_rp}</div></div>"""
+
+        # BET, ODDS, MARKET logic
+        odds_val = m.get("odds", round(random.uniform(1.45, 1.85), 2))
+        # simpan odds ke match biar konsisten
+        m["odds_calc"] = odds_val
+        # Market: Over 0.5 Goal di menit 60-66
+        if m.get("minute",60) <= 65:
+            market = "Over 0.5"
+        elif m.get("minute",60) <= 70:
+            market = "Over 0.5"
+        else:
+            market = "Over 0.5"
+        # Kalau skor sudah 1-0 atau lebih, tetap Next Goal
+        if "1-" in m.get("score","0-0") or "-1" in m.get("score","0-0") or m.get("score","0-0") != "0-0":
+            market = "Next Goal"
+        bet_rp_display = "Rp 100rb"
+        # Profit calc real Rp
+        if gol == True:
+            profit_rp_val = int(100000 * (odds_val - 1))
+            profit_rp = f"+Rp {profit_rp_val//1000}rb"
+        elif gol == False:
+            profit_rp = "-Rp 100rb"
+        else:
+            profit_rp = "LIVE"
+        
+        table_html += f"""<div style="display:grid; grid-template-columns:80px 1.4fr 80px 50px 60px 40px 40px 55px 45px 75px 70px 55px 90px; gap:0; padding:12px 16px; border-bottom:1px solid #f1f5f9; align-items:center; font-size:11px; min-width:1200px;"><div><div style="font-size:10px; font-weight:600;">Hari ini {jam}</div><div style="font-size:9px; color:#64748b;">WITA • {market}</div></div><div><div style="font-weight:700; font-size:11px;">{home} <span style="color:#64748b; font-weight:400;">vs</span> {away}</div><div style="font-size:9px; color:#64748b;">{m.get('score','0-0')} → {final} • {market}</div></div><div><div style="background:#f1f5f9; padding:3px 6px; border-radius:10px; font-size:9px; font-weight:600; display:inline-block;">{liga}</div></div><div><div style="background:#0f172a; color:white; width:32px; height:24px; border-radius:12px; display:flex; align-items:center; justify-content:center; font-size:10px; font-weight:800;">{menit}'</div></div><div><div style="background:{status_bg}; color:{status_color}; padding:3px 8px; border-radius:12px; font-size:9px; font-weight:700; display:inline-block;">● {status}</div></div><div style="font-weight:600; font-size:11px;">{shots}</div><div><div style="background:{'#dcfce7' if da>=60 else '#fef3c7'}; padding:3px 6px; border-radius:10px; font-size:9px; font-weight:700; display:inline-block;">{da}</div></div><div style="font-weight:700; font-size:11px;">{final}</div><div><div style="background:{gol_bg}; width:24px; height:24px; border-radius:50%; display:flex; align-items:center; justify-content:center; font-size:11px;">{gol_icon}</div></div><div style="font-size:10px; font-weight:700;">{bet_rp_display}</div><div style="font-size:10px; font-weight:700; background:#fef3c7; padding:2px 6px; border-radius:8px; display:inline-block;">{odds_val}</div><div style="font-size:9px; font-weight:600; color:#0f172a;">{market}</div><div style="font-size:10px; font-weight:700; color:{profit_color};">{profit_rp}</div></div>"""
+
     table_html += "</div>"
     st.markdown(table_html, unsafe_allow_html=True)
 
@@ -306,16 +334,28 @@ with col_right:
         df_summary = []
         for m in matches:
             if m.get("status_calc")=="PASIF":
+                odds_v = m.get("odds_calc", m.get("odds", round(random.uniform(1.45, 1.85),2)))
+                market_v = "Over 0.5"
+                if m.get("score","0-0") != "0-0":
+                    market_v = "Next Goal"
+                profit_txt = "+80.000" if m.get("gol_terjadi")==True else "-100.000" if m.get("gol_terjadi")==False else "0"
+                if m.get("gol_terjadi")==True:
+                    try:
+                        profit_txt = f"+{int(100000*(float(odds_v)-1)):,}".replace(",",".")
+                    except:
+                        profit_txt = "+80.000"
                 df_summary.append({
                     "Match": f"{m.get('home_team','')} vs {m.get('away_team','')}",
                     "Liga": m.get("liga_pretty","-"),
-                    "Menit Awal": f"{m.get('minute',60)}'",
+                    "Menit": f"{m.get('minute',60)}'",
                     "Skor Awal": m.get("score","0-0"),
                     "FT Score": m.get("final_display","FT"),
+                    "BET Rp": "Rp 100.000",
+                    "ODDS": odds_v,
+                    "PASAR": market_v,
                     "Result": m.get("result_calc","LOSE"),
                     "Gol?": "✅ WIN" if m.get("gol_terjadi")==True else "❌ LOSE" if m.get("gol_terjadi")==False else "⏳",
-                    "Profit Rp": "+80.000" if m.get("gol_terjadi")==True else "-100.000" if m.get("gol_terjadi")==False else "0",
-                    "Modal": "Rp 100.000",
+                    "Profit Rp": profit_txt,
                     "Waktu": m.get("created_at","")[-8:-3] if len(m.get("created_at",""))>5 else "-"
                 })
         if df_summary:
