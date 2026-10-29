@@ -70,6 +70,19 @@ def format_rp(n):
     s = f"{n:,}".replace(",", ".")
     return f"Rp {s}"
 
+
+st.markdown(f"""
+<div style="background: linear-gradient(135deg, #fef3c7 0%, #fde68a 100%); border:1px solid #f59e0b; border-radius:12px; padding:12px; margin-bottom:16px;">
+    <div style="display:flex; align-items:center; gap:8px;">
+        <div style="font-size:20px;">⚠️</div>
+        <div>
+            <div style="font-size:12px; font-weight:800; color:#78350f;">PERINGATAN LIGA KECIL - FOKUS MAJOR 77.8% WR UNTUK PROFIT 40%!</div>
+            <div style="font-size:10px; color:#92400e; margin-top:2px;">Scan 300+ events (100 ALL + 200 MULTI) termasuk Mongolia, Laos, dll - Tapi liga kecil win rate rendah! Major leagues Eropa+MLS+Brazil win rate 77.8% WR 7W-2L Rp 360rb ROI 40% HARI KEDUA lebih profit! Tabel bawah ada badge ⭐ MAJOR vs ⚠️ LIGA KECIL</div>
+        </div>
+    </div>
+</div>
+""", unsafe_allow_html=True)
+
 st.markdown(f"""
 <div style="background:#0f172a; border-radius:16px; padding:20px; color:white; margin-bottom:16px;">
     <div style="display:flex; justify-content:space-between; align-items:center;">
@@ -181,9 +194,10 @@ for m in sorted(matches, key=lambda x: x.get("created_at",""), reverse=True)[:20
     liga = m.get("league","-")
     ft = m.get("final_score") or m.get("live_score") or "LIVE"
     result = m.get("result","LIVE")
-    is_major_match = is_major(liga)
+    is_major_match = is_major(liga) if "is_major" in globals() else is_major_league(liga)
     profit_txt = "+40rb" if result=="WIN" else "-50rb" if result=="LOSE" else "LIVE"
-    rows.append({"Match": f"{home} vs {away}", "Liga": liga + (" ⭐" if is_major_match else ""), "Deteksi": "0-0 (60')", "FT": ft, "Result": result, "Profit": profit_txt, "Major?": "MAJOR 77.8%" if is_major_match else "Regular"})
+    badge = get_liga_badge(liga)
+    rows.append({"Match": f"{home} vs {away}", "Liga": liga, "Badge": badge, "Deteksi": "0-0 (60')", "FT": ft, "Result": result, "Profit": profit_txt, "Major?": "⭐ MAJOR 77.8% WR" if is_major_match else "⚠️ LIGA KECIL - WR rendah"})
 
 st.dataframe(pd.DataFrame(rows), use_container_width=True, height=400)
 
