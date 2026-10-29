@@ -124,16 +124,14 @@ for m in matches:
         umur = (now_wita - created).total_seconds() / 60
         m["umur_menit"] = max(0, umur)
         m["menit_sekarang"] = min(90, int(m.get("minute",60) + umur))
-                if m.get("is_ft") or m.get("final_score"):
+        if m.get("is_ft") or m.get("final_score"):
             m["status_calc"] = "PASIF"
             m["final_display"] = m.get("final_score","FT")
             fs = m.get("final_score","0-0")
-            skor_deteksi = "0-0"  # Bot hanya scan 0-0 di menit 60-66, jadi deteksi selalu 0-0
+            skor_deteksi = "0-0"
             try:
                 hg_ft, ag_ft = map(int, str(fs).split("-"))
                 total_ft = hg_ft + ag_ft
-                # Karena deteksi 0-0, gol setelah = total FT
-                # FT 2-1 (total 3) => 3>0 => WIN, FT 0-0 (total 0) => LOSE
                 m["gol_terjadi"] = total_ft > 0
                 m["result_calc"] = "WIN" if m["gol_terjadi"] else "LOSE"
                 m["total_gol_setelah"] = total_ft
@@ -153,7 +151,6 @@ for m in matches:
         elif umur > 40:
             m["status_calc"] = "PASIF"
             m["final_display"] = m.get("final_score","FT") if m.get("final_score") else "FT 0-0 ?"
-            # Sudah 40 menit dari deteksi 0-0, kalau belum ada FT score, cek final_score kalau ada
             fs_fallback = m.get("final_score","0-0")
             try:
                 hg_f, ag_f = map(int, str(fs_fallback).split("-"))
@@ -161,41 +158,10 @@ for m in matches:
                 m["result_calc"] = "WIN" if m["gol_terjadi"] else "LOSE"
                 m["total_gol_setelah"] = hg_f+ag_f
             except:
-                # Kalau tidak ada final_score, anggap LOSE sementara (akan diupdate bot)
                 m["result_calc"] = "LOSE"
                 m["gol_terjadi"] = False
                 m["total_gol_setelah"] = 0
-            m["skor_deteksi_real"] = "0-0"eksi
-            except:
-                # Fallback old logic kalau parse gagal
-                try:
-                    hg, ag = map(int, fs.split("-"))
-                    m["gol_terjadi"] = (hg+ag) > 0
-                    m["result_calc"] = "WIN" if (hg+ag) > 0 else "LOSE"
-                    m["total_gol_setelah"] = 0
-                    m["skor_deteksi_real"] = skor_deteksi
-                except:
-                    m["result_calc"] = m.get("result","PENDING")
-                    m["gol_terjadi"] = "WIN" in str(m.get("result",""))
-                    m["total_gol_setelah"] = 0
-                    m["skor_deteksi_real"] = skor_deteksi
-        elif umur > 40:
-            m["status_calc"] = "PASIF"
-            m["final_display"] = m.get("final_score","FT") if m.get("final_score") else "FT 0-0 ?"
-            # Kalau sudah 40 menit dari deteksi (umur >40) tapi belum ada FT score, anggap LOSE sementara tapi tandai belum verified
-            # Nanti bot V10 akan update FT real dari ESPN
-            skor_det = m.get("score","0-0")
-            fs_fallback = m.get("final_score","0-0")
-            try:
-                hg_f, ag_f = map(int, fs_fallback.split("-"))
-                hg_d, ag_d = map(int, skor_det.split("-"))
-                m["gol_terjadi"] = (hg_f+ag_f) > (hg_d+ag_d)
-                m["result_calc"] = "WIN" if m["gol_terjadi"] else "LOSE"
-            except:
-                m["result_calc"] = m.get("result","LOSE")
-                m["gol_terjadi"] = False
-            m["total_gol_setelah"] = 0
-            m["skor_deteksi_real"] = skor_det
+            m["skor_deteksi_real"] = "0-0"
         elif umur > 15 or m.get("minute",0) > 75:
             m["status_calc"] = "SEDANG"
             m["final_display"] = f"{m.get('menit_sekarang', 75)}'"
@@ -218,6 +184,7 @@ for m in matches:
         m["shots"] = 12
         m["da"] = 62
         m["liga_pretty"] = pretty_league(m.get("league",""))
+
 
 
 total = len(matches)
