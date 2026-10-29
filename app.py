@@ -196,6 +196,18 @@ win = len([m for m in matches if m.get("result_calc")=="WIN"])
 lose = len([m for m in matches if m.get("result_calc")=="LOSE"])
 win_rate = (win / selesai * 100) if selesai > 0 else 64.3
 
+# ===== MODAL & PROFIT RP =====
+MODAL_PER_MATCH = 50000  # Rp 50rb per match - LOWER RISK
+ODDS = 1.8
+PROFIT_PER_WIN = int(MODAL_PER_MATCH * (ODDS - 1))  # Rp 40.000
+LOSS_PER_LOSE = MODAL_PER_MATCH  # Rp 50.000
+total_modal_keluar = selesai * MODAL_PER_MATCH
+total_profit_rp = win * PROFIT_PER_WIN - lose * LOSS_PER_LOSE
+roi = (total_profit_rp / total_modal_keluar * 100) if total_modal_keluar > 0 else 0
+modal_aktif = aktif * MODAL_PER_MATCH
+
+
+
 # ===== FILTER LIGA BESAR REKOMENDASI =====
 major_matches = [m for m in matches if is_major_league(m.get("league","") or m.get("league_slug",""), m.get("liga_pretty",""))]
 total_major = len(major_matches)
@@ -210,18 +222,6 @@ total_profit_major = win_major * PROFIT_PER_WIN - lose_major * LOSS_PER_LOSE
 total_modal_major = selesai_major * MODAL_PER_MATCH
 roi_major = (total_profit_major / total_modal_major * 100) if total_modal_major > 0 else 0
 
-
-# ===== MODAL & PROFIT RP =====
-MODAL_PER_MATCH = 50000  # Rp 50rb per match - LOWER RISK
-ODDS = 1.8
-PROFIT_PER_WIN = int(MODAL_PER_MATCH * (ODDS - 1))  # Rp 40.000
-LOSS_PER_LOSE = MODAL_PER_MATCH  # Rp 50.000
-total_modal_keluar = selesai * MODAL_PER_MATCH
-total_profit_rp = win * PROFIT_PER_WIN - lose * LOSS_PER_LOSE
-roi = (total_profit_rp / total_modal_keluar * 100) if total_modal_keluar > 0 else 0
-modal_aktif = aktif * MODAL_PER_MATCH
-
-
 if total == 0:
     total, selesai, win, aktif, sedang, pasif = 17, 14, 9, 2, 3, 9
     win_rate = 64.3
@@ -229,21 +229,6 @@ if total == 0:
     total_modal_keluar = 14*100000
     modal_aktif = 2*100000
 
-# ===== FILTER LIGA BESAR REKOMENDASI - EROPA ASIA AMERIKA AUSTRALIA =====
-major_matches = [m for m in matches if is_major_league(m.get("league","") or m.get("league_slug",""), m.get("liga_pretty",""))]
-total_major = len(major_matches)
-aktif_major = len([m for m in major_matches if m.get("status_calc")=="AKTIF"])
-sedang_major = len([m for m in major_matches if m.get("status_calc")=="SEDANG"])
-pasif_major = len([m for m in major_matches if m.get("status_calc")=="PASIF"])
-selesai_major = pasif_major
-win_major = len([m for m in major_matches if m.get("result_calc")=="WIN"])
-lose_major = len([m for m in major_matches if m.get("result_calc")=="LOSE"])
-win_rate_major = (win_major / selesai_major * 100) if selesai_major > 0 else 0
-total_profit_major = win_major * PROFIT_PER_WIN - lose_major * LOSS_PER_LOSE
-total_modal_major = selesai_major * MODAL_PER_MATCH
-roi_major = (total_profit_major / total_modal_major * 100) if total_modal_major > 0 else 0
-
-col_left, col_right = st.columns([320, 1100])
 
 
 with col_left:
