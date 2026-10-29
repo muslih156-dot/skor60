@@ -9,7 +9,7 @@ permissions:
   contents: write
 
 concurrency:
-  group: skor60-v89-batch
+  group: skor60-v10-live
   cancel-in-progress: false
 
 jobs:
@@ -21,6 +21,7 @@ jobs:
         with:
           token: ${{ secrets.GITHUB_TOKEN }}
           persist-credentials: true
+          fetch-depth: 0
       
       - uses: actions/setup-python@v4
         with:
@@ -35,47 +36,55 @@ jobs:
       - name: Install deps
         run: pip install -r requirements.txt
       
-      - name: Run bot V8.9 BATCH FIX
+      - name: Run bot V10 LIVE SCORE
         env:
           TELEGRAM_TOKEN: ${{ secrets.TELEGRAM_TOKEN }}
           CHAT_ID: ${{ secrets.CHAT_ID }}
         run: |
-          echo "=== START V8.9 BATCH FIX ==="
+          echo "=== START V10 LIVE SCORE ==="
           python check_once.py
           echo "=== Files after run ==="
           ls -R data/ || echo "no data folder"
           echo "=== matches.json ==="
-          cat data/matches.json 2>/dev/null | head -20 || echo "no matches.json (ga ada peluang)"
+          cat data/matches.json 2>/dev/null | head -30 || echo "no matches.json"
       
-      - name: Commit - FORCE ADD bypass gitignore
+      - name: Commit - FIX FETCH FIRST
         run: |
           git config user.name "bot-skor60"
           git config user.email "bot@skor60.com"
           
-          # FIX: ga error kalau file ga ada
+          echo "=== SYNC WITH REMOTE FIRST (fix rejected) ==="
+          git fetch origin main
+          # rebase local dengan remote, kalau conflict ambil ours untuk data tapi theirs untuk code? Pakai rebase dengan strategi
+          # Coba rebase, kalau gagal reset ke remote dan apply lagi? Simpler: pull --rebase
+          git pull origin main --rebase -X theirs || git pull --rebase || echo "rebase warning but continue"
+          
           echo "=== FORCE ADD ==="
           if [ -f "data/matches.json" ]; then
             git add -f data/matches.json
             echo "added matches.json"
-          else
-            echo "no matches.json - skip"
           fi
           
           if [ -d "data/archive" ]; then
             git add -f data/archive/
             echo "added archive"
-          else
-            echo "no archive - skip"
           fi
           
           git status
           git diff --staged --stat
           
           if git diff --staged --quiet; then
-            echo "No changes to commit - ga ada peluang baru"
+            echo "No changes to commit - ga ada update live score"
           else
-            git commit -m "V8.9 BATCH $(date -u +%Y-%m-%d_%H:%M_UTC) [skip ci]"
-            echo "=== Pushing ==="
-            git push https://x-access-token:${{ secrets.GITHUB_TOKEN }}@github.com/${{ github.repository }}.git HEAD:main || git push || (sleep 5 && git push)
+            git commit -m "V10 LIVE SCORE $(date -u +%Y-%m-%d_%H:%M_UTC) [skip ci]"
+            echo "=== Pushing with retry ==="
+            # retry 3x dengan pull rebase setiap gagal
+            for i in 1 2 3; do
+              git push origin main && break
+              echo "Push gagal attempt $i, sync lagi..."
+              git fetch origin main
+              git rebase origin/main || git pull --rebase
+              sleep 2
+            done
             echo "=== Push done ==="
           fi
