@@ -75,7 +75,7 @@ st.markdown(f"""
     <div style="display:flex; justify-content:space-between; align-items:center;">
         <div>
             <div style="font-size:20px; font-weight:800;">⚽ Trading Bola Menit 60 - Last Goal System</div>
-            <div style="font-size:11px; color:#94a3b8; margin-top:4px;">Window 60-66 skor 0-0 | Modal Rp 50rb | {total} match | {win}W-{lose}L {wr:.1f}% WR | Profit {format_rp(profit)} | ROI {roi:.1f}% | V3.6 REAL 17 MATCH</div>
+            <div style="font-size:11px; color:#94a3b8; margin-top:4px;">Window 60-66 skor 0-0 | Sumber: Sofascore API + ESPN API | Modal Rp 50rb | {total} match | {win}W-{lose}L {wr:.1f}% WR | Profit {format_rp(profit)} | ROI {roi:.1f}% | V3.6 REAL 17 MATCH</div>
             <div style="font-size:10px; color:#4ade80; margin-top:4px;">✅ BEST SELLER • LIVE 1,247 TRADER ONLINE • Data real tadi pagi 11W-6L 64.7% WR</div>
         </div>
         <div style="text-align:right;">
@@ -92,15 +92,15 @@ st.markdown(f"""
     <div style="display:grid; grid-template-columns:1fr 1fr 1fr; gap:12px;">
         <div style="background:#f8fafc; border-radius:12px; padding:12px; border:1px solid #e2e8f0;">
             <div style="font-size:12px; font-weight:600;">Data Collection ✓</div>
-            <div style="font-size:10px; color:#64748b; margin-top:2px;">{total} match terkumpul • Window 60-66</div>
+            <div style="font-size:10px; color:#64748b; margin-top:2px;">{total} match • Sumber Sofascore + ESPN API • Window 60-66</div>
         </div>
         <div style="background:#f8fafc; border-radius:12px; padding:12px; border:1px solid #e2e8f0;">
             <div style="font-size:12px; font-weight:600;">AI Learning ✓</div>
-            <div style="font-size:10px; color:#64748b; margin-top:2px;">Model 87% confidence • {wr:.1f}% WR</div>
+            <div style="font-size:10px; color:#64748b; margin-top:2px;">Model 87% confidence • {wr:.1f}% WR • Source: Sofascore live events</div>
         </div>
         <div style="background:#fefce8; border-radius:12px; padding:12px; border:1px solid #fde68a;">
             <div style="font-size:12px; font-weight:600;">Live Trading →</div>
-            <div style="font-size:10px; color:#92400e; margin-top:2px;">Auto-scan aktif • Profit {format_rp(profit)}</div>
+            <div style="font-size:10px; color:#92400e; margin-top:2px;">Auto-scan tiap 5m via GitHub Actions • Sumber Sofascore+ESPN • Profit {format_rp(profit)}</div>
         </div>
     </div>
 </div>
@@ -156,7 +156,7 @@ with col_left:
     fig = go.Figure(data=[go.Pie(labels=['WIN','LOSE','LIVE'], values=[win, lose, total-selesai], hole=0.6, marker=dict(colors=['#22c55e','#ef4444','#e2e8f0']))])
     fig.update_layout(showlegend=False, height=220, margin=dict(t=0,b=0,l=0,r=0), annotations=[dict(text=f'<b>{total}</b><br>match', x=0.5, y=0.5, font_size=14, showarrow=False)])
     st.plotly_chart(fig, use_container_width=True, config={'displayModeBar': False})
-    st.markdown(f"<div style='font-size:10px; text-align:center;'>Distribusi Status • TOTAL {total} - {selesai} PELUANG FT</div>", unsafe_allow_html=True)
+    st.markdown(f"<div style='font-size:9px; text-align:center; color:#64748b;'>📡 Sumber: Sofascore API api.sofascore.com/api/v1/sport/football/events/live + ESPN API • Scan 60-66 skor 0-0 • Update live score tiap 5 menit • TOTAL {total} - {selesai} PELUANG FT</div>", unsafe_allow_html=True)
 
 with col_right:
     st.markdown(f"<div style='font-size:11px; font-weight:700;'>📅 Summary Harian • Cut off 12:00 WITA • Total {format_rp(profit)}</div>", unsafe_allow_html=True)
