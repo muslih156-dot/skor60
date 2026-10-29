@@ -32,5 +32,22 @@
     "odds": 1.8,
     "source": "V19 partisi 12:00 WITA",
     "trading_day": "2026-10-29"
+  },
+  {
+    "match_id": "401916255",
+    "home_team": "China PR U17",
+    "away_team": "France U17",
+    "league": "all",
+    "minute": 63,
+    "score": "0-0",
+    "score_deteksi": "0-0",
+    "live_score": "0-0",
+    "final_score": null,
+    "is_ft": false,
+    "result": "LIVE",
+    "created_at": "2026-10-30T00:20:47.147485+08:00",
+    "odds": 1.8,
+    "source": "V19 partisi 12:00 WITA",
+    "trading_day": "2026-10-29"
   }
 ]
