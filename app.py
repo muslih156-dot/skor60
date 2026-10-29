@@ -75,6 +75,26 @@ major_wr = (major_win/major_selesai*100) if major_selesai>0 else 0
 major_profit = major_win*PROFIT_PER_WIN - major_lose*LOSS_PER_LOSE
 major_roi = (major_profit/(major_selesai*MODAL_PER_MATCH)*100) if major_selesai>0 else 0
 
+
+def get_trading_day(dt):
+    """Cut off 12:00 WITA - trading day 12:00-11:59 next day"""
+    if dt.hour < 12:
+        return (dt - timedelta(days=1)).date()
+    else:
+        return dt.date()
+
+def parse_created_wita(created_str):
+    try:
+        dt = pd.to_datetime(created_str)
+        if pd.isna(dt):
+            return now_wita
+        if dt.tzinfo is None:
+            dt = dt.replace(tzinfo=WITA)
+        return dt.astimezone(WITA)
+    except:
+        return now_wita
+
+
 def format_rp(n):
     if n >= 1000000:
         return f"Rp {n/1000000:.1f} Jt"
@@ -183,7 +203,24 @@ with col_left:
     st.markdown(f"<div style='font-size:9px; text-align:center; color:#64748b;'>📡 Sumber: Sofascore API api.sofascore.com/api/v1/sport/football/events/live + ESPN API • Scan 60-66 skor 0-0 • Update live score tiap 5 menit • TOTAL {total} - {selesai} PELUANG FT</div>", unsafe_allow_html=True)
 
 with col_right:
-    st.markdown(f"<div style='font-size:11px; font-weight:700;'>📅 Summary Harian • Cut off 12:00 WITA • Total {format_rp(profit)}</div>", unsafe_allow_html=True)
+    # Hitung partisi harian
+    daily_groups = {}
+    for m in matches:
+        try:
+            cw = parse_created_wita(m.get("created_at",""))
+            td = get_trading_day(cw)
+            key = td.isoformat()
+            if key not in daily_groups:
+                daily_groups[key] = []
+            daily_groups[key].append(m)
+        except:
+            pass
+    
+    today_trading = get_trading_day(now_wita).isoformat()
+    yesterday_trading = (get_trading_day(now_wita) - timedelta(days=1)).isoformat()
+    
+    st.markdown(f"<div style='font-size:11px; font-weight:700;'>📅 Summary Harian • Cut off 12:00 WITA • Partisi {len(daily_groups)} hari • Total {format_rp(profit)}</div>", unsafe_allow_html=True)
+    st.markdown(f"<div style='font-size:9px; color:#64748b; margin-top:2px;'>17 match sebelum jam 12 siang ini = trading day {yesterday_trading} (12:00 {yesterday_trading} - 11:59 {today_trading}) • Nanti sore setelah jam 12 = trading day {today_trading} (12:00 {today_trading} - 11:59 besok) - match baru masuk DI ATAS 17 match lama!</div>", unsafe_allow_html=True)
     st.markdown(f"""
     <div style="background:white; border-radius:12px; padding:12px; border:1px solid #e2e8f0; margin-top:8px;">
         <div style="font-size:10px; color:#64748b;">28 Oct 2026 • 11W-6L 64.7% WR • Profit {format_rp(profit)} • ROI {roi:.1f}%</div>
@@ -195,7 +232,15 @@ with col_right:
     </div>
     """, unsafe_allow_html=True)
 
-st.markdown(f"### 20 Peluang Terakhir • {win}W-{lose}L {wr:.1f}% WR • Modal Rp 50rb • Profit {format_rp(profit)} • BISA LIHAT 2-2 NYA!")
+# Tabs partisi harian
+    if daily_groups:
+        tab_labels = [f"{day} ({len(ms)} match)" for day, ms in sorted(daily_groups.items(), reverse=True)]
+        tabs = st.tabs(tab_labels)
+        for idx, (day_key, day_matches) in enumerate(sorted(daily_groups.items(), reverse=True)):
+            with tabs[idx]:
+                st.markdown(f"**Trading day {day_key} cut off 12:00 WITA - {len(day_matches)} match** - {'17 match sebelum jam 12 siang ini' if day_key==yesterday_trading else 'Match baru setelah jam 12 siang - masuk DI ATAS yang lama!' if day_key==today_trading else ''}")
+    
+    st.markdown(f"### 20 Peluang Terakhir • {win}W-{lose}L {wr:.1f}% WR • Modal Rp 50rb • Profit {format_rp(profit)} • BARU DI ATAS 17 LAMA - PARTISI 12:00 WITA!")
 
 # Table with both total and major visible
 rows = []
