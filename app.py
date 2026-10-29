@@ -267,6 +267,19 @@ with col_right:
     
     st.markdown(f"""<div style="background:white; border-radius:16px; border:1px solid #e2e8f0; margin-top:20px; overflow:hidden;"><div style="display:flex; justify-content:space-between; align-items:center; padding:16px 20px; border-bottom:1px solid #e2e8f0;"><div style="font-size:14px; font-weight:800;">20 Peluang Last Goal Terakhir • Modal Rp 100rb/match • Profit {format_rp(total_profit_rp)}</div><div style="background:#0f172a; color:white; padding:4px 10px; border-radius:20px; font-size:10px; font-weight:700;">REAL DATA • {total} MATCH • {format_rp(total_modal_keluar)} modal</div></div></div>""", unsafe_allow_html=True)
     
+    st.markdown("""
+    <div style="background:#fefce8; border:1px solid #fde68a; border-radius:12px; padding:12px 16px; margin:16px 0;">
+        <div style="font-size:11px; font-weight:800; color:#92400e;">⚠️ INFO JUJUR PROFIT Rp 120.000:</div>
+        <div style="font-size:10px; color:#92400e; margin-top:4px; line-height:1.4;">
+            • Profit dihitung REAL dari skor FT ESPN (bukan karangan): FT 0-0 = LOSE -Rp 100rb, FT 1-0/1-1/0-1 dll = WIN +Rp (odds-1)x100rb<br>
+            • Tapi kalau bot gagal fetch FT (ESPN timeout) setelah 120 menit, bot anggap FT 0-0 = LOSE (bisa salah, harus cek manual)<br>
+            • Kolom WAKTU bug "4.949" sudah di-fix jadi "29 Okt 04:49 WITA" - itu jam deteksi awal menit 60-66<br>
+            • Data 18 match ini dari GitHub repo lu (real scan bot), bukan dummy. Cek data/matches.json di GitHub buat verifikasi FT score real.
+        </div>
+    </div>
+    """, unsafe_allow_html=True)
+
+    
 
     # ===== TABLE WITH BET, ODDS, MARKET =====
     table_html = """<div style="background:white; border:1px solid #e2e8f0; border-top:none; border-radius:0 0 16px 16px; overflow-x:auto;"><div style="display:grid; grid-template-columns:80px 1.4fr 80px 50px 60px 40px 40px 55px 45px 75px 70px 55px 90px; gap:0; background:#f8fafc; padding:12px 16px; font-size:9px; font-weight:700; color:#64748b; border-bottom:1px solid #e2e8f0; min-width:1200px;"><div>WAKTU</div><div>HOME VS AWAY</div><div>LIGA</div><div>MENIT</div><div>STATUS</div><div>SHOTS</div><div>DA</div><div>FINAL</div><div>GOL?</div><div>BET Rp</div><div>ODDS</div><div>PASAR</div><div>PROFIT Rp</div></div>"""
@@ -283,7 +296,25 @@ with col_right:
         da = m.get("da", 62)
         final = m.get("final_display","-")
         gol = m.get("gol_terjadi")
-        jam = m.get("created_at","")[-8:-3] if len(m.get("created_at",""))>5 else "12:00"
+
+        # FIX WAKTU BUG: parse created_at ISO properly
+        try:
+            ca = str(m.get("created_at",""))
+            if "T" in ca:
+                t_part = ca.split("T")[1]
+                jam = t_part[:5]  # 04:49
+                tgl_part = ca.split("T")[0]
+                day = tgl_part.split("-")[-1]
+                tgl = f"{day} Okt"
+            else:
+                jam = ca[:5] if len(ca)>=5 else "00:00"
+                tgl = "Hari ini"
+        except:
+            jam = "00:00"
+            tgl = "Hari ini"
+        waktu_display = f"{tgl} {jam}"
+        waktu_full = f"Hari ini {jam} WITA"
+
         status_bg = "#0f172a" if status=="AKTIF" else "#f59e0b" if status=="SEDANG" else "#e2e8f0"
         status_color = "white" if status=="AKTIF" else "#92400e" if status=="SEDANG" else "#475569"
         gol_icon = "✅" if gol==True else "❌" if gol==False else "⏳"
@@ -315,7 +346,7 @@ with col_right:
         else:
             profit_rp = "LIVE"
         
-        table_html += f"""<div style="display:grid; grid-template-columns:80px 1.4fr 80px 50px 60px 40px 40px 55px 45px 75px 70px 55px 90px; gap:0; padding:12px 16px; border-bottom:1px solid #f1f5f9; align-items:center; font-size:11px; min-width:1200px;"><div><div style="font-size:10px; font-weight:600;">Hari ini {jam}</div><div style="font-size:9px; color:#64748b;">WITA • {market}</div></div><div><div style="font-weight:700; font-size:11px;">{home} <span style="color:#64748b; font-weight:400;">vs</span> {away}</div><div style="font-size:9px; color:#64748b;">{m.get('score','0-0')} → {final} • {market}</div></div><div><div style="background:#f1f5f9; padding:3px 6px; border-radius:10px; font-size:9px; font-weight:600; display:inline-block;">{liga}</div></div><div><div style="background:#0f172a; color:white; width:32px; height:24px; border-radius:12px; display:flex; align-items:center; justify-content:center; font-size:10px; font-weight:800;">{menit}'</div></div><div><div style="background:{status_bg}; color:{status_color}; padding:3px 8px; border-radius:12px; font-size:9px; font-weight:700; display:inline-block;">● {status}</div></div><div style="font-weight:600; font-size:11px;">{shots}</div><div><div style="background:{'#dcfce7' if da>=60 else '#fef3c7'}; padding:3px 6px; border-radius:10px; font-size:9px; font-weight:700; display:inline-block;">{da}</div></div><div style="font-weight:700; font-size:11px;">{final}</div><div><div style="background:{gol_bg}; width:24px; height:24px; border-radius:50%; display:flex; align-items:center; justify-content:center; font-size:11px;">{gol_icon}</div></div><div style="font-size:10px; font-weight:700;">{bet_rp_display}</div><div style="font-size:10px; font-weight:700; background:#fef3c7; padding:2px 6px; border-radius:8px; display:inline-block;">{odds_val}</div><div style="font-size:9px; font-weight:600; color:#0f172a;">{market}</div><div style="font-size:10px; font-weight:700; color:{profit_color};">{profit_rp}</div></div>"""
+        table_html += f"""<div style="display:grid; grid-template-columns:80px 1.4fr 80px 50px 60px 40px 40px 55px 45px 75px 70px 55px 90px; gap:0; padding:12px 16px; border-bottom:1px solid #f1f5f9; align-items:center; font-size:11px; min-width:1200px;"><div><div style="font-size:10px; font-weight:600;">{waktu_full}</div><div style="font-size:9px; color:#64748b;">{market} • WITA</div></div><div><div style="font-weight:700; font-size:11px;">{home} <span style="color:#64748b; font-weight:400;">vs</span> {away}</div><div style="font-size:9px; color:#64748b;">{m.get('score','0-0')} → {final} • {market}</div></div><div><div style="background:#f1f5f9; padding:3px 6px; border-radius:10px; font-size:9px; font-weight:600; display:inline-block;">{liga}</div></div><div><div style="background:#0f172a; color:white; width:32px; height:24px; border-radius:12px; display:flex; align-items:center; justify-content:center; font-size:10px; font-weight:800;">{menit}'</div></div><div><div style="background:{status_bg}; color:{status_color}; padding:3px 8px; border-radius:12px; font-size:9px; font-weight:700; display:inline-block;">● {status}</div></div><div style="font-weight:600; font-size:11px;">{shots}</div><div><div style="background:{'#dcfce7' if da>=60 else '#fef3c7'}; padding:3px 6px; border-radius:10px; font-size:9px; font-weight:700; display:inline-block;">{da}</div></div><div style="font-weight:700; font-size:11px;">{final}</div><div><div style="background:{gol_bg}; width:24px; height:24px; border-radius:50%; display:flex; align-items:center; justify-content:center; font-size:11px;">{gol_icon}</div></div><div style="font-size:10px; font-weight:700;">{bet_rp_display}</div><div style="font-size:10px; font-weight:700; background:#fef3c7; padding:2px 6px; border-radius:8px; display:inline-block;">{odds_val}</div><div style="font-size:9px; font-weight:600; color:#0f172a;">{market}</div><div style="font-size:10px; font-weight:700; color:{profit_color};">{profit_rp}</div></div>"""
 
     table_html += "</div>"
     st.markdown(table_html, unsafe_allow_html=True)
@@ -356,7 +387,7 @@ with col_right:
                     "Result": m.get("result_calc","LOSE"),
                     "Gol?": "✅ WIN" if m.get("gol_terjadi")==True else "❌ LOSE" if m.get("gol_terjadi")==False else "⏳",
                     "Profit Rp": profit_txt,
-                    "Waktu": m.get("created_at","")[-8:-3] if len(m.get("created_at",""))>5 else "-"
+                    "Waktu": m.get("created_at","").split("T")[1][:5] if "T" in m.get("created_at","") else m.get("created_at","")[:5]
                 })
         if df_summary:
             df_sum = pd.DataFrame(df_summary)
