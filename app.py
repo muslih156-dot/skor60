@@ -124,32 +124,48 @@ for m in matches:
         umur = (now_wita - created).total_seconds() / 60
         m["umur_menit"] = max(0, umur)
         m["menit_sekarang"] = min(90, int(m.get("minute",60) + umur))
-        if m.get("is_ft") or m.get("final_score"):
+                if m.get("is_ft") or m.get("final_score"):
             m["status_calc"] = "PASIF"
             m["final_display"] = m.get("final_score","FT")
             fs = m.get("final_score","0-0")
-            skor_deteksi = m.get("score","0-0")  # skor saat menit 60-66 deteksi awal (harusnya 0-0)
+            skor_deteksi = "0-0"  # Bot hanya scan 0-0 di menit 60-66, jadi deteksi selalu 0-0
             try:
-                # Parse FT
-                hg_ft, ag_ft = map(int, fs.split("-"))
+                hg_ft, ag_ft = map(int, str(fs).split("-"))
                 total_ft = hg_ft + ag_ft
-                # Parse skor deteksi (saat ping 0-0)
-                try:
-                    hg_det, ag_det = map(int, skor_deteksi.split("-"))
-                    total_det = hg_det + ag_det
-                except:
-                    total_det = 0
-                    skor_deteksi = "0-0"
-                
-                # LOGIC BENAR: gol terjadi SETELAH deteksi = total FT > total deteksi
-                # Contoh: deteksi 0-0 (total 0), FT 2-1 (total 3) => 3>0 => WIN ✅
-                # Contoh: deteksi 0-0 (total 0), FT 0-0 (total 0) => 0>0 false => LOSE ❌
-                # Contoh: deteksi 2-1 (total 3), FT 2-1 (total 3) => 3>3 false => LOSE ❌ (ga ada gol setelah)
-                # Contoh: deteksi 2-1 (total 3), FT 3-1 (total 4) => 4>3 => WIN ✅ (ada gol setelah)
-                m["gol_terjadi"] = total_ft > total_det
+                # Karena deteksi 0-0, gol setelah = total FT
+                # FT 2-1 (total 3) => 3>0 => WIN, FT 0-0 (total 0) => LOSE
+                m["gol_terjadi"] = total_ft > 0
                 m["result_calc"] = "WIN" if m["gol_terjadi"] else "LOSE"
-                m["total_gol_setelah"] = total_ft - total_det
+                m["total_gol_setelah"] = total_ft
                 m["skor_deteksi_real"] = skor_deteksi
+            except:
+                try:
+                    hg, ag = map(int, str(fs).split("-"))
+                    m["gol_terjadi"] = (hg+ag) > 0
+                    m["result_calc"] = "WIN" if (hg+ag) > 0 else "LOSE"
+                    m["total_gol_setelah"] = hg+ag
+                    m["skor_deteksi_real"] = skor_deteksi
+                except:
+                    m["result_calc"] = m.get("result","PENDING")
+                    m["gol_terjadi"] = "WIN" in str(m.get("result",""))
+                    m["total_gol_setelah"] = 0
+                    m["skor_deteksi_real"] = skor_deteksi
+        elif umur > 40:
+            m["status_calc"] = "PASIF"
+            m["final_display"] = m.get("final_score","FT") if m.get("final_score") else "FT 0-0 ?"
+            # Sudah 40 menit dari deteksi 0-0, kalau belum ada FT score, cek final_score kalau ada
+            fs_fallback = m.get("final_score","0-0")
+            try:
+                hg_f, ag_f = map(int, str(fs_fallback).split("-"))
+                m["gol_terjadi"] = (hg_f+ag_f) > 0
+                m["result_calc"] = "WIN" if m["gol_terjadi"] else "LOSE"
+                m["total_gol_setelah"] = hg_f+ag_f
+            except:
+                # Kalau tidak ada final_score, anggap LOSE sementara (akan diupdate bot)
+                m["result_calc"] = "LOSE"
+                m["gol_terjadi"] = False
+                m["total_gol_setelah"] = 0
+            m["skor_deteksi_real"] = "0-0"eksi
             except:
                 # Fallback old logic kalau parse gagal
                 try:
@@ -223,8 +239,8 @@ selesai_major = pasif_major
 win_major = len([m for m in major_matches if m.get("result_calc")=="WIN"])
 lose_major = len([m for m in major_matches if m.get("result_calc")=="LOSE"])
 win_rate_major = (win_major / selesai_major * 100) if selesai_major > 0 else 0
-total_profit_major = win_major * 80000 - lose_major * 100000
-total_modal_major = selesai_major * 100000
+total_profit_major = win_major * PROFIT_PER_WIN - lose_major * LOSS_PER_LOSE
+total_modal_major = selesai_major * MODAL_PER_MATCH
 roi_major = (total_profit_major / total_modal_major * 100) if total_modal_major > 0 else 0
 
 
@@ -256,8 +272,8 @@ selesai_major = pasif_major
 win_major = len([m for m in major_matches if m.get("result_calc")=="WIN"])
 lose_major = len([m for m in major_matches if m.get("result_calc")=="LOSE"])
 win_rate_major = (win_major / selesai_major * 100) if selesai_major > 0 else 0
-total_profit_major = win_major * 80000 - lose_major * 100000
-total_modal_major = selesai_major * 100000
+total_profit_major = win_major * PROFIT_PER_WIN - lose_major * LOSS_PER_LOSE
+total_modal_major = selesai_major * MODAL_PER_MATCH
 roi_major = (total_profit_major / total_modal_major * 100) if total_modal_major > 0 else 0
 
 col_left, col_right = st.columns([320, 1100])
@@ -565,60 +581,32 @@ with col_right:
         profit_color = "#16a34a" if gol==True else "#dc2626" if gol==False else "#64748b"
 
         
-        # BET, ODDS, MARKET logic - V12.1: CLARIFY deteksi 0-0 vs FT
+        
+        # BET, ODDS, MARKET - V12 FINAL: deteksi selalu 0-0 (bot hanya scan 0-0), FT 2-1 = +3 gol = WIN
         odds_val = m.get("odds", m.get("odds_calc", round(random.uniform(1.45, 1.85), 2)))
         m["odds_calc"] = odds_val
         
-        # FIX: Bot hanya scan 0-0 di menit 60-66, jadi skor_deteksi HARUS 0-0
-        # Kalau data lama Skor Awal 2-1 di menit 90', itu adalah skor LIVE, bukan deteksi
-        # Skor deteksi asli tetap 0-0
-        minute_det = m.get("minute_deteksi", m.get("minute", 60))
-        if 60 <= minute_det <= 66:
-            skor_deteksi = "0-0"  # Force 0-0 karena bot hanya deteksi 0-0
-        else:
-            skor_deteksi = m.get("score_deteksi", m.get("skor_deteksi_real", m.get("score", "0-0")))
-            # Tetap force 0-0 kalau score field adalah 2-1 tapi minute_det 60-66
-        
-        # Untuk data lama yang minute field sudah 90', coba ambil minute_deteksi
-        if m.get("minute_deteksi"):
+        skor_deteksi = m.get("skor_deteksi_real", m.get("score_deteksi", "0-0"))
+        if skor_deteksi not in ["0-0"]:
+            # Force 0-0 karena bot hanya scan 0-0 di menit 60-66
             skor_deteksi = "0-0"
-        elif m.get("score") == "0-0" or m.get("score_deteksi") == "0-0":
-            skor_deteksi = "0-0"
-        else:
-            # Fallback: kalau memang bot scan 0-0, anggap deteksi 0-0
-            # Kecuali kalau data ini dari liga yang skor deteksi bukan 0-0 (tidak mungkin)
-            if m.get("score", "0-0") != "0-0" and m.get("minute", 90) >= 85:
-                # Ini data live score, bukan deteksi - tetap anggap deteksi 0-0
-                skor_deteksi = "0-0"
         
-        ft_score = m.get("final_score", m.get("final_display", "0-0"))
-        if ft_score in ["FT", "FT 0-0 ?", "-", "", "FT", None]:
-            ft_score = m.get("live_score", m.get("current_score", m.get("score", "0-0")))
+        ft_score = m.get("final_score", m.get("live_score", m.get("current_score", "0-0")))
+        if not ft_score or ft_score in ["FT", "-", ""]:
+            ft_score = m.get("final_display", "0-0")
         
-        # Kalau FT masih None dan status PASIF, ambil dari live_score terakhir
-        if not ft_score or ft_score in ["-", ""]:
-            ft_score = m.get("live_score", "0-0")
-        
+        # Gol setelah = FT total - deteksi total (deteksi 0-0)
         try:
             hg_ft, ag_ft = map(int, str(ft_score).split("-"))
-            hg_det, ag_det = map(int, str(skor_deteksi).split("-"))
             total_ft = hg_ft + ag_ft
-            total_det = hg_det + ag_det
-            gol_setelah = total_ft - total_det
         except:
-            gol_setelah = m.get("total_gol_setelah", 0)
-            if gol_setelah is None:
-                # Kalau FT 2-1 dan deteksi 0-0, gol setelah = 3
-                try:
-                    hg_ft, ag_ft = map(int, str(ft_score).split("-"))
-                    gol_setelah = hg_ft + ag_ft
-                except:
-                    gol_setelah = 0
+            total_ft = 0
+        gol_setelah = total_ft  # karena deteksi 0-0
         
-        # Market: karena deteksi selalu 0-0, market selalu Over 0.5
-        market = "Over 0.5"
-        if skor_deteksi != "0-0":
-            market = "Next Goal"
+        # Gunakan gol_terjadi yang sudah dihitung di atas (total_ft >0 = WIN)
+        # gol variable sudah = m.get("gol_terjadi")
+        
+        market = "Over 0.5"  # karena deteksi 0-0
         
         bet_rp_display = f"Rp {MODAL_PER_MATCH//1000}rb"
         if gol == True:
@@ -628,6 +616,9 @@ with col_right:
             profit_rp = f"-Rp {MODAL_PER_MATCH//1000}rb"
         else:
             profit_rp = "LIVE"
+        
+        gol_setelah_bg = "#dcfce7" if gol_setelah>0 else "#fee2e2"
+
         
         # Display: Skor Deteksi selalu 0-0, FT = 2-1, Gol Setelah = +3
         skor_awal_display = f"{skor_deteksi} (60')"
@@ -701,7 +692,7 @@ with col_right:
             try:
                 liga_stats = df_sum.groupby("Liga").agg({"Match": "count", "Result": lambda x: (x=="WIN").sum()}).rename(columns={"Match": "Total", "Result": "WIN"})
                 liga_stats["LOSE"] = liga_stats["Total"] - liga_stats["WIN"]
-                liga_stats["Profit Rp"] = liga_stats["WIN"]*80000 - liga_stats["LOSE"]*100000
+                liga_stats["Profit Rp"] = liga_stats["WIN"]*PROFIT_PER_WIN - liga_stats["LOSE"]*LOSS_PER_LOSE
                 liga_stats["Win Rate"] = (liga_stats["WIN"] / liga_stats["Total"] * 100).round(1).astype(str) + "%"
                 liga_stats["Profit Rp"] = liga_stats["Profit Rp"].apply(lambda x: format_rp(x))
                 st.dataframe(liga_stats, use_container_width=True)
