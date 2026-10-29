@@ -559,5 +559,22 @@
     "odds": 1.8,
     "source": "V19 partisi 12:00 WITA",
     "trading_day": "2026-10-29"
+  },
+  {
+    "match_id": "401900107",
+    "home_team": "North Dakota",
+    "away_team": "South Dakota State",
+    "league": "all",
+    "minute": 64,
+    "score": "0-0",
+    "score_deteksi": "0-0",
+    "live_score": "0-0",
+    "final_score": null,
+    "is_ft": false,
+    "result": "LIVE",
+    "created_at": "2026-10-30T05:25:33.972139+08:00",
+    "odds": 1.8,
+    "source": "V19 partisi 12:00 WITA",
+    "trading_day": "2026-10-29"
   }
 ]
