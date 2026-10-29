@@ -1,5 +1,23 @@
 [
   {
+    "match_id": "401931124",
+    "home_team": "West Florida",
+    "away_team": "Central Arkansas",
+    "league": "Usa Ncaa M 1",
+    "league_slug": "usa.ncaa.m.1",
+    "minute": 62,
+    "menit_sekarang": 62,
+    "score": "0-0",
+    "status": "AKTIF",
+    "status_detail": "AKTIF",
+    "created_at": "2026-10-29T09:28:30.542816",
+    "last_update": "2026-10-29T09:28:30.542816",
+    "wita_date": "2026-10-29",
+    "month": "2026-10",
+    "prob_gol": 75,
+    "is_ft": false
+  },
+  {
     "match_id": "401886152",
     "home_team": "Cienciano del Cusco",
     "away_team": "Atl\u00e9tico Grau",
@@ -52,12 +70,15 @@
     "home_team": "Metropolitanos",
     "away_team": "Portuguesa",
     "league": "Ven 1",
-    "minute": 53,
+    "minute": 90,
     "score": "0-0",
     "status": "AKTIF",
     "created_at": "2026-10-29T08:40:33.780429",
     "wita_date": "2026-10-29",
-    "month": "2026-10"
+    "month": "2026-10",
+    "final_score": "0-0",
+    "result": "\u274c LOSE",
+    "is_ft": true
   },
   {
     "match_id": "401886617",
