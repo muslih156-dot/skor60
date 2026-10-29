@@ -82,7 +82,7 @@ def format_rp(n):
 @st.cache_data(ttl=30)
 def load_all_data():
     all_matches = []
-    for p in ["data/matches.json", "data/archive/all_time.json"]:
+    for p in ["data/matches.json", "data/archive/all_time.json", "data/all_time.json", "matches.json", "all_time.json"]:
         try:
             if os.path.exists(p):
                 with open(p, "r", encoding="utf-8") as f:
