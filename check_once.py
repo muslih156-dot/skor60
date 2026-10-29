@@ -1,353 +1,330 @@
 
-import os, json, requests, time
-from datetime import datetime, timedelta, timezone
-from concurrent.futures import ThreadPoolExecutor, as_completed
+import os, json, requests
+from datetime import datetime, timezone, timedelta
+from pathlib import Path
 
 TELEGRAM_TOKEN = os.getenv("TELEGRAM_TOKEN")
 CHAT_ID = os.getenv("CHAT_ID")
+WITA = timezone(timedelta(hours=8))
 
-MIN_MINUTE = 60
-MAX_MINUTE = 66
-WITA_TZ = timezone(timedelta(hours=8))
+DATA_DIR = Path("data")
+MATCHES_FILE = DATA_DIR / "matches.json"
+ARCHIVE_DIR = DATA_DIR / "archive"
 
 def wita_now():
-    utc = datetime.utcnow()
-    wita = utc + timedelta(hours=8)
-    return wita, utc
+    return datetime.now(WITA)
 
-def load_local_matches(path):
+def send_telegram(pesan):
+    if not TELEGRAM_TOKEN or not CHAT_ID:
+        print("TOKEN/CHAT_ID belum di set")
+        return False
     try:
-        if os.path.exists(path):
-            with open(path, "r", encoding="utf-8") as f:
-                j = json.load(f)
-                if isinstance(j, list):
-                    return j
+        url = f"https://api.telegram.org/bot{TELEGRAM_TOKEN}/sendMessage"
+        data = {"chat_id": CHAT_ID, "text": pesan, "parse_mode": "HTML"}
+        r = requests.post(url, data=data, timeout=10)
+        print(f"Telegram status: {r.status_code}")
+        return r.status_code == 200
     except Exception as e:
-        print(f"Load {path} error {e}")
+        print(f"Error telegram: {e}")
+        return False
+
+def load_matches():
+    if MATCHES_FILE.exists():
+        try:
+            with open(MATCHES_FILE, 'r', encoding='utf-8') as f:
+                return json.load(f)
+        except:
+            return []
     return []
 
-LEAGUE_NAMES = {
-    "eng.1": "Premier League", "eng.2": "Championship", "eng.fa": "FA Cup",
-    "ger.1": "Bundesliga", "ger.2": "2. Bundesliga", "ger.dfb_pokal": "DFB Pokal",
-    "esp.1": "LaLiga", "esp.2": "LaLiga 2", "ita.1": "Serie A", "ita.2": "Serie B",
-    "fra.1": "Ligue 1", "ned.1": "Eredivisie", "por.1": "Primeira Liga",
-    "bel.1": "Jupiler Pro League", "tur.1": "Süper Lig", "sco.1": "Scottish Premiership",
-    "uefa.champions": "Champions League", "uefa.europa": "Europa League",
-    "usa.1": "MLS", "bra.1": "Brasileirão", "jpn.1": "J1 League", "idn.1": "Liga 1",
-    "swe.1": "Allsvenskan", "nor.1": "Eliteserien", "den.1": "Superliga",
-    "afc.cup": "AFC Cup", "afc.champions": "AFC Champions",
-}
-
-def get_pretty_league(slug, raw=""):
-    if slug in LEAGUE_NAMES:
-        return LEAGUE_NAMES[slug]
-    if raw and raw != slug and "." not in raw and len(raw) > 3:
-        return raw
-    return slug.replace("."," ").replace("_"," ").title()
-
-def parse_clock(clock_str, detail_str=""):
-    try:
-        s = (clock_str or detail_str or "").strip()
-        if not s: return 0
-        su = s.upper()
-        if "HT" in su: return 45
-        if "FT" in su: return 90
-        s_clean = s.replace("'", "").replace('"', "").replace("’", "")
-        if ":" in s_clean: return int(s_clean.split(":")[0])
-        if "+" in s_clean: return int(s_clean.split("+")[0].split()[0])
-        parts = s_clean.split()
-        for p in parts:
-            if p.isdigit():
-                return int(p)
-        return int(float(parts[0])) if parts else 0
-    except:
-        return 0
-
-def get_warning_flags(league_name, home, away, league_code=""):
-    warnings = []
-    low = f"{league_name} {home} {away} {league_code}".lower()
-    if any(x in low for x in ["women", "female", "putri", "wanita"]): warnings.append("⚠️ LIGA WANITA")
-    if any(x in low for x in ["u17","u19","u21","u23","youth","reserves"," ii"," iii"," u-"]): warnings.append("⚠️ TIM MUDA")
-    if any(x in low for x in ["futsal","beach","esports","amateur","friendly","nextgen"]): warnings.append("⚠️ LIGA MINOR")
-    return " | ".join(warnings) if warnings else ""
-
-def fetch_all_leagues():
-    all_leagues = []
-    try:
-        r = requests.get("https://sports.core.api.espn.com/v2/sports/soccer/leagues?limit=500", timeout=15)
-        if r.status_code == 200:
-            j = r.json()
-            items = j.get("items", [])
-            for it in items:
-                slug = None
-                if "$ref" in it:
-                    try: slug = it["$ref"].split("/leagues/")[-1].split("?")[0].split("/")[0]
-                    except: pass
-                else: slug = it.get("id")
-                if slug and len(slug) < 50 and "." in slug:
-                    all_leagues.append((slug, slug))
-    except: pass
-    if len(all_leagues) < 80:
-        fallback = ["eng.1","eng.2","eng.fa","ger.1","ger.2","ger.dfb_pokal","esp.1","esp.2","ita.1","fra.1","ned.1","por.1","bel.1","tur.1","sco.1","uefa.champions","uefa.europa","uefa.europa.conf","usa.1","bra.1","arg.1","mex.1","jpn.1","kor.1","aus.1","idn.1","tha.1","mys.1","ind.1","swe.1","nor.1","den.1","afc.cup","afc.champions","ita.2","eng.3","fra.2","ned.2","por.2","bel.2","tur.2","usa.2","bra.2","jpn.2","swe.2","nor.2","den.2","fin.1","egy.1","sau.1","qat.1","uae.1","chn.1","rus.1","ukr.1","pol.1","cze.1","gre.1","sui.1","aut.1","irl.1","wal.1","sco.2","mex.2","arg.2","col.1","chi.1","per.1","uru.1","par.1","bol.1","ven.1","ecu.1","conmebol.libertadores","conmebol.sudamericana"]
-        all_leagues = [(c,c) for c in fallback]
-    seen={}
-    for slug,name in all_leagues: seen[slug]=name
-    return list(seen.items())
-
-def fetch_league(league_tuple):
-    slug, lname = league_tuple
-    url = f"https://site.api.espn.com/apis/site/v2/sports/soccer/{slug}/scoreboard"
-    try:
-        r = requests.get(url, timeout=6)
-        if r.status_code==200:
-            evs = r.json().get("events",[])
-            if evs: return (slug, lname, evs)
-        return (slug, lname, [])
-    except: return (slug, lname, [])
-
-def cek_parallel():
-    wita, utc = wita_now()
-    start = time.time()
-    print(f"WITA {wita} | SCAN 220 LIGA WINDOW {MIN_MINUTE}-{MAX_MINUTE} V10 LIVE SCORE")
-    leagues = fetch_all_leagues()
-    print(f"Total {len(leagues)} liga")
-    all_events={}
-    with ThreadPoolExecutor(max_workers=25) as ex:
-        futures = {ex.submit(fetch_league, lt): lt for lt in leagues}
-        for fut in as_completed(futures):
-            slug, lname, evs = fut.result()
-            if evs:
-                for ev in evs:
-                    all_events[ev.get("id")]=(ev,slug,lname)
-    elapsed = time.time()-start
-    print(f"Parallel done {elapsed:.1f}s - {len(all_events)} events")
-    out=[]
-    inprog=[]
-    for ev_id,(ev,slug,lname) in all_events.items():
+def save_matches(matches):
+    DATA_DIR.mkdir(exist_ok=True)
+    ARCHIVE_DIR.mkdir(exist_ok=True, parents=True)
+    with open(MATCHES_FILE, 'w', encoding='utf-8') as f:
+        json.dump(matches, f, indent=2, ensure_ascii=False)
+    # Also save to all_time
+    all_time_file = ARCHIVE_DIR / "all_time.json"
+    # Load existing all_time
+    all_matches = []
+    if all_time_file.exists():
         try:
-            comp = ev.get("competitions",[{}])[0]
-            status = comp.get("status",{})
-            tname = status.get("type",{}).get("name","")
-            state = status.get("type",{}).get("state","")
-            clock = status.get("displayClock","") or status.get("clock","") or ""
-            detail = status.get("type",{}).get("shortDetail","") or status.get("type",{}).get("detail","") or ""
-            minute = parse_clock(clock, detail)
-            comps = comp.get("competitors",[])
-            if len(comps)<2: continue
-            home = next((c for c in comps if c.get("homeAway")=="home"), comps[0])
-            away = next((c for c in comps if c.get("homeAway")=="away"), comps[1])
-            hs = int(home.get("score",0) or 0)
-            aws = int(away.get("score",0) or 0)
-            hname = home.get("team",{}).get("displayName","Home")
-            aname = away.get("team",{}).get("displayName","Away")
-            raw_league = (ev.get("leagues",[{}])[0].get("name") if ev.get("leagues") else "") or lname
-            real_league = get_pretty_league(slug, raw_league)
-            is_live = "IN_PROGRESS" in tname or state=="in"
-            is_ft = "FINAL" in tname or "FT" in tname or state=="post"
-            if is_live or is_ft:
-                warning = get_warning_flags(real_league, hname, aname, slug)
-                line = f"{hname} {hs}-{aws} {aname} Menit {minute} {real_league} [{slug}] {tname} {warning}"
-                inprog.append((minute, line, ev, hs, aws, hname, aname, real_league, slug, warning, is_ft, is_live, ev_id))
-                if MIN_MINUTE <= minute <= MAX_MINUTE and hs==0 and aws==0 and is_live:
-                    out.append({"id": ev.get("id"), "home": hname, "away": aname, "league": real_league, "league_slug": slug, "minute": minute, "warning": warning, "status": "AKTIF", "score": f"{hs}-{aws}", "hs": hs, "aws": aws, "is_live": True})
-        except Exception as e:
-            continue
-    inprog_sorted = sorted(inprog, key=lambda x: x[0])
-    print(f"--- {len(inprog_sorted)} IN-PROGRESS/FT ---")
-    for minute, line, ev, hs, aws, hname, aname, real_league, slug, warning, is_ft, is_live, ev_id in inprog_sorted[:50]:
-        print(line)
-    print(f"Found {len(out)} peluang {MIN_MINUTE}-{MAX_MINUTE} 0-0")
-    return out, inprog_sorted
+            with open(all_time_file, 'r', encoding='utf-8') as f:
+                all_matches = json.load(f)
+        except:
+            all_matches = []
+    # Merge
+    seen = {str(m.get("match_id")): m for m in all_matches}
+    for m in matches:
+        mid = str(m.get("match_id"))
+        if mid not in seen:
+            seen[mid] = m
+        else:
+            # Update with newer data but keep score_deteksi
+            old = seen[mid]
+            # Preserve original detection score if exists
+            if old.get("score_deteksi"):
+                m["score_deteksi"] = old["score_deteksi"]
+                m["minute_deteksi"] = old.get("minute_deteksi", old.get("minute", 60))
+            seen[mid].update(m)
+            # Ensure detection preserved
+            if old.get("score_deteksi"):
+                seen[mid]["score_deteksi"] = old["score_deteksi"]
+    with open(all_time_file, 'w', encoding='utf-8') as f:
+        json.dump(list(seen.values()), f, indent=2, ensure_ascii=False)
 
-def update_live_scores():
-    """V10: Update score & menit untuk match yang masih live di dashboard"""
+def cek_menit_60():
+    """Scan Sofascore live events menit 60-66 skor 0-0"""
     try:
-        wita, _ = wita_now()
-        dash = load_local_matches("data/matches.json")
-        if not dash:
-            print("No dash to update")
-            return
+        url = "https://api.sofascore.com/api/v1/sport/football/events/live"
+        r = requests.get(url, headers={"User-Agent": "Mozilla/5.0", "Accept": "application/json"}, timeout=15)
+        data = r.json()
+        out = []
+        for ev in data.get("events", []):
+            minute = ev.get("time", {}).get("minute", 0)
+            hs = ev.get("homeScore", {}).get("current", 0)
+            aws = ev.get("awayScore", {}).get("current", 0)
+            status_type = ev.get("status", {}).get("type", "")
+            status_desc = ev.get("status", {}).get("description", "")
+            # Hanya inprogress dan menit 60-66 dan skor 0-0 (deteksi awal)
+            if status_type == "inprogress" and 60 <= minute <= 66 and hs == 0 and aws == 0:
+                # Filter liga besar? Untuk sekarang semua, nanti filter di dashboard
+                out.append({
+                    "id": str(ev["id"]),
+                    "home": ev["homeTeam"]["name"],
+                    "away": ev["awayTeam"]["name"],
+                    "league": ev["tournament"]["name"],
+                    "league_slug": ev["tournament"].get("slug",""),
+                    "minute": minute,
+                    "home_score": hs,
+                    "away_score": aws,
+                    "score": f"{hs}-{aws}",  # ini skor deteksi = 0-0
+                    "status_type": status_type,
+                    "status_desc": status_desc
+                })
+        return out
+    except Exception as e:
+        print(f"Error cek_menit_60: {e}")
+        return []
+
+def get_live_score(event_id):
+    """Ambil skor live terbaru dari Sofascore"""
+    try:
+        url = f"https://api.sofascore.com/api/v1/event/{event_id}"
+        r = requests.get(url, headers={"User-Agent": "Mozilla/5.0"}, timeout=10)
+        data = r.json()
+        ev = data.get("event", {})
+        hs = ev.get("homeScore", {}).get("current", 0)
+        aws = ev.get("awayScore", {}).get("current", 0)
+        minute = ev.get("time", {}).get("minute", 0)
+        status_type = ev.get("status", {}).get("type", "")
+        status_desc = ev.get("status", {}).get("description", "")
+        return {
+            "home_score": hs,
+            "away_score": aws,
+            "score": f"{hs}-{aws}",
+            "minute": minute,
+            "status_type": status_type,
+            "status_desc": status_desc,
+            "is_ft": status_type == "finished" or "FT" in status_desc or "Ended" in status_desc
+        }
+    except Exception as e:
+        print(f"Error get_live_score {event_id}: {e}")
+        return None
+
+def get_stats(event_id):
+    try:
+        url = f"https://api.sofascore.com/api/v1/event/{event_id}/statistics"
+        r = requests.get(url, headers={"User-Agent": "Mozilla/5.0"}, timeout=10)
+        data = r.json()
+        stats = {}
+        for g in data.get("statistics", []):
+            for s in g.get("groups", []):
+                for it in s.get("statisticsItems", []):
+                    if it["name"] in ["Total shots", "Shots on target", "Dangerous attacks", "Expected goals", "Ball possession"]:
+                        stats[it["name"]] = {"home": it.get("homeValue", 0), "away": it.get("awayValue", 0)}
+        return stats
+    except:
+        return {}
+
+def analisa(stats):
+    try:
+        ts_h = int(str(stats.get("Total shots", {}).get("home", 0) or 0).split()[0] if isinstance(stats.get("Total shots", {}).get("home", 0), str) else stats.get("Total shots", {}).get("home", 0) or 0)
+        ts_a = int(str(stats.get("Total shots", {}).get("away", 0) or 0).split()[0] if isinstance(stats.get("Total shots", {}).get("away", 0), str) else stats.get("Total shots", {}).get("away", 0) or 0)
+        ts = ts_h + ts_a
+    except:
+        ts = 0
+    try:
+        da_h = int(stats.get("Dangerous attacks", {}).get("home", 0) or 0)
+        da_a = int(stats.get("Dangerous attacks", {}).get("away", 0) or 0)
+        da = da_h + da_a
+    except:
+        da = 0
+    try:
+        sot_h = int(stats.get("Shots on target", {}).get("home", 0) or 0)
+        sot_a = int(stats.get("Shots on target", {}).get("away", 0) or 0)
+        sot = sot_h + sot_a
+    except:
+        sot = 0
+    
+    if ts >= 12 and da >= 45 and sot >= 3:
+        return f"AKTIF 🔥", ts, da, sot
+    elif ts <= 6 and da <= 25:
+        return f"PASIF 🥶", ts, da, sot
+    else:
+        return f"SEDANG 😐", ts, da, sot
+
+def update_existing_matches():
+    """Update skor live untuk match yang masih aktif, JANGAN overwrite skor deteksi"""
+    matches = load_matches()
+    updated = []
+    now = wita_now()
+    for m in matches:
+        mid = str(m.get("match_id"))
+        # Skip yang sudah FT dan sudah ada final_score lebih dari 2 jam lalu
+        try:
+            created = datetime.fromisoformat(m.get("created_at","").replace("+08:00","+08:00"))
+            umur_jam = (now - created).total_seconds() / 3600
+            if m.get("is_ft") and umur_jam > 3:
+                updated.append(m)
+                continue
+        except:
+            pass
         
-        # Fetch all current events
-        leagues = fetch_all_leagues()
-        all_events = {}
-        with ThreadPoolExecutor(max_workers=25) as ex:
-            futures = {ex.submit(fetch_league, lt): lt for lt in leagues}
-            for fut in as_completed(futures):
-                slug, lname, evs = fut.result()
-                if evs:
-                    for ev in evs:
-                        all_events[ev.get("id")] = ev
-        
-        updated_count = 0
-        finished_count = 0
-        
-        for m in dash:
-            mid = str(m.get("match_id"))
-            if mid in all_events:
-                ev = all_events[mid]
-                comp = ev.get("competitions",[{}])[0]
-                status = comp.get("status",{})
-                tname = status.get("type",{}).get("name","")
-                clock = status.get("displayClock","") or status.get("clock","") or ""
-                detail = status.get("type",{}).get("shortDetail","") or ""
-                minute = parse_clock(clock, detail)
-                comps = comp.get("competitors",[])
-                if len(comps) >= 2:
-                    home_c = next((c for c in comps if c.get("homeAway")=="home"), comps[0])
-                    away_c = next((c for c in comps if c.get("homeAway")=="away"), comps[1])
-                    hs = int(home_c.get("score",0) or 0)
-                    aws = int(away_c.get("score",0) or 0)
-                    is_ft = "FINAL" in tname or "FT" in detail or "FT" in tname
-                    
-                    # Update live score & menit
-                    old_minute = m.get("minute",0)
-                    old_score = m.get("score","0-0")
-                    new_score = f"{hs}-{aws}"
-                    
-                    if minute != old_minute or new_score != old_score:
-                        m["minute"] = minute
-                        m["score"] = new_score
-                        m["menit_sekarang"] = minute
-                        m["last_update"] = wita.isoformat()
-                        m["status_detail"] = detail
-                        updated_count += 1
-                        print(f"🔄 Update {mid} {m['home_team']} {old_score}@{old_minute}' -> {new_score}@{minute}'")
-                    
-                    # Kalau FT, cek WIN/LOSE
-                    if is_ft:
-                        final_score = new_score
-                        m["final_score"] = final_score
-                        m["is_ft"] = True
-                        m["ft_at"] = wita.isoformat()
-                        if hs + aws > 0:
-                            m["result"] = "✅ WIN"
-                            m["betting"] = "WIN - Over 0.5 masuk!"
-                            m["profit"] = 80
-                        else:
-                            m["result"] = "❌ LOSE"
-                            m["betting"] = "LOSE - Tetap 0-0"
-                            m["profit"] = -100
-                        finished_count += 1
-                        print(f"🏁 FT {mid} {m['home_team']} vs {m['away_team']} {final_score} = {m['result']}")
+        # Kalau masih aktif atau sedang, cek live score
+        if not m.get("is_ft"):
+            live = get_live_score(mid)
+            if live:
+                # PRESERVE skor deteksi asli!
+                score_deteksi = m.get("score_deteksi", m.get("score", "0-0"))
+                minute_deteksi = m.get("minute_deteksi", m.get("minute", 60))
+                
+                # Update live score, tapi JANGAN overwrite score_deteksi
+                m["live_score"] = live["score"]
+                m["current_score"] = live["score"]
+                m["minute_live"] = live["minute"]
+                m["status_type"] = live["status_type"]
+                m["status_desc"] = live["status_desc"]
+                m["is_ft"] = live["is_ft"]
+                
+                if live["is_ft"]:
+                    m["final_score"] = live["score"]
+                    # HITUNG WIN/LOSE BENAR: bandingkan FT vs deteksi
+                    try:
+                        hg_ft, ag_ft = map(int, live["score"].split("-"))
+                        hg_det, ag_det = map(int, score_deteksi.split("-"))
+                        total_ft = hg_ft + ag_ft
+                        total_det = hg_det + ag_det
+                        gol_setelah = total_ft - total_det
+                        m["total_gol_setelah"] = gol_setelah
+                        m["gol_terjadi"] = gol_setelah > 0
+                        m["result"] = "WIN" if gol_setelah > 0 else "LOSE"
+                        m["result_calc"] = m["result"]
+                        print(f"FT {mid}: deteksi {score_deteksi} -> FT {live['score']} = gol setelah {gol_setelah} => {m['result']}")
+                    except Exception as e:
+                        print(f"Error hitung gol {mid}: {e}")
+                        m["result"] = "LOSE"
+                else:
+                    # Masih live
+                    m["final_score"] = None
+                
+                # Preserve deteksi
+                m["score_deteksi"] = score_deteksi
+                m["minute_deteksi"] = minute_deteksi
+                # Score field tetap deteksi untuk kompatibilitas, tapi kita punya live_score juga
+                # Jangan overwrite m["score"] dengan live, biar tetap 0-0
             else:
-                # Match ga ada di live events lagi, mungkin FT
+                # Gagal fetch, cek umur
                 try:
-                    created = datetime.fromisoformat(m.get('created_at','').replace('Z','+00:00'))
-                    if created.tzinfo is None:
-                        created = created.replace(tzinfo=WITA_TZ)
-                    umur = (wita - created).total_seconds() / 60
-                    if umur > 120 and not m.get('is_ft'):  # 2 jam ga ada update = FT 0-0?
+                    created = datetime.fromisoformat(m.get("created_at",""))
+                    umur_menit = (now - created).total_seconds() / 60
+                    if umur_menit > 120 and not m.get("final_score"):
+                        # Sudah 2 jam, anggap FT 0-0 kalau belum ada update
                         m["is_ft"] = True
-                        m["final_score"] = m.get("score","0-0")
-                        if m["final_score"] == "0-0":
-                            m["result"] = "❌ LOSE"
-                            m["profit"] = -100
-                        else:
-                            m["result"] = "✅ WIN"
-                            m["profit"] = 80
-                        finished_count += 1
+                        m["final_score"] = m.get("live_score", "0-0")
+                        m["result"] = "LOSE"
+                        m["result_calc"] = "LOSE"
+                        m["gol_terjadi"] = False
                 except:
                     pass
         
-        if updated_count > 0 or finished_count > 0:
-            with open("data/matches.json","w",encoding="utf-8") as f:
-                json.dump(dash, f, indent=2, default=str)
-            print(f"Updated {updated_count} live scores, {finished_count} FT")
-            
-            # Update archive juga
-            month_key = wita.strftime("%Y-%m")
-            for arch_path in [f"data/archive/{month_key}.json", "data/archive/all_time.json"]:
-                if os.path.exists(arch_path):
-                    archive = load_local_matches(arch_path)
-                    for am in archive:
-                        for dm in dash:
-                            if str(am.get('match_id')) == str(dm.get('match_id')):
-                                if dm.get('is_ft'):
-                                    am['final_score'] = dm.get('final_score')
-                                    am['result'] = dm.get('result')
-                                    am['is_ft'] = True
-                                    am['score'] = dm.get('score')
-                                    am['minute'] = dm.get('minute')
-                    with open(arch_path,"w",encoding="utf-8") as f:
-                        json.dump(archive, f, indent=2, default=str)
-        else:
-            print("No live updates needed")
-            
-    except Exception as e:
-        print(f"Update live scores error {e}")
-        import traceback
-        traceback.print_exc()
+        updated.append(m)
+    
+    return updated
 
-def save_batch(new_matches):
-    try:
-        wita, utc = wita_now()
-        month_key = wita.strftime("%Y-%m")
-        os.makedirs("data", exist_ok=True)
-        os.makedirs("data/archive", exist_ok=True)
-        if not os.path.exists("data/matches.json"):
-            with open("data/matches.json","w") as f: json.dump([], f)
-        
-        existing_dash = load_local_matches("data/matches.json")
-        existing_month = load_local_matches(f"data/archive/{month_key}.json")
-        existing_all = load_local_matches("data/archive/all_time.json")
-        
-        existing_ids = set(str(m.get("match_id")) for m in existing_dash)
-        filtered = [m for m in new_matches if str(m["id"]) not in existing_ids]
-        
-        if not filtered:
-            print(f"Ga ada yang baru")
-            return
-        
-        new_entries = []
-        for m in filtered:
-            full_status = m["status"]
-            if m["warning"]: full_status = f"{m['status']} | {m['warning']}"
-            entry = {
-                "match_id": str(m["id"]),
-                "home_team": m["home"],
-                "away_team": m["away"],
-                "league": m["league"],
-                "league_slug": m.get("league_slug",""),
-                "minute": m["minute"],
-                "menit_sekarang": m["minute"],
-                "score": m.get("score","0-0"),
-                "status": full_status,
-                "status_detail": "AKTIF",
-                "created_at": wita.isoformat(),
-                "last_update": wita.isoformat(),
-                "wita_date": wita.strftime("%Y-%m-%d"),
-                "month": month_key,
-                "prob_gol": 75,
-                "is_ft": False
+if __name__ == "__main__":
+    print(f"=== Check Menit 60-66 - {wita_now().strftime('%d %b %Y %H:%M WITA')} ===")
+    
+    # 1. Update existing matches dulu (live score -> FT)
+    existing = update_existing_matches()
+    print(f"Existing matches updated: {len(existing)}")
+    
+    # 2. Scan new matches
+    new_matches = cek_menit_60()
+    print(f"Found {len(new_matches)} new match 0-0 di menit 60-66")
+    
+    # Filter yang belum ada
+    existing_ids = set(str(m.get("match_id")) for m in existing)
+    to_add = []
+    for nm in new_matches:
+        if nm["id"] not in existing_ids:
+            stats = get_stats(nm["id"])
+            status_text, ts, da, sot = analisa(stats)
+            
+            match_data = {
+                "match_id": nm["id"],
+                "home_team": nm["home"],
+                "away_team": nm["away"],
+                "league": nm["league"],
+                "league_slug": nm["league_slug"],
+                "minute": nm["minute"],
+                "minute_deteksi": nm["minute"],
+                "score": "0-0",  # skor deteksi selalu 0-0
+                "score_deteksi": "0-0",
+                "live_score": "0-0",
+                "current_score": "0-0",
+                "final_score": None,
+                "status": status_text,
+                "status_calc": "AKTIF",
+                "shots": ts,
+                "da": da,
+                "sot": sot,
+                "created_at": wita_now().isoformat(),
+                "wita_date": wita_now().strftime("%Y-%m-%d"),
+                "is_ft": False,
+                "result": "LIVE",
+                "result_calc": "LIVE",
+                "gol_terjadi": None,
+                "total_gol_setelah": 0,
+                "odds": round(1.46 + (da % 40) / 100, 2),  # odds dummy 1.46-1.86
+                "odds_calc": round(1.46 + (da % 40) / 100, 2)
             }
-            new_entries.append(entry)
-        
-        updated_dash = new_entries + existing_dash
-        updated_dash = updated_dash[:200]
-        with open("data/matches.json","w",encoding="utf-8") as f: json.dump(updated_dash, f, indent=2, default=str)
-        
-        updated_month = new_entries + existing_month
-        with open(f"data/archive/{month_key}.json","w",encoding="utf-8") as f: json.dump(updated_month, f, indent=2, default=str)
-        
-        updated_all = new_entries + existing_all
-        with open("data/archive/all_time.json","w",encoding="utf-8") as f: json.dump(updated_all, f, indent=2, default=str)
-        
-        print(f"✅ Saved BATCH: {len(new_entries)} new | dash {len(updated_dash)}")
-        for e in new_entries:
-            print(f"  - {e['match_id']} {e['home_team']} vs {e['away_team']} {e['league']} Menit {e['minute']}")
-        
-    except Exception as e:
-        print(f"Save batch error {e}")
-        import traceback
-        traceback.print_exc()
+            to_add.append(match_data)
+            
+            pesan = f"""⚽ <b>MENIT 60 - 0-0 DETEKSI</b>
 
-if __name__=="__main__":
-    wita,utc = wita_now()
-    print(f"V10 LIVE SCORE + RESULT - WINDOW {MIN_MINUTE}-{MAX_MINUTE} - WITA {wita}")
-    print("=== Step 1: Update live scores for existing matches ===")
-    update_live_scores()
-    print("=== Step 2: Scan new peluang ===")
-    new_matches, all_inprog = cek_parallel()
-    save_batch(new_matches)
-    print(f"Done V10 - Updated live scores + {len(new_matches)} new")
+🏟️ {nm['home']} vs {nm['away']}
+🏆 {nm['league']}
+⏱️ Menit {nm['minute']} - Skor {nm['score']} (deteksi)
+
+📊 {status_text}
+Shots {ts} | DA {da} | SoT {sot}
+
+💰 BET: Rp 50rb | ODDS: {match_data['odds']} | PASAR: Over 0.5 Goal
+ID: {nm['id']} | {wita_now().strftime('%H:%M WITA')}"""
+            send_telegram(pesan)
+            print(f"Added: {nm['home']} vs {nm['away']} - {status_text}")
+    
+    # Gabung
+    all_matches = existing + to_add
+    # Sort by created_at desc
+    try:
+        all_matches = sorted(all_matches, key=lambda x: x.get("created_at",""), reverse=True)
+    except:
+        pass
+    
+    # Keep only last 100
+    all_matches = all_matches[:100]
+    
+    save_matches(all_matches)
+    print(f"Total matches saved: {len(all_matches)} - New: {len(to_add)}")
+    print("Done")
