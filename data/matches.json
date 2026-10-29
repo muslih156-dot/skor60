@@ -5,13 +5,13 @@
     "away_team": "Philadelphia Union",
     "league": "MLS",
     "league_slug": "usa.1",
-    "minute": 61,
-    "menit_sekarang": 61,
+    "minute": 66,
+    "menit_sekarang": 66,
     "score": "0-0",
     "status": "AKTIF",
-    "status_detail": "AKTIF",
+    "status_detail": "66'",
     "created_at": "2026-10-29T10:00:44.703254",
-    "last_update": "2026-10-29T10:00:44.703254",
+    "last_update": "2026-10-29T10:05:21.878143",
     "wita_date": "2026-10-29",
     "month": "2026-10",
     "prob_gol": 75,
@@ -53,7 +53,7 @@
     "prob_gol": 75,
     "is_ft": true,
     "final_score": "3-0",
-    "ft_at": "2026-10-29T10:00:39.421122",
+    "ft_at": "2026-10-29T10:05:21.878143",
     "result": "\u2705 WIN",
     "betting": "WIN - Over 0.5 masuk!",
     "profit": 80
@@ -76,7 +76,7 @@
     "prob_gol": 75,
     "is_ft": true,
     "final_score": "2-1",
-    "ft_at": "2026-10-29T10:00:39.421122",
+    "ft_at": "2026-10-29T10:05:21.878143",
     "result": "\u2705 WIN",
     "betting": "WIN - Over 0.5 masuk!",
     "profit": 80
@@ -97,7 +97,7 @@
     "status_detail": "90'+2'",
     "final_score": "2-2",
     "is_ft": true,
-    "ft_at": "2026-10-29T10:00:39.421122",
+    "ft_at": "2026-10-29T10:05:21.878143",
     "result": "\u2705 WIN",
     "betting": "WIN - Over 0.5 masuk!",
     "profit": 80
@@ -118,7 +118,7 @@
     "status_detail": "90'+3'",
     "final_score": "0-0",
     "is_ft": true,
-    "ft_at": "2026-10-29T10:00:39.421122",
+    "ft_at": "2026-10-29T10:05:21.878143",
     "result": "\u274c LOSE",
     "betting": "LOSE - Tetap 0-0",
     "profit": -100
@@ -139,7 +139,7 @@
     "status_detail": "FT",
     "final_score": "1-0",
     "is_ft": true,
-    "ft_at": "2026-10-29T10:00:39.421122",
+    "ft_at": "2026-10-29T10:05:21.878143",
     "result": "\u2705 WIN",
     "betting": "WIN - Over 0.5 masuk!",
     "profit": 80
@@ -160,7 +160,7 @@
     "status_detail": "FT",
     "final_score": "0-0",
     "is_ft": true,
-    "ft_at": "2026-10-29T10:00:39.421122",
+    "ft_at": "2026-10-29T10:05:21.878143",
     "result": "\u274c LOSE",
     "betting": "LOSE - Tetap 0-0",
     "profit": -100
@@ -181,7 +181,7 @@
     "status_detail": "FT",
     "final_score": "0-0",
     "is_ft": true,
-    "ft_at": "2026-10-29T10:00:39.421122",
+    "ft_at": "2026-10-29T10:05:21.878143",
     "result": "\u274c LOSE",
     "betting": "LOSE - Tetap 0-0",
     "profit": -100
@@ -202,7 +202,7 @@
     "status_detail": "FT",
     "final_score": "0-2",
     "is_ft": true,
-    "ft_at": "2026-10-29T10:00:39.421122",
+    "ft_at": "2026-10-29T10:05:21.878143",
     "result": "\u2705 WIN",
     "betting": "WIN - Over 0.5 masuk!",
     "profit": 80
@@ -223,7 +223,7 @@
     "status_detail": "FT",
     "final_score": "0-1",
     "is_ft": true,
-    "ft_at": "2026-10-29T10:00:39.421122",
+    "ft_at": "2026-10-29T10:05:21.878143",
     "result": "\u2705 WIN",
     "betting": "WIN - Over 0.5 masuk!",
     "profit": 80
@@ -244,7 +244,7 @@
     "status_detail": "FT",
     "final_score": "1-1",
     "is_ft": true,
-    "ft_at": "2026-10-29T10:00:39.421122",
+    "ft_at": "2026-10-29T10:05:21.878143",
     "result": "\u2705 WIN",
     "betting": "WIN - Over 0.5 masuk!",
     "profit": 80
@@ -265,7 +265,7 @@
     "status_detail": "FT-Pens",
     "final_score": "1-1",
     "is_ft": true,
-    "ft_at": "2026-10-29T10:00:39.421122",
+    "ft_at": "2026-10-29T10:05:21.878143",
     "result": "\u2705 WIN",
     "betting": "WIN - Over 0.5 masuk!",
     "profit": 80
@@ -286,7 +286,7 @@
     "status_detail": "FT",
     "final_score": "0-0",
     "is_ft": true,
-    "ft_at": "2026-10-29T10:00:39.421122",
+    "ft_at": "2026-10-29T10:05:21.878143",
     "result": "\u274c LOSE",
     "betting": "LOSE - Tetap 0-0",
     "profit": -100
@@ -307,7 +307,7 @@
     "status_detail": "FT",
     "final_score": "2-1",
     "is_ft": true,
-    "ft_at": "2026-10-29T10:00:39.421122",
+    "ft_at": "2026-10-29T10:05:21.878143",
     "result": "\u2705 WIN",
     "betting": "WIN - Over 0.5 masuk!",
     "profit": 80
@@ -328,7 +328,7 @@
     "status_detail": "FT",
     "final_score": "0-1",
     "is_ft": true,
-    "ft_at": "2026-10-29T10:00:39.421122",
+    "ft_at": "2026-10-29T10:05:21.878143",
     "result": "\u2705 WIN",
     "betting": "WIN - Over 0.5 masuk!",
     "profit": 80
@@ -349,7 +349,7 @@
     "status_detail": "FT",
     "final_score": "0-2",
     "is_ft": true,
-    "ft_at": "2026-10-29T10:00:39.421122",
+    "ft_at": "2026-10-29T10:05:21.878143",
     "result": "\u2705 WIN",
     "betting": "WIN - Over 0.5 masuk!",
     "profit": 80
@@ -370,7 +370,7 @@
     "status_detail": "FT",
     "final_score": "0-0",
     "is_ft": true,
-    "ft_at": "2026-10-29T10:00:39.421122",
+    "ft_at": "2026-10-29T10:05:21.878143",
     "result": "\u274c LOSE",
     "betting": "LOSE - Tetap 0-0",
     "profit": -100
@@ -391,7 +391,7 @@
     "status_detail": "FT",
     "final_score": "0-0",
     "is_ft": true,
-    "ft_at": "2026-10-29T10:00:39.421122",
+    "ft_at": "2026-10-29T10:05:21.878143",
     "result": "\u274c LOSE",
     "betting": "LOSE - Tetap 0-0",
     "profit": -100
@@ -412,7 +412,7 @@
     "status_detail": "FT",
     "final_score": "0-2",
     "is_ft": true,
-    "ft_at": "2026-10-29T10:00:39.421122",
+    "ft_at": "2026-10-29T10:05:21.878143",
     "result": "\u2705 WIN",
     "betting": "WIN - Over 0.5 masuk!",
     "profit": 80
