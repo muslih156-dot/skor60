@@ -341,84 +341,94 @@ with col_right:
         st.markdown(f"""<div style="background:white; border-radius:16px; padding:20px; border:1px solid #e2e8f0; margin-top:16px;"><div style="display:flex; justify-content:space-between;"><div style="font-size:12px; font-weight:700;">Distribusi Status • Modal {format_rp(modal_aktif)} aktif</div><div style="background:#f1f5f9; padding:4px 8px; border-radius:12px; font-size:10px; font-weight:600;">TOTAL {total}</div></div></div>""", unsafe_allow_html=True)
         st.plotly_chart(fig_donut, use_container_width=True, config={'displayModeBar': False})
     with c2:
-        # ===== SUMMARY HARIAN CUT OFF 12:00 WITA =====
+        # ===== SUMMARY HARIAN DUAL - TOTAL & MAJOR - CUT OFF 12:00 WITA =====
         from collections import defaultdict
-        daily_stats = defaultdict(lambda: {"win":0, "lose":0, "profit":0, "total":0, "matches":[]})
-        for m in matches:
-            try:
-                ca_str = m.get("created_at","")
-                ca = pd.to_datetime(ca_str)
-                if pd.isna(ca):
-                    continue
-                # Ensure WITA
-                if ca.tzinfo is None:
-                    ca = ca.replace(tzinfo=WITA)
-                else:
-                    ca = ca.astimezone(WITA)
-                # Cut off 12:00 WITA: if hour < 12, masuk hari sebelumnya
-                trading_date = ca.date()
-                if ca.hour < 12:
-                    trading_date = trading_date - timedelta(days=1)
-                # profit per match
-                if m.get("result_calc")=="WIN":
-                    profit = int(MODAL_PER_MATCH * (m.get("odds_calc", ODDS)-1)) if m.get("odds_calc") else PROFIT_PER_WIN
-                    daily_stats[trading_date]["win"] += 1
-                    daily_stats[trading_date]["profit"] += profit
-                elif m.get("result_calc")=="LOSE":
-                    profit = -MODAL_PER_MATCH
-                    daily_stats[trading_date]["lose"] += 1
-                    daily_stats[trading_date]["profit"] += profit
-                else:
-                    continue
-                daily_stats[trading_date]["total"] += 1
-                daily_stats[trading_date]["matches"].append(m)
-            except:
-                continue
         
-        # Sort by date
-        sorted_dates = sorted(daily_stats.keys())
-        if sorted_dates:
-            dates_str = [d.strftime("%d %b") for d in sorted_dates]
-            profits = [daily_stats[d]["profit"] for d in sorted_dates]
-            win_counts = [daily_stats[d]["win"] for d in sorted_dates]
-            colors = ["#22c55e" if p>=0 else "#ef4444" for p in profits]
-            
-            fig_daily = go.Figure(data=[
-                go.Bar(x=dates_str, y=profits, marker_color=colors, text=[f"{format_rp(p)}<br>{daily_stats[d]['win']}W-{daily_stats[d]['lose']}L" for d,p in zip(sorted_dates, profits)], textposition='outside', width=0.5)
-            ])
-            fig_daily.update_layout(
-                yaxis=dict(title="Profit Rp", gridcolor="#f1f5f9", zeroline=True, zerolinecolor="#94a3b8"),
-                xaxis=dict(title="Trading Day (Cut off 12:00 WITA)"),
-                margin=dict(t=40,b=40,l=60,r=20),
-                height=240,
-                plot_bgcolor='white',
-                showlegend=False
-            )
-            st.markdown(f"""<div style="background:white; border-radius:16px; padding:20px; border:1px solid #e2e8f0; margin-top:16px;"><div style="display:flex; justify-content:space-between; align-items:center;"><div style="font-size:12px; font-weight:700;">📅 Summary Harian • Cut off 12:00 WITA • Total {format_rp(total_profit_rp)}</div><div style="background:#0f172a; color:white; padding:4px 8px; border-radius:12px; font-size:10px; font-weight:600;">{len(sorted_dates)} hari trading</div></div><div style="font-size:10px; color:#64748b; margin-top:4px;">Hari trading = 12:00 WITA sampai 11:59 WITA besoknya • Match sebelum jam 12 siang masuk hari sebelumnya</div></div>""", unsafe_allow_html=True)
-            st.plotly_chart(fig_daily, use_container_width=True, config={'displayModeBar': False})
-            
-            # Table harian detail
-            daily_table = []
-            for d in sorted_dates[-7:][::-1]:  # 7 hari terakhir
-                ds = daily_stats[d]
-                wr = (ds["win"]/ds["total"]*100) if ds["total"]>0 else 0
-                daily_table.append({
-                    "Tanggal Trading": d.strftime("%d %b %Y") + " (12:00-11:59)",
-                    "Match": ds["total"],
-                    "WIN": ds["win"],
-                    "LOSE": ds["lose"],
-                    "Win Rate": f"{wr:.1f}%",
-                    "Profit Rp": format_rp(ds["profit"]),
-                    "ROI": f"{ds['profit']/(ds['total']*MODAL_PER_MATCH)*100:.1f}%" if ds["total"]>0 else "0%"
-                })
-            if daily_table:
-                st.dataframe(pd.DataFrame(daily_table), use_container_width=True, height=250)
-        else:
-            # Fallback kalau belum ada data selesai
-            fig_bar = go.Figure(data=[go.Bar(x=['Hari ini', 'Kemarin', '2 hari lalu'], y=[total_profit_rp, total_profit_rp*0.6, total_profit_rp*0.3], marker_color=['#22c55e', '#3b82f6', '#94a3b8'], width=0.4)])
-            fig_bar.update_layout(yaxis=dict(title="Profit Rp", gridcolor="#f1f5f9"), xaxis=dict(showgrid=False), margin=dict(t=20,b=20,l=40,r=20), height=200, plot_bgcolor='white', showlegend=False)
-            st.markdown(f"""<div style="background:white; border-radius:16px; padding:20px; border:1px solid #e2e8f0; margin-top:16px;"><div style="font-size:12px; font-weight:700;">📅 Summary Harian • Cut off 12:00 WITA • {format_rp(total_profit_rp)} total (belum ada FT hari ini)</div><div style="font-size:10px; color:#64748b; margin-top:4px;">Menunggu match selesai FT buat rekap harian</div></div>""", unsafe_allow_html=True)
-            st.plotly_chart(fig_bar, use_container_width=True, config={'displayModeBar': False})
+        def build_daily_stats(match_list):
+            stats = defaultdict(lambda: {"win":0, "lose":0, "profit":0, "total":0})
+            for m in match_list:
+                try:
+                    ca_str = m.get("created_at","")
+                    ca = pd.to_datetime(ca_str)
+                    if pd.isna(ca):
+                        continue
+                    if ca.tzinfo is None:
+                        ca = ca.replace(tzinfo=WITA)
+                    else:
+                        ca = ca.astimezone(WITA)
+                    trading_date = ca.date()
+                    if ca.hour < 12:
+                        trading_date = trading_date - timedelta(days=1)
+                    if m.get("result_calc")=="WIN":
+                        profit = int(MODAL_PER_MATCH * (m.get("odds_calc", ODDS)-1)) if m.get("odds_calc") else PROFIT_PER_WIN
+                        stats[trading_date]["win"] += 1
+                        stats[trading_date]["profit"] += profit
+                    elif m.get("result_calc")=="LOSE":
+                        profit = -MODAL_PER_MATCH
+                        stats[trading_date]["lose"] += 1
+                        stats[trading_date]["profit"] += profit
+                    else:
+                        continue
+                    stats[trading_date]["total"] += 1
+                except:
+                    continue
+            return stats
+        
+        daily_stats_total = build_daily_stats(matches)
+        daily_stats_major = build_daily_stats(major_matches)
+        
+        # Tabs for daily summary
+        tab_daily_total, tab_daily_major = st.tabs([f"📅 Total Harian ({len(daily_stats_total)} hari)", f"⭐ Major Harian ({len(daily_stats_major)} hari)"])
+        
+        with tab_daily_total:
+            sorted_dates = sorted(daily_stats_total.keys())
+            if sorted_dates:
+                dates_str = [d.strftime("%d %b") for d in sorted_dates]
+                profits = [daily_stats_total[d]["profit"] for d in sorted_dates]
+                colors = ["#22c55e" if p>=0 else "#ef4444" for p in profits]
+                fig_daily = go.Figure(data=[
+                    go.Bar(x=dates_str, y=profits, marker_color=colors, text=[f"{format_rp(p)}<br>{daily_stats_total[d]['win']}W-{daily_stats_total[d]['lose']}L" for d,p in zip(sorted_dates, profits)], textposition='outside', width=0.5)
+                ])
+                fig_daily.update_layout(yaxis=dict(title="Profit Rp", gridcolor="#f1f5f9", zeroline=True, zerolinecolor="#94a3b8"), xaxis=dict(title="Trading Day (Cut off 12:00 WITA)"), margin=dict(t=40,b=40,l=60,r=20), height=240, plot_bgcolor='white', showlegend=False)
+                st.markdown(f"""<div style="background:white; border-radius:12px; padding:12px; border:1px solid #e2e8f0; margin-bottom:8px;"><div style="display:flex; justify-content:space-between;"><div style="font-size:11px; font-weight:700;">📅 Total Harian • Cut off 12:00 WITA • {format_rp(total_profit_rp)}</div><div style="background:#0f172a; color:white; padding:3px 8px; border-radius:10px; font-size:9px;">{len(sorted_dates)} hari</div></div><div style="font-size:9px; color:#64748b; margin-top:2px;">Semua liga • 12:00-11:59 WITA • Sebelum jam 12 masuk hari sebelumnya</div></div>""", unsafe_allow_html=True)
+                st.plotly_chart(fig_daily, use_container_width=True, config={'displayModeBar': False})
+                daily_table = []
+                for d in sorted_dates[-7:][::-1]:
+                    ds = daily_stats_total[d]
+                    wr = (ds["win"]/ds["total"]*100) if ds["total"]>0 else 0
+                    daily_table.append({"Tanggal": d.strftime("%d %b %Y")+" (12:00-11:59)", "Match": ds["total"], "W-L": f"{ds['win']}W-{ds['lose']}L", "WR": f"{wr:.1f}%", "Profit": format_rp(ds["profit"]), "ROI": f"{ds['profit']/(ds['total']*MODAL_PER_MATCH)*100:.1f}%" if ds["total"]>0 else "0%"})
+                if daily_table:
+                    st.dataframe(pd.DataFrame(daily_table), use_container_width=True, height=220)
+            else:
+                st.info("Belum ada FT total hari ini")
+        
+        with tab_daily_major:
+            sorted_dates_m = sorted(daily_stats_major.keys())
+            if sorted_dates_m:
+                dates_str_m = [d.strftime("%d %b") for d in sorted_dates_m]
+                profits_m = [daily_stats_major[d]["profit"] for d in sorted_dates_m]
+                colors_m = ["#f59e0b" if p>=0 else "#ef4444" for p in profits_m]
+                fig_daily_m = go.Figure(data=[
+                    go.Bar(x=dates_str_m, y=profits_m, marker_color=colors_m, text=[f"{format_rp(p)}<br>{daily_stats_major[d]['win']}W-{daily_stats_major[d]['lose']}L" for d,p in zip(sorted_dates_m, profits_m)], textposition='outside', width=0.5)
+                ])
+                fig_daily_m.update_layout(yaxis=dict(title="Profit Rp", gridcolor="#f1f5f9", zeroline=True, zerolinecolor="#94a3b8"), xaxis=dict(title="Trading Day Major (Cut off 12:00 WITA)"), margin=dict(t=40,b=40,l=60,r=20), height=240, plot_bgcolor='white', showlegend=False)
+                st.markdown(f"""<div style="background: linear-gradient(135deg, #fffbeb 0%, #ffffff 100%); border-radius:12px; padding:12px; border:1px solid #fde68a; margin-bottom:8px;"><div style="display:flex; justify-content:space-between;"><div style="font-size:11px; font-weight:700; color:#92400e;">⭐ Major Harian • Cut off 12:00 WITA • {format_rp(total_profit_major)}</div><div style="background:#f59e0b; color:white; padding:3px 8px; border-radius:10px; font-size:9px;">{len(sorted_dates_m)} hari • {selesai_major} match</div></div><div style="font-size:9px; color:#92400e; margin-top:2px;">Liga besar Eropa+MLS+Brazil+J-League+A-League • ROI {roi_major:.1f}% • WR {win_rate_major:.1f}%</div></div>""", unsafe_allow_html=True)
+                st.plotly_chart(fig_daily_m, use_container_width=True, config={'displayModeBar': False})
+                daily_table_m = []
+                for d in sorted_dates_m[-7:][::-1]:
+                    ds = daily_stats_major[d]
+                    wr = (ds["win"]/ds["total"]*100) if ds["total"]>0 else 0
+                    daily_table_m.append({"Tanggal Major": d.strftime("%d %b %Y")+" (12:00-11:59)", "Match": ds["total"], "W-L": f"{ds['win']}W-{ds['lose']}L", "WR": f"{wr:.1f}%", "Profit": format_rp(ds["profit"]), "ROI": f"{ds['profit']/(ds['total']*MODAL_PER_MATCH)*100:.1f}%" if ds["total"]>0 else "0%"})
+                if daily_table_m:
+                    st.dataframe(pd.DataFrame(daily_table_m), use_container_width=True, height=220)
+                # Highlight best day major
+                if sorted_dates_m:
+                    best_day = max(sorted_dates_m, key=lambda d: daily_stats_major[d]["profit"])
+                    worst_day = min(sorted_dates_m, key=lambda d: daily_stats_major[d]["profit"])
+                    st.markdown(f"""<div style="background:white; border-radius:10px; padding:10px; border:1px solid #e2e8f0; margin-top:8px; display:flex; gap:12px;"><div style="flex:1; background:#f0fdf4; border-radius:8px; padding:8px; border:1px solid #bbf7d0;"><div style="font-size:9px; color:#166534; font-weight:700;">🏆 BEST DAY MAJOR</div><div style="font-size:12px; font-weight:800;">{best_day.strftime("%d %b")} • {format_rp(daily_stats_major[best_day]["profit"])} • {daily_stats_major[best_day]["win"]}W-{daily_stats_major[best_day]["lose"]}L</div></div><div style="flex:1; background:#fef2f2; border-radius:8px; padding:8px; border:1px solid #fecaca;"><div style="font-size:9px; color:#991b1b; font-weight:700;">📉 WORST DAY MAJOR</div><div style="font-size:12px; font-weight:800;">{worst_day.strftime("%d %b")} • {format_rp(daily_stats_major[worst_day]["profit"])} • {daily_stats_major[worst_day]["win"]}W-{daily_stats_major[worst_day]["lose"]}L</div></div></div>""", unsafe_allow_html=True)
+            else:
+                st.warning("Belum ada FT liga besar hari ini. Major filter: Premier League, LaLiga, Serie A, Bundesliga, MLS, Brasileirão, J1 League, A-League, UCL/UEL")
+                st.caption(f"Total major {total_major} match, selesai {selesai_major} • Win rate {win_rate_major:.1f}% • Profit {format_rp(total_profit_major)}")
     
     
     # ===== 2 SUMMARY TABS: SEMUA LIGA vs LIGA BESAR REKOMENDASI =====
