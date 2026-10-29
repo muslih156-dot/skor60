@@ -6,8 +6,8 @@ from concurrent.futures import ThreadPoolExecutor, as_completed
 TELEGRAM_TOKEN = os.getenv("TELEGRAM_TOKEN")
 CHAT_ID = os.getenv("CHAT_ID")
 
-MIN_MINUTE = 50
-MAX_MINUTE = 80
+MIN_MINUTE = 60
+MAX_MINUTE = 66
 WITA_TZ = timezone(timedelta(hours=8))
 
 def wita_now():
