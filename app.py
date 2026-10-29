@@ -21,7 +21,47 @@ footer { visibility: hidden; }
 """, unsafe_allow_html=True)
 
 GITHUB_RAW_BASE = "https://raw.githubusercontent.com/muslih156-dot/skor60/main"
+
 LEAGUE_MAP = {"ita.1": "Serie A", "ita.2": "Serie B", "eng.1": "Premier League", "ger.1": "Bundesliga", "esp.1": "LaLiga", "fra.1": "Ligue 1", "ned.1": "Eredivisie", "swe.1": "Allsvenskan", "afc.cup": "AFC Cup", "ven.1": "Liga FUTVE", "us.usa.ncaa.w.1": "USA NCAA W1"}
+
+# ===== LIGA BESAR REKOMENDASI - EROPA ASIA AMERIKA AUSTRALIA =====
+MAJOR_LEAGUE_SLUGS = [
+    "eng.1", "eng.2", "eng.champ", "esp.1", "esp.2", "ita.1", "ita.2", "ger.1", "ger.2", "fra.1", "fra.2",
+    "ned.1", "por.1", "bel.1", "tur.1", "sco.1", "gre.1", "sui.1", "aut.1", "den.1", "nor.1", "swe.1",
+    "usa.1", "usa.mls", "mls", "mex.1", "bra.1", "arg.1", "col.1", "chi.1", "uru.1", "per.1",
+    "jpn.1", "kor.1", "aus.1", "saud.1", "chn.1", "uae.1", "qat.1",
+    "uefa.champions", "uefa.europa", "uefa.europa.conf", "conmebol.libertadores", "afc.champions", "afc.cup"
+]
+
+MAJOR_KEYWORDS = [
+    "premier league", "laliga", "serie a", "bundesliga", "ligue 1", "eredivisie", "primeira liga",
+    "championship", "la liga", "serie b", "2. bundesliga", "ligue 2",
+    "mls", "major league", "liga mx", "brasileir", "argentina primera", "primera division",
+    "j1 league", "k league", "a-league", "saudi pro", "pro league", "super league",
+    "champions league", "europa league", "libertadores", "afc champions", "uefa",
+    "scottish premiership", "belgian pro", "eredivisie", "super lig"
+]
+
+def is_major_league(league_slug, liga_pretty):
+    slug = str(league_slug).lower()
+    pretty = str(liga_pretty).lower()
+    # cek slug exact
+    for ms in MAJOR_LEAGUE_SLUGS:
+        if ms in slug:
+            return True
+    # cek keyword di pretty name
+    for kw in MAJOR_KEYWORDS:
+        if kw in pretty:
+            return True
+    # Tier 1 leagues: kalau mengandung .1 (tier 1) dan bukan NCAA, U23, youth, women lower
+    if ".1" in slug and "ncaa" not in slug and "w." not in slug and "u20" not in slug and "u23" not in slug and "youth" not in slug:
+        # tapi filter out liga kecil tier 1 seperti ven.1, per.1? Per 1 dan Ven 1 itu tier 1 tapi minor - kita exclude
+        minor_tier1 = ["ven.1", "per.1", "bol.1", "ecu.1", "par.1", "nic.1", "hon.1", "gua.1", "els.1"]
+        if any(m in slug for m in minor_tier1):
+            return False
+        return True
+    return False
+
 
 def pretty_league(slug):
     if not slug: return "-"
@@ -123,6 +163,7 @@ for m in matches:
         m["da"] = 62
         m["liga_pretty"] = pretty_league(m.get("league",""))
 
+
 total = len(matches)
 aktif = len([m for m in matches if m.get("status_calc")=="AKTIF"])
 sedang = len([m for m in matches if m.get("status_calc")=="SEDANG"])
@@ -131,6 +172,21 @@ selesai = pasif
 win = len([m for m in matches if m.get("result_calc")=="WIN"])
 lose = len([m for m in matches if m.get("result_calc")=="LOSE"])
 win_rate = (win / selesai * 100) if selesai > 0 else 64.3
+
+# ===== FILTER LIGA BESAR REKOMENDASI =====
+major_matches = [m for m in matches if is_major_league(m.get("league","") or m.get("league_slug",""), m.get("liga_pretty",""))]
+total_major = len(major_matches)
+aktif_major = len([m for m in major_matches if m.get("status_calc")=="AKTIF"])
+sedang_major = len([m for m in major_matches if m.get("status_calc")=="SEDANG"])
+pasif_major = len([m for m in major_matches if m.get("status_calc")=="PASIF"])
+selesai_major = pasif_major
+win_major = len([m for m in major_matches if m.get("result_calc")=="WIN"])
+lose_major = len([m for m in major_matches if m.get("result_calc")=="LOSE"])
+win_rate_major = (win_major / selesai_major * 100) if selesai_major > 0 else 0
+total_profit_major = win_major * 80000 - lose_major * 100000
+total_modal_major = selesai_major * 100000
+roi_major = (total_profit_major / total_modal_major * 100) if total_modal_major > 0 else 0
+
 
 # ===== MODAL & PROFIT RP =====
 MODAL_PER_MATCH = 100000  # Rp 100rb per match
@@ -142,6 +198,7 @@ total_profit_rp = win * PROFIT_PER_WIN - lose * LOSS_PER_LOSE
 roi = (total_profit_rp / total_modal_keluar * 100) if total_modal_keluar > 0 else 0
 modal_aktif = aktif * MODAL_PER_MATCH
 
+
 if total == 0:
     total, selesai, win, aktif, sedang, pasif = 17, 14, 9, 2, 3, 9
     win_rate = 64.3
@@ -149,7 +206,22 @@ if total == 0:
     total_modal_keluar = 14*100000
     modal_aktif = 2*100000
 
+# ===== FILTER LIGA BESAR REKOMENDASI - EROPA ASIA AMERIKA AUSTRALIA =====
+major_matches = [m for m in matches if is_major_league(m.get("league","") or m.get("league_slug",""), m.get("liga_pretty",""))]
+total_major = len(major_matches)
+aktif_major = len([m for m in major_matches if m.get("status_calc")=="AKTIF"])
+sedang_major = len([m for m in major_matches if m.get("status_calc")=="SEDANG"])
+pasif_major = len([m for m in major_matches if m.get("status_calc")=="PASIF"])
+selesai_major = pasif_major
+win_major = len([m for m in major_matches if m.get("result_calc")=="WIN"])
+lose_major = len([m for m in major_matches if m.get("result_calc")=="LOSE"])
+win_rate_major = (win_major / selesai_major * 100) if selesai_major > 0 else 0
+total_profit_major = win_major * 80000 - lose_major * 100000
+total_modal_major = selesai_major * 100000
+roi_major = (total_profit_major / total_modal_major * 100) if total_modal_major > 0 else 0
+
 col_left, col_right = st.columns([320, 1100])
+
 
 with col_left:
     st.markdown(f"""
@@ -265,7 +337,58 @@ with col_right:
         st.markdown(f"""<div style="background:white; border-radius:16px; padding:20px; border:1px solid #e2e8f0; margin-top:16px;"><div style="font-size:12px; font-weight:700;">Profit Rp per Status • {format_rp(total_profit_rp)} total</div></div>""", unsafe_allow_html=True)
         st.plotly_chart(fig_bar, use_container_width=True, config={'displayModeBar': False})
     
+    
+    # ===== 2 SUMMARY TABS: SEMUA LIGA vs LIGA BESAR REKOMENDASI =====
+    st.markdown("""
+    <div style="background:white; border-radius:16px; border:1px solid #e2e8f0; margin-top:20px; padding:16px 20px;">
+        <div style="font-size:14px; font-weight:800;">📊 2 Summary - Pilih Filter Liga</div>
+        <div style="font-size:11px; color:#64748b; margin-top:4px;">Semua liga (19 match termasuk NCAA, Peru, Ven) vs Liga Besar Rekomendasi (Eropa top 5 + MLS + Brazil + J-League + A-League + UCL/UEL)</div>
+    </div>
+    """, unsafe_allow_html=True)
+    
+    tab_all, tab_major = st.tabs([f"🌍 Semua Liga ({total} match)", f"⭐ Liga Besar Rekomendasi ({total_major} match)"])
+    
+    with tab_all:
+        c1, c2, c3, c4 = st.columns(4)
+        c1.metric("Total", total, f"{aktif} aktif")
+        c2.metric("Selesai FT", selesai, f"{win}W-{lose}L")
+        c3.metric("Win Rate", f"{win_rate:.1f}%", f"{win} dari {selesai}")
+        c4.metric("Profit Rp", format_rp(total_profit_rp), f"ROI {roi:.1f}%")
+        st.caption(f"Semua liga: termasuk NCAA, Per 1, Ven 1, Serie B, Allsvensk, AFC Cup dll. Modal {format_rp(total_modal_keluar)} • Profit {format_rp(total_profit_rp)}")
+    
+    with tab_major:
+        c1, c2, c3, c4 = st.columns(4)
+        c1.metric("Total Major", total_major, f"{aktif_major} aktif")
+        c2.metric("Selesai Major", selesai_major, f"{win_major}W-{lose_major}L")
+        c3.metric("Win Rate Major", f"{win_rate_major:.1f}%" if selesai_major>0 else "0%", f"{win_major} dari {selesai_major}" if selesai_major>0 else "Belum ada FT")
+        c4.metric("Profit Major Rp", format_rp(total_profit_major), f"ROI {roi_major:.1f}%" if total_modal_major>0 else "0%")
+        
+        # List liga besar yang ke-detect
+        liga_major_list = sorted(set([m.get("liga_pretty","-") for m in major_matches]))
+        st.markdown(f"**✅ Liga Besar Terdeteksi ({len(liga_major_list)} liga):** " + ", ".join(liga_major_list[:15]) + (" ..." if len(liga_major_list)>15 else ""))
+        st.caption(f"Filter: Eropa (Premier League, LaLiga, Serie A, Bundesliga, Ligue 1, Eredivisie, Championship, Serie B, Liga Portugal, Belgian Pro, Scottish Prem) + Amerika (MLS, Liga MX, Brasileirão, Argentina Primera) + Asia (J1 League, K League, Saudi Pro, A-League, Chinese Super) + AFC Champions + UCL/UEL + Libertadores. Modal {format_rp(total_modal_major)} • Profit {format_rp(total_profit_major)}")
+        
+        if total_major == 0:
+            st.warning("⚠️ Belum ada match liga besar yang menit 60-66 skor 0-0 hari ini. Coba cek tab Semua Liga atau tunggu scan bot berikutnya (tiap 5 menit).")
+        else:
+            # Show top 5 major matches
+            df_major_preview = []
+            for m in sorted(major_matches, key=lambda x: x.get("created_at",""), reverse=True)[:5]:
+                df_major_preview.append({
+                    "Match": f"{m.get('home_team','')} vs {m.get('away_team','')}",
+                    "Liga": m.get("liga_pretty","-"),
+                    "Menit": f"{m.get('minute',60)}'",
+                    "Skor": m.get("score","0-0"),
+                    "Status": m.get("status_calc","-"),
+                    "FT": m.get("final_display","-"),
+                    "Result": m.get("result_calc","LIVE"),
+                    "Profit": f"+{int(100000*(m.get('odds_calc',1.8)-1))}rb" if m.get("gol_terjadi")==True else "-100rb" if m.get("gol_terjadi")==False else "LIVE"
+                })
+            if df_major_preview:
+                st.dataframe(pd.DataFrame(df_major_preview), use_container_width=True)
+
     st.markdown(f"""<div style="background:white; border-radius:16px; border:1px solid #e2e8f0; margin-top:20px; overflow:hidden;"><div style="display:flex; justify-content:space-between; align-items:center; padding:16px 20px; border-bottom:1px solid #e2e8f0;"><div style="font-size:14px; font-weight:800;">20 Peluang Last Goal Terakhir • Modal Rp 100rb/match • Profit {format_rp(total_profit_rp)}</div><div style="background:#0f172a; color:white; padding:4px 10px; border-radius:20px; font-size:10px; font-weight:700;">REAL DATA • {total} MATCH • {format_rp(total_modal_keluar)} modal</div></div></div>""", unsafe_allow_html=True)
+
     
     st.markdown("""
     <div style="background:#fefce8; border:1px solid #fde68a; border-radius:12px; padding:12px 16px; margin:16px 0;">
