@@ -1,3 +1,4 @@
+Download
 
 import streamlit as st
 import pandas as pd
@@ -189,10 +190,10 @@ roi_major = (total_profit_major / total_modal_major * 100) if total_modal_major 
 
 
 # ===== MODAL & PROFIT RP =====
-MODAL_PER_MATCH = 100000  # Rp 100rb per match
+MODAL_PER_MATCH = 50000  # Rp 50rb per match - LOWER RISK
 ODDS = 1.8
-PROFIT_PER_WIN = int(MODAL_PER_MATCH * (ODDS - 1))  # Rp 80.000
-LOSS_PER_LOSE = MODAL_PER_MATCH  # Rp 100.000
+PROFIT_PER_WIN = int(MODAL_PER_MATCH * (ODDS - 1))  # Rp 40.000
+LOSS_PER_LOSE = MODAL_PER_MATCH  # Rp 50.000
 total_modal_keluar = selesai * MODAL_PER_MATCH
 total_profit_rp = win * PROFIT_PER_WIN - lose * LOSS_PER_LOSE
 roi = (total_profit_rp / total_modal_keluar * 100) if total_modal_keluar > 0 else 0
@@ -247,13 +248,13 @@ with col_left:
         <div style="font-size:10px; font-weight:700; letter-spacing:1.2px; color:#64748b; margin-bottom:12px;">MODAL & PROFIT (Rp)</div>
         <div style="background:#0f172a; border-radius:12px; padding:16px; color:white;">
             <div style="font-size:10px; color:#94a3b8; font-weight:700; letter-spacing:0.5px;">MODAL PER MATCH</div>
-            <div style="font-size:20px; font-weight:800; margin-top:2px;">Rp 100.000</div>
-            <div style="font-size:10px; color:#94a3b8; margin-top:6px;">Odds 1.8 • Profit WIN Rp 80rb • Loss -Rp 100rb</div>
+            <div style="font-size:20px; font-weight:800; margin-top:2px;">Rp 50.000</div>
+            <div style="font-size:10px; color:#94a3b8; margin-top:6px;">Odds 1.8 • Profit WIN Rp 40rb • Loss -Rp 50rb</div>
             <div style="border-top:1px solid #1e293b; margin-top:12px; padding-top:12px;">
                 <div style="display:flex; justify-content:space-between; font-size:11px; margin-bottom:6px;"><span style="color:#94a3b8;">Total modal keluar</span><span style="font-weight:700;">{format_rp(total_modal_keluar)}</span></div>
                 <div style="display:flex; justify-content:space-between; font-size:11px; margin-bottom:6px;"><span style="color:#94a3b8;">Modal aktif ({aktif} match)</span><span style="font-weight:700;">{format_rp(modal_aktif)}</span></div>
                 <div style="display:flex; justify-content:space-between; font-size:12px; font-weight:800;"><span style="color:#4ade80;">Total Profit</span><span style="color:#4ade80;">{format_rp(total_profit_rp)}</span></div>
-                <div style="font-size:10px; color:#4ade80; margin-top:4px;">ROI {roi:.1f}% • {win} WIN x 80rb - {lose} LOSE x 100rb</div>
+                <div style="font-size:10px; color:#4ade80; margin-top:4px;">ROI {roi:.1f}% • {win} WIN x 80rb - {lose} LOSE x 50rb</div>
             </div>
         </div>
         <div style="margin-top:12px;">
@@ -273,14 +274,14 @@ with col_left:
         <div style="font-size:10px; font-weight:700; letter-spacing:1.2px; color:#94a3b8; margin-bottom:8px;">STRATEGI HARI INI</div>
         <div style="font-size:16px; font-weight:800; line-height:1.2;">Over 0.5 Goal<br>Menit 60-66 • Rp</div>
         <div style="margin-top:16px; font-size:11px;">
-            <div style="display:flex; justify-content:space-between; margin-bottom:8px;"><span style="color:#94a3b8;">Stake/match</span><span style="font-weight:600;">Rp 100.000</span></div>
+            <div style="display:flex; justify-content:space-between; margin-bottom:8px;"><span style="color:#94a3b8;">Stake/match</span><span style="font-weight:600;">Rp 50.000</span></div>
             <div style="display:flex; justify-content:space-between; margin-bottom:8px;"><span style="color:#94a3b8;">Odds target</span><span style="font-weight:600;">1.45 - 1.85</span></div>
-            <div style="display:flex; justify-content:space-between; margin-bottom:8px;"><span style="color:#94a3b8;">Profit WIN</span><span style="font-weight:600; color:#4ade80;">+Rp 80.000</span></div>
-            <div style="display:flex; justify-content:space-between;"><span style="color:#94a3b8;">Stop Loss</span><span style="font-weight:600;">-Rp 100.000</span></div>
+            <div style="display:flex; justify-content:space-between; margin-bottom:8px;"><span style="color:#94a3b8;">Profit WIN</span><span style="font-weight:600; color:#4ade80;">+Rp 40.000</span></div>
+            <div style="display:flex; justify-content:space-between;"><span style="color:#94a3b8;">Stop Loss</span><span style="font-weight:600;">-Rp 50.000</span></div>
         </div>
         <div style="background:#fefce8; color:#92400e; border-radius:12px; padding:10px; margin-top:12px; font-size:10px;">
             <div style="font-weight:700;">💰 Contoh 17 match:</div>
-            <div style="margin-top:4px;">Modal: 17 x 100rb = Rp 1.700.000</div>
+            <div style="margin-top:4px;">Modal: 17 x 50rb = Rp 1.700.000</div>
             <div>Profit: 9 WIN (720rb) - 5 LOSE (500rb) = +Rp 220.000</div>
         </div>
     </div>
@@ -296,7 +297,7 @@ with col_right:
                     <span style="background:rgba(34,197,94,0.2); border:1px solid #22c55e; color:#4ade80; padding:4px 12px; border-radius:20px; font-size:10px; font-weight:700;">● LIVE • 1,247 TRADER ONLINE</span>
                 </div>
                 <div style="font-size:32px; font-weight:900; line-height:1.1; margin-bottom:8px;">⚽ Trading Bola Menit 60 - Last<br>Goal System</div>
-                <div style="font-size:12px; color:#cbd5e1; line-height:1.5; max-width:500px;">Window 60-66 skor 0-0 | Modal Rp 100rb/match | Profit {format_rp(total_profit_rp)} dari {selesai} match.<br>Sistem teruji {win_rate:.1f}% win rate • ROI {roi:.1f}% • V10 LIVE SCORE Rp.</div>
+                <div style="font-size:12px; color:#cbd5e1; line-height:1.5; max-width:500px;">Window 60-66 skor 0-0 | Modal Rp 50rb/match | Profit {format_rp(total_profit_rp)} dari {selesai} match.<br>Sistem teruji {win_rate:.1f}% win rate • ROI {roi:.1f}% • V10 LIVE SCORE Rp.</div>
             </div>
             <div style="display:flex; gap:12px;">
                 <div style="background:#1e293b; border:1px solid #334155; border-radius:12px; padding:12px; min-width:140px;">
@@ -324,9 +325,9 @@ with col_right:
     
     m1, m2, m3, m4, m5 = st.columns(5)
     with m1:
-        st.markdown(f"""<div style="background:white; border-radius:16px; padding:16px; border:1px solid #e2e8f0; height:130px; margin-top:16px;"><div style="display:flex; justify-content:space-between; align-items:center; margin-bottom:8px;"><div style="width:28px; height:28px; background:#f1f5f9; border-radius:8px; display:flex; align-items:center; justify-content:center; font-size:12px;">💰</div><div style="width:6px; height:6px; background:#22c55e; border-radius:50%;"></div></div><div style="font-size:9px; font-weight:700; color:#64748b;">MODAL / MATCH</div><div style="font-size:18px; font-weight:900; color:#0f172a; margin-top:4px;">Rp 100rb</div><div style="font-size:10px; color:#64748b;">Odds 1.8 → +80rb</div></div>""", unsafe_allow_html=True)
+        st.markdown(f"""<div style="background:white; border-radius:16px; padding:16px; border:1px solid #e2e8f0; height:130px; margin-top:16px;"><div style="display:flex; justify-content:space-between; align-items:center; margin-bottom:8px;"><div style="width:28px; height:28px; background:#f1f5f9; border-radius:8px; display:flex; align-items:center; justify-content:center; font-size:12px;">💰</div><div style="width:6px; height:6px; background:#22c55e; border-radius:50%;"></div></div><div style="font-size:9px; font-weight:700; color:#64748b;">MODAL / MATCH</div><div style="font-size:18px; font-weight:900; color:#0f172a; margin-top:4px;">Rp 50rb</div><div style="font-size:10px; color:#64748b;">Odds 1.8 → +80rb</div></div>""", unsafe_allow_html=True)
     with m2:
-        st.markdown(f"""<div style="background:white; border-radius:16px; padding:16px; border:1px solid #e2e8f0; height:130px; margin-top:16px;"><div style="font-size:9px; font-weight:700; color:#64748b;">TOTAL MODAL</div><div style="font-size:16px; font-weight:900; color:#0f172a; margin-top:8px;">{format_rp(total_modal_keluar)}</div><div style="font-size:10px; color:#64748b; margin-top:4px;">{selesai} match x 100rb</div><div style="font-size:9px; color:#16a34a; margin-top:4px;">{selesai} selesai</div></div>""", unsafe_allow_html=True)
+        st.markdown(f"""<div style="background:white; border-radius:16px; padding:16px; border:1px solid #e2e8f0; height:130px; margin-top:16px;"><div style="font-size:9px; font-weight:700; color:#64748b;">TOTAL MODAL</div><div style="font-size:16px; font-weight:900; color:#0f172a; margin-top:8px;">{format_rp(total_modal_keluar)}</div><div style="font-size:10px; color:#64748b; margin-top:4px;">{selesai} match x 50rb</div><div style="font-size:9px; color:#16a34a; margin-top:4px;">{selesai} selesai</div></div>""", unsafe_allow_html=True)
     with m3:
         st.markdown(f"""<div style="background:white; border-radius:16px; padding:16px; border:1px solid #22c55e; border-left:4px solid #22c55e; height:130px; margin-top:16px; position:relative;"><div style="position:absolute; top:12px; right:12px; background:#dcfce7; color:#166534; padding:2px 6px; border-radius:12px; font-size:8px; font-weight:700;">TOTAL</div><div style="font-size:9px; font-weight:700; color:#64748b;">WIN RATE TOTAL</div><div style="display:flex; align-items:baseline; gap:6px; margin-top:4px;"><div style="font-size:18px; font-weight:900; color:#0f172a;">{win_rate:.1f}%</div><div style="font-size:10px; color:#16a34a; font-weight:600;">{win}W-{lose}L</div></div><div style="font-size:13px; font-weight:800; color:#16a34a; margin-top:4px;">{format_rp(total_profit_rp)}</div><div style="font-size:9px; color:#64748b;">ROI {roi:.1f}% • {selesai} match</div></div>""", unsafe_allow_html=True)
     with m4:
@@ -391,12 +392,12 @@ with col_right:
                     "Status": m.get("status_calc","-"),
                     "FT": m.get("final_display","-"),
                     "Result": m.get("result_calc","LIVE"),
-                    "Profit": f"+{int(100000*(m.get('odds_calc',1.8)-1))}rb" if m.get("gol_terjadi")==True else "-100rb" if m.get("gol_terjadi")==False else "LIVE"
+                    "Profit": f"+{int(100000*(m.get('odds_calc',1.8)-1))}rb" if m.get("gol_terjadi")==True else "-50rb" if m.get("gol_terjadi")==False else "LIVE"
                 })
             if df_major_preview:
                 st.dataframe(pd.DataFrame(df_major_preview), use_container_width=True)
 
-    st.markdown(f"""<div style="background:white; border-radius:16px; border:1px solid #e2e8f0; margin-top:20px; overflow:hidden;"><div style="display:flex; justify-content:space-between; align-items:center; padding:16px 20px; border-bottom:1px solid #e2e8f0;"><div style="font-size:14px; font-weight:800;">20 Peluang Last Goal Terakhir • Modal Rp 100rb/match • Profit {format_rp(total_profit_rp)}</div><div style="background:#0f172a; color:white; padding:4px 10px; border-radius:20px; font-size:10px; font-weight:700;">REAL DATA • {total} MATCH • {format_rp(total_modal_keluar)} modal</div></div></div>""", unsafe_allow_html=True)
+    st.markdown(f"""<div style="background:white; border-radius:16px; border:1px solid #e2e8f0; margin-top:20px; overflow:hidden;"><div style="display:flex; justify-content:space-between; align-items:center; padding:16px 20px; border-bottom:1px solid #e2e8f0;"><div style="font-size:14px; font-weight:800;">20 Peluang Last Goal Terakhir • Modal Rp 50rb/match • Profit {format_rp(total_profit_rp)}</div><div style="background:#0f172a; color:white; padding:4px 10px; border-radius:20px; font-size:10px; font-weight:700;">REAL DATA • {total} MATCH • {format_rp(total_modal_keluar)} modal</div></div></div>""", unsafe_allow_html=True)
 
     
     # ===== TABLE WITH BET, ODDS, MARKET =====
@@ -437,7 +438,7 @@ with col_right:
         status_color = "white" if status=="AKTIF" else "#92400e" if status=="SEDANG" else "#475569"
         gol_icon = "✅" if gol==True else "❌" if gol==False else "⏳"
         gol_bg = "#dcfce7" if gol==True else "#fee2e2" if gol==False else "#f1f5f9"
-        profit_rp = "+Rp 80rb" if gol==True else "-Rp 100rb" if gol==False else "⏳ LIVE"
+        profit_rp = "+Rp 80rb" if gol==True else "-Rp 50rb" if gol==False else "⏳ LIVE"
         profit_color = "#16a34a" if gol==True else "#dc2626" if gol==False else "#64748b"
 
         # BET, ODDS, MARKET logic
@@ -454,13 +455,13 @@ with col_right:
         # Kalau skor sudah 1-0 atau lebih, tetap Next Goal
         if "1-" in m.get("score","0-0") or "-1" in m.get("score","0-0") or m.get("score","0-0") != "0-0":
             market = "Next Goal"
-        bet_rp_display = "Rp 100rb"
+        bet_rp_display = "Rp 50rb"
         # Profit calc real Rp
         if gol == True:
             profit_rp_val = int(100000 * (odds_val - 1))
             profit_rp = f"+Rp {profit_rp_val//1000}rb"
         elif gol == False:
-            profit_rp = "-Rp 100rb"
+            profit_rp = "-Rp 50rb"
         else:
             profit_rp = "LIVE"
         
@@ -473,7 +474,7 @@ with col_right:
     st.markdown(f"""
     <div style="background:white; border-radius:16px; border:1px solid #e2e8f0; margin-top:24px; overflow:hidden;">
         <div style="padding:16px 20px; border-bottom:1px solid #e2e8f0; background: linear-gradient(135deg, #f8fafc 0%, #f1f5f9 100%);">
-            <div style="font-size:14px; font-weight:800;">📊 Summary Detail {win_rate:.1f}% Win Rate • Modal Rp 100rb • Profit {format_rp(total_profit_rp)}</div>
+            <div style="font-size:14px; font-weight:800;">📊 Summary Detail {win_rate:.1f}% Win Rate • Modal Rp 50rb • Profit {format_rp(total_profit_rp)}</div>
             <div style="font-size:11px; color:#64748b; margin-top:4px;">{selesai} match selesai • Modal {format_rp(total_modal_keluar)} • {win} WIN (+{format_rp(win*80000)}) - {lose} LOSE (-{format_rp(lose*100000)}) = {format_rp(total_profit_rp)} • ROI {roi:.1f}%</div>
         </div>
     </div>
@@ -499,7 +500,7 @@ with col_right:
                     "Menit": f"{m.get('minute',60)}'",
                     "Skor Awal": m.get("score","0-0"),
                     "FT Score": m.get("final_display","FT"),
-                    "BET Rp": "Rp 100.000",
+                    "BET Rp": "Rp 50.000",
                     "ODDS": odds_v,
                     "PASAR": market_v,
                     "Result": m.get("result_calc","LOSE"),
@@ -516,7 +517,7 @@ with col_right:
             c1.metric("✅ WIN", len(win_df), f"+{format_rp(len(win_df)*80000)}")
             c2.metric("❌ LOSE", len(lose_df), f"-{format_rp(len(lose_df)*100000)}")
             c3.metric("💰 Profit Bersih Rp", format_rp(total_profit_rp), f"ROI {roi:.1f}%")
-            c4.metric("💳 Modal Keluar", format_rp(total_modal_keluar), f"{selesai} x 100rb")
+            c4.metric("💳 Modal Keluar", format_rp(total_modal_keluar), f"{selesai} x 50rb")
             
             st.dataframe(df_sum, use_container_width=True, height=400)
             
@@ -533,19 +534,19 @@ with col_right:
             
             with st.expander(f"🔍 Detail WIN ({len(win_df)} match) • +{format_rp(len(win_df)*80000)}", expanded=False):
                 for _, row in win_df.iterrows():
-                    st.success(f"✅ {row['Match']} | {row['Liga']} | {row['Menit Awal']} {row['Skor Awal']} → FT {row['FT Score']} | +Rp 80.000")
+                    st.success(f"✅ {row['Match']} | {row['Liga']} | {row['Menit Awal']} {row['Skor Awal']} → FT {row['FT Score']} | +Rp 40.000")
             with st.expander(f"🔍 Detail LOSE ({len(lose_df)} match) • -{format_rp(len(lose_df)*100000)}", expanded=False):
                 for _, row in lose_df.iterrows():
-                    st.error(f"❌ {row['Match']} | {row['Liga']} | {row['Menit Awal']} {row['Skor Awal']} → FT {row['FT Score']} | -Rp 100.000")
+                    st.error(f"❌ {row['Match']} | {row['Liga']} | {row['Menit Awal']} {row['Skor Awal']} → FT {row['FT Score']} | -Rp 50.000")
             
             st.markdown(f"""
             <div style="background:#0f172a; border-radius:16px; padding:20px; color:white; margin-top:16px;">
                 <div style="font-size:12px; font-weight:700; letter-spacing:0.5px; color:#94a3b8;">RINGKASAN KEUANGAN REAL (Rp)</div>
                 <div style="display:grid; grid-template-columns:1fr 1fr; gap:16px; margin-top:16px;">
                     <div>
-                        <div style="font-size:11px; color:#94a3b8;">Modal per match</div><div style="font-size:18px; font-weight:800;">Rp 100.000</div>
+                        <div style="font-size:11px; color:#94a3b8;">Modal per match</div><div style="font-size:18px; font-weight:800;">Rp 50.000</div>
                         <div style="font-size:11px; color:#94a3b8; margin-top:8px;">Odds</div><div style="font-size:14px; font-weight:700;">1.8</div>
-                        <div style="font-size:11px; color:#94a3b8; margin-top:8px;">Profit per WIN</div><div style="font-size:14px; font-weight:700; color:#4ade80;">+Rp 80.000</div>
+                        <div style="font-size:11px; color:#94a3b8; margin-top:8px;">Profit per WIN</div><div style="font-size:14px; font-weight:700; color:#4ade80;">+Rp 40.000</div>
                     </div>
                     <div>
                         <div style="font-size:11px; color:#94a3b8;">Total match selesai</div><div style="font-size:18px; font-weight:800;">{selesai} match</div>
@@ -557,4 +558,4 @@ with col_right:
             </div>
             """, unsafe_allow_html=True)
 
-st.markdown(f"""<div style="text-align:center; padding:20px; color:#64748b; font-size:11px;">V3.2 • Window 60-66 • LIVE AI • Modal Rp 100rb/match • Profit {format_rp(total_profit_rp)} • Win rate {win_rate:.1f}% • ROI {roi:.1f}% • {now_wita.strftime('%d %b %Y %H:%M WITA')} | DATA: {len(matches)} LIVE • AUTO UPDATE SCORE • SHOTS & DA LIVE • SUMMARY Rp</div>""", unsafe_allow_html=True)
+st.markdown(f"""<div style="text-align:center; padding:20px; color:#64748b; font-size:11px;">V3.2 • Window 60-66 • LIVE AI • Modal Rp 50rb/match • Profit {format_rp(total_profit_rp)} • Win rate {win_rate:.1f}% • ROI {roi:.1f}% • {now_wita.strftime('%d %b %Y %H:%M WITA')} | DATA: {len(matches)} LIVE • AUTO UPDATE SCORE • SHOTS & DA LIVE • SUMMARY Rp</div>""", unsafe_allow_html=True)
