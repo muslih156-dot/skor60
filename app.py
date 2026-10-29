@@ -50,11 +50,22 @@ profit = win*PROFIT_PER_WIN - lose*LOSS_PER_LOSE
 roi = (profit/(selesai*MODAL_PER_MATCH)*100) if selesai>0 else 0
 modal_keluar = selesai*MODAL_PER_MATCH
 
-# Major
-MAJOR_KEYWORDS = ["premier league", "laliga", "serie a", "bundesliga", "ligue 1", "eredivisie", "mls", "major league", "la liga", "champions league", "serie b", "bundesliga 2", "brasileir", "argentina", "j1 league", "a-league", "saudi", "uefa", "eng.1", "esp.1", "ita.1", "ger.1", "usa.1", "bra.1", "jpn.1", "aus.1"]
+# Major vs Minor - 300+ events scan tapi peringatan liga kecil
+MAJOR_KEYWORDS = ["premier league", "laliga", "la liga", "serie a", "bundesliga", "ligue 1", "eredivisie", "primeira liga", "championship", "mls", "major league", "liga mx", "brasileir", "argentina primera", "j1 league", "k league", "a-league", "saudi pro", "champions league", "europa league", "libertadores", "afc champions", "eng.1", "esp.1", "ita.1", "ger.1", "fra.1", "ned.1", "usa.1", "mex.1", "bra.1", "arg.1", "jpn.1", "aus.1", "uefa"]
+
 def is_major(liga):
     low = str(liga).lower()
     return any(k in low for k in MAJOR_KEYWORDS)
+
+def is_major_league(liga):
+    return is_major(liga)
+
+def get_liga_badge(liga):
+    if is_major(liga):
+        return "⭐ MAJOR 77.8% WR"
+    else:
+        return "⚠️ LIGA KECIL - WR rendah"
+
 
 major_matches = [m for m in matches if is_major(m.get("league",""))]
 major_selesai = len([m for m in major_matches if m.get("is_ft") or m.get("final_score")])
