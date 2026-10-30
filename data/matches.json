@@ -1,5 +1,38 @@
 [
   {
+    "match_id": "401898564",
+    "home_team": "Houston Christian",
+    "away_team": "Lindenwood",
+    "league": "all",
+    "league_slug": "all",
+    "minute": 63,
+    "minute_deteksi": 63,
+    "score": "0-0",
+    "score_deteksi": "0-0",
+    "skor_deteksi_real": "0-0",
+    "score_at_detection": "0-0",
+    "live_score": "0-0",
+    "final_score": null,
+    "is_ft": false,
+    "ft_official": false,
+    "result": "LIVE",
+    "result_calc": "LIVE",
+    "result_proof": "Deteksi 0-0 di menit 63 - menunggu FT resmi",
+    "created_at": "2026-10-30T09:35:32.259903+08:00",
+    "odds": 1.8,
+    "odds_actual": 1.8,
+    "odds_used": 1.8,
+    "stake": 50000,
+    "source": "V21 FIX 10/10 - VALIDASI WIN/LOSE BENAR + FT RESMI",
+    "trading_day": "2026-10-29",
+    "gol_terjadi": null,
+    "score_progression": [],
+    "detection_detail": "63'",
+    "detection_state": "in",
+    "dedup_key": "401898564_2026-10-29",
+    "home_away_hash": "277492480e84"
+  },
+  {
     "match_id": "401879639",
     "home_team": "Antigua GFC",
     "away_team": "Deportivo San Pedro",
@@ -32,13 +65,19 @@
         "score": "1-0",
         "timestamp": "2026-10-30T09:30:41.508496+08:00",
         "proof": "Gol setelah deteksi 63' 0-0 -> 67' 1-0"
+      },
+      {
+        "minute": 72,
+        "score": "1-0",
+        "timestamp": "2026-10-30T09:35:32.259833+08:00",
+        "proof": "Gol setelah deteksi 63' 0-0 -> 72' 1-0"
       }
     ],
     "detection_detail": "63'",
     "detection_state": "in",
     "dedup_key": "401879639_2026-10-29",
     "home_away_hash": "d1825331aac2",
-    "current_minute": 67
+    "current_minute": 72
   },
   {
     "match_id": "401901506",
