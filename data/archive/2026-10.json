@@ -627,5 +627,39 @@
     "odds": 1.8,
     "source": "V19 partisi 12:00 WITA",
     "trading_day": "2026-10-29"
+  },
+  {
+    "match_id": "401886695",
+    "home_team": "Central Michigan",
+    "away_team": "Ball State",
+    "league": "all",
+    "minute": 62,
+    "score": "0-0",
+    "score_deteksi": "0-0",
+    "live_score": "0-0",
+    "final_score": null,
+    "is_ft": false,
+    "result": "LIVE",
+    "created_at": "2026-10-30T08:30:51.854978+08:00",
+    "odds": 1.8,
+    "source": "V19 partisi 12:00 WITA",
+    "trading_day": "2026-10-29"
+  },
+  {
+    "match_id": "401901506",
+    "home_team": "Little Rock",
+    "away_team": "Central Arkansas",
+    "league": "all",
+    "minute": 66,
+    "score": "0-0",
+    "score_deteksi": "0-0",
+    "live_score": "0-0",
+    "final_score": null,
+    "is_ft": false,
+    "result": "LIVE",
+    "created_at": "2026-10-30T08:30:51.855010+08:00",
+    "odds": 1.8,
+    "source": "V19 partisi 12:00 WITA",
+    "trading_day": "2026-10-29"
   }
 ]
