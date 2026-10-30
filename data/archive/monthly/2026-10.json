@@ -1,6 +1,6 @@
 {
   "trading_month": "2026-10",
-  "last_updated_utc": "2026-10-30T21:51:01Z",
+  "last_updated_utc": "2026-10-30T21:56:01Z",
   "total_records": 5,
   "matches": [
     {
@@ -43,6 +43,15 @@
           "score": "1-0",
           "match_status": "Second Half",
           "note": "GOAL DETECTED"
+        },
+        {
+          "timestamp_utc": "2026-10-30T21:56:01Z",
+          "timestamp_wita": "2026-10-31T05:56:01.532694+08:00",
+          "clock": "79'",
+          "minute": 79,
+          "score": "1-1",
+          "match_status": "Second Half",
+          "note": "GOAL DETECTED"
         }
       ],
       "goal_events": [
@@ -57,9 +66,21 @@
           "time_approximate": true,
           "note": "GOAL EVENT TIME APPROXIMATE",
           "source": "SCORE_SNAPSHOT_DIFFERENCE"
+        },
+        {
+          "observed_at_utc": "2026-10-30T21:56:01Z",
+          "observed_at_wita": "2026-10-31T05:56:01.532694+08:00",
+          "minute": 79,
+          "clock_display": "79'",
+          "previous_score": "1-0",
+          "score_after": "1-1",
+          "team": "UNKNOWN_FROM_SNAPSHOT_DIFF",
+          "time_approximate": true,
+          "note": "GOAL EVENT TIME APPROXIMATE",
+          "source": "SCORE_SNAPSHOT_DIFFERENCE"
         }
       ],
-      "current_score": "1-0",
+      "current_score": "1-1",
       "final_score": null,
       "match_status": "Second Half",
       "settlement_status": "PENDING",
@@ -72,11 +93,11 @@
       "actual_roi_contribution": null,
       "is_major": false,
       "created_at": "2026-10-30T21:31:11Z",
-      "updated_at": "2026-10-30T21:51:01Z",
+      "updated_at": "2026-10-30T21:56:01Z",
       "last_verified_at": "2026-10-30T21:31:11Z",
       "verification_status": "IN_PROGRESS_PENDING_FINAL",
       "revision_history": [],
-      "audit_explanation": "Pertandingan 401892244 masih berstatus Second Half (Skor saat ini: 1-0). Menunggu status Final resmi dari provider (PENDING).",
+      "audit_explanation": "Pertandingan 401892244 masih berstatus Second Half (Skor saat ini: 1-1). Menunggu status Final resmi dari provider (PENDING).",
       "audit_passed": true
     },
     {
@@ -125,13 +146,14 @@
         {
           "minute": 86,
           "clock_display": "86'",
-          "period": 2,
-          "team": "Lille",
+          "period": 0,
+          "team_id": "166",
           "scorer": "Olivier Giroud",
           "type": "Goal - Volley",
-          "text": "Goal! Lille 1, Lens 0. Olivier Giroud (Lille) left footed shot from the centre of the box to the bottom right corner.",
+          "is_own_goal": false,
+          "is_penalty": false,
           "time_approximate": false,
-          "source": "ESPN_SUMMARY_KEY_EVENTS"
+          "source": "ESPN_OFFICIAL_DETAIL"
         }
       ],
       "current_score": "1-0",
@@ -147,7 +169,7 @@
       "actual_roi_contribution": null,
       "is_major": true,
       "created_at": "2026-10-30T21:25:49Z",
-      "updated_at": "2026-10-30T21:51:01Z",
+      "updated_at": "2026-10-30T21:56:01Z",
       "last_verified_at": "2026-10-30T21:25:49Z",
       "verification_status": "IN_PROGRESS_PENDING_FINAL",
       "revision_history": [],
