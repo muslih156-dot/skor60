@@ -77,13 +77,19 @@
         "score": "1-0",
         "timestamp": "2026-10-30T09:40:39.622045+08:00",
         "proof": "Gol setelah deteksi 63' 0-0 -> 77' 1-0"
+      },
+      {
+        "minute": 78,
+        "score": "1-0",
+        "timestamp": "2026-10-30T09:41:16.947611+08:00",
+        "proof": "Gol setelah deteksi 63' 0-0 -> 78' 1-0"
       }
     ],
     "detection_detail": "63'",
     "detection_state": "in",
     "dedup_key": "401879639_2026-10-29",
     "home_away_hash": "d1825331aac2",
-    "current_minute": 77
+    "current_minute": 78
   },
   {
     "match_id": "401901506",
