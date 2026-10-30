@@ -1,6 +1,6 @@
 {
   "trading_month": "2026-10",
-  "last_updated_utc": "2026-10-30T23:45:55Z",
+  "last_updated_utc": "2026-10-30T23:51:06Z",
   "total_records": 10,
   "matches": [
     {
@@ -50,7 +50,7 @@
       "actual_roi_contribution": null,
       "is_major": false,
       "created_at": "2026-10-30T23:31:13Z",
-      "updated_at": "2026-10-30T23:45:55Z",
+      "updated_at": "2026-10-30T23:51:06Z",
       "last_verified_at": "2026-10-30T23:31:13Z",
       "verification_status": "IN_PROGRESS_PENDING_FINAL",
       "revision_history": [],
@@ -126,7 +126,7 @@
       "actual_roi_contribution": null,
       "is_major": false,
       "created_at": "2026-10-30T23:25:53Z",
-      "updated_at": "2026-10-30T23:45:55Z",
+      "updated_at": "2026-10-30T23:51:06Z",
       "last_verified_at": "2026-10-30T23:25:53Z",
       "verification_status": "IN_PROGRESS_PENDING_FINAL",
       "revision_history": [],
@@ -173,23 +173,42 @@
           "score": "0-1",
           "match_status": "Second Half",
           "note": "GOAL DETECTED"
+        },
+        {
+          "timestamp_utc": "2026-10-30T23:51:06Z",
+          "timestamp_wita": "2026-10-31T07:51:06.805705+08:00",
+          "clock": "90'+1'",
+          "minute": 90,
+          "score": "1-1",
+          "match_status": "Second Half",
+          "note": "GOAL DETECTED"
         }
       ],
       "goal_events": [
         {
           "minute": 68,
           "clock_display": "68'",
-          "period": 0,
-          "team_id": "20889",
+          "period": 2,
+          "team": "Independiente Petrolero",
           "scorer": "Willie",
           "type": "Goal",
-          "is_own_goal": false,
-          "is_penalty": false,
+          "text": "Willie (Independiente Petrolero) Goal at 68'",
           "time_approximate": false,
-          "source": "ESPN_OFFICIAL_DETAIL"
+          "source": "ESPN_SUMMARY_KEY_EVENTS"
+        },
+        {
+          "minute": 87,
+          "clock_display": "87'",
+          "period": 2,
+          "team": "Real Potosí",
+          "scorer": "Maximiliano Gómez",
+          "type": "Goal",
+          "text": "Maximiliano Gómez (Real Potosí) Goal at 87'",
+          "time_approximate": false,
+          "source": "ESPN_SUMMARY_KEY_EVENTS"
         }
       ],
-      "current_score": "0-1",
+      "current_score": "1-1",
       "final_score": null,
       "match_status": "Second Half",
       "settlement_status": "PENDING",
@@ -202,11 +221,11 @@
       "actual_roi_contribution": null,
       "is_major": false,
       "created_at": "2026-10-30T23:20:45Z",
-      "updated_at": "2026-10-30T23:45:55Z",
+      "updated_at": "2026-10-30T23:51:06Z",
       "last_verified_at": "2026-10-30T23:20:45Z",
       "verification_status": "IN_PROGRESS_PENDING_FINAL",
       "revision_history": [],
-      "audit_explanation": "Pertandingan 401930003 masih berstatus Second Half (Skor saat ini: 0-1). Menunggu status Final resmi dari provider (PENDING).",
+      "audit_explanation": "Pertandingan 401930003 masih berstatus Second Half (Skor saat ini: 1-1). Menunggu status Final resmi dari provider (PENDING).",
       "audit_passed": true
     },
     {
