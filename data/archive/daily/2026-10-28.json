@@ -1,0 +1,81 @@
+{
+  "trading_day": "2026-10-28",
+  "last_updated_utc": "2026-10-30T02:49:56Z",
+  "total_records": 1,
+  "matches": [
+    {
+      "match_id": "401777666",
+      "home_team": "Arsenal",
+      "away_team": "Chelsea",
+      "league": "English Premier League",
+      "league_slug": "eng.1",
+      "league_category": "MAJOR",
+      "market": "OVER 0.5 GOAL AFTER ENTRY",
+      "kickoff_utc": "2026-10-29T12:00:00Z",
+      "kickoff_wita": "2026-10-29T20:00:00+08:00",
+      "detected_at_utc": "2026-10-29T03:30:00Z",
+      "detected_at_wita": "2026-10-29T11:30:00+08:00",
+      "trading_day": "2026-10-28",
+      "minute_detected": 61,
+      "score_at_entry": "0-0",
+      "odds_entry": null,
+      "simulated_odds": 1.8,
+      "odds_source": "SIMULATED_DEFAULT",
+      "stake": 50000,
+      "source": "ESPN_API",
+      "source_event_id": "401777666",
+      "is_provisional_id": false,
+      "snapshots": [
+        {
+          "timestamp_utc": "2026-10-29T03:30:00Z",
+          "timestamp_wita": "2026-10-29T11:30:00+08:00",
+          "clock": "61'",
+          "minute": 61,
+          "score": "0-0",
+          "match_status": "Second Half",
+          "note": "ENTRY"
+        },
+        {
+          "timestamp_utc": "2026-10-29T04:15:00Z",
+          "timestamp_wita": "2026-10-29T12:15:00+08:00",
+          "clock": "60'",
+          "minute": 60,
+          "score": "1-0",
+          "match_status": "Final",
+          "note": "GOAL DETECTED"
+        }
+      ],
+      "goal_events": [
+        {
+          "observed_at_utc": "2026-10-29T04:15:00Z",
+          "observed_at_wita": "2026-10-29T12:15:00+08:00",
+          "minute": 60,
+          "clock_display": "60'",
+          "previous_score": "0-0",
+          "score_after": "1-0",
+          "team": "UNKNOWN_FROM_SNAPSHOT_DIFF",
+          "time_approximate": true,
+          "note": "GOAL EVENT TIME APPROXIMATE",
+          "source": "SCORE_SNAPSHOT_DIFFERENCE"
+        }
+      ],
+      "current_score": "1-0",
+      "final_score": "1-0",
+      "match_status": "Final",
+      "settlement_status": "SETTLED",
+      "result": "WIN",
+      "profit": 40000,
+      "roi_contribution": 80.0,
+      "simulated_profit": 40000,
+      "simulated_roi_contribution": 80.0,
+      "actual_profit": null,
+      "actual_roi_contribution": null,
+      "is_major": true,
+      "created_at": "2026-10-29T03:30:00Z",
+      "updated_at": "2026-10-29T04:15:00Z",
+      "last_verified_at": "2026-10-29T04:15:00Z",
+      "verification_status": "VERIFIED_OFFICIAL_FINAL",
+      "revision_history": []
+    }
+  ]
+}
