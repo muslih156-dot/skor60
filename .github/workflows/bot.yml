@@ -49,10 +49,32 @@ jobs:
         run: |
           git config user.name "skor60-audit-bot"
           git config user.email "actions@users.noreply.github.com"
+          
+          # Konfigurasi pull rebase agar otomatis menyatukan perubahan dari remote
+          git config pull.rebase true
+          git pull origin main || true
+
           git add data/
           if git diff --cached --quiet; then
             echo "Tidak ada perubahan data."
             exit 0
           fi
+          
           git commit -m "chore(data): update trading records $(date -u +'%Y-%m-%dT%H:%M:%SZ')"
-          git push origin HEAD:main
+          
+          MAX_RETRIES=3
+          COUNT=1
+          while [ $COUNT -le $MAX_RETRIES ]; do
+            echo "Push attempt $COUNT of $MAX_RETRIES..."
+            if git push origin HEAD:main; then
+              echo "Push berhasil."
+              exit 0
+            fi
+            echo "Push gagal, mencoba pull --rebase ulang..."
+            git pull origin main --rebase || true
+            COUNT=$((COUNT + 1))
+            sleep 3
+          done
+          
+          echo "Gagal melakukan push setelah $MAX_RETRIES percobaan."
+          exit 1
