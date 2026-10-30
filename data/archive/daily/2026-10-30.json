@@ -1,8 +1,62 @@
 {
   "trading_day": "2026-10-30",
-  "last_updated_utc": "2026-10-30T23:26:03Z",
-  "total_records": 8,
+  "last_updated_utc": "2026-10-30T23:31:23Z",
+  "total_records": 9,
   "matches": [
+    {
+      "match_id": "401898880",
+      "home_team": "Virginia",
+      "away_team": "Pittsburgh",
+      "league": "Unknown League",
+      "league_slug": "unknown",
+      "league_category": "UNKNOWN",
+      "market": "OVER 0.5 GOAL AFTER ENTRY",
+      "kickoff_utc": "2026-10-30T22:00:00Z",
+      "kickoff_wita": "2026-10-31T06:00:00+08:00",
+      "detected_at_utc": "2026-10-30T23:31:13Z",
+      "detected_at_wita": "2026-10-31T07:31:13.710592+08:00",
+      "trading_day": "2026-10-30",
+      "minute_detected": 61,
+      "score_at_entry": "0-0",
+      "odds_entry": null,
+      "simulated_odds": 1.8,
+      "odds_source": "SIMULATED_DEFAULT",
+      "stake": 50000,
+      "source": "ESPN_API",
+      "source_event_id": "401898880",
+      "is_provisional_id": false,
+      "snapshots": [
+        {
+          "timestamp_utc": "2026-10-30T23:31:13Z",
+          "timestamp_wita": "2026-10-31T07:31:13.710592+08:00",
+          "clock": "61'",
+          "minute": 61,
+          "score": "0-0",
+          "match_status": "Second Half",
+          "note": "ENTRY"
+        }
+      ],
+      "goal_events": [],
+      "current_score": "0-0",
+      "final_score": null,
+      "match_status": "Second Half",
+      "settlement_status": "PENDING",
+      "result": "PENDING",
+      "profit": 0,
+      "roi_contribution": 0.0,
+      "simulated_profit": 0,
+      "simulated_roi_contribution": 0.0,
+      "actual_profit": null,
+      "actual_roi_contribution": null,
+      "is_major": false,
+      "created_at": "2026-10-30T23:31:13Z",
+      "updated_at": "2026-10-30T23:31:23Z",
+      "last_verified_at": "2026-10-30T23:31:13Z",
+      "verification_status": "IN_PROGRESS_PENDING_FINAL",
+      "revision_history": [],
+      "audit_explanation": "Pertandingan 401898880 masih berstatus Second Half (Skor saat ini: 0-0). Menunggu status Final resmi dari provider (PENDING).",
+      "audit_passed": true
+    },
     {
       "match_id": "401850680",
       "home_team": "Coquimbo Unido",
@@ -34,10 +88,31 @@
           "score": "0-0",
           "match_status": "Second Half",
           "note": "ENTRY"
+        },
+        {
+          "timestamp_utc": "2026-10-30T23:31:23Z",
+          "timestamp_wita": "2026-10-31T07:31:23.650826+08:00",
+          "clock": "67'",
+          "minute": 67,
+          "score": "1-0",
+          "match_status": "Second Half",
+          "note": "GOAL DETECTED"
         }
       ],
-      "goal_events": [],
-      "current_score": "0-0",
+      "goal_events": [
+        {
+          "minute": 63,
+          "clock_display": "63'",
+          "period": 2,
+          "team": "Coquimbo Unido",
+          "scorer": "Luis Riveros",
+          "type": "Goal - Header",
+          "text": "Goal! Coquimbo Unido 1, Unión La Calera 0. Luis Riveros (Coquimbo Unido) header from the centre of the box to the bottom right corner. Assisted by Francisco Salinas with a cross.",
+          "time_approximate": false,
+          "source": "ESPN_SUMMARY_KEY_EVENTS"
+        }
+      ],
+      "current_score": "1-0",
       "final_score": null,
       "match_status": "Second Half",
       "settlement_status": "PENDING",
@@ -50,11 +125,11 @@
       "actual_roi_contribution": null,
       "is_major": false,
       "created_at": "2026-10-30T23:25:53Z",
-      "updated_at": "2026-10-30T23:26:03Z",
+      "updated_at": "2026-10-30T23:31:23Z",
       "last_verified_at": "2026-10-30T23:25:53Z",
       "verification_status": "IN_PROGRESS_PENDING_FINAL",
       "revision_history": [],
-      "audit_explanation": "Pertandingan 401850680 masih berstatus Second Half (Skor saat ini: 0-0). Menunggu status Final resmi dari provider (PENDING).",
+      "audit_explanation": "Pertandingan 401850680 masih berstatus Second Half (Skor saat ini: 1-0). Menunggu status Final resmi dari provider (PENDING).",
       "audit_passed": true
     },
     {
@@ -88,10 +163,31 @@
           "score": "0-0",
           "match_status": "Second Half",
           "note": "ENTRY"
+        },
+        {
+          "timestamp_utc": "2026-10-30T23:31:23Z",
+          "timestamp_wita": "2026-10-31T07:31:23.721436+08:00",
+          "clock": "72'",
+          "minute": 72,
+          "score": "0-1",
+          "match_status": "Second Half",
+          "note": "GOAL DETECTED"
         }
       ],
-      "goal_events": [],
-      "current_score": "0-0",
+      "goal_events": [
+        {
+          "minute": 68,
+          "clock_display": "68'",
+          "period": 2,
+          "team": "Independiente Petrolero",
+          "scorer": "Willie",
+          "type": "Goal",
+          "text": "Willie (Independiente Petrolero) Goal at 68'",
+          "time_approximate": false,
+          "source": "ESPN_SUMMARY_KEY_EVENTS"
+        }
+      ],
+      "current_score": "0-1",
       "final_score": null,
       "match_status": "Second Half",
       "settlement_status": "PENDING",
@@ -104,11 +200,11 @@
       "actual_roi_contribution": null,
       "is_major": false,
       "created_at": "2026-10-30T23:20:45Z",
-      "updated_at": "2026-10-30T23:26:03Z",
+      "updated_at": "2026-10-30T23:31:23Z",
       "last_verified_at": "2026-10-30T23:20:45Z",
       "verification_status": "IN_PROGRESS_PENDING_FINAL",
       "revision_history": [],
-      "audit_explanation": "Pertandingan 401930003 masih berstatus Second Half (Skor saat ini: 0-0). Menunggu status Final resmi dari provider (PENDING).",
+      "audit_explanation": "Pertandingan 401930003 masih berstatus Second Half (Skor saat ini: 0-1). Menunggu status Final resmi dari provider (PENDING).",
       "audit_passed": true
     },
     {
