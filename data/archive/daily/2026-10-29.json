@@ -11,7 +11,7 @@
     "score_deteksi": "0-0",
     "skor_deteksi_real": "0-0",
     "score_at_detection": "0-0",
-    "live_score": "0-0",
+    "live_score": "1-0",
     "final_score": null,
     "is_ft": false,
     "ft_official": false,
@@ -26,11 +26,19 @@
     "source": "V21 FIX 10/10 - VALIDASI WIN/LOSE BENAR + FT RESMI",
     "trading_day": "2026-10-29",
     "gol_terjadi": null,
-    "score_progression": [],
+    "score_progression": [
+      {
+        "minute": 67,
+        "score": "1-0",
+        "timestamp": "2026-10-30T09:30:41.508496+08:00",
+        "proof": "Gol setelah deteksi 63' 0-0 -> 67' 1-0"
+      }
+    ],
     "detection_detail": "63'",
     "detection_state": "in",
     "dedup_key": "401879639_2026-10-29",
-    "home_away_hash": "d1825331aac2"
+    "home_away_hash": "d1825331aac2",
+    "current_minute": 67
   },
   {
     "match_id": "401901506",
