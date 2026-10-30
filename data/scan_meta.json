@@ -1,6 +1,6 @@
 {
-  "scan_timestamp_utc": "2026-10-30T10:21:00Z",
-  "scan_timestamp_wita": "2026-10-30T18:21:00.584278+08:00",
+  "scan_timestamp_utc": "2026-10-30T10:25:50Z",
+  "scan_timestamp_wita": "2026-10-30T18:25:50.432491+08:00",
   "source_status": "DEGRADED_PARTIAL_FAILURE",
   "endpoints_queried": 22,
   "endpoints_succeeded": 20,
@@ -21,7 +21,7 @@
       "url": "https://site.api.espn.com/apis/site/v2/sports/soccer/all/scoreboard",
       "ok": true,
       "http_status": 200,
-      "elapsed_ms": 69.08,
+      "elapsed_ms": 90.8,
       "attempts": 1,
       "error": null
     },
@@ -30,7 +30,7 @@
       "url": "https://site.api.espn.com/apis/site/v2/sports/soccer/afc.champions/scoreboard",
       "ok": true,
       "http_status": 200,
-      "elapsed_ms": 34.38,
+      "elapsed_ms": 24.97,
       "attempts": 1,
       "error": null
     },
@@ -39,7 +39,7 @@
       "url": "https://site.api.espn.com/apis/site/v2/sports/soccer/arg.1/scoreboard",
       "ok": true,
       "http_status": 200,
-      "elapsed_ms": 120.72,
+      "elapsed_ms": 18.05,
       "attempts": 1,
       "error": null
     },
@@ -48,7 +48,7 @@
       "url": "https://site.api.espn.com/apis/site/v2/sports/soccer/aus.1/scoreboard",
       "ok": true,
       "http_status": 200,
-      "elapsed_ms": 16.2,
+      "elapsed_ms": 14.53,
       "attempts": 1,
       "error": null
     },
@@ -57,7 +57,7 @@
       "url": "https://site.api.espn.com/apis/site/v2/sports/soccer/bel.1/scoreboard",
       "ok": true,
       "http_status": 200,
-      "elapsed_ms": 22.2,
+      "elapsed_ms": 14.88,
       "attempts": 1,
       "error": null
     },
@@ -66,7 +66,7 @@
       "url": "https://site.api.espn.com/apis/site/v2/sports/soccer/bra.1/scoreboard",
       "ok": true,
       "http_status": 200,
-      "elapsed_ms": 14.62,
+      "elapsed_ms": 23.43,
       "attempts": 1,
       "error": null
     },
@@ -75,7 +75,7 @@
       "url": "https://site.api.espn.com/apis/site/v2/sports/soccer/conmebol.libertadores/scoreboard",
       "ok": true,
       "http_status": 200,
-      "elapsed_ms": 20.69,
+      "elapsed_ms": 22.06,
       "attempts": 1,
       "error": null
     },
@@ -84,7 +84,7 @@
       "url": "https://site.api.espn.com/apis/site/v2/sports/soccer/eng.1/scoreboard",
       "ok": true,
       "http_status": 200,
-      "elapsed_ms": 13.76,
+      "elapsed_ms": 12.87,
       "attempts": 1,
       "error": null
     },
@@ -93,7 +93,7 @@
       "url": "https://site.api.espn.com/apis/site/v2/sports/soccer/esp.1/scoreboard",
       "ok": true,
       "http_status": 200,
-      "elapsed_ms": 14.29,
+      "elapsed_ms": 12.48,
       "attempts": 1,
       "error": null
     },
@@ -102,7 +102,7 @@
       "url": "https://site.api.espn.com/apis/site/v2/sports/soccer/fra.1/scoreboard",
       "ok": true,
       "http_status": 200,
-      "elapsed_ms": 17.63,
+      "elapsed_ms": 16.47,
       "attempts": 1,
       "error": null
     },
@@ -111,7 +111,7 @@
       "url": "https://site.api.espn.com/apis/site/v2/sports/soccer/ger.1/scoreboard",
       "ok": true,
       "http_status": 200,
-      "elapsed_ms": 20.86,
+      "elapsed_ms": 13.38,
       "attempts": 1,
       "error": null
     },
@@ -120,7 +120,7 @@
       "url": "https://site.api.espn.com/apis/site/v2/sports/soccer/ita.1/scoreboard",
       "ok": true,
       "http_status": 200,
-      "elapsed_ms": 15.75,
+      "elapsed_ms": 12.1,
       "attempts": 1,
       "error": null
     },
@@ -129,7 +129,7 @@
       "url": "https://site.api.espn.com/apis/site/v2/sports/soccer/jpn.1/scoreboard",
       "ok": true,
       "http_status": 200,
-      "elapsed_ms": 15.57,
+      "elapsed_ms": 28.5,
       "attempts": 1,
       "error": null
     },
@@ -138,7 +138,7 @@
       "url": "https://site.api.espn.com/apis/site/v2/sports/soccer/kor.1/scoreboard",
       "ok": false,
       "http_status": 400,
-      "elapsed_ms": 25.39,
+      "elapsed_ms": 22.98,
       "attempts": 3,
       "error": "HTTP 400 from https://site.api.espn.com/apis/site/v2/sports/soccer/kor.1/scoreboard"
     },
@@ -147,7 +147,7 @@
       "url": "https://site.api.espn.com/apis/site/v2/sports/soccer/mex.1/scoreboard",
       "ok": true,
       "http_status": 200,
-      "elapsed_ms": 15.21,
+      "elapsed_ms": 15.76,
       "attempts": 1,
       "error": null
     },
@@ -156,7 +156,7 @@
       "url": "https://site.api.espn.com/apis/site/v2/sports/soccer/ned.1/scoreboard",
       "ok": true,
       "http_status": 200,
-      "elapsed_ms": 15.97,
+      "elapsed_ms": 19.84,
       "attempts": 1,
       "error": null
     },
@@ -165,7 +165,7 @@
       "url": "https://site.api.espn.com/apis/site/v2/sports/soccer/por.1/scoreboard",
       "ok": true,
       "http_status": 200,
-      "elapsed_ms": 16.81,
+      "elapsed_ms": 14.95,
       "attempts": 1,
       "error": null
     },
@@ -174,7 +174,7 @@
       "url": "https://site.api.espn.com/apis/site/v2/sports/soccer/saud.1/scoreboard",
       "ok": false,
       "http_status": 400,
-      "elapsed_ms": 24.99,
+      "elapsed_ms": 44.85,
       "attempts": 3,
       "error": "HTTP 400 from https://site.api.espn.com/apis/site/v2/sports/soccer/saud.1/scoreboard"
     },
@@ -183,7 +183,7 @@
       "url": "https://site.api.espn.com/apis/site/v2/sports/soccer/tur.1/scoreboard",
       "ok": true,
       "http_status": 200,
-      "elapsed_ms": 35.67,
+      "elapsed_ms": 27.65,
       "attempts": 1,
       "error": null
     },
@@ -192,7 +192,7 @@
       "url": "https://site.api.espn.com/apis/site/v2/sports/soccer/uefa.champions/scoreboard",
       "ok": true,
       "http_status": 200,
-      "elapsed_ms": 27.55,
+      "elapsed_ms": 15.68,
       "attempts": 1,
       "error": null
     },
@@ -201,7 +201,7 @@
       "url": "https://site.api.espn.com/apis/site/v2/sports/soccer/uefa.europa/scoreboard",
       "ok": true,
       "http_status": 200,
-      "elapsed_ms": 17.13,
+      "elapsed_ms": 45.76,
       "attempts": 1,
       "error": null
     },
@@ -210,7 +210,7 @@
       "url": "https://site.api.espn.com/apis/site/v2/sports/soccer/usa.1/scoreboard",
       "ok": true,
       "http_status": 200,
-      "elapsed_ms": 18.04,
+      "elapsed_ms": 21.31,
       "attempts": 1,
       "error": null
     }
