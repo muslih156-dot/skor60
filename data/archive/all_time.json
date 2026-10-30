@@ -1,7 +1,7 @@
 {
   "system": "TRADING BOLA MENIT 60 - LAST GOAL SYSTEM",
   "version": "2.0",
-  "last_updated_utc": "2026-10-30T22:36:03Z",
+  "last_updated_utc": "2026-10-30T22:41:03Z",
   "total_records": 7,
   "matches": [
     {
@@ -51,7 +51,7 @@
       "actual_roi_contribution": null,
       "is_major": false,
       "created_at": "2026-10-30T22:25:41Z",
-      "updated_at": "2026-10-30T22:36:03Z",
+      "updated_at": "2026-10-30T22:41:03Z",
       "last_verified_at": "2026-10-30T22:25:41Z",
       "verification_status": "IN_PROGRESS_PENDING_FINAL",
       "revision_history": [],
@@ -104,13 +104,14 @@
         {
           "minute": 71,
           "clock_display": "71'",
-          "period": 2,
-          "team": "Deportivo Pereira",
+          "period": 0,
+          "team_id": "5486",
           "scorer": "Anderson Plata",
           "type": "Goal",
-          "text": "Goal! Deportivo Pereira 1, Jaguares de Córdoba 0. Ánderson Plata (Deportivo Pereira) right footed shot from very close range to the centre of the goal. Assisted by Sebastián Urrea with a headed pass following a corner.",
+          "is_own_goal": false,
+          "is_penalty": false,
           "time_approximate": false,
-          "source": "ESPN_SUMMARY_KEY_EVENTS"
+          "source": "ESPN_OFFICIAL_DETAIL"
         }
       ],
       "current_score": "1-0",
@@ -126,7 +127,7 @@
       "actual_roi_contribution": null,
       "is_major": false,
       "created_at": "2026-10-30T22:20:46Z",
-      "updated_at": "2026-10-30T22:36:03Z",
+      "updated_at": "2026-10-30T22:41:03Z",
       "last_verified_at": "2026-10-30T22:20:46Z",
       "verification_status": "IN_PROGRESS_PENDING_FINAL",
       "revision_history": [],
