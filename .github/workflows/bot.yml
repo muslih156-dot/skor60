@@ -1,5 +1,7 @@
 name: Trading Bola Menit 60 Bot
-
+name: Run Unit Tests Before Execution
+        run: |
+          PYTHONPATH=. pytest -q
 on:
   schedule:
     - cron: "*/5 * * * *"
