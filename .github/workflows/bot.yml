@@ -1,6 +1,5 @@
 name: Trading Bola Menit 60 Bot
 
-          PYTHONPATH=. pytest -q
 on:
   schedule:
     - cron: "*/5 * * * *"
@@ -37,11 +36,13 @@ jobs:
 
       - name: Run Unit Tests Before Execution
         run: |
-          pytest -q
+          PYTHONPATH=. pytest -q
 
       - name: Execute Single Scan & Settlement Cycle
         env:
           TZ: "Asia/Makassar"
+          TELEGRAM_BOT_TOKEN: ${{ secrets.TELEGRAM_BOT_TOKEN }}
+          TELEGRAM_CHAT_ID: ${{ secrets.TELEGRAM_CHAT_ID }}
         run: |
           python check_once.py --json
 
