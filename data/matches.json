@@ -1,7 +1,7 @@
 {
   "system": "TRADING BOLA MENIT 60 - LAST GOAL SYSTEM",
   "version": "2.0",
-  "last_updated_utc": "2026-10-30T19:12:05Z",
+  "last_updated_utc": "2026-10-30T19:16:08Z",
   "total_records": 2,
   "matches": [
     {
@@ -53,6 +53,15 @@
           "score": "1-1",
           "match_status": "Second Half",
           "note": "GOAL DETECTED"
+        },
+        {
+          "timestamp_utc": "2026-10-30T19:16:08Z",
+          "timestamp_wita": "2026-10-31T03:16:08.566113+08:00",
+          "clock": "89'",
+          "minute": 89,
+          "score": "2-1",
+          "match_status": "Second Half",
+          "note": "GOAL DETECTED"
         }
       ],
       "goal_events": [
@@ -79,9 +88,21 @@
           "time_approximate": true,
           "note": "GOAL EVENT TIME APPROXIMATE",
           "source": "SCORE_SNAPSHOT_DIFFERENCE"
+        },
+        {
+          "observed_at_utc": "2026-10-30T19:16:08Z",
+          "observed_at_wita": "2026-10-31T03:16:08.566113+08:00",
+          "minute": 89,
+          "clock_display": "89'",
+          "previous_score": "1-1",
+          "score_after": "2-1",
+          "team": "UNKNOWN_FROM_SNAPSHOT_DIFF",
+          "time_approximate": true,
+          "note": "GOAL EVENT TIME APPROXIMATE",
+          "source": "SCORE_SNAPSHOT_DIFFERENCE"
         }
       ],
-      "current_score": "1-1",
+      "current_score": "2-1",
       "final_score": null,
       "match_status": "Second Half",
       "settlement_status": "PENDING",
@@ -94,11 +115,11 @@
       "actual_roi_contribution": null,
       "is_major": false,
       "created_at": "2026-10-30T18:30:55Z",
-      "updated_at": "2026-10-30T19:12:05Z",
+      "updated_at": "2026-10-30T19:16:08Z",
       "last_verified_at": "2026-10-30T18:30:55Z",
       "verification_status": "IN_PROGRESS_PENDING_FINAL",
       "revision_history": [],
-      "audit_explanation": "Pertandingan 401898423 masih berstatus Second Half (Skor saat ini: 1-1). Menunggu status Final resmi dari provider (PENDING).",
+      "audit_explanation": "Pertandingan 401898423 masih berstatus Second Half (Skor saat ini: 2-1). Menunggu status Final resmi dari provider (PENDING).",
       "audit_passed": true
     },
     {
