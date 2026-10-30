@@ -7,7 +7,7 @@ Tugas:
 2. Mendeteksi kandidat baru pada menit 60–66 dengan skor 0-0 (secara idempotent).
 3. Memantau dan memperbarui status pertandingan yang masih PENDING / LIVE.
 4. Melakukan validasi settlement akhir (WIN/LOSE/VOID/REVIEW) menggunakan scoreboard + summary detail.
-5. Menyimpan metadata kesehatan sistem dan arsip JSON.
+5. Menyimpan metadata kesehatan sistem dan arsip JSON, serta mengirim notifikasi ke Telegram jika ada kandidat baru.
 """
 
 import argparse
@@ -23,10 +23,11 @@ from database import TradingDatabase, save_scan_metadata
 from espn_client import fetch_live_match, fetch_match_detail, fetch_match_events
 from parser import detect_candidate, format_iso_utc_and_wita
 from settlement import audit_result, validate_final_result
+from telegram_notifier import send_telegram_message
 
 
 def run_scan_cycle() -> Dict[str, Any]:
-    """Menjalankan satu siklus penuh pemindaian, deteksi kandidat, dan settlement."""
+    """Menjalankan satu siklus penuh pemindaian, deteksi kandidat, settlement, dan notifikasi."""
     db = TradingDatabase()
     session = requests.Session()
     cycle_start = datetime.now(timezone.utc)
@@ -50,13 +51,32 @@ def run_scan_cycle() -> Dict[str, Any]:
 
         cand_eval = detect_candidate(parsed_match)
         if cand_eval["is_candidate"]:
-            _, created = db.insert_candidate_idempotent(
+            record, created = db.insert_candidate_idempotent(
                 parsed_match=parsed_match,
                 detected_dt_utc=cycle_start,
                 stake=DEFAULT_STAKE,
             )
             if created:
                 new_candidates_count += 1
+                
+                # Kirim notifikasi otomatis ke Telegram saat kandidat baru terdeteksi
+                home_team = record.get("home_team", "Home")
+                away_team = record.get("away_team", "Away")
+                league = record.get("league", "Unknown League")
+                minute = record.get("minute_detected", "60-66")
+                score = record.get("score_at_entry", "0-0")
+                wita_time = record.get("detected_at_wita", cycle_wita_str)
+
+                telegram_msg = (
+                    f"🚨 *KANDIDAT TRADING BARU TERDETEKSI* 🚨\n\n"
+                    f"⚽ *Match:* {home_team} vs {away_team}\n"
+                    f"🏆 *League:* {league}\n"
+                    f"⏱ *Menit:* {minute}' (Babak 2)\n"
+                    f"📊 *Skor Entry:* {score}\n"
+                    f"💰 *Market:* Over 0.5 Goal After Entry\n"
+                    f"🕒 *Waktu (WITA):* {wita_time}"
+                )
+                send_telegram_message(telegram_msg)
             else:
                 existing_candidates_skipped += 1
 
