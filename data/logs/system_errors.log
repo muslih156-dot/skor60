@@ -466,3 +466,15 @@
 2026-10-30 16:16:02,458 [WARNING] Attempt 1/3 failed: HTTP 400 from https://site.api.espn.com/apis/site/v2/sports/soccer/saud.1/scoreboard
 2026-10-30 16:16:04,026 [WARNING] Attempt 2/3 failed: HTTP 400 from https://site.api.espn.com/apis/site/v2/sports/soccer/saud.1/scoreboard
 2026-10-30 16:16:07,097 [WARNING] Attempt 3/3 failed: HTTP 400 from https://site.api.espn.com/apis/site/v2/sports/soccer/saud.1/scoreboard
+2026-10-30 08:20:43,269 [WARNING] Attempt 1/3 failed: HTTP 403 from https://site.api.espn.com/apis/site/v2/sports/soccer/all/scoreboard
+2026-10-30 08:20:44,769 [WARNING] Attempt 2/3 failed: HTTP 403 from https://site.api.espn.com/apis/site/v2/sports/soccer/all/scoreboard
+2026-10-30 08:20:47,770 [WARNING] Attempt 3/3 failed: HTTP 403 from https://site.api.espn.com/apis/site/v2/sports/soccer/all/scoreboard
+2026-10-30 08:20:47,770 [WARNING] Attempt 1/3 failed: HTTP 403 from https://site.api.espn.com/apis/site/v2/sports/soccer/eng.1/scoreboard
+2026-10-30 08:20:49,270 [WARNING] Attempt 2/3 failed: HTTP 403 from https://site.api.espn.com/apis/site/v2/sports/soccer/eng.1/scoreboard
+2026-10-30 08:20:52,271 [WARNING] Attempt 3/3 failed: HTTP 403 from https://site.api.espn.com/apis/site/v2/sports/soccer/eng.1/scoreboard
+2026-10-30 16:20:53,326 [WARNING] Attempt 1/3 failed: HTTP 400 from https://site.api.espn.com/apis/site/v2/sports/soccer/kor.1/scoreboard
+2026-10-30 16:20:54,900 [WARNING] Attempt 2/3 failed: HTTP 400 from https://site.api.espn.com/apis/site/v2/sports/soccer/kor.1/scoreboard
+2026-10-30 16:20:57,968 [WARNING] Attempt 3/3 failed: HTTP 400 from https://site.api.espn.com/apis/site/v2/sports/soccer/kor.1/scoreboard
+2026-10-30 16:20:58,173 [WARNING] Attempt 1/3 failed: HTTP 400 from https://site.api.espn.com/apis/site/v2/sports/soccer/saud.1/scoreboard
+2026-10-30 16:20:59,740 [WARNING] Attempt 2/3 failed: HTTP 400 from https://site.api.espn.com/apis/site/v2/sports/soccer/saud.1/scoreboard
+2026-10-30 16:21:02,847 [WARNING] Attempt 3/3 failed: HTTP 400 from https://site.api.espn.com/apis/site/v2/sports/soccer/saud.1/scoreboard
