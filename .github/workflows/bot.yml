@@ -1,4 +1,5 @@
 name: Trading Bola Menit 60 Bot
+
           PYTHONPATH=. pytest -q
 on:
   schedule:
