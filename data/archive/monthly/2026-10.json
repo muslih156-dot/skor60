@@ -1,6 +1,6 @@
 {
   "trading_month": "2026-10",
-  "last_updated_utc": "2026-10-30T19:06:36Z",
+  "last_updated_utc": "2026-10-30T19:12:05Z",
   "total_records": 2,
   "matches": [
     {
@@ -43,6 +43,15 @@
           "score": "1-0",
           "match_status": "Second Half",
           "note": "GOAL DETECTED"
+        },
+        {
+          "timestamp_utc": "2026-10-30T19:12:05Z",
+          "timestamp_wita": "2026-10-31T03:12:05.140385+08:00",
+          "clock": "87'",
+          "minute": 87,
+          "score": "1-1",
+          "match_status": "Second Half",
+          "note": "GOAL DETECTED"
         }
       ],
       "goal_events": [
@@ -57,9 +66,21 @@
           "time_approximate": true,
           "note": "GOAL EVENT TIME APPROXIMATE",
           "source": "SCORE_SNAPSHOT_DIFFERENCE"
+        },
+        {
+          "observed_at_utc": "2026-10-30T19:12:05Z",
+          "observed_at_wita": "2026-10-31T03:12:05.140385+08:00",
+          "minute": 87,
+          "clock_display": "87'",
+          "previous_score": "1-0",
+          "score_after": "1-1",
+          "team": "UNKNOWN_FROM_SNAPSHOT_DIFF",
+          "time_approximate": true,
+          "note": "GOAL EVENT TIME APPROXIMATE",
+          "source": "SCORE_SNAPSHOT_DIFFERENCE"
         }
       ],
-      "current_score": "1-0",
+      "current_score": "1-1",
       "final_score": null,
       "match_status": "Second Half",
       "settlement_status": "PENDING",
@@ -72,11 +93,11 @@
       "actual_roi_contribution": null,
       "is_major": false,
       "created_at": "2026-10-30T18:30:55Z",
-      "updated_at": "2026-10-30T19:06:36Z",
+      "updated_at": "2026-10-30T19:12:05Z",
       "last_verified_at": "2026-10-30T18:30:55Z",
       "verification_status": "IN_PROGRESS_PENDING_FINAL",
       "revision_history": [],
-      "audit_explanation": "Pertandingan 401898423 masih berstatus Second Half (Skor saat ini: 1-0). Menunggu status Final resmi dari provider (PENDING).",
+      "audit_explanation": "Pertandingan 401898423 masih berstatus Second Half (Skor saat ini: 1-1). Menunggu status Final resmi dari provider (PENDING).",
       "audit_passed": true
     },
     {
