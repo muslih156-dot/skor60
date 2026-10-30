@@ -7,6 +7,7 @@ tidak pernah menghasilkan skor atau kandidat palsu.
 """
 
 import logging
+import re
 import time
 from datetime import datetime, timezone
 from typing import Any, Dict, List, Optional, Tuple
@@ -77,7 +78,6 @@ def _request_json_with_retry(
             last_error = f"HTTP {resp.status_code} from {url}"
             logger.warning("Attempt %d/%d failed: %s", attempt, max_retries, last_error)
 
-            # Jika 404 atau 403 permanen, tetap catat dan batasi retry
             if attempt < max_retries:
                 sleep_sec = API_BACKOFF_BASE_SECONDS * (2 ** (attempt - 1))
                 time.sleep(sleep_sec)
@@ -99,6 +99,59 @@ def _request_json_with_retry(
         "data": None,
         "error": last_error,
     }
+
+
+def extract_goal_events_from_payload(header: Dict[str, Any]) -> List[Dict[str, Any]]:
+    """
+    Mengekstrak daftar event gol dari payload header / competitions ESPN sebagai fallback.
+    """
+    goals: List[Dict[str, Any]] = []
+    try:
+        competitions = header.get("competitions", [])
+        if competitions and isinstance(competitions, list):
+            details = competitions[0].get("details", [])
+            for detail in details:
+                if not isinstance(detail, dict):
+                    continue
+                is_scoring = bool(detail.get("scoringPlay", False))
+                type_text = str((detail.get("type") or {}).get("text") or "").lower()
+                if not is_scoring and "goal" not in type_text and "penalty - scored" not in type_text:
+                    continue
+                if "miss" in type_text or "saved" in type_text:
+                    continue
+
+                clock_disp = str((detail.get("clock") or {}).get("displayValue") or "").strip()
+                clock_val = (detail.get("clock") or {}).get("value")
+                minute_val: Optional[int] = None
+                if clock_disp:
+                    m = re.match(r"^(\d+)", clock_disp)
+                    if m:
+                        minute_val = int(m.group(1))
+                elif isinstance(clock_val, (int, float)):
+                    minute_val = int(clock_val // 60)
+
+                period_num = int((detail.get("period") or {}).get("number", 0) or 0)
+                team_name = str((detail.get("team") or {}).get("displayName") or "").strip()
+                participants = detail.get("participants") or []
+                scorer = ""
+                if isinstance(participants, list) and participants:
+                    athlete = (participants[0] or {}).get("athlete") or {}
+                    scorer = str(athlete.get("displayName") or "").strip()
+
+                goals.append({
+                    "minute": minute_val,
+                    "clock_display": clock_disp or (f"{minute_val}'" if minute_val is not None else "N/A"),
+                    "period": period_num,
+                    "team": team_name,
+                    "scorer": scorer,
+                    "type": str((detail.get("type") or {}).get("text") or "Goal"),
+                    "text": str(detail.get("text") or ""),
+                    "time_approximate": False,
+                    "source": "ESPN_SUMMARY_HEADER_DETAILS",
+                })
+    except Exception as e:
+        logger.error("Error extracting goal events from payload header: %s", e)
+    return goals
 
 
 def fetch_live_match(
@@ -143,7 +196,6 @@ def fetch_live_match(
         endpoints_succeeded += 1
         payload = res["data"]
 
-        # Ekstrak metadata liga dari level atas scoreboard jika ada
         leagues_meta = payload.get("leagues") or []
         default_league_name = ""
         default_league_slug = "" if slug_label == "all" else slug_label
@@ -167,11 +219,8 @@ def fetch_live_match(
 
             ev_id = str(ev_copy.get("id") or "").strip()
             if not ev_id:
-                # Buat kunci sementara agar tidak tertimpa sebelum diparsing
                 ev_id = f"RAW_NO_ID_{len(deduplicated_raw_events)}"
 
-            # Prioritaskan data dari endpoint spesifik liga dibandingkan endpoint 'all'
-            # karena endpoint spesifik liga selalu memiliki slug dan nama liga yang akurat.
             if ev_id not in deduplicated_raw_events or slug_label != "all":
                 deduplicated_raw_events[ev_id] = (ev_copy, default_league_slug)
 
@@ -211,135 +260,4 @@ def fetch_live_match(
         "endpoints_succeeded": endpoints_succeeded,
         "endpoints_failed": endpoints_failed,
         "raw_events_received": raw_events_received,
-        "unique_events_count": len(deduplicated_raw_events),
-        "matches_processed": matches_processed,
-        "matches_failed_parsing": matches_failed_parsing,
-        "parse_errors": parse_errors[:50],
-        "endpoint_logs": endpoint_logs,
-        "matches": parsed_matches,
-    }
-
-
-def fetch_match_detail(
-    match_id: str,
-    league_slug: str = "all",
-    session: Optional[requests.Session] = None,
-) -> Dict[str, Any]:
-    """
-    Mengambil detail pertandingan spesifik dari endpoint ESPN Summary:
-    https://site.api.espn.com/apis/site/v2/sports/soccer/{league_slug}/summary?event={match_id}
-    Digunakan untuk memverifikasi status final, perubahan skor, dan rekonsiliasi konflik.
-    """
-    slug = (league_slug or "all").strip().lower()
-    if slug == "unknown" or not slug:
-        slug = "all"
-    url = ESPN_SUMMARY_TEMPLATE.format(league_slug=slug, match_id=match_id)
-    res = _request_json_with_retry(url, session=session)
-
-    if not res["ok"] or not res["data"]:
-        return {
-            "ok": False,
-            "match_id": match_id,
-            "http_status": res["http_status"],
-            "elapsed_ms": res["elapsed_ms"],
-            "error": res["error"],
-            "parsed": None,
-            "raw_summary": None,
-        }
-
-    summary_data = res["data"]
-    header = summary_data.get("header") or {}
-    competitions = header.get("competitions") or []
-
-    # Bangun struktur kompatibel event untuk diparsing oleh parser standar
-    synthetic_event: Dict[str, Any] = {
-        "id": header.get("id") or match_id,
-        "competitions": competitions,
-        "league": header.get("league") or {"slug": slug},
-        "_league_slug": slug,
-    }
-    if competitions and isinstance(competitions[0], dict):
-        synthetic_event["status"] = competitions[0].get("status") or {}
-        synthetic_event["date"] = competitions[0].get("date") or ""
-
-    parsed = parse_full_event(synthetic_event, league_slug_hint=slug)
-    return {
-        "ok": parsed["score"].get("score_valid", False),
-        "match_id": match_id,
-        "http_status": res["http_status"],
-        "elapsed_ms": res["elapsed_ms"],
-        "error": None if parsed["score"].get("score_valid", False) else parsed["score"].get("error"),
-        "parsed": parsed,
-        "raw_summary": summary_data,
-    }
-
-
-def fetch_match_events(
-    match_id: str,
-    league_slug: str = "all",
-    summary_payload: Optional[Dict[str, Any]] = None,
-    session: Optional[requests.Session] = None,
-) -> List[Dict[str, Any]]:
-    """
-    Mengekstrak daftar event gol resmi dari endpoint summary (`keyEvents` / `scoringPlays` / `header`).
-    Jika `summary_payload` sudah diambil sebelumnya, gunakan langsung tanpa request ganda.
-    """
-    if summary_payload is None:
-        detail_res = fetch_match_detail(match_id, league_slug=league_slug, session=session)
-        if not detail_res["ok"] or not detail_res["raw_summary"]:
-            return []
-        summary_payload = detail_res["raw_summary"]
-
-    goals: List[Dict[str, Any]] = []
-    if not isinstance(summary_payload, dict):
-        return goals
-
-    # 1. Cek keyEvents di summary payload
-    key_events = summary_payload.get("keyEvents") or summary_payload.get("scoringPlays") or []
-    if isinstance(key_events, list):
-        for item in key_events:
-            if not isinstance(item, dict):
-                continue
-            is_scoring = bool(item.get("scoringPlay", False))
-            type_text = str((item.get("type") or {}).get("text") or "").lower()
-            if not is_scoring and "goal" not in type_text and "penalty - scored" not in type_text:
-                continue
-            if "miss" in type_text or "saved" in type_text:
-                continue
-
-            clock_disp = str((item.get("clock") or {}).get("displayValue") or "").strip()
-            clock_val = (item.get("clock") or {}).get("value")
-            minute_val: Optional[int] = None
-            if clock_disp:
-                m = re.match(r"^(\d+)", clock_disp)
-                if m:
-                    minute_val = int(m.group(1))
-            elif isinstance(clock_val, (int, float)):
-                minute_val = int(clock_val // 60)
-
-            period_num = int((item.get("period") or {}).get("number", 0) or 0)
-            team_name = str((item.get("team") or {}).get("displayName") or "").strip()
-            participants = item.get("participants") or []
-            scorer = ""
-            if isinstance(participants, list) and participants:
-                athlete = (participants[0] or {}).get("athlete") or {}
-                scorer = str(athlete.get("displayName") or "").strip()
-
-            goals.append({
-                "minute": minute_val,
-                "clock_display": clock_disp or (f"{minute_val}'" if minute_val is not None else "N/A"),
-                "period": period_num,
-                "team": team_name,
-                "scorer": scorer,
-                "type": str((item.get("type") or {}).get("text") or "Goal"),
-                "text": str(item.get("text") or ""),
-                "time_approximate": False,
-                "source": "ESPN_SUMMARY_KEY_EVENTS",
-            })
-
-    # 2. Fallback ke header.competitions[0].details jika keyEvents kosong
-    if not goals:
-        header = summary_payload.get("header") or {}
-        goals = extract_goal_events_from_payload(header)
-
-    return goals
+        "unique_events_count": len(deduplicated_
