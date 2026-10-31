@@ -1,6 +1,6 @@
 {
   "trading_day": "2026-10-30",
-  "last_updated_utc": "2026-10-31T01:45:58Z",
+  "last_updated_utc": "2026-10-31T01:50:52Z",
   "total_records": 1,
   "matches": [
     {
@@ -14,8 +14,8 @@
       "market": "OVER 0.5 GOAL AFTER ENTRY",
       "kickoff_utc": "2026-10-29T12:00:00Z",
       "kickoff_wita": "2026-10-29T20:00:00+08:00",
-      "detected_at_utc": "2026-10-31T01:45:58Z",
-      "detected_at_wita": "2026-10-31T09:45:58.578573+08:00",
+      "detected_at_utc": "2026-10-31T01:50:52Z",
+      "detected_at_wita": "2026-10-31T09:50:52.816464+08:00",
       "trading_day": "2026-10-30",
       "minute_detected": 60,
       "score_at_entry": "0-0",
@@ -28,8 +28,8 @@
       "is_provisional_id": false,
       "snapshots": [
         {
-          "timestamp_utc": "2026-10-31T01:45:58Z",
-          "timestamp_wita": "2026-10-31T09:45:58.578573+08:00",
+          "timestamp_utc": "2026-10-31T01:50:52Z",
+          "timestamp_wita": "2026-10-31T09:50:52.816464+08:00",
           "clock": "60'",
           "minute": 60,
           "score": "0-0",
@@ -50,9 +50,9 @@
       "actual_profit": null,
       "actual_roi_contribution": null,
       "is_major": true,
-      "created_at": "2026-10-31T01:45:58Z",
-      "updated_at": "2026-10-31T01:45:58Z",
-      "last_verified_at": "2026-10-31T01:45:58Z",
+      "created_at": "2026-10-31T01:50:52Z",
+      "updated_at": "2026-10-31T01:50:52Z",
+      "last_verified_at": "2026-10-31T01:50:52Z",
       "verification_status": "VERIFIED_ENTRY",
       "revision_history": []
     }
