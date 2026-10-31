@@ -1,7 +1,7 @@
 {
   "system": "TRADING BOLA MENIT 60 - LAST GOAL SYSTEM",
   "version": "2.1",
-  "last_updated_utc": "2026-10-31T03:43:03Z",
+  "last_updated_utc": "2026-10-31T03:48:03Z",
   "total_records": 19,
   "matches": [
     {
@@ -45,23 +45,42 @@
           "score": "0-1",
           "match_status": "Second Half",
           "note": "GOAL DETECTED"
+        },
+        {
+          "timestamp_utc": "2026-10-31T03:48:03Z",
+          "timestamp_wita": "2026-10-31T11:48:03.583769+08:00",
+          "clock": "89'",
+          "minute": 89,
+          "score": "1-1",
+          "match_status": "Second Half",
+          "note": "GOAL DETECTED"
         }
       ],
       "goal_events": [
         {
           "minute": 68,
           "clock_display": "68'",
-          "period": 0,
-          "team_id": "7237",
+          "period": 2,
+          "team": "Puntarenas FC",
           "scorer": "Doryan Rodriguez",
           "type": "Goal",
-          "is_own_goal": false,
-          "is_penalty": false,
+          "text": "Doryan Rodriguez (Puntarenas FC) Goal at 68'",
           "time_approximate": false,
-          "source": "ESPN_OFFICIAL_DETAIL"
+          "source": "ESPN_SUMMARY_KEY_EVENTS"
+        },
+        {
+          "minute": 82,
+          "clock_display": "82'",
+          "period": 2,
+          "team": "Pérez Zeledón",
+          "scorer": "José Alvarado",
+          "type": "Goal",
+          "text": "José Alvarado (Pérez Zeledón) Goal at 82'",
+          "time_approximate": false,
+          "source": "ESPN_SUMMARY_KEY_EVENTS"
         }
       ],
-      "current_score": "0-1",
+      "current_score": "1-1",
       "final_score": null,
       "match_status": "Second Half",
       "settlement_status": "PENDING",
@@ -74,11 +93,11 @@
       "actual_roi_contribution": null,
       "is_major": false,
       "created_at": "2026-10-31T03:20:58Z",
-      "updated_at": "2026-10-31T03:43:03Z",
+      "updated_at": "2026-10-31T03:48:03Z",
       "last_verified_at": "2026-10-31T03:20:58Z",
       "verification_status": "IN_PROGRESS_PENDING_FINAL",
       "revision_history": [],
-      "audit_explanation": "Pertandingan 401876829 masih berstatus Second Half (Skor saat ini: 0-1). Menunggu status Final resmi dari provider (PENDING).",
+      "audit_explanation": "Pertandingan 401876829 masih berstatus Second Half (Skor saat ini: 1-1). Menunggu status Final resmi dari provider (PENDING).",
       "audit_passed": true
     },
     {
