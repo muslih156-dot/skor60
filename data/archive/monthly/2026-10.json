@@ -1,6 +1,6 @@
 {
   "trading_month": "2026-10",
-  "last_updated_utc": "2026-10-31T18:12:55Z",
+  "last_updated_utc": "2026-10-31T18:17:48Z",
   "total_records": 30,
   "matches": [
     {
@@ -37,7 +37,20 @@
           "note": "ENTRY"
         }
       ],
-      "goal_events": [],
+      "goal_events": [
+        {
+          "minute": 64,
+          "clock_display": "64'",
+          "period": 0,
+          "team_id": "11336",
+          "scorer": "Christian",
+          "type": "Goal",
+          "is_own_goal": false,
+          "is_penalty": false,
+          "time_approximate": false,
+          "source": "ESPN_OFFICIAL_DETAIL"
+        }
+      ],
       "current_score": "0-0",
       "final_score": null,
       "match_status": "Second Half",
@@ -51,7 +64,7 @@
       "actual_roi_contribution": null,
       "is_major": false,
       "created_at": "2026-10-31T18:10:57Z",
-      "updated_at": "2026-10-31T18:12:55Z",
+      "updated_at": "2026-10-31T18:17:48Z",
       "last_verified_at": "2026-10-31T18:10:57Z",
       "verification_status": "IN_PROGRESS_PENDING_FINAL",
       "revision_history": [],
