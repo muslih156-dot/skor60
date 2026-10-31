@@ -35,35 +35,7 @@ st.set_page_config(
     page_icon="⚽",
     layout="wide",
     initial_sidebar_state="expanded",
-st.markdown(
-    """
-    <style>
-    /* Mengubah background utama aplikasi Streamlit */
-    .stApp {
-        background-color: #0f172a; /* Warna latar belakang gelap profesional (Slate Dark) */
-        color: #f8fafc; /* Warna teks utama agar kontras dan jelas */
-    }
 
-    /* Mengubah background sidebar agar senada */
-    [data-testid="stSidebar"] {
-        background-color: #1e293b;
-    }
-
-    /* Memastikan teks pada widget, label, dan tabel tetap jelas dibaca */
-    p, span, label, .stMarkdown {
-        color: #f8fafc !important;
-    }
-
-    /* Styling tambahan untuk kontainer data agar kontras dan rapi */
-    div.stDataFrame, div.stTable {
-        background-color: #1e293b;
-        border-radius: 8px;
-        padding: 5px;
-        border: 1px solid #334155;
-    }
-    </style>
-    """,
-    unsafe_allow_html=True,
 )
 
 # Styling CSS bersih & profesional untuk kartu dan badge status
