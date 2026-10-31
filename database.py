@@ -4,6 +4,7 @@ Manajemen penyimpanan data produksi untuk TRADING BOLA MENIT 60 – LAST GOAL SY
 Menggunakan SQLite sebagai database transaksional utama dan menyinkronkan ke file JSON
 terstruktur (matches.json, all_time.json, daily/YYYY-MM-DD.json, monthly/YYYY-MM.json)
 dengan atomic write (tempfile + os.replace), file locking, backup otomatis, dan anti-duplikasi.
+Menyimpan label aktivitas statistik.
 """
 
 import json
@@ -20,7 +21,7 @@ from typing import Any, Dict, Iterator, List, Optional, Tuple
 try:
     import fcntl
 except ImportError:
-    fcntl = None  # Kompatibilitas sistem non-POSIX (fallback ke lockfile atomic)
+    fcntl = None
 
 from config import (
     ALL_TIME_JSON_PATH,
@@ -76,10 +77,6 @@ REQUIRED_RECORD_FIELDS = [
 
 @contextmanager
 def acquire_file_lock(lock_path: Path = LOCK_FILE_PATH, timeout: float = 15.0) -> Iterator[None]:
-    """
-    Mencegah dua proses menulis database secara bersamaan.
-    Menggunakan fcntl.flock pada Linux/macOS dan atomic lockfile creation sebagai fallback.
-    """
     ensure_directories()
     start_time = time.monotonic()
     lock_file = open(lock_path, "a+", encoding="utf-8")
@@ -106,24 +103,16 @@ def acquire_file_lock(lock_path: Path = LOCK_FILE_PATH, timeout: float = 15.0) -
 
 
 def atomic_write_json(target_path: Path, data: Any, create_backup: bool = False) -> None:
-    """
-    Menulis data ke file JSON secara atomik:
-    1. Validasi serialisasi JSON dan struktur kembali (json.loads).
-    2. Buat backup jika file target sudah ada dan create_backup=True.
-    3. Tulis ke temporary file pada direktori yang sama, flush + fsync, lalu os.replace().
-    """
     ensure_directories()
     target_path.parent.mkdir(parents=True, exist_ok=True)
 
     serialized = json.dumps(data, indent=2, ensure_ascii=False)
-    # Validasi struktur JSON sebelum menyentuh disk
     json.loads(serialized)
 
     if create_backup and target_path.exists():
         ts = datetime.now(timezone.utc).strftime("%Y%m%dT%H%M%SZ")
         backup_file = BACKUP_DIR / f"{target_path.stem}_{ts}.json.bak"
         shutil.copy2(target_path, backup_file)
-        # Batasi jumlah file backup maksimal 30 file terbaru agar disk tetap bersih
         backups = sorted(BACKUP_DIR.glob(f"{target_path.stem}_*.bak"), key=lambda p: p.stat().st_mtime)
         while len(backups) > 30:
             oldest = backups.pop(0)
@@ -153,18 +142,12 @@ def atomic_write_json(target_path: Path, data: Any, create_backup: bool = False)
 
 
 def validate_record_schema(record: Dict[str, Any]) -> None:
-    """Memastikan record memiliki seluruh field wajib sesuai spesifikasi Bagian F.2."""
     missing = [field for field in REQUIRED_RECORD_FIELDS if field not in record]
     if missing:
         raise ValueError(f"Record schema validation failed. Missing fields: {missing}")
 
 
 class TradingDatabase:
-    """
-    Kelas operasional database utama dengan SQLite + Sinkronisasi Arsip JSON.
-    Menjamin prinsip idempotent processing (1 match_id = maksimal 1 kandidat trading).
-    """
-
     def __init__(self, db_path: Path = SQLITE_DB_PATH, matches_json_path: Path = MATCHES_JSON_PATH):
         self.db_path = db_path
         self.matches_json_path = matches_json_path
@@ -196,12 +179,8 @@ class TradingDatabase:
                     )
                     """
                 )
-                conn.execute(
-                    "CREATE INDEX IF NOT EXISTS idx_trading_day ON matches(trading_day);"
-                )
-                conn.execute(
-                    "CREATE INDEX IF NOT EXISTS idx_settlement_status ON matches(settlement_status);"
-                )
+                conn.execute("CREATE INDEX IF NOT EXISTS idx_trading_day ON matches(trading_day);")
+                conn.execute("CREATE INDEX IF NOT EXISTS idx_settlement_status ON matches(settlement_status);")
                 conn.commit()
 
     def create_candidate_record(
@@ -210,10 +189,6 @@ class TradingDatabase:
         detected_dt_utc: Optional[datetime] = None,
         stake: int = DEFAULT_STAKE,
     ) -> Dict[str, Any]:
-        """
-        Membangun struktur data kandidat trading baru sesuai Bagian F.2.
-        Trading day ditetapkan saat ENTRY dan tidak pernah berubah saat FT.
-        """
         now_dt = detected_dt_utc or datetime.now(timezone.utc)
         detected_utc, detected_wita = format_iso_utc_and_wita(now_dt)
         trading_day = compute_trading_day(now_dt)
@@ -221,6 +196,7 @@ class TradingDatabase:
         status_info = parsed_match["status"]
         clock_info = parsed_match["clock"]
         score_info = parsed_match["score"]
+        act_info = parsed_match.get("activity", {})
         goal_events = parsed_match.get("goal_events") or []
 
         minute_detected = int(clock_info["minute"])
@@ -243,6 +219,7 @@ class TradingDatabase:
             "league": score_info["league"],
             "league_slug": score_info["league_slug"],
             "league_category": score_info.get("league_category", "UNKNOWN"),
+            "activity_label": act_info.get("activity_label", "NORMAL"),
             "market": STRATEGY_MARKET,
             "kickoff_utc": score_info["kickoff_utc"],
             "kickoff_wita": score_info["kickoff_wita"],
@@ -287,16 +264,6 @@ class TradingDatabase:
         detected_dt_utc: Optional[datetime] = None,
         stake: int = DEFAULT_STAKE,
     ) -> Tuple[Dict[str, Any], bool]:
-        """
-        Menyimpan kandidat baru secara idempotent.
-        Jika match_id sudah ada di database:
-          - JANGAN membuat record baru.
-          - JANGAN menggandakan stake atau profit.
-          - Kembalikan (existing_record, False).
-        Jika belum ada:
-          - Simpan kandidat baru dan sinkronkan arsip JSON.
-          - Kembalikan (new_record, True).
-        """
         match_id = parsed_match["score"]["match_id"]
         with acquire_file_lock():
             existing = self._get_by_id_unlocked(match_id)
@@ -313,17 +280,12 @@ class TradingDatabase:
             return new_record, True
 
     def update_existing_record(self, updated_record: Dict[str, Any]) -> Dict[str, Any]:
-        """
-        Memperbarui record yang sudah ada tanpa pernah mengubah `trading_day`,
-        `detected_at_utc`, `minute_detected`, `score_at_entry`, atau `stake`.
-        """
         validate_record_schema(updated_record)
         match_id = updated_record["match_id"]
 
         with acquire_file_lock():
             existing = self._get_by_id_unlocked(match_id)
             if existing is not None:
-                # Kunci atribut historis saat entry agar tidak pernah berubah
                 updated_record["trading_day"] = existing["trading_day"]
                 updated_record["detected_at_utc"] = existing["detected_at_utc"]
                 updated_record["detected_at_wita"] = existing["detected_at_wita"]
@@ -331,6 +293,8 @@ class TradingDatabase:
                 updated_record["score_at_entry"] = existing["score_at_entry"]
                 updated_record["stake"] = existing["stake"]
                 updated_record["created_at"] = existing["created_at"]
+                if "activity_label" in existing:
+                    updated_record["activity_label"] = existing["activity_label"]
 
             self._save_record_unlocked(updated_record)
             self._sync_json_archives_unlocked()
@@ -381,7 +345,6 @@ class TradingDatabase:
             return self._get_by_id_unlocked(match_id)
 
     def get_all_matches(self) -> List[Dict[str, Any]]:
-        """Mengambil seluruh pertandingan diurutkan dari yang terbaru di bagian paling atas."""
         with acquire_file_lock():
             return self._get_all_unlocked()
 
@@ -393,7 +356,6 @@ class TradingDatabase:
             return [json.loads(r["record_json"]) for r in rows]
 
     def get_pending_matches(self) -> List[Dict[str, Any]]:
-        """Mengambil pertandingan yang masih membutuhkan pemantauan atau rekonsiliasi."""
         with acquire_file_lock():
             with self._get_conn() as conn:
                 rows = conn.execute(
@@ -406,20 +368,12 @@ class TradingDatabase:
                 return [json.loads(r["record_json"]) for r in rows]
 
     def _sync_json_archives_unlocked(self) -> None:
-        """
-        Menyinkronkan isi SQLite ke seluruh arsip JSON sesuai Bagian G:
-        - data/matches.json
-        - data/archive/all_time.json
-        - data/archive/daily/YYYY-MM-DD.json
-        - data/archive/monthly/YYYY-MM.json
-        Semua diurutkan dengan pertandingan terbaru di bagian paling atas.
-        """
         all_records = self._get_all_unlocked()
         now_utc_str = datetime.now(timezone.utc).strftime("%Y-%m-%dT%H:%M:%SZ")
 
         envelope = {
             "system": "TRADING BOLA MENIT 60 - LAST GOAL SYSTEM",
-            "version": "2.0",
+            "version": "2.1",
             "last_updated_utc": now_utc_str,
             "total_records": len(all_records),
             "matches": all_records,
@@ -428,7 +382,6 @@ class TradingDatabase:
         atomic_write_json(self.matches_json_path, envelope, create_backup=True)
         atomic_write_json(ALL_TIME_JSON_PATH, envelope, create_backup=False)
 
-        # Partisi harian (berdasarkan trading_day cut-off 12:00 WITA)
         by_day: Dict[str, List[Dict[str, Any]]] = {}
         by_month: Dict[str, List[Dict[str, Any]]] = {}
         for rec in all_records:
@@ -466,13 +419,11 @@ class TradingDatabase:
 
 
 def save_scan_metadata(meta: Dict[str, Any]) -> None:
-    """Menyimpan metadata pemindaian terakhir untuk dipantau oleh dashboard & health check."""
     with acquire_file_lock():
         atomic_write_json(SCAN_META_JSON_PATH, meta, create_backup=False)
 
 
 def load_scan_metadata() -> Dict[str, Any]:
-    """Membaca metadata pemindaian terakhir."""
     if not SCAN_META_JSON_PATH.exists():
         return {
             "scan_timestamp_utc": None,
