@@ -89,6 +89,7 @@ MAJOR_LEAGUE_SLUGS: Set[str] = {
 }
 
 # Daftar liga divisi kedua / piala domestik yang terverifikasi sebagai MINOR
+# Ditambahkan: Indonesia, Jepang (Cup), Korea (Cup), Australia (Cup), China, Thailand, Malaysia
 MINOR_LEAGUE_SLUGS: Set[str] = {
     "eng.2", "eng.3", "eng.4", "eng.fa", "eng.league_cup",
     "esp.2", "esp.copa_del_rey",
@@ -97,12 +98,19 @@ MINOR_LEAGUE_SLUGS: Set[str] = {
     "fra.2", "fra.coupe_de_france",
     "ned.2", "por.2", "bel.2", "tur.2",
     "usa.2", "mex.2", "bra.2", "arg.2",
-    "jpn.2", "kor.2", "idn.1", "tha.1", "mys.1", "sgp.1",
+    "jpn.2", "jpn.3", "jpn.cup", "jpn.league_cup", "jpn.emperor",
+    "kor.2", "kor.fa_cup", "kor.cup",
+    "idn.1", "idn.cup", "idn.2",
+    "aus.cup", "aus.ffa_cup",
+    "chn.1", "chn.2", "chn.fa_cup",
+    "tha.1", "tha.2", "tha.fa_cup", "tha.league_cup",
+    "mas.1", "mas.cup", "mas.fa_cup",
+    "mys.1", "sgp.1",
     "uefa.europa.conf", "conmebol.sudamericana",
 }
 
 # Daftar liga yang dipindai secara aktif pada ESPN MULTI LEAGUE
-ACTIVE_SCAN_LEAGUES: List[str] = sorted(list(MAJOR_LEAGUE_SLUGS))
+ACTIVE_SCAN_LEAGUES: List[str] = sorted(list(MAJOR_LEAGUE_SLUGS) + list(MINOR_LEAGUE_SLUGS))
 
 
 def classify_league_slug(league_slug: str) -> str:
