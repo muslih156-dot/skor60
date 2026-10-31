@@ -1,19 +1,19 @@
 {
-  "scan_timestamp_utc": "2026-10-31T00:31:05Z",
-  "scan_timestamp_wita": "2026-10-31T08:31:05.294902+08:00",
+  "scan_timestamp_utc": "2026-10-31T00:35:41Z",
+  "scan_timestamp_wita": "2026-10-31T08:35:41.178766+08:00",
   "source_status": "DEGRADED_PARTIAL_FAILURE",
-  "endpoints_queried": 22,
-  "endpoints_succeeded": 20,
-  "endpoints_failed": 2,
-  "raw_events_received": 165,
-  "unique_events_count": 148,
-  "matches_processed": 148,
+  "endpoints_queried": 70,
+  "endpoints_succeeded": 45,
+  "endpoints_failed": 25,
+  "raw_events_received": 295,
+  "unique_events_count": 262,
+  "matches_processed": 262,
   "matches_failed_parsing": 0,
   "live_matches_seen": 30,
-  "new_candidates_detected": 3,
-  "existing_candidates_skipped": 0,
+  "new_candidates_detected": 0,
+  "existing_candidates_skipped": 3,
   "pending_matches_checked": 4,
-  "matches_settled_this_cycle": 0,
+  "matches_settled_this_cycle": 1,
   "matches_flagged_review": 0,
   "endpoint_logs": [
     {
@@ -21,7 +21,7 @@
       "url": "https://site.api.espn.com/apis/site/v2/sports/soccer/all/scoreboard",
       "ok": true,
       "http_status": 200,
-      "elapsed_ms": 126.78,
+      "elapsed_ms": 178.82,
       "attempts": 1,
       "error": null
     },
@@ -30,7 +30,7 @@
       "url": "https://site.api.espn.com/apis/site/v2/sports/soccer/afc.champions/scoreboard",
       "ok": true,
       "http_status": 200,
-      "elapsed_ms": 28.46,
+      "elapsed_ms": 127.42,
       "attempts": 1,
       "error": null
     },
@@ -39,7 +39,16 @@
       "url": "https://site.api.espn.com/apis/site/v2/sports/soccer/arg.1/scoreboard",
       "ok": true,
       "http_status": 200,
-      "elapsed_ms": 41.8,
+      "elapsed_ms": 55.23,
+      "attempts": 1,
+      "error": null
+    },
+    {
+      "league_slug": "arg.2",
+      "url": "https://site.api.espn.com/apis/site/v2/sports/soccer/arg.2/scoreboard",
+      "ok": true,
+      "http_status": 200,
+      "elapsed_ms": 80.26,
       "attempts": 1,
       "error": null
     },
@@ -48,34 +57,106 @@
       "url": "https://site.api.espn.com/apis/site/v2/sports/soccer/aus.1/scoreboard",
       "ok": true,
       "http_status": 200,
-      "elapsed_ms": 13.75,
+      "elapsed_ms": 43.93,
       "attempts": 1,
       "error": null
+    },
+    {
+      "league_slug": "aus.cup",
+      "url": "https://site.api.espn.com/apis/site/v2/sports/soccer/aus.cup/scoreboard",
+      "ok": false,
+      "http_status": 400,
+      "elapsed_ms": 98.15,
+      "attempts": 3,
+      "error": "HTTP 400 from https://site.api.espn.com/apis/site/v2/sports/soccer/aus.cup/scoreboard"
+    },
+    {
+      "league_slug": "aus.ffa_cup",
+      "url": "https://site.api.espn.com/apis/site/v2/sports/soccer/aus.ffa_cup/scoreboard",
+      "ok": false,
+      "http_status": 400,
+      "elapsed_ms": 82.4,
+      "attempts": 3,
+      "error": "HTTP 400 from https://site.api.espn.com/apis/site/v2/sports/soccer/aus.ffa_cup/scoreboard"
     },
     {
       "league_slug": "bel.1",
       "url": "https://site.api.espn.com/apis/site/v2/sports/soccer/bel.1/scoreboard",
       "ok": true,
       "http_status": 200,
-      "elapsed_ms": 46.33,
+      "elapsed_ms": 48.05,
       "attempts": 1,
       "error": null
+    },
+    {
+      "league_slug": "bel.2",
+      "url": "https://site.api.espn.com/apis/site/v2/sports/soccer/bel.2/scoreboard",
+      "ok": false,
+      "http_status": 400,
+      "elapsed_ms": 67.38,
+      "attempts": 3,
+      "error": "HTTP 400 from https://site.api.espn.com/apis/site/v2/sports/soccer/bel.2/scoreboard"
     },
     {
       "league_slug": "bra.1",
       "url": "https://site.api.espn.com/apis/site/v2/sports/soccer/bra.1/scoreboard",
       "ok": true,
       "http_status": 200,
-      "elapsed_ms": 29.21,
+      "elapsed_ms": 35.67,
       "attempts": 1,
       "error": null
+    },
+    {
+      "league_slug": "bra.2",
+      "url": "https://site.api.espn.com/apis/site/v2/sports/soccer/bra.2/scoreboard",
+      "ok": true,
+      "http_status": 200,
+      "elapsed_ms": 124.48,
+      "attempts": 1,
+      "error": null
+    },
+    {
+      "league_slug": "chn.1",
+      "url": "https://site.api.espn.com/apis/site/v2/sports/soccer/chn.1/scoreboard",
+      "ok": true,
+      "http_status": 200,
+      "elapsed_ms": 66.65,
+      "attempts": 1,
+      "error": null
+    },
+    {
+      "league_slug": "chn.2",
+      "url": "https://site.api.espn.com/apis/site/v2/sports/soccer/chn.2/scoreboard",
+      "ok": false,
+      "http_status": 400,
+      "elapsed_ms": 83.91,
+      "attempts": 3,
+      "error": "HTTP 400 from https://site.api.espn.com/apis/site/v2/sports/soccer/chn.2/scoreboard"
+    },
+    {
+      "league_slug": "chn.fa_cup",
+      "url": "https://site.api.espn.com/apis/site/v2/sports/soccer/chn.fa_cup/scoreboard",
+      "ok": false,
+      "http_status": 400,
+      "elapsed_ms": 97.05,
+      "attempts": 3,
+      "error": "HTTP 400 from https://site.api.espn.com/apis/site/v2/sports/soccer/chn.fa_cup/scoreboard"
     },
     {
       "league_slug": "conmebol.libertadores",
       "url": "https://site.api.espn.com/apis/site/v2/sports/soccer/conmebol.libertadores/scoreboard",
       "ok": true,
       "http_status": 200,
-      "elapsed_ms": 150.6,
+      "elapsed_ms": 79.92,
+      "attempts": 1,
+      "error": null
+    },
+    {
+      "league_slug": "conmebol.sudamericana",
+      "url": "https://site.api.espn.com/apis/site/v2/sports/soccer/conmebol.sudamericana/scoreboard",
+      "ok": true,
+      "http_status": 200,
+      "elapsed_ms": 29.36,
       "attempts": 1,
       "error": null
     },
@@ -84,7 +165,52 @@
       "url": "https://site.api.espn.com/apis/site/v2/sports/soccer/eng.1/scoreboard",
       "ok": true,
       "http_status": 200,
-      "elapsed_ms": 13.68,
+      "elapsed_ms": 44.57,
+      "attempts": 1,
+      "error": null
+    },
+    {
+      "league_slug": "eng.2",
+      "url": "https://site.api.espn.com/apis/site/v2/sports/soccer/eng.2/scoreboard",
+      "ok": true,
+      "http_status": 200,
+      "elapsed_ms": 72.68,
+      "attempts": 1,
+      "error": null
+    },
+    {
+      "league_slug": "eng.3",
+      "url": "https://site.api.espn.com/apis/site/v2/sports/soccer/eng.3/scoreboard",
+      "ok": true,
+      "http_status": 200,
+      "elapsed_ms": 56.96,
+      "attempts": 1,
+      "error": null
+    },
+    {
+      "league_slug": "eng.4",
+      "url": "https://site.api.espn.com/apis/site/v2/sports/soccer/eng.4/scoreboard",
+      "ok": true,
+      "http_status": 200,
+      "elapsed_ms": 35.79,
+      "attempts": 1,
+      "error": null
+    },
+    {
+      "league_slug": "eng.fa",
+      "url": "https://site.api.espn.com/apis/site/v2/sports/soccer/eng.fa/scoreboard",
+      "ok": true,
+      "http_status": 200,
+      "elapsed_ms": 35.76,
+      "attempts": 1,
+      "error": null
+    },
+    {
+      "league_slug": "eng.league_cup",
+      "url": "https://site.api.espn.com/apis/site/v2/sports/soccer/eng.league_cup/scoreboard",
+      "ok": true,
+      "http_status": 200,
+      "elapsed_ms": 112.12,
       "attempts": 1,
       "error": null
     },
@@ -93,7 +219,25 @@
       "url": "https://site.api.espn.com/apis/site/v2/sports/soccer/esp.1/scoreboard",
       "ok": true,
       "http_status": 200,
-      "elapsed_ms": 32.16,
+      "elapsed_ms": 76.49,
+      "attempts": 1,
+      "error": null
+    },
+    {
+      "league_slug": "esp.2",
+      "url": "https://site.api.espn.com/apis/site/v2/sports/soccer/esp.2/scoreboard",
+      "ok": true,
+      "http_status": 200,
+      "elapsed_ms": 49.02,
+      "attempts": 1,
+      "error": null
+    },
+    {
+      "league_slug": "esp.copa_del_rey",
+      "url": "https://site.api.espn.com/apis/site/v2/sports/soccer/esp.copa_del_rey/scoreboard",
+      "ok": true,
+      "http_status": 200,
+      "elapsed_ms": 97.59,
       "attempts": 1,
       "error": null
     },
@@ -102,7 +246,25 @@
       "url": "https://site.api.espn.com/apis/site/v2/sports/soccer/fra.1/scoreboard",
       "ok": true,
       "http_status": 200,
-      "elapsed_ms": 14.71,
+      "elapsed_ms": 48.27,
+      "attempts": 1,
+      "error": null
+    },
+    {
+      "league_slug": "fra.2",
+      "url": "https://site.api.espn.com/apis/site/v2/sports/soccer/fra.2/scoreboard",
+      "ok": true,
+      "http_status": 200,
+      "elapsed_ms": 45.94,
+      "attempts": 1,
+      "error": null
+    },
+    {
+      "league_slug": "fra.coupe_de_france",
+      "url": "https://site.api.espn.com/apis/site/v2/sports/soccer/fra.coupe_de_france/scoreboard",
+      "ok": true,
+      "http_status": 200,
+      "elapsed_ms": 96.65,
       "attempts": 1,
       "error": null
     },
@@ -111,16 +273,79 @@
       "url": "https://site.api.espn.com/apis/site/v2/sports/soccer/ger.1/scoreboard",
       "ok": true,
       "http_status": 200,
-      "elapsed_ms": 15.52,
+      "elapsed_ms": 31.16,
       "attempts": 1,
       "error": null
+    },
+    {
+      "league_slug": "ger.2",
+      "url": "https://site.api.espn.com/apis/site/v2/sports/soccer/ger.2/scoreboard",
+      "ok": true,
+      "http_status": 200,
+      "elapsed_ms": 71.95,
+      "attempts": 1,
+      "error": null
+    },
+    {
+      "league_slug": "ger.dfb_pokal",
+      "url": "https://site.api.espn.com/apis/site/v2/sports/soccer/ger.dfb_pokal/scoreboard",
+      "ok": true,
+      "http_status": 200,
+      "elapsed_ms": 43.36,
+      "attempts": 1,
+      "error": null
+    },
+    {
+      "league_slug": "idn.1",
+      "url": "https://site.api.espn.com/apis/site/v2/sports/soccer/idn.1/scoreboard",
+      "ok": true,
+      "http_status": 200,
+      "elapsed_ms": 88.1,
+      "attempts": 1,
+      "error": null
+    },
+    {
+      "league_slug": "idn.2",
+      "url": "https://site.api.espn.com/apis/site/v2/sports/soccer/idn.2/scoreboard",
+      "ok": false,
+      "http_status": 400,
+      "elapsed_ms": 80.6,
+      "attempts": 3,
+      "error": "HTTP 400 from https://site.api.espn.com/apis/site/v2/sports/soccer/idn.2/scoreboard"
+    },
+    {
+      "league_slug": "idn.cup",
+      "url": "https://site.api.espn.com/apis/site/v2/sports/soccer/idn.cup/scoreboard",
+      "ok": false,
+      "http_status": 400,
+      "elapsed_ms": 75.42,
+      "attempts": 3,
+      "error": "HTTP 400 from https://site.api.espn.com/apis/site/v2/sports/soccer/idn.cup/scoreboard"
     },
     {
       "league_slug": "ita.1",
       "url": "https://site.api.espn.com/apis/site/v2/sports/soccer/ita.1/scoreboard",
       "ok": true,
       "http_status": 200,
-      "elapsed_ms": 34.18,
+      "elapsed_ms": 39.17,
+      "attempts": 1,
+      "error": null
+    },
+    {
+      "league_slug": "ita.2",
+      "url": "https://site.api.espn.com/apis/site/v2/sports/soccer/ita.2/scoreboard",
+      "ok": true,
+      "http_status": 200,
+      "elapsed_ms": 37.43,
+      "attempts": 1,
+      "error": null
+    },
+    {
+      "league_slug": "ita.coppa_italia",
+      "url": "https://site.api.espn.com/apis/site/v2/sports/soccer/ita.coppa_italia/scoreboard",
+      "ok": true,
+      "http_status": 200,
+      "elapsed_ms": 80.15,
       "attempts": 1,
       "error": null
     },
@@ -129,25 +354,142 @@
       "url": "https://site.api.espn.com/apis/site/v2/sports/soccer/jpn.1/scoreboard",
       "ok": true,
       "http_status": 200,
-      "elapsed_ms": 21.12,
+      "elapsed_ms": 39.51,
       "attempts": 1,
       "error": null
+    },
+    {
+      "league_slug": "jpn.2",
+      "url": "https://site.api.espn.com/apis/site/v2/sports/soccer/jpn.2/scoreboard",
+      "ok": false,
+      "http_status": 400,
+      "elapsed_ms": 82.13,
+      "attempts": 3,
+      "error": "HTTP 400 from https://site.api.espn.com/apis/site/v2/sports/soccer/jpn.2/scoreboard"
+    },
+    {
+      "league_slug": "jpn.3",
+      "url": "https://site.api.espn.com/apis/site/v2/sports/soccer/jpn.3/scoreboard",
+      "ok": false,
+      "http_status": 400,
+      "elapsed_ms": 86.1,
+      "attempts": 3,
+      "error": "HTTP 400 from https://site.api.espn.com/apis/site/v2/sports/soccer/jpn.3/scoreboard"
+    },
+    {
+      "league_slug": "jpn.cup",
+      "url": "https://site.api.espn.com/apis/site/v2/sports/soccer/jpn.cup/scoreboard",
+      "ok": false,
+      "http_status": 400,
+      "elapsed_ms": 78.57,
+      "attempts": 3,
+      "error": "HTTP 400 from https://site.api.espn.com/apis/site/v2/sports/soccer/jpn.cup/scoreboard"
+    },
+    {
+      "league_slug": "jpn.emperor",
+      "url": "https://site.api.espn.com/apis/site/v2/sports/soccer/jpn.emperor/scoreboard",
+      "ok": false,
+      "http_status": 400,
+      "elapsed_ms": 72.27,
+      "attempts": 3,
+      "error": "HTTP 400 from https://site.api.espn.com/apis/site/v2/sports/soccer/jpn.emperor/scoreboard"
+    },
+    {
+      "league_slug": "jpn.league_cup",
+      "url": "https://site.api.espn.com/apis/site/v2/sports/soccer/jpn.league_cup/scoreboard",
+      "ok": false,
+      "http_status": 400,
+      "elapsed_ms": 134.5,
+      "attempts": 3,
+      "error": "HTTP 400 from https://site.api.espn.com/apis/site/v2/sports/soccer/jpn.league_cup/scoreboard"
     },
     {
       "league_slug": "kor.1",
       "url": "https://site.api.espn.com/apis/site/v2/sports/soccer/kor.1/scoreboard",
       "ok": false,
       "http_status": 400,
-      "elapsed_ms": 57.2,
+      "elapsed_ms": 92.87,
       "attempts": 3,
       "error": "HTTP 400 from https://site.api.espn.com/apis/site/v2/sports/soccer/kor.1/scoreboard"
+    },
+    {
+      "league_slug": "kor.2",
+      "url": "https://site.api.espn.com/apis/site/v2/sports/soccer/kor.2/scoreboard",
+      "ok": false,
+      "http_status": 400,
+      "elapsed_ms": 96.55,
+      "attempts": 3,
+      "error": "HTTP 400 from https://site.api.espn.com/apis/site/v2/sports/soccer/kor.2/scoreboard"
+    },
+    {
+      "league_slug": "kor.cup",
+      "url": "https://site.api.espn.com/apis/site/v2/sports/soccer/kor.cup/scoreboard",
+      "ok": false,
+      "http_status": 400,
+      "elapsed_ms": 72.67,
+      "attempts": 3,
+      "error": "HTTP 400 from https://site.api.espn.com/apis/site/v2/sports/soccer/kor.cup/scoreboard"
+    },
+    {
+      "league_slug": "kor.fa_cup",
+      "url": "https://site.api.espn.com/apis/site/v2/sports/soccer/kor.fa_cup/scoreboard",
+      "ok": false,
+      "http_status": 400,
+      "elapsed_ms": 76.7,
+      "attempts": 3,
+      "error": "HTTP 400 from https://site.api.espn.com/apis/site/v2/sports/soccer/kor.fa_cup/scoreboard"
+    },
+    {
+      "league_slug": "mas.1",
+      "url": "https://site.api.espn.com/apis/site/v2/sports/soccer/mas.1/scoreboard",
+      "ok": false,
+      "http_status": 400,
+      "elapsed_ms": 75.47,
+      "attempts": 3,
+      "error": "HTTP 400 from https://site.api.espn.com/apis/site/v2/sports/soccer/mas.1/scoreboard"
+    },
+    {
+      "league_slug": "mas.cup",
+      "url": "https://site.api.espn.com/apis/site/v2/sports/soccer/mas.cup/scoreboard",
+      "ok": false,
+      "http_status": 400,
+      "elapsed_ms": 81.11,
+      "attempts": 3,
+      "error": "HTTP 400 from https://site.api.espn.com/apis/site/v2/sports/soccer/mas.cup/scoreboard"
+    },
+    {
+      "league_slug": "mas.fa_cup",
+      "url": "https://site.api.espn.com/apis/site/v2/sports/soccer/mas.fa_cup/scoreboard",
+      "ok": false,
+      "http_status": 400,
+      "elapsed_ms": 93.6,
+      "attempts": 3,
+      "error": "HTTP 400 from https://site.api.espn.com/apis/site/v2/sports/soccer/mas.fa_cup/scoreboard"
     },
     {
       "league_slug": "mex.1",
       "url": "https://site.api.espn.com/apis/site/v2/sports/soccer/mex.1/scoreboard",
       "ok": true,
       "http_status": 200,
-      "elapsed_ms": 30.37,
+      "elapsed_ms": 59.54,
+      "attempts": 1,
+      "error": null
+    },
+    {
+      "league_slug": "mex.2",
+      "url": "https://site.api.espn.com/apis/site/v2/sports/soccer/mex.2/scoreboard",
+      "ok": true,
+      "http_status": 200,
+      "elapsed_ms": 178.28,
+      "attempts": 1,
+      "error": null
+    },
+    {
+      "league_slug": "mys.1",
+      "url": "https://site.api.espn.com/apis/site/v2/sports/soccer/mys.1/scoreboard",
+      "ok": true,
+      "http_status": 200,
+      "elapsed_ms": 141.05,
       "attempts": 1,
       "error": null
     },
@@ -156,7 +498,16 @@
       "url": "https://site.api.espn.com/apis/site/v2/sports/soccer/ned.1/scoreboard",
       "ok": true,
       "http_status": 200,
-      "elapsed_ms": 19.89,
+      "elapsed_ms": 97.82,
+      "attempts": 1,
+      "error": null
+    },
+    {
+      "league_slug": "ned.2",
+      "url": "https://site.api.espn.com/apis/site/v2/sports/soccer/ned.2/scoreboard",
+      "ok": true,
+      "http_status": 200,
+      "elapsed_ms": 53.72,
       "attempts": 1,
       "error": null
     },
@@ -165,25 +516,88 @@
       "url": "https://site.api.espn.com/apis/site/v2/sports/soccer/por.1/scoreboard",
       "ok": true,
       "http_status": 200,
-      "elapsed_ms": 17.96,
+      "elapsed_ms": 88.96,
       "attempts": 1,
       "error": null
+    },
+    {
+      "league_slug": "por.2",
+      "url": "https://site.api.espn.com/apis/site/v2/sports/soccer/por.2/scoreboard",
+      "ok": false,
+      "http_status": 400,
+      "elapsed_ms": 80.72,
+      "attempts": 3,
+      "error": "HTTP 400 from https://site.api.espn.com/apis/site/v2/sports/soccer/por.2/scoreboard"
     },
     {
       "league_slug": "saud.1",
       "url": "https://site.api.espn.com/apis/site/v2/sports/soccer/saud.1/scoreboard",
       "ok": false,
       "http_status": 400,
-      "elapsed_ms": 62.52,
+      "elapsed_ms": 82.1,
       "attempts": 3,
       "error": "HTTP 400 from https://site.api.espn.com/apis/site/v2/sports/soccer/saud.1/scoreboard"
+    },
+    {
+      "league_slug": "sgp.1",
+      "url": "https://site.api.espn.com/apis/site/v2/sports/soccer/sgp.1/scoreboard",
+      "ok": true,
+      "http_status": 200,
+      "elapsed_ms": 113.96,
+      "attempts": 1,
+      "error": null
+    },
+    {
+      "league_slug": "tha.1",
+      "url": "https://site.api.espn.com/apis/site/v2/sports/soccer/tha.1/scoreboard",
+      "ok": true,
+      "http_status": 200,
+      "elapsed_ms": 90.31,
+      "attempts": 1,
+      "error": null
+    },
+    {
+      "league_slug": "tha.2",
+      "url": "https://site.api.espn.com/apis/site/v2/sports/soccer/tha.2/scoreboard",
+      "ok": false,
+      "http_status": 400,
+      "elapsed_ms": 72.4,
+      "attempts": 3,
+      "error": "HTTP 400 from https://site.api.espn.com/apis/site/v2/sports/soccer/tha.2/scoreboard"
+    },
+    {
+      "league_slug": "tha.fa_cup",
+      "url": "https://site.api.espn.com/apis/site/v2/sports/soccer/tha.fa_cup/scoreboard",
+      "ok": false,
+      "http_status": 400,
+      "elapsed_ms": 82.3,
+      "attempts": 3,
+      "error": "HTTP 400 from https://site.api.espn.com/apis/site/v2/sports/soccer/tha.fa_cup/scoreboard"
+    },
+    {
+      "league_slug": "tha.league_cup",
+      "url": "https://site.api.espn.com/apis/site/v2/sports/soccer/tha.league_cup/scoreboard",
+      "ok": false,
+      "http_status": 400,
+      "elapsed_ms": 105.95,
+      "attempts": 3,
+      "error": "HTTP 400 from https://site.api.espn.com/apis/site/v2/sports/soccer/tha.league_cup/scoreboard"
     },
     {
       "league_slug": "tur.1",
       "url": "https://site.api.espn.com/apis/site/v2/sports/soccer/tur.1/scoreboard",
       "ok": true,
       "http_status": 200,
-      "elapsed_ms": 44.97,
+      "elapsed_ms": 110.23,
+      "attempts": 1,
+      "error": null
+    },
+    {
+      "league_slug": "tur.2",
+      "url": "https://site.api.espn.com/apis/site/v2/sports/soccer/tur.2/scoreboard",
+      "ok": true,
+      "http_status": 200,
+      "elapsed_ms": 91.7,
       "attempts": 1,
       "error": null
     },
@@ -192,7 +606,7 @@
       "url": "https://site.api.espn.com/apis/site/v2/sports/soccer/uefa.champions/scoreboard",
       "ok": true,
       "http_status": 200,
-      "elapsed_ms": 20.84,
+      "elapsed_ms": 51.32,
       "attempts": 1,
       "error": null
     },
@@ -201,7 +615,16 @@
       "url": "https://site.api.espn.com/apis/site/v2/sports/soccer/uefa.europa/scoreboard",
       "ok": true,
       "http_status": 200,
-      "elapsed_ms": 30.33,
+      "elapsed_ms": 41.47,
+      "attempts": 1,
+      "error": null
+    },
+    {
+      "league_slug": "uefa.europa.conf",
+      "url": "https://site.api.espn.com/apis/site/v2/sports/soccer/uefa.europa.conf/scoreboard",
+      "ok": true,
+      "http_status": 200,
+      "elapsed_ms": 79.69,
       "attempts": 1,
       "error": null
     },
@@ -210,9 +633,18 @@
       "url": "https://site.api.espn.com/apis/site/v2/sports/soccer/usa.1/scoreboard",
       "ok": true,
       "http_status": 200,
-      "elapsed_ms": 32.13,
+      "elapsed_ms": 83.55,
       "attempts": 1,
       "error": null
+    },
+    {
+      "league_slug": "usa.2",
+      "url": "https://site.api.espn.com/apis/site/v2/sports/soccer/usa.2/scoreboard",
+      "ok": false,
+      "http_status": 400,
+      "elapsed_ms": 86.14,
+      "attempts": 3,
+      "error": "HTTP 400 from https://site.api.espn.com/apis/site/v2/sports/soccer/usa.2/scoreboard"
     }
   ]
 }
