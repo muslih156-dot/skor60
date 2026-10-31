@@ -4,7 +4,7 @@ Dashboard Streamlit Produksi untuk TRADING BOLA MENIT 60 – LAST GOAL SYSTEM.
 Membaca langsung dari database operasional dan file histori yang tersimpan tanpa membuat
 data dummy. Menampilkan pemisahan profit aktual vs simulasi, 5 kartu utama, 6 grafik Plotly,
 ringkasan trading day (cut-off 12:00 WITA), tabel 20 pertandingan terbaru dengan filter,
-dan panel penjelasan audit detail.
+dan panel penjelasan audit detail beserta label Aktif/Pasif.
 """
 
 from datetime import datetime, timezone
@@ -94,7 +94,7 @@ def format_idr(amount: int) -> str:
 
 
 def get_peak_hours_label(now_wita: datetime) -> str:
-    """Memberikan panduan informasi Peak Hours berdasarkan jam WITA saat ini (Bagian J)."""
+    """Memberikan panduan informasi Peak Hours berdasarkan jam WITA saat ini."""
     h = now_wita.hour
     if 13 <= h < 19:
         return "13:00–19:00 WITA: Jendela Potensi Pertandingan Asia"
@@ -122,7 +122,7 @@ def render_dashboard() -> None:
         last_db_update_str = "BELUM ADA DATABASE"
 
     # =================================================================
-    # 1. HEADER UTAMA (Bagian L.1)
+    # 1. HEADER UTAMA
     # =================================================================
     st.markdown(
         f"""
@@ -156,7 +156,7 @@ def render_dashboard() -> None:
     major_stats = stats["by_league_tier"]["MAJOR"]
 
     # =================================================================
-    # 2. LIMA KARTU UTAMA (Bagian L.2)
+    # 2. LIMA KARTU UTAMA
     # =================================================================
     cols = st.columns(5)
 
@@ -244,7 +244,7 @@ def render_dashboard() -> None:
     st.write("")
 
     # =================================================================
-    # 3. PEMISAHAN STATISTIK SIMULASI VS ACTUAL ODDS & KUALITAS STRATEGI (Bagian C.4, H, I)
+    # 3. PEMISAHAN STATISTIK SIMULASI VS ACTUAL ODDS
     # =================================================================
     with st.expander("📊 Detail Statistik Kuantitatif, Break-Even, EV, & Klasifikasi Liga (Major / Minor / Unknown)", expanded=True):
         tab_sim, tab_act, tab_tier = st.tabs([
@@ -297,7 +297,7 @@ def render_dashboard() -> None:
             st.dataframe(pd.DataFrame(tier_rows), use_container_width=True, hide_index=True)
 
     # =================================================================
-    # 4. GRAFIK VISUALISASI PLOTLY (Bagian L.3)
+    # 4. GRAFIK VISUALISASI PLOTLY
     # =================================================================
     st.subheader("📈 Visualisasi Performa & Distribusi")
     if len(all_records) == 0:
@@ -305,7 +305,6 @@ def render_dashboard() -> None:
     else:
         g_col1, g_col2, g_col3 = st.columns(3)
 
-        # Chart 1: Donut WIN/LOSE/VOID/PENDING
         with g_col1:
             status_counts = {
                 "WIN": sim_stats["win"],
@@ -334,7 +333,6 @@ def render_dashboard() -> None:
             else:
                 st.caption("Data belum cukup untuk grafik distribusi status.")
 
-        # Chart 2 & 3: Grafik Profit Harian & Cumulative Profit
         day_summaries = list(reversed(stats["by_trading_day"]))
         settled_days = [d for d in day_summaries if d["settled_matches"] > 0]
 
@@ -372,7 +370,6 @@ def render_dashboard() -> None:
 
         g_col4, g_col5, g_col6 = st.columns(3)
 
-        # Chart 4: Performa Major vs Minor vs Unknown
         with g_col4:
             tier_list = [
                 stats["by_league_tier"]["MAJOR"],
@@ -394,7 +391,6 @@ def render_dashboard() -> None:
             else:
                 st.caption("Data belum cukup untuk grafik Major vs Minor.")
 
-        # Chart 5: Win Rate Berdasarkan Odds Aktual
         with g_col5:
             actual_settled = [
                 r for r in all_records
@@ -416,7 +412,6 @@ def render_dashboard() -> None:
             else:
                 st.caption("Data odds aktual belum cukup untuk grafik Win Rate berdasarkan odds.")
 
-        # Chart 6: Distribusi Waktu Entry (Menit 60–66)
         with g_col6:
             entry_mins = [int(r["minute_detected"]) for r in all_records if r.get("minute_detected") is not None]
             if entry_mins:
@@ -434,7 +429,7 @@ def render_dashboard() -> None:
                 st.caption("Data belum cukup untuk grafik distribusi menit entry.")
 
     # =================================================================
-    # 5. RINGKASAN TRADING DAY (Bagian L.4)
+    # 5. RINGKASAN TRADING DAY
     # =================================================================
     st.subheader("🗓️ Ringkasan Partisi Harian (Cut-Off 12:00 WITA)")
     if not stats["by_trading_day"]:
@@ -458,7 +453,7 @@ def render_dashboard() -> None:
         st.dataframe(df_td, use_container_width=True, hide_index=True)
 
     # =================================================================
-    # 6. TABEL PERTANDINGAN & FILTER (Bagian L.5)
+    # 6. TABEL PERTANDINGAN & FILTER (DENGAN LABEL AKTIVITAS)
     # =================================================================
     st.subheader("📋 Daftar Pertandingan (20 Terbaru Sesuai Filter)")
 
@@ -517,8 +512,11 @@ def render_dashboard() -> None:
             )
 
             badge_tier = "MAJOR" if rec.get("is_major") else str(rec.get("league_category") or "UNKNOWN")
-            odds_disp = f"{rec['odds_entry']:.2f} (Actual)" if rec.get("odds_entry") is not None else f"{SIMULATED_ODDS:.2f} (Sim)"
+            odds_disp = f"{rec.get('odds_entry', SIMULATED_ODDS):.2f} (Actual)" if rec.get("odds_entry") is not None else f"{SIMULATED_ODDS:.2f} (Sim)"
             pnl_val = rec.get("actual_profit") if rec.get("odds_entry") is not None else rec.get("simulated_profit", 0)
+
+            # Tambahan untuk Aktivitas
+            act_label = rec.get("activity_label", "NORMAL")
 
             table_rows.append({
                 "No": idx,
@@ -526,7 +524,8 @@ def render_dashboard() -> None:
                 "Match": f"{rec.get('home_team')} vs {rec.get('away_team')}",
                 "League": rec.get("league"),
                 "Badge": badge_tier,
-                "Minute Entry": f"{rec.get('minute_detected')}'",
+                "Activity": act_label,
+                "Min Entry": f"{rec.get('minute_detected')}'",
                 "Entry Score": rec.get("score_at_entry"),
                 "Entry Odds": odds_disp,
                 "Current Score": rec.get("current_score"),
@@ -534,31 +533,46 @@ def render_dashboard() -> None:
                 "Result": display_status,
                 "Profit": format_idr(int(pnl_val or 0)) if res in ("WIN", "LOSE", "VOID") else "Rp0 (Pending)",
                 "Trading Day": rec.get("trading_day"),
-                "Verification": rec.get("verification_status"),
             })
 
         df_table = pd.DataFrame(table_rows)
 
-        def style_result_col(val: str) -> str:
-            colors = {
-                "WIN": "background-color: #16a34a; color: white; font-weight: bold;",
-                "LOSE": "background-color: #dc2626; color: white; font-weight: bold;",
-                "LIVE": "background-color: #2563eb; color: white; font-weight: bold;",
-                "PENDING": "background-color: #ca8a04; color: white; font-weight: bold;",
-                "VOID": "background-color: #64748b; color: white; font-weight: bold;",
-                "REVIEW": "background-color: #ea580c; color: white; font-weight: bold;",
-                "DATA UNVERIFIED": "background-color: #ea580c; color: white; font-weight: bold;",
-            }
-            return colors.get(str(val).upper(), "")
+        # Style mapping
+        def style_table(row):
+            styles = [''] * len(row)
+            
+            # Warnai result
+            res_val = str(row['Result']).upper()
+            if res_val == "WIN":
+                styles[row.index.get_loc('Result')] = "background-color: #16a34a; color: white; font-weight: bold;"
+            elif res_val == "LOSE":
+                styles[row.index.get_loc('Result')] = "background-color: #dc2626; color: white; font-weight: bold;"
+            elif res_val == "LIVE":
+                styles[row.index.get_loc('Result')] = "background-color: #2563eb; color: white; font-weight: bold;"
+            elif res_val == "PENDING":
+                styles[row.index.get_loc('Result')] = "background-color: #ca8a04; color: white; font-weight: bold;"
+            elif res_val == "VOID":
+                styles[row.index.get_loc('Result')] = "background-color: #64748b; color: white; font-weight: bold;"
+            elif res_val in ("REVIEW", "DATA UNVERIFIED"):
+                styles[row.index.get_loc('Result')] = "background-color: #ea580c; color: white; font-weight: bold;"
+            
+            # Warnai Activity Label
+            act_val = str(row['Activity']).upper()
+            if act_val == "AKTIF":
+                styles[row.index.get_loc('Activity')] = "background-color: #2e7d32; color: white; font-weight: bold;"
+            elif act_val == "PASIF":
+                styles[row.index.get_loc('Activity')] = "background-color: #d32f2f; color: white; font-weight: bold;"
+                
+            return styles
 
         st.dataframe(
-            df_table.style.map(style_result_col, subset=["Result"]),
+            df_table.style.apply(style_table, axis=1),
             use_container_width=True,
             hide_index=True,
         )
 
         # =================================================================
-        # 7. PANEL AUDIT DETAIL PERTANDINGAN (Bagian L.6)
+        # 7. PANEL AUDIT DETAIL PERTANDINGAN
         # =================================================================
         st.subheader("🔍 Audit Trail & Penjelasan Hasil Pertandingan")
         match_options = {
@@ -579,7 +593,7 @@ def render_dashboard() -> None:
                 st.markdown("**1. Identitas & Waktu Entry**")
                 st.write(f"- **Match ID:** `{sel_rec.get('match_id')}`")
                 st.write(f"- **League Slug:** `{sel_rec.get('league_slug')}` ({sel_rec.get('league_category')})")
-                st.write(f"- **Kickoff (WITA):** `{sel_rec.get('kickoff_wita')}`")
+                st.write(f"- **Activity Level:** `{sel_rec.get('activity_label', 'NORMAL')}`")
                 st.write(f"- **Waktu Deteksi / Entry (UTC):** `{sel_rec.get('detected_at_utc')}`")
                 st.write(f"- **Waktu Deteksi / Entry (WITA):** `{sel_rec.get('detected_at_wita')}`")
                 st.write(f"- **Trading Day:** `{sel_rec.get('trading_day')}`")
