@@ -1,6 +1,6 @@
 {
   "trading_month": "2026-10",
-  "last_updated_utc": "2026-10-31T05:47:49Z",
+  "last_updated_utc": "2026-10-31T05:52:53Z",
   "total_records": 20,
   "matches": [
     {
@@ -44,40 +44,48 @@
           "score": "0-1",
           "match_status": "Second Half",
           "note": "GOAL DETECTED"
+        },
+        {
+          "timestamp_utc": "2026-10-31T05:52:53Z",
+          "timestamp_wita": "2026-10-31T13:52:53.378477+08:00",
+          "clock": "Final",
+          "minute": null,
+          "score": "0-1",
+          "match_status": "Final",
+          "note": "MATCH FINISHED"
         }
       ],
       "goal_events": [
         {
           "minute": 66,
           "clock_display": "66'",
-          "period": 0,
-          "team_id": "20285",
+          "period": 2,
+          "team": "Sydney FC",
           "scorer": "Faith Webber",
           "type": "Goal",
-          "is_own_goal": false,
-          "is_penalty": false,
+          "text": "Goal! Brisbane Roar Women 0, Sydney Women 1. Faith Webber (Sydney Women) right footed shot from the right side of the box to the bottom left corner. Assisted by Maddie Caspers.",
           "time_approximate": false,
-          "source": "ESPN_OFFICIAL_DETAIL"
+          "source": "ESPN_SUMMARY_KEY_EVENTS"
         }
       ],
       "current_score": "0-1",
-      "final_score": null,
-      "match_status": "Second Half",
-      "settlement_status": "PENDING",
-      "result": "PENDING",
-      "profit": 0,
-      "roi_contribution": 0.0,
-      "simulated_profit": 0,
-      "simulated_roi_contribution": 0.0,
+      "final_score": "0-1",
+      "match_status": "Final",
+      "settlement_status": "SETTLED",
+      "result": "WIN",
+      "profit": 40000,
+      "roi_contribution": 80.0,
+      "simulated_profit": 40000,
+      "simulated_roi_contribution": 80.0,
       "actual_profit": null,
       "actual_roi_contribution": null,
       "is_major": false,
       "created_at": "2026-10-31T05:21:07Z",
-      "updated_at": "2026-10-31T05:47:49Z",
-      "last_verified_at": "2026-10-31T05:21:07Z",
-      "verification_status": "IN_PROGRESS_PENDING_FINAL",
+      "updated_at": "2026-10-31T05:52:53Z",
+      "last_verified_at": "2026-10-31T05:52:53Z",
+      "verification_status": "VERIFIED_OFFICIAL_FINAL",
       "revision_history": [],
-      "audit_explanation": "Pertandingan 401913244 masih berstatus Second Half (Skor saat ini: 0-1). Menunggu status Final resmi dari provider (PENDING).",
+      "audit_explanation": "Pertandingan 401913244 masuk pada menit 64' dengan skor 0-0. Status resmi mencapai Final dengan skor akhir waktu normal 0-1. Minimal 1 gol tercipta setelah waktu entry sehingga dinyatakan WIN.",
       "audit_passed": true
     },
     {
