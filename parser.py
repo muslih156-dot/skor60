@@ -2,6 +2,7 @@
 parser.py
 Modul parsing status, waktu pertandingan (clock), skor, penentuan trading day WITA,
 dan deteksi kandidat untuk TRADING BOLA MENIT 60 – LAST GOAL SYSTEM.
+Menyertakan perhitungan statistik Aktif/Pasif.
 """
 
 import re
@@ -22,7 +23,6 @@ from config import (
 
 WITA_TZ = ZoneInfo(TIMEZONE_NAME)
 
-# Pemetaan status resmi ESPN ke kategori standar yang wajib dikenali
 STATUS_MAP: Dict[str, str] = {
     "STATUS_SCHEDULED": "Scheduled",
     "STATUS_TBD": "Scheduled",
@@ -51,11 +51,6 @@ STATUS_MAP: Dict[str, str] = {
 
 
 def compute_trading_day(dt_utc: datetime) -> str:
-    """
-    Menghitung tanggal Trading Day berdasarkan aturan Cut-Off 12:00 WITA (Asia/Makassar).
-    - Jika waktu lokal WITA < 12:00 -> Trading day = tanggal hari sebelumnya.
-    - Jika waktu lokal WITA >= 12:00 -> Trading day = tanggal hari tersebut.
-    """
     if dt_utc.tzinfo is None:
         dt_utc = dt_utc.replace(tzinfo=timezone.utc)
     dt_wita = dt_utc.astimezone(WITA_TZ)
@@ -67,7 +62,6 @@ def compute_trading_day(dt_utc: datetime) -> str:
 
 
 def format_iso_utc_and_wita(dt_utc: datetime) -> Tuple[str, str]:
-    """Mengonversi datetime ke format string ISO 8601 untuk UTC dan WITA."""
     if dt_utc.tzinfo is None:
         dt_utc = dt_utc.replace(tzinfo=timezone.utc)
     utc_str = dt_utc.astimezone(timezone.utc).strftime("%Y-%m-%dT%H:%M:%SZ")
@@ -76,11 +70,6 @@ def format_iso_utc_and_wita(dt_utc: datetime) -> Tuple[str, str]:
 
 
 def parse_match_status(event_data: Dict[str, Any]) -> Dict[str, Any]:
-    """
-    Mengekstrak dan memvalidasi status pertandingan dari payload ESPN.
-    Mengenali: Scheduled, First Half, Halftime, Second Half, Live, Extra Time,
-    Penalties, Final, Postponed, Cancelled, Suspended, Abandoned.
-    """
     if not isinstance(event_data, dict):
         return {
             "canonical_status": "UNKNOWN",
@@ -116,7 +105,6 @@ def parse_match_status(event_data: Dict[str, Any]) -> Dict[str, Any]:
 
     canonical = STATUS_MAP.get(raw_name, "UNKNOWN")
 
-    # Penanganan fallback berdasarkan state & period jika raw_name generik (STATUS_IN_PROGRESS)
     if canonical == "Live":
         if period == 1:
             canonical = "First Half"
@@ -146,7 +134,6 @@ def parse_match_status(event_data: Dict[str, Any]) -> Dict[str, Any]:
             else:
                 canonical = "Live"
 
-    # Deteksi apakah kompetisi memiliki format waktu khusus (misal bukan 2x45 menit reguler)
     comp = (event_data.get("competitions") or [{}])[0]
     format_reg_periods = (
         comp.get("format", {}).get("regulation", {}).get("periods")
@@ -189,10 +176,6 @@ def parse_match_status(event_data: Dict[str, Any]) -> Dict[str, Any]:
 
 
 def parse_match_clock(event_data: Dict[str, Any]) -> Dict[str, Any]:
-    """
-    Mengekstrak menit pertandingan resmi dari field ESPN (displayClock / clock)
-    tanpa pernah menambahkan 45 secara otomatis tanpa memeriksa struktur waktu.
-    """
     status_obj = event_data.get("status")
     if not isinstance(status_obj, dict):
         comp = (event_data.get("competitions") or [{}])[0]
@@ -211,9 +194,7 @@ def parse_match_clock(event_data: Dict[str, Any]) -> Dict[str, Any]:
     clock_valid: bool = False
     is_non_cumulative_clock: bool = False
 
-    # 1. Prioritaskan displayClock (contoh: "63'", "45'+2'", "90'+4'", "60:12")
     if display_clock:
-        # Cek pola injury time: "45'+2'" atau "90'+3'"
         match_stoppage = re.match(r"^(\d+)\s*'\s*\+\s*(\d+)\s*'?$", display_clock)
         if match_stoppage:
             base_min = int(match_stoppage.group(1))
@@ -221,22 +202,16 @@ def parse_match_clock(event_data: Dict[str, Any]) -> Dict[str, Any]:
             minute = base_min
             clock_valid = True
         else:
-            # Cek pola menit standar: "63'" atau "63:15" atau "63"
             match_std = re.match(r"^(\d+)(?::\d+)?\s*'?$", display_clock)
             if match_std:
                 minute = int(match_std.group(1))
                 clock_valid = True
 
-    # 2. Fallback ke raw_clock (dalam detik) jika displayClock tidak terparsing
     if not clock_valid and isinstance(raw_clock, (int, float)) and raw_clock >= 0:
         if raw_clock > 0 or period == 1:
             minute = int(raw_clock // 60)
             clock_valid = True
 
-    # 3. Validasi struktur waktu babak kedua:
-    # Di ESPN Soccer reguler, babak kedua selalu kumulatif (45' s/d 90').
-    # Jika period == 2 tetapi minute < 45 (misal clock me-reset ke 15'), tandai sebagai
-    # non-cumulative / format khusus dan JANGAN menambahkan 45 secara buta.
     if clock_valid and period == 2 and minute is not None and minute < 45:
         is_non_cumulative_clock = True
 
@@ -251,13 +226,43 @@ def parse_match_clock(event_data: Dict[str, Any]) -> Dict[str, Any]:
     }
 
 
+def analyze_match_activity(statistics: list) -> Dict[str, Any]:
+    stats_map = {}
+    for stat in statistics:
+        if isinstance(stat, dict):
+            name = str(stat.get("name") or "").lower()
+            val = str(stat.get("displayValue") or "0")
+            try:
+                stats_map[name] = float(val)
+            except ValueError:
+                stats_map[name] = 0.0
+
+    total_shots = stats_map.get("totalshots", 0.0)
+    shots_on_target = stats_map.get("shotsontarget", 0.0)
+    corners = stats_map.get("cornerkicks", 0.0)
+    xg_total = stats_map.get("expectedgoals", 0.0)
+
+    label = "NORMAL"
+    
+    # Kriteria PASIF & AKTIF
+    if total_shots < 15 and shots_on_target < 5 and corners < 7 and xg_total < 1.2:
+        label = "PASIF"
+    elif total_shots > 22 and shots_on_target > 8 and corners > 10 and xg_total > 2.5:
+        label = "AKTIF"
+    
+    if total_shots == 0 and corners == 0:
+        label = "NO_STATS_DATA"
+
+    return {
+        "activity_label": label,
+        "total_shots": total_shots,
+        "shots_on_target": shots_on_target,
+        "corners": corners,
+        "xg_total": xg_total
+    }
+
+
 def parse_score(event_data: Dict[str, Any], league_slug_hint: str = "") -> Dict[str, Any]:
-    """
-    Mengekstrak skor home/away, tim, liga, waktu kickoff, odds entry (jika ada),
-    dan skor waktu normal (regulation score) dari payload event ESPN.
-    PENTING: Jika field skor hilang, kosong, atau bukan angka valid,
-    `score_valid` akan bernilai False agar error API tidak pernah dianggap 0-0.
-    """
     if not isinstance(event_data, dict):
         return {"score_valid": False, "error": "Invalid event_data type"}
 
@@ -295,7 +300,6 @@ def parse_score(event_data: Dict[str, Any], league_slug_hint: str = "") -> Dict[
     raw_home_score = home_comp.get("score")
     raw_away_score = away_comp.get("score")
 
-    # Validasi ketat: skor tidak boleh None, string kosong, atau boolean
     if (
         raw_home_score is None
         or raw_away_score is None
@@ -324,7 +328,6 @@ def parse_score(event_data: Dict[str, Any], league_slug_hint: str = "") -> Dict[
             "away_team": away_team,
         }
 
-    # Ekstraksi skor waktu normal (linescores babak 1 + babak 2) jika tersedia
     regulation_home_score: Optional[int] = None
     regulation_away_score: Optional[int] = None
     home_linescores = home_comp.get("linescores")
@@ -346,7 +349,6 @@ def parse_score(event_data: Dict[str, Any], league_slug_hint: str = "") -> Dict[
             regulation_home_score = None
             regulation_away_score = None
 
-    # Ekstraksi liga & slug
     league_info = event_data.get("league") or comp.get("league") or {}
     league_slug = str(
         league_info.get("slug")
@@ -361,7 +363,6 @@ def parse_score(event_data: Dict[str, Any], league_slug_hint: str = "") -> Dict[
         or "Unknown League"
     ).strip()
 
-    # Kickoff timestamp
     raw_date = str(event_data.get("date") or comp.get("date") or "").strip()
     try:
         if raw_date.endswith("Z"):
@@ -375,7 +376,6 @@ def parse_score(event_data: Dict[str, Any], league_slug_hint: str = "") -> Dict[
 
     kickoff_utc, kickoff_wita = format_iso_utc_and_wita(kickoff_dt)
 
-    # Identitas pertandingan (match_id resmi atau provisional composite ID)
     raw_id = str(event_data.get("id") or comp.get("id") or "").strip()
     is_provisional_id = False
     if raw_id:
@@ -387,7 +387,6 @@ def parse_score(event_data: Dict[str, Any], league_slug_hint: str = "") -> Dict[
         safe_league = re.sub(r"[^a-z0-9.]", "", league_slug or "unknown")
         match_id = f"PROVISIONAL_{safe_league}_{safe_home}_{safe_away}_{kickoff_utc}"
 
-    # Ekstraksi odds aktual jika benar-benar tersedia untuk Over 0.5 saat skor 0-0
     odds_entry: Optional[float] = None
     odds_source: str = "SIMULATED_DEFAULT"
     odds_list = comp.get("odds")
@@ -402,7 +401,6 @@ def parse_score(event_data: Dict[str, Any], league_slug_hint: str = "") -> Dict[
                 try:
                     ou_float = float(over_under)
                     odd_float = float(over_odds_val)
-                    # Hanya terima jika decimal odds valid (> 1.01 dan < 25.0) dan line 0.5
                     if abs(ou_float - 0.5) < 1e-6 and 1.01 < odd_float < 25.0:
                         odds_entry = round(odd_float, 3)
                         odds_source = f"ACTUAL:{provider_name}"
@@ -436,10 +434,6 @@ def parse_score(event_data: Dict[str, Any], league_slug_hint: str = "") -> Dict[
 
 
 def extract_goal_events_from_payload(event_data: Dict[str, Any]) -> List[Dict[str, Any]]:
-    """
-    Mengekstrak daftar event gol resmi dari payload scoreboard (`competitions[0].details`)
-    atau summary (`keyEvents` / `scoringPlays`).
-    """
     goals: List[Dict[str, Any]] = []
     if not isinstance(event_data, dict):
         return goals
@@ -449,7 +443,6 @@ def extract_goal_events_from_payload(event_data: Dict[str, Any]) -> List[Dict[st
     if not isinstance(details, list):
         details = []
 
-    # Coba ambil dari details di scoreboard
     for item in details:
         if not isinstance(item, dict):
             continue
@@ -494,32 +487,33 @@ def extract_goal_events_from_payload(event_data: Dict[str, Any]) -> List[Dict[st
 
 
 def parse_full_event(event_data: Dict[str, Any], league_slug_hint: str = "") -> Dict[str, Any]:
-    """Menggabungkan hasil parsing status, waktu, skor, dan event gol menjadi satu objek terpadu."""
     status_info = parse_match_status(event_data)
     clock_info = parse_match_clock(event_data)
     score_info = parse_score(event_data, league_slug_hint=league_slug_hint)
     goal_events = extract_goal_events_from_payload(event_data)
+    
+    comps = event_data.get("competitions") or []
+    statistics_raw = []
+    if comps and isinstance(comps[0], dict) and "competitors" in comps[0]:
+        for c in comps[0]["competitors"]:
+            statistics_raw.extend(c.get("statistics") or [])
+            
+    activity_info = analyze_match_activity(statistics_raw)
 
     return {
         "status": status_info,
         "clock": clock_info,
         "score": score_info,
         "goal_events": goal_events,
+        "activity": activity_info
     }
 
 
 def detect_candidate(parsed_event: Dict[str, Any]) -> Dict[str, Any]:
-    """
-    Memvalidasi apakah satu pertandingan yang telah diparsing memenuhi seluruh syarat
-    kandidat trading:
-    1. Status pertandingan LIVE dan berada pada Babak Kedua (Second Half, period == 2).
-    2. Pertandingan belum selesai, belum ditunda, belum dibatalkan, dan bukan format waktu khusus.
-    3. Menit pertandingan berada pada rentang 60 s/d 66 (inklusif) dan clock valid.
-    4. Skor resmi saat deteksi adalah 0-0 (score_valid == True).
-    """
     status = parsed_event.get("status") or {}
     clock = parsed_event.get("clock") or {}
     score = parsed_event.get("score") or {}
+    act = parsed_event.get("activity") or {}
 
     reasons: List[str] = []
 
@@ -559,4 +553,5 @@ def detect_candidate(parsed_event: Dict[str, Any]) -> Dict[str, Any]:
         "reasons": reasons,
         "minute_detected": minute,
         "score_at_entry": score.get("formatted_score") if score.get("score_valid") else None,
+        "activity_label": act.get("activity_label", "NORMAL")
     }
