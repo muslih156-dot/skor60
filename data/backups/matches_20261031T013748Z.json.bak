@@ -1,7 +1,7 @@
 {
   "system": "TRADING BOLA MENIT 60 - LAST GOAL SYSTEM",
-  "version": "2.0",
-  "last_updated_utc": "2026-10-31T01:07:43Z",
+  "version": "2.1",
+  "last_updated_utc": "2026-10-31T01:30:41Z",
   "total_records": 15,
   "matches": [
     {
@@ -44,6 +44,15 @@
           "score": "0-1",
           "match_status": "Second Half",
           "note": "GOAL DETECTED"
+        },
+        {
+          "timestamp_utc": "2026-10-31T01:22:51Z",
+          "timestamp_wita": "2026-10-31T09:22:51.807093+08:00",
+          "clock": "90'",
+          "minute": 90,
+          "score": "1-1",
+          "match_status": "Second Half",
+          "note": "GOAL DETECTED"
         }
       ],
       "goal_events": [
@@ -58,9 +67,21 @@
           "time_approximate": true,
           "note": "GOAL EVENT TIME APPROXIMATE",
           "source": "SCORE_SNAPSHOT_DIFFERENCE"
+        },
+        {
+          "observed_at_utc": "2026-10-31T01:22:51Z",
+          "observed_at_wita": "2026-10-31T09:22:51.807093+08:00",
+          "minute": 90,
+          "clock_display": "90'",
+          "previous_score": "0-1",
+          "score_after": "1-1",
+          "team": "UNKNOWN_FROM_SNAPSHOT_DIFF",
+          "time_approximate": true,
+          "note": "GOAL EVENT TIME APPROXIMATE",
+          "source": "SCORE_SNAPSHOT_DIFFERENCE"
         }
       ],
-      "current_score": "0-1",
+      "current_score": "1-1",
       "final_score": null,
       "match_status": "Second Half",
       "settlement_status": "PENDING",
@@ -73,11 +94,11 @@
       "actual_roi_contribution": null,
       "is_major": false,
       "created_at": "2026-10-31T00:40:57Z",
-      "updated_at": "2026-10-31T01:07:43Z",
+      "updated_at": "2026-10-31T01:30:41Z",
       "last_verified_at": "2026-10-31T00:40:57Z",
       "verification_status": "IN_PROGRESS_PENDING_FINAL",
       "revision_history": [],
-      "audit_explanation": "Pertandingan 401899274 masih berstatus Second Half (Skor saat ini: 0-1). Menunggu status Final resmi dari provider (PENDING).",
+      "audit_explanation": "Pertandingan 401899274 masih berstatus Second Half (Skor saat ini: 1-1). Menunggu status Final resmi dari provider (PENDING).",
       "audit_passed": true
     },
     {
@@ -174,27 +195,58 @@
           "score": "0-0",
           "match_status": "Second Half",
           "note": "ENTRY"
+        },
+        {
+          "timestamp_utc": "2026-10-31T01:13:01Z",
+          "timestamp_wita": "2026-10-31T09:13:01.444725+08:00",
+          "clock": "89'",
+          "minute": 89,
+          "score": "1-0",
+          "match_status": "Second Half",
+          "note": "GOAL DETECTED"
+        },
+        {
+          "timestamp_utc": "2026-10-31T01:22:51Z",
+          "timestamp_wita": "2026-10-31T09:22:51.901728+08:00",
+          "clock": "Final",
+          "minute": null,
+          "score": "1-0",
+          "match_status": "Final",
+          "note": "MATCH FINISHED"
         }
       ],
-      "goal_events": [],
-      "current_score": "0-0",
-      "final_score": null,
-      "match_status": "Second Half",
-      "settlement_status": "PENDING",
-      "result": "PENDING",
-      "profit": 0,
-      "roi_contribution": 0.0,
-      "simulated_profit": 0,
-      "simulated_roi_contribution": 0.0,
+      "goal_events": [
+        {
+          "observed_at_utc": "2026-10-31T01:13:01Z",
+          "observed_at_wita": "2026-10-31T09:13:01.444725+08:00",
+          "minute": 89,
+          "clock_display": "89'",
+          "previous_score": "0-0",
+          "score_after": "1-0",
+          "team": "UNKNOWN_FROM_SNAPSHOT_DIFF",
+          "time_approximate": true,
+          "note": "GOAL EVENT TIME APPROXIMATE",
+          "source": "SCORE_SNAPSHOT_DIFFERENCE"
+        }
+      ],
+      "current_score": "1-0",
+      "final_score": "1-0",
+      "match_status": "Final",
+      "settlement_status": "SETTLED",
+      "result": "WIN",
+      "profit": 40000,
+      "roi_contribution": 80.0,
+      "simulated_profit": 40000,
+      "simulated_roi_contribution": 80.0,
       "actual_profit": null,
       "actual_roi_contribution": null,
       "is_major": false,
       "created_at": "2026-10-31T00:31:05Z",
-      "updated_at": "2026-10-31T01:07:43Z",
-      "last_verified_at": "2026-10-31T00:31:05Z",
-      "verification_status": "IN_PROGRESS_PENDING_FINAL",
+      "updated_at": "2026-10-31T01:22:51Z",
+      "last_verified_at": "2026-10-31T01:22:51Z",
+      "verification_status": "VERIFIED_OFFICIAL_FINAL",
       "revision_history": [],
-      "audit_explanation": "Pertandingan 401898939 masih berstatus Second Half (Skor saat ini: 0-0). Menunggu status Final resmi dari provider (PENDING).",
+      "audit_explanation": "Pertandingan 401898939 masuk pada menit 61' dengan skor 0-0. Status resmi mencapai Final dengan skor akhir waktu normal 1-0. Minimal 1 gol tercipta setelah waktu entry sehingga dinyatakan WIN.",
       "audit_passed": true
     },
     {
@@ -228,27 +280,58 @@
           "score": "0-0",
           "match_status": "Second Half",
           "note": "ENTRY"
+        },
+        {
+          "timestamp_utc": "2026-10-31T01:13:01Z",
+          "timestamp_wita": "2026-10-31T09:13:01.501748+08:00",
+          "clock": "89'",
+          "minute": 89,
+          "score": "1-1",
+          "match_status": "Second Half",
+          "note": "GOAL DETECTED"
+        },
+        {
+          "timestamp_utc": "2026-10-31T01:22:51Z",
+          "timestamp_wita": "2026-10-31T09:22:51.992740+08:00",
+          "clock": "Final",
+          "minute": null,
+          "score": "1-1",
+          "match_status": "Final",
+          "note": "MATCH FINISHED"
         }
       ],
-      "goal_events": [],
-      "current_score": "0-0",
-      "final_score": null,
-      "match_status": "Second Half",
-      "settlement_status": "PENDING",
-      "result": "PENDING",
-      "profit": 0,
-      "roi_contribution": 0.0,
-      "simulated_profit": 0,
-      "simulated_roi_contribution": 0.0,
+      "goal_events": [
+        {
+          "observed_at_utc": "2026-10-31T01:13:01Z",
+          "observed_at_wita": "2026-10-31T09:13:01.501748+08:00",
+          "minute": 89,
+          "clock_display": "89'",
+          "previous_score": "0-0",
+          "score_after": "1-1",
+          "team": "UNKNOWN_FROM_SNAPSHOT_DIFF",
+          "time_approximate": true,
+          "note": "GOAL EVENT TIME APPROXIMATE",
+          "source": "SCORE_SNAPSHOT_DIFFERENCE"
+        }
+      ],
+      "current_score": "1-1",
+      "final_score": "1-1",
+      "match_status": "Final",
+      "settlement_status": "SETTLED",
+      "result": "WIN",
+      "profit": 40000,
+      "roi_contribution": 80.0,
+      "simulated_profit": 40000,
+      "simulated_roi_contribution": 80.0,
       "actual_profit": null,
       "actual_roi_contribution": null,
       "is_major": false,
       "created_at": "2026-10-31T00:31:05Z",
-      "updated_at": "2026-10-31T01:03:04Z",
-      "last_verified_at": "2026-10-31T00:31:05Z",
-      "verification_status": "IN_PROGRESS_PENDING_FINAL",
+      "updated_at": "2026-10-31T01:22:51Z",
+      "last_verified_at": "2026-10-31T01:22:51Z",
+      "verification_status": "VERIFIED_OFFICIAL_FINAL",
       "revision_history": [],
-      "audit_explanation": "Pertandingan 401891906 masih berstatus Second Half (Skor saat ini: 0-0). Menunggu status Final resmi dari provider (PENDING).",
+      "audit_explanation": "Pertandingan 401891906 masuk pada menit 60' dengan skor 0-0. Status resmi mencapai Final dengan skor akhir waktu normal 1-1. Minimal 1 gol tercipta setelah waktu entry sehingga dinyatakan WIN.",
       "audit_passed": true
     },
     {
