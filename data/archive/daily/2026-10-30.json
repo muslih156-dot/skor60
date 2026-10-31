@@ -1,6 +1,6 @@
 {
   "trading_day": "2026-10-30",
-  "last_updated_utc": "2026-10-31T00:57:53Z",
+  "last_updated_utc": "2026-10-31T01:03:04Z",
   "total_records": 14,
   "matches": [
     {
@@ -72,7 +72,7 @@
       "actual_roi_contribution": null,
       "is_major": false,
       "created_at": "2026-10-31T00:40:57Z",
-      "updated_at": "2026-10-31T00:57:53Z",
+      "updated_at": "2026-10-31T01:03:04Z",
       "last_verified_at": "2026-10-31T00:40:57Z",
       "verification_status": "IN_PROGRESS_PENDING_FINAL",
       "revision_history": [],
@@ -126,7 +126,7 @@
       "actual_roi_contribution": null,
       "is_major": false,
       "created_at": "2026-10-31T00:31:05Z",
-      "updated_at": "2026-10-31T00:57:53Z",
+      "updated_at": "2026-10-31T01:03:04Z",
       "last_verified_at": "2026-10-31T00:31:05Z",
       "verification_status": "IN_PROGRESS_PENDING_FINAL",
       "revision_history": [],
@@ -180,7 +180,7 @@
       "actual_roi_contribution": null,
       "is_major": false,
       "created_at": "2026-10-31T00:31:05Z",
-      "updated_at": "2026-10-31T00:57:53Z",
+      "updated_at": "2026-10-31T01:03:04Z",
       "last_verified_at": "2026-10-31T00:31:05Z",
       "verification_status": "IN_PROGRESS_PENDING_FINAL",
       "revision_history": [],
@@ -234,7 +234,7 @@
       "actual_roi_contribution": null,
       "is_major": false,
       "created_at": "2026-10-31T00:31:05Z",
-      "updated_at": "2026-10-31T00:57:53Z",
+      "updated_at": "2026-10-31T01:03:04Z",
       "last_verified_at": "2026-10-31T00:31:05Z",
       "verification_status": "IN_PROGRESS_PENDING_FINAL",
       "revision_history": [],
