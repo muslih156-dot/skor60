@@ -4,6 +4,7 @@ Klien HTTP tangguh untuk mengambil data pertandingan dari ESPN API.
 Dilengkapi deduplikasi ESPN ALL + ESPN MULTI LEAGUE, retry dengan exponential backoff,
 pencatatan metrik kesehatan API, serta isolasi error agar kegagalan jaringan
 tidak pernah menghasilkan skor atau kandidat palsu.
+Dilengkapi Filter Anti-Basket/Olahraga lain (Hanya Sepak Bola).
 """
 
 import logging
@@ -207,10 +208,19 @@ def fetch_live_match(
         if not isinstance(events, list):
             continue
 
-        raw_events_received += len(events)
         for ev in events:
             if not isinstance(ev, dict):
                 continue
+            
+            # =========================================================================
+            # FILTER WAJIB: HANYA SEPAK BOLA (ANTI-BASKET / OLAHRAGA LAIN)
+            # UID ESPN untuk Sepak Bola selalu memiliki "s:600" 
+            # =========================================================================
+            ev_uid = str(ev.get("uid", "")).lower()
+            if ev_uid and "s:" in ev_uid and "s:600" not in ev_uid:
+                continue
+
+            raw_events_received += 1
             ev_copy = dict(ev)
             if default_league_name and "_league_name" not in ev_copy:
                 ev_copy["_league_name"] = default_league_name
