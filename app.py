@@ -35,58 +35,6 @@ st.set_page_config(
     page_icon="⚽",
     layout="wide",
     initial_sidebar_state="expanded",
-
-    # ================== BACKGROUND + OVERLAY SUPAYA TULISAN JELAS ==================
-def _set_background_with_overlay(image_url: str = "https://images.unsplash.com/photo-1431324155629-1a6deb1dec8d?q=80&w=2070", overlay: float = 0.82):
-    """Background stadion + overlay gelap - tulisan tetap kontras"""
-    st.markdown(
-        f"""
-        <style>
-        .stApp {{
-            background-image: url('{image_url}');
-            background-size: cover;
-            background-position: center;
-            background-attachment: fixed;
-            background-repeat: no-repeat;
-        }}
-        .stApp::before {{
-            content: "";
-            position: fixed;
-            inset: 0;
-            background: rgba(15, 23, 42, {overlay});
-            backdrop-filter: blur(2px);
-            z-index: -1;
-            pointer-events: none;
-        }}
-        .stApp > div, [data-testid="stHeader"], [data-testid="stSidebar"] {{
-            position: relative;
-            z-index: 1;
-        }}
-        .metric-card {{
-            background: rgba(30, 41, 59, 0.95) !important;
-            border: 1px solid rgba(255,255,255,0.12) !important;
-            box-shadow: 0 8px 32px rgba(0,0,0,0.45) !important;
-        }}
-        .main-header {{
-            background: linear-gradient(90deg, rgba(15,23,42,0.97) 0%, rgba(30,41,59,0.97) 100%) !important;
-            border: 1px solid rgba(255,255,255,0.1);
-            box-shadow: 0 8px 32px rgba(0,0,0,0.35);
-        }}
-        [data-testid="stSidebar"] {{
-            background: rgba(15, 23, 42, 0.92) !important;
-            backdrop-filter: blur(12px);
-        }}
-        [data-testid="stExpander"], [data-testid="stTabs"] {{
-            background: rgba(30, 41, 59, 0.65) !important;
-            border-radius: 10px;
-        }}
-        </style>
-        """,
-        unsafe_allow_html=True,
-    )
-
-_set_background_with_overlay()
-# ================== END BACKGROUND ==================
 )
 
 # Styling CSS bersih & profesional untuk kartu dan badge status
