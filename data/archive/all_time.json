@@ -1,7 +1,7 @@
 {
   "system": "TRADING BOLA MENIT 60 - LAST GOAL SYSTEM",
   "version": "2.1",
-  "last_updated_utc": "2026-11-01T15:27:38Z",
+  "last_updated_utc": "2026-11-01T15:33:12Z",
   "total_records": 49,
   "matches": [
     {
@@ -36,10 +36,31 @@
           "score": "0-0",
           "match_status": "Second Half",
           "note": "ENTRY"
+        },
+        {
+          "timestamp_utc": "2026-11-01T15:33:12Z",
+          "timestamp_wita": "2026-11-01T23:33:12.779702+08:00",
+          "clock": "75'",
+          "minute": 75,
+          "score": "1-0",
+          "match_status": "Second Half",
+          "note": "GOAL DETECTED"
         }
       ],
-      "goal_events": [],
-      "current_score": "0-0",
+      "goal_events": [
+        {
+          "minute": 68,
+          "clock_display": "68'",
+          "period": 2,
+          "team": "Southampton",
+          "scorer": "Libby Mcinnes",
+          "type": "Goal",
+          "text": "Libby Mcinnes (Southampton) Goal at 68'",
+          "time_approximate": false,
+          "source": "ESPN_SUMMARY_KEY_EVENTS"
+        }
+      ],
+      "current_score": "1-0",
       "final_score": null,
       "match_status": "Second Half",
       "settlement_status": "PENDING",
@@ -52,11 +73,11 @@
       "actual_roi_contribution": null,
       "is_major": false,
       "created_at": "2026-11-01T15:20:53Z",
-      "updated_at": "2026-11-01T15:27:38Z",
+      "updated_at": "2026-11-01T15:33:12Z",
       "last_verified_at": "2026-11-01T15:20:53Z",
       "verification_status": "IN_PROGRESS_PENDING_FINAL",
       "revision_history": [],
-      "audit_explanation": "Pertandingan 401923291 masih berstatus Second Half (Skor saat ini: 0-0). Menunggu status Final resmi dari provider (PENDING).",
+      "audit_explanation": "Pertandingan 401923291 masih berstatus Second Half (Skor saat ini: 1-0). Menunggu status Final resmi dari provider (PENDING).",
       "audit_passed": true
     },
     {
@@ -106,13 +127,14 @@
         {
           "minute": 65,
           "clock_display": "65'",
-          "period": 2,
-          "team": "Sunderland",
+          "period": 0,
+          "team_id": "21060",
           "scorer": "Chloe Paxton",
           "type": "Goal",
-          "text": "Chloe Paxton (Sunderland) Goal at 65'",
+          "is_own_goal": false,
+          "is_penalty": false,
           "time_approximate": false,
-          "source": "ESPN_SUMMARY_KEY_EVENTS"
+          "source": "ESPN_OFFICIAL_DETAIL"
         }
       ],
       "current_score": "1-0",
@@ -128,7 +150,7 @@
       "actual_roi_contribution": null,
       "is_major": false,
       "created_at": "2026-11-01T15:20:53Z",
-      "updated_at": "2026-11-01T15:27:38Z",
+      "updated_at": "2026-11-01T15:33:12Z",
       "last_verified_at": "2026-11-01T15:20:53Z",
       "verification_status": "IN_PROGRESS_PENDING_FINAL",
       "revision_history": [],
@@ -183,7 +205,7 @@
       "actual_roi_contribution": null,
       "is_major": false,
       "created_at": "2026-11-01T15:20:53Z",
-      "updated_at": "2026-11-01T15:27:38Z",
+      "updated_at": "2026-11-01T15:33:12Z",
       "last_verified_at": "2026-11-01T15:20:53Z",
       "verification_status": "IN_PROGRESS_PENDING_FINAL",
       "revision_history": [],
