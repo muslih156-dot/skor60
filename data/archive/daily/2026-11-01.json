@@ -1,6 +1,6 @@
 {
   "trading_day": "2026-11-01",
-  "last_updated_utc": "2026-11-01T23:47:52Z",
+  "last_updated_utc": "2026-11-01T23:52:53Z",
   "total_records": 17,
   "matches": [
     {
@@ -59,24 +59,26 @@
         {
           "minute": 71,
           "clock_display": "71'",
-          "period": 2,
-          "team": "Dallas Trinity FC",
+          "period": 0,
+          "team_id": "131447",
           "scorer": "Seven Castain",
           "type": "Goal",
-          "text": "Seven Castain (Dallas Trinity FC) Goal at 71'",
+          "is_own_goal": false,
+          "is_penalty": false,
           "time_approximate": false,
-          "source": "ESPN_SUMMARY_KEY_EVENTS"
+          "source": "ESPN_OFFICIAL_DETAIL"
         },
         {
           "minute": 75,
           "clock_display": "75'",
-          "period": 2,
-          "team": "Dallas Trinity FC",
+          "period": 0,
+          "team_id": "131447",
           "scorer": "Juliet Moore",
           "type": "Goal",
-          "text": "Juliet Moore (Dallas Trinity FC) Goal at 75'",
+          "is_own_goal": false,
+          "is_penalty": false,
           "time_approximate": false,
-          "source": "ESPN_SUMMARY_KEY_EVENTS"
+          "source": "ESPN_OFFICIAL_DETAIL"
         }
       ],
       "current_score": "2-0",
@@ -92,7 +94,7 @@
       "actual_roi_contribution": null,
       "is_major": false,
       "created_at": "2026-11-01T23:31:06Z",
-      "updated_at": "2026-11-01T23:47:52Z",
+      "updated_at": "2026-11-01T23:52:53Z",
       "last_verified_at": "2026-11-01T23:31:06Z",
       "verification_status": "IN_PROGRESS_PENDING_FINAL",
       "revision_history": [],
@@ -147,7 +149,7 @@
       "actual_roi_contribution": null,
       "is_major": false,
       "created_at": "2026-11-01T23:25:42Z",
-      "updated_at": "2026-11-01T23:47:52Z",
+      "updated_at": "2026-11-01T23:52:53Z",
       "last_verified_at": "2026-11-01T23:25:42Z",
       "verification_status": "IN_PROGRESS_PENDING_FINAL",
       "revision_history": [],
@@ -224,7 +226,7 @@
       "actual_roi_contribution": null,
       "is_major": false,
       "created_at": "2026-11-01T23:25:42Z",
-      "updated_at": "2026-11-01T23:47:52Z",
+      "updated_at": "2026-11-01T23:52:53Z",
       "last_verified_at": "2026-11-01T23:25:42Z",
       "verification_status": "IN_PROGRESS_PENDING_FINAL",
       "revision_history": [],
@@ -301,7 +303,7 @@
       "actual_roi_contribution": null,
       "is_major": false,
       "created_at": "2026-11-01T23:25:42Z",
-      "updated_at": "2026-11-01T23:47:52Z",
+      "updated_at": "2026-11-01T23:52:53Z",
       "last_verified_at": "2026-11-01T23:25:42Z",
       "verification_status": "IN_PROGRESS_PENDING_FINAL",
       "revision_history": [],
