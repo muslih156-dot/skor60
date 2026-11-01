@@ -1,6 +1,6 @@
 {
   "trading_day": "2026-11-01",
-  "last_updated_utc": "2026-11-01T15:47:54Z",
+  "last_updated_utc": "2026-11-01T15:52:52Z",
   "total_records": 8,
   "matches": [
     {
@@ -59,24 +59,26 @@
         {
           "minute": 68,
           "clock_display": "68'",
-          "period": 2,
-          "team": "Southampton",
+          "period": 0,
+          "team_id": "21039",
           "scorer": "Libby Mcinnes",
           "type": "Goal",
-          "text": "Libby Mcinnes (Southampton) Goal at 68'",
+          "is_own_goal": false,
+          "is_penalty": false,
           "time_approximate": false,
-          "source": "ESPN_SUMMARY_KEY_EVENTS"
+          "source": "ESPN_OFFICIAL_DETAIL"
         },
         {
           "minute": 87,
           "clock_display": "87'",
-          "period": 2,
-          "team": "Leicester City",
+          "period": 0,
+          "team_id": "21036",
           "scorer": "Paulina Nystrom",
           "type": "Goal",
-          "text": "Paulina Nystrom (Leicester City) Goal at 87'",
+          "is_own_goal": false,
+          "is_penalty": false,
           "time_approximate": false,
-          "source": "ESPN_SUMMARY_KEY_EVENTS"
+          "source": "ESPN_OFFICIAL_DETAIL"
         }
       ],
       "current_score": "1-1",
@@ -92,7 +94,7 @@
       "actual_roi_contribution": null,
       "is_major": false,
       "created_at": "2026-11-01T15:20:53Z",
-      "updated_at": "2026-11-01T15:47:54Z",
+      "updated_at": "2026-11-01T15:52:52Z",
       "last_verified_at": "2026-11-01T15:20:53Z",
       "verification_status": "IN_PROGRESS_PENDING_FINAL",
       "revision_history": [],
@@ -169,7 +171,7 @@
       "actual_roi_contribution": null,
       "is_major": false,
       "created_at": "2026-11-01T15:20:53Z",
-      "updated_at": "2026-11-01T15:47:54Z",
+      "updated_at": "2026-11-01T15:52:52Z",
       "last_verified_at": "2026-11-01T15:20:53Z",
       "verification_status": "IN_PROGRESS_PENDING_FINAL",
       "revision_history": [],
@@ -224,7 +226,7 @@
       "actual_roi_contribution": null,
       "is_major": false,
       "created_at": "2026-11-01T15:20:53Z",
-      "updated_at": "2026-11-01T15:47:54Z",
+      "updated_at": "2026-11-01T15:52:52Z",
       "last_verified_at": "2026-11-01T15:20:53Z",
       "verification_status": "IN_PROGRESS_PENDING_FINAL",
       "revision_history": [],
