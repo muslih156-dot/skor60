@@ -1,6 +1,6 @@
 {
   "trading_month": "2026-10",
-  "last_updated_utc": "2026-11-01T02:32:59Z",
+  "last_updated_utc": "2026-11-01T02:37:45Z",
   "total_records": 41,
   "matches": [
     {
@@ -73,7 +73,7 @@
       "actual_roi_contribution": null,
       "is_major": false,
       "created_at": "2026-11-01T02:20:58Z",
-      "updated_at": "2026-11-01T02:32:59Z",
+      "updated_at": "2026-11-01T02:37:45Z",
       "last_verified_at": "2026-11-01T02:20:58Z",
       "verification_status": "IN_PROGRESS_PENDING_FINAL",
       "revision_history": [],
@@ -127,13 +127,14 @@
         {
           "minute": 69,
           "clock_display": "69'",
-          "period": 2,
-          "team": "Cancún FC",
+          "period": 0,
+          "team_id": "20724",
           "scorer": "Gipson Preciado",
           "type": "Goal",
-          "text": "Gipson Preciado (Cancún FC) Goal at 69'",
+          "is_own_goal": false,
+          "is_penalty": false,
           "time_approximate": false,
-          "source": "ESPN_SUMMARY_KEY_EVENTS"
+          "source": "ESPN_OFFICIAL_DETAIL"
         }
       ],
       "current_score": "1-0",
@@ -149,7 +150,7 @@
       "actual_roi_contribution": null,
       "is_major": false,
       "created_at": "2026-11-01T02:20:58Z",
-      "updated_at": "2026-11-01T02:32:59Z",
+      "updated_at": "2026-11-01T02:37:45Z",
       "last_verified_at": "2026-11-01T02:20:58Z",
       "verification_status": "IN_PROGRESS_PENDING_FINAL",
       "revision_history": [],
