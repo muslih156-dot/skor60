@@ -1,7 +1,7 @@
 {
   "system": "TRADING BOLA MENIT 60 - LAST GOAL SYSTEM",
   "version": "2.1",
-  "last_updated_utc": "2026-11-01T02:27:03Z",
+  "last_updated_utc": "2026-11-01T02:32:59Z",
   "total_records": 41,
   "matches": [
     {
@@ -51,13 +51,14 @@
         {
           "minute": 64,
           "clock_display": "64'",
-          "period": 2,
-          "team": "Tapatío",
+          "period": 0,
+          "team_id": "20720",
           "scorer": "Daniel Villaseca Kubikova",
           "type": "Goal",
-          "text": "Daniel Villaseca Kubikova (Tapatío) Goal at 64'",
+          "is_own_goal": false,
+          "is_penalty": false,
           "time_approximate": false,
-          "source": "ESPN_SUMMARY_KEY_EVENTS"
+          "source": "ESPN_OFFICIAL_DETAIL"
         }
       ],
       "current_score": "0-1",
@@ -73,7 +74,7 @@
       "actual_roi_contribution": null,
       "is_major": false,
       "created_at": "2026-11-01T02:20:58Z",
-      "updated_at": "2026-11-01T02:27:03Z",
+      "updated_at": "2026-11-01T02:32:59Z",
       "last_verified_at": "2026-11-01T02:20:58Z",
       "verification_status": "IN_PROGRESS_PENDING_FINAL",
       "revision_history": [],
@@ -112,10 +113,31 @@
           "score": "0-0",
           "match_status": "Second Half",
           "note": "ENTRY"
+        },
+        {
+          "timestamp_utc": "2026-11-01T02:32:59Z",
+          "timestamp_wita": "2026-11-01T10:32:59.650482+08:00",
+          "clock": "75'",
+          "minute": 75,
+          "score": "1-0",
+          "match_status": "Second Half",
+          "note": "GOAL DETECTED"
         }
       ],
-      "goal_events": [],
-      "current_score": "0-0",
+      "goal_events": [
+        {
+          "minute": 69,
+          "clock_display": "69'",
+          "period": 2,
+          "team": "Cancún FC",
+          "scorer": "Gipson Preciado",
+          "type": "Goal",
+          "text": "Gipson Preciado (Cancún FC) Goal at 69'",
+          "time_approximate": false,
+          "source": "ESPN_SUMMARY_KEY_EVENTS"
+        }
+      ],
+      "current_score": "1-0",
       "final_score": null,
       "match_status": "Second Half",
       "settlement_status": "PENDING",
@@ -128,11 +150,11 @@
       "actual_roi_contribution": null,
       "is_major": false,
       "created_at": "2026-11-01T02:20:58Z",
-      "updated_at": "2026-11-01T02:27:03Z",
+      "updated_at": "2026-11-01T02:32:59Z",
       "last_verified_at": "2026-11-01T02:20:58Z",
       "verification_status": "IN_PROGRESS_PENDING_FINAL",
       "revision_history": [],
-      "audit_explanation": "Pertandingan 401886262 masih berstatus Second Half (Skor saat ini: 0-0). Menunggu status Final resmi dari provider (PENDING).",
+      "audit_explanation": "Pertandingan 401886262 masih berstatus Second Half (Skor saat ini: 1-0). Menunggu status Final resmi dari provider (PENDING).",
       "audit_passed": true
     },
     {
