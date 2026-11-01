@@ -1,6 +1,6 @@
 {
   "trading_day": "2026-11-01",
-  "last_updated_utc": "2026-11-01T21:17:52Z",
+  "last_updated_utc": "2026-11-01T21:22:23Z",
   "total_records": 12,
   "matches": [
     {
@@ -50,13 +50,14 @@
         {
           "minute": 70,
           "clock_display": "70'",
-          "period": 2,
-          "team": "Juventus",
+          "period": 0,
+          "team_id": "111",
           "scorer": "Kerim Alajbegovic",
           "type": "Goal",
-          "text": "Goal! Juventus 1, Napoli 0. Kerim Alajbegovic (Juventus) left footed shot from outside the box to the bottom right corner. Assisted by Edon Zhegrova.",
+          "is_own_goal": false,
+          "is_penalty": false,
           "time_approximate": false,
-          "source": "ESPN_SUMMARY_KEY_EVENTS"
+          "source": "ESPN_OFFICIAL_DETAIL"
         }
       ],
       "current_score": "1-0",
@@ -72,7 +73,7 @@
       "actual_roi_contribution": null,
       "is_major": true,
       "created_at": "2026-11-01T21:05:56Z",
-      "updated_at": "2026-11-01T21:17:52Z",
+      "updated_at": "2026-11-01T21:22:23Z",
       "last_verified_at": "2026-11-01T21:05:56Z",
       "verification_status": "IN_PROGRESS_PENDING_FINAL",
       "revision_history": [],
