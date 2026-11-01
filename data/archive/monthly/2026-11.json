@@ -1,6 +1,6 @@
 {
   "trading_month": "2026-11",
-  "last_updated_utc": "2026-11-01T05:27:45Z",
+  "last_updated_utc": "2026-11-01T05:31:46Z",
   "total_records": 1,
   "matches": [
     {
@@ -50,24 +50,26 @@
         {
           "minute": 63,
           "clock_display": "63'",
-          "period": 2,
-          "team": "Central Coast Mariners FC",
+          "period": 0,
+          "team_id": "5325",
           "scorer": "Oliver Lavale",
           "type": "Goal - Volley",
-          "text": "Goal! Melbourne Victory 0, Central Coast Mariners 1. Oliver Lavale (Central Coast Mariners) right footed shot from the right side of the box to the bottom right corner. Assisted by Ali Auglah with a through ball.",
+          "is_own_goal": false,
+          "is_penalty": false,
           "time_approximate": false,
-          "source": "ESPN_SUMMARY_KEY_EVENTS"
+          "source": "ESPN_OFFICIAL_DETAIL"
         },
         {
           "minute": 69,
           "clock_display": "69'",
-          "period": 2,
-          "team": "Melbourne Victory",
+          "period": 0,
+          "team_id": "5328",
           "scorer": "Jordi Valadon",
           "type": "Goal",
-          "text": "Goal! Melbourne Victory 1, Central Coast Mariners 1. Jordi Valadon (Melbourne Victory) right footed shot from outside the box to the top left corner. Assisted by Charles Nduka.",
+          "is_own_goal": false,
+          "is_penalty": false,
           "time_approximate": false,
-          "source": "ESPN_SUMMARY_KEY_EVENTS"
+          "source": "ESPN_OFFICIAL_DETAIL"
         }
       ],
       "current_score": "1-1",
@@ -83,7 +85,7 @@
       "actual_roi_contribution": null,
       "is_major": true,
       "created_at": "2026-11-01T05:21:00Z",
-      "updated_at": "2026-11-01T05:27:45Z",
+      "updated_at": "2026-11-01T05:31:46Z",
       "last_verified_at": "2026-11-01T05:21:00Z",
       "verification_status": "IN_PROGRESS_PENDING_FINAL",
       "revision_history": [],
