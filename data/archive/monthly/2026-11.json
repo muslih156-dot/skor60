@@ -1,6 +1,6 @@
 {
   "trading_month": "2026-11",
-  "last_updated_utc": "2026-11-01T19:02:58Z",
+  "last_updated_utc": "2026-11-01T19:08:32Z",
   "total_records": 11,
   "matches": [
     {
@@ -50,13 +50,14 @@
         {
           "minute": 69,
           "clock_display": "69'",
-          "period": 2,
-          "team": "Valencia",
+          "period": 0,
+          "team_id": "94",
           "scorer": "Umar Sadiq",
           "type": "Goal",
-          "text": "Goal! Elche 0, Valencia 1. Umar Sadiq (Valencia) left footed shot from very close range to the bottom right corner. Assisted by Arnaut Danjuma following a fast break.",
+          "is_own_goal": false,
+          "is_penalty": false,
           "time_approximate": false,
-          "source": "ESPN_SUMMARY_KEY_EVENTS"
+          "source": "ESPN_OFFICIAL_DETAIL"
         }
       ],
       "current_score": "0-1",
@@ -72,7 +73,7 @@
       "actual_roi_contribution": null,
       "is_major": true,
       "created_at": "2026-11-01T18:50:59Z",
-      "updated_at": "2026-11-01T19:02:58Z",
+      "updated_at": "2026-11-01T19:08:32Z",
       "last_verified_at": "2026-11-01T18:50:59Z",
       "verification_status": "IN_PROGRESS_PENDING_FINAL",
       "revision_history": [],
@@ -127,7 +128,7 @@
       "actual_roi_contribution": null,
       "is_major": true,
       "created_at": "2026-11-01T18:50:59Z",
-      "updated_at": "2026-11-01T19:02:58Z",
+      "updated_at": "2026-11-01T19:08:32Z",
       "last_verified_at": "2026-11-01T18:50:59Z",
       "verification_status": "IN_PROGRESS_PENDING_FINAL",
       "revision_history": [],
