@@ -1,6 +1,6 @@
 {
   "trading_month": "2026-11",
-  "last_updated_utc": "2026-11-02T00:37:47Z",
+  "last_updated_utc": "2026-11-02T00:43:04Z",
   "total_records": 18,
   "matches": [
     {
@@ -50,13 +50,14 @@
         {
           "minute": 72,
           "clock_display": "72'",
-          "period": 2,
-          "team": "Santos",
+          "period": 0,
+          "team_id": "225",
           "scorer": "Matías Espíndola",
           "type": "Own Goal",
-          "text": "Own Goal by Matías Espíndola, Necaxa. Santos Laguna 1, Necaxa 0.",
+          "is_own_goal": true,
+          "is_penalty": false,
           "time_approximate": false,
-          "source": "ESPN_SUMMARY_KEY_EVENTS"
+          "source": "ESPN_OFFICIAL_DETAIL"
         }
       ],
       "current_score": "1-0",
@@ -72,7 +73,7 @@
       "actual_roi_contribution": null,
       "is_major": true,
       "created_at": "2026-11-02T00:20:57Z",
-      "updated_at": "2026-11-02T00:37:47Z",
+      "updated_at": "2026-11-02T00:43:04Z",
       "last_verified_at": "2026-11-02T00:20:57Z",
       "verification_status": "IN_PROGRESS_PENDING_FINAL",
       "revision_history": [],
