@@ -1,6 +1,6 @@
 {
   "trading_month": "2026-11",
-  "last_updated_utc": "2026-11-02T04:03:02Z",
+  "last_updated_utc": "2026-11-02T04:07:42Z",
   "total_records": 19,
   "matches": [
     {
@@ -50,13 +50,14 @@
         {
           "minute": 88,
           "clock_display": "88'",
-          "period": 2,
-          "team": "Sacramento Republic FC",
+          "period": 0,
+          "team_id": "17828",
           "scorer": "Blake Willey",
           "type": "Goal",
-          "text": "Blake Willey (Sacramento Republic FC) Goal at 88'",
+          "is_own_goal": false,
+          "is_penalty": false,
           "time_approximate": false,
-          "source": "ESPN_SUMMARY_KEY_EVENTS"
+          "source": "ESPN_OFFICIAL_DETAIL"
         }
       ],
       "current_score": "1-0",
@@ -72,7 +73,7 @@
       "actual_roi_contribution": null,
       "is_major": false,
       "created_at": "2026-11-02T03:31:00Z",
-      "updated_at": "2026-11-02T04:03:02Z",
+      "updated_at": "2026-11-02T04:07:42Z",
       "last_verified_at": "2026-11-02T03:31:00Z",
       "verification_status": "IN_PROGRESS_PENDING_FINAL",
       "revision_history": [],
