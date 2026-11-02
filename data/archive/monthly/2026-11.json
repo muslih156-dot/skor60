@@ -1,6 +1,6 @@
 {
   "trading_month": "2026-11",
-  "last_updated_utc": "2026-11-02T00:07:45Z",
+  "last_updated_utc": "2026-11-02T00:13:24Z",
   "total_records": 17,
   "matches": [
     {
@@ -339,52 +339,59 @@
           "score": "2-0",
           "match_status": "Second Half",
           "note": "GOAL DETECTED"
+        },
+        {
+          "timestamp_utc": "2026-11-02T00:13:24Z",
+          "timestamp_wita": "2026-11-02T08:13:24.626546+08:00",
+          "clock": "Final",
+          "minute": null,
+          "score": "2-0",
+          "match_status": "Final",
+          "note": "MATCH FINISHED"
         }
       ],
       "goal_events": [
         {
           "minute": 62,
           "clock_display": "62'",
-          "period": 0,
-          "team_id": "15365",
+          "period": 2,
+          "team": "Washington Spirit",
           "scorer": "Michelle Alozie",
           "type": "Own Goal",
-          "is_own_goal": true,
-          "is_penalty": false,
+          "text": "Own Goal by Michelle Alozie, Chicago Stars. Washington Spirit 1, Chicago Stars 0.",
           "time_approximate": false,
-          "source": "ESPN_OFFICIAL_DETAIL"
+          "source": "ESPN_SUMMARY_KEY_EVENTS"
         },
         {
           "minute": 85,
           "clock_display": "85'",
-          "period": 0,
-          "team_id": "15365",
+          "period": 2,
+          "team": "Washington Spirit",
           "scorer": "Trinity Rodman",
           "type": "Goal",
-          "is_own_goal": false,
-          "is_penalty": false,
+          "text": "Goal! Washington Spirit 2, Chicago Stars 0. Trinity Rodman (Washington Spirit) right footed shot from the centre of the box to the top left corner. Assisted by Clara Luvanga.",
           "time_approximate": false,
-          "source": "ESPN_OFFICIAL_DETAIL"
+          "source": "ESPN_SUMMARY_KEY_EVENTS"
         }
       ],
       "current_score": "2-0",
-      "final_score": null,
-      "match_status": "Second Half",
-      "settlement_status": "PENDING",
-      "result": "PENDING",
-      "profit": 0,
-      "roi_contribution": 0.0,
-      "simulated_profit": 0,
-      "simulated_roi_contribution": 0.0,
+      "final_score": "2-0",
+      "match_status": "Final",
+      "settlement_status": "SETTLED",
+      "result": "WIN",
+      "profit": 40000,
+      "roi_contribution": 80.0,
+      "simulated_profit": 40000,
+      "simulated_roi_contribution": 80.0,
       "actual_profit": null,
       "actual_roi_contribution": null,
       "is_major": false,
       "created_at": "2026-11-01T23:25:42Z",
-      "updated_at": "2026-11-02T00:07:45Z",
-      "last_verified_at": "2026-11-01T23:25:42Z",
-      "verification_status": "IN_PROGRESS_PENDING_FINAL",
+      "updated_at": "2026-11-02T00:13:24Z",
+      "last_verified_at": "2026-11-02T00:13:24Z",
+      "verification_status": "VERIFIED_OFFICIAL_FINAL",
       "revision_history": [],
-      "audit_explanation": "Pertandingan 401854035 masih berstatus Second Half (Skor saat ini: 2-0). Menunggu status Final resmi dari provider (PENDING).",
+      "audit_explanation": "Pertandingan 401854035 masuk pada menit 60' dengan skor 0-0. Status resmi mencapai Final dengan skor akhir waktu normal 2-0. Minimal 1 gol tercipta setelah waktu entry sehingga dinyatakan WIN.",
       "audit_passed": true
     },
     {
