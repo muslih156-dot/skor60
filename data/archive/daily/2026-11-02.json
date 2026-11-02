@@ -1,6 +1,6 @@
 {
   "trading_day": "2026-11-02",
-  "last_updated_utc": "2026-11-02T20:37:55Z",
+  "last_updated_utc": "2026-11-02T20:43:18Z",
   "total_records": 8,
   "matches": [
     {
@@ -44,6 +44,15 @@
           "score": "0-1",
           "match_status": "Second Half",
           "note": "GOAL DETECTED"
+        },
+        {
+          "timestamp_utc": "2026-11-02T20:43:18Z",
+          "timestamp_wita": "2026-11-03T04:43:18.485927+08:00",
+          "clock": "83'",
+          "minute": 83,
+          "score": "0-2",
+          "match_status": "Second Half",
+          "note": "GOAL DETECTED"
         }
       ],
       "goal_events": [
@@ -57,9 +66,20 @@
           "text": "Charles-Andreas Brym (NAC Breda) Goal at 75'",
           "time_approximate": false,
           "source": "ESPN_SUMMARY_KEY_EVENTS"
+        },
+        {
+          "minute": 82,
+          "clock_display": "82'",
+          "period": 2,
+          "team": "NAC Breda",
+          "scorer": "Charles-Andreas Brym",
+          "type": "Goal",
+          "text": "Charles-Andreas Brym (NAC Breda) Goal at 82'",
+          "time_approximate": false,
+          "source": "ESPN_SUMMARY_KEY_EVENTS"
         }
       ],
-      "current_score": "0-1",
+      "current_score": "0-2",
       "final_score": null,
       "match_status": "Second Half",
       "settlement_status": "PENDING",
@@ -72,11 +92,11 @@
       "actual_roi_contribution": null,
       "is_major": false,
       "created_at": "2026-11-02T20:21:34Z",
-      "updated_at": "2026-11-02T20:37:55Z",
+      "updated_at": "2026-11-02T20:43:18Z",
       "last_verified_at": "2026-11-02T20:21:34Z",
       "verification_status": "IN_PROGRESS_PENDING_FINAL",
       "revision_history": [],
-      "audit_explanation": "Pertandingan 401875865 masih berstatus Second Half (Skor saat ini: 0-1). Menunggu status Final resmi dari provider (PENDING).",
+      "audit_explanation": "Pertandingan 401875865 masih berstatus Second Half (Skor saat ini: 0-2). Menunggu status Final resmi dari provider (PENDING).",
       "audit_passed": true
     },
     {
@@ -127,7 +147,7 @@
       "actual_roi_contribution": null,
       "is_major": false,
       "created_at": "2026-11-02T20:21:34Z",
-      "updated_at": "2026-11-02T20:37:55Z",
+      "updated_at": "2026-11-02T20:43:18Z",
       "last_verified_at": "2026-11-02T20:21:34Z",
       "verification_status": "IN_PROGRESS_PENDING_FINAL",
       "revision_history": [],
