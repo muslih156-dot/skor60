@@ -1,7 +1,7 @@
 {
   "system": "TRADING BOLA MENIT 60 - LAST GOAL SYSTEM",
   "version": "2.1",
-  "last_updated_utc": "2026-11-02T20:43:18Z",
+  "last_updated_utc": "2026-11-02T20:48:20Z",
   "total_records": 68,
   "matches": [
     {
@@ -60,24 +60,26 @@
         {
           "minute": 75,
           "clock_display": "75'",
-          "period": 2,
-          "team": "NAC Breda",
+          "period": 0,
+          "team_id": "141",
           "scorer": "Charles-Andreas Brym",
           "type": "Goal",
-          "text": "Charles-Andreas Brym (NAC Breda) Goal at 75'",
+          "is_own_goal": false,
+          "is_penalty": false,
           "time_approximate": false,
-          "source": "ESPN_SUMMARY_KEY_EVENTS"
+          "source": "ESPN_OFFICIAL_DETAIL"
         },
         {
           "minute": 82,
           "clock_display": "82'",
-          "period": 2,
-          "team": "NAC Breda",
+          "period": 0,
+          "team_id": "141",
           "scorer": "Charles-Andreas Brym",
           "type": "Goal",
-          "text": "Charles-Andreas Brym (NAC Breda) Goal at 82'",
+          "is_own_goal": false,
+          "is_penalty": false,
           "time_approximate": false,
-          "source": "ESPN_SUMMARY_KEY_EVENTS"
+          "source": "ESPN_OFFICIAL_DETAIL"
         }
       ],
       "current_score": "0-2",
@@ -93,7 +95,7 @@
       "actual_roi_contribution": null,
       "is_major": false,
       "created_at": "2026-11-02T20:21:34Z",
-      "updated_at": "2026-11-02T20:43:18Z",
+      "updated_at": "2026-11-02T20:48:20Z",
       "last_verified_at": "2026-11-02T20:21:34Z",
       "verification_status": "IN_PROGRESS_PENDING_FINAL",
       "revision_history": [],
@@ -148,7 +150,7 @@
       "actual_roi_contribution": null,
       "is_major": false,
       "created_at": "2026-11-02T20:21:34Z",
-      "updated_at": "2026-11-02T20:43:18Z",
+      "updated_at": "2026-11-02T20:48:20Z",
       "last_verified_at": "2026-11-02T20:21:34Z",
       "verification_status": "IN_PROGRESS_PENDING_FINAL",
       "revision_history": [],
