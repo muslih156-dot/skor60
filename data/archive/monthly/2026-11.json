@@ -1,6 +1,6 @@
 {
   "trading_month": "2026-11",
-  "last_updated_utc": "2026-11-03T21:28:06Z",
+  "last_updated_utc": "2026-11-03T21:33:14Z",
   "total_records": 42,
   "matches": [
     {
@@ -51,7 +51,7 @@
       "actual_roi_contribution": null,
       "is_major": false,
       "created_at": "2026-11-03T21:21:09Z",
-      "updated_at": "2026-11-03T21:28:06Z",
+      "updated_at": "2026-11-03T21:33:14Z",
       "last_verified_at": "2026-11-03T21:21:09Z",
       "verification_status": "IN_PROGRESS_PENDING_FINAL",
       "revision_history": [],
@@ -106,7 +106,7 @@
       "actual_roi_contribution": null,
       "is_major": true,
       "created_at": "2026-11-03T21:17:11Z",
-      "updated_at": "2026-11-03T21:28:06Z",
+      "updated_at": "2026-11-03T21:33:14Z",
       "last_verified_at": "2026-11-03T21:17:11Z",
       "verification_status": "IN_PROGRESS_PENDING_FINAL",
       "revision_history": [],
@@ -183,7 +183,7 @@
       "actual_roi_contribution": null,
       "is_major": false,
       "created_at": "2026-11-03T21:06:00Z",
-      "updated_at": "2026-11-03T21:28:06Z",
+      "updated_at": "2026-11-03T21:33:14Z",
       "last_verified_at": "2026-11-03T21:06:00Z",
       "verification_status": "IN_PROGRESS_PENDING_FINAL",
       "revision_history": [],
@@ -237,13 +237,14 @@
         {
           "minute": 81,
           "clock_display": "81'",
-          "period": 2,
-          "team": "Livingston",
+          "period": 0,
+          "team_id": "259",
           "scorer": "Shane Blaney",
           "type": "Goal",
-          "text": "Shane Blaney (Livingston) Goal at 81'",
+          "is_own_goal": false,
+          "is_penalty": false,
           "time_approximate": false,
-          "source": "ESPN_SUMMARY_KEY_EVENTS"
+          "source": "ESPN_OFFICIAL_DETAIL"
         }
       ],
       "current_score": "0-1",
@@ -259,7 +260,7 @@
       "actual_roi_contribution": null,
       "is_major": false,
       "created_at": "2026-11-03T21:06:00Z",
-      "updated_at": "2026-11-03T21:28:06Z",
+      "updated_at": "2026-11-03T21:33:14Z",
       "last_verified_at": "2026-11-03T21:06:00Z",
       "verification_status": "IN_PROGRESS_PENDING_FINAL",
       "revision_history": [],
@@ -313,13 +314,14 @@
         {
           "minute": 79,
           "clock_display": "79'",
-          "period": 2,
-          "team": "Inverness Caledonian Thistle",
+          "period": 0,
+          "team_id": "253",
           "scorer": "Alfie Stewart",
           "type": "Goal",
-          "text": "Alfie Stewart (Inverness Caledonian Thistle) Goal at 79'",
+          "is_own_goal": false,
+          "is_penalty": false,
           "time_approximate": false,
-          "source": "ESPN_SUMMARY_KEY_EVENTS"
+          "source": "ESPN_OFFICIAL_DETAIL"
         }
       ],
       "current_score": "1-0",
@@ -335,7 +337,7 @@
       "actual_roi_contribution": null,
       "is_major": false,
       "created_at": "2026-11-03T21:06:00Z",
-      "updated_at": "2026-11-03T21:28:06Z",
+      "updated_at": "2026-11-03T21:33:14Z",
       "last_verified_at": "2026-11-03T21:06:00Z",
       "verification_status": "IN_PROGRESS_PENDING_FINAL",
       "revision_history": [],
@@ -412,7 +414,7 @@
       "actual_roi_contribution": null,
       "is_major": false,
       "created_at": "2026-11-03T21:06:00Z",
-      "updated_at": "2026-11-03T21:28:06Z",
+      "updated_at": "2026-11-03T21:33:14Z",
       "last_verified_at": "2026-11-03T21:06:00Z",
       "verification_status": "IN_PROGRESS_PENDING_FINAL",
       "revision_history": [],
@@ -467,7 +469,7 @@
       "actual_roi_contribution": null,
       "is_major": false,
       "created_at": "2026-11-03T21:06:00Z",
-      "updated_at": "2026-11-03T21:28:06Z",
+      "updated_at": "2026-11-03T21:33:14Z",
       "last_verified_at": "2026-11-03T21:06:00Z",
       "verification_status": "IN_PROGRESS_PENDING_FINAL",
       "revision_history": [],
