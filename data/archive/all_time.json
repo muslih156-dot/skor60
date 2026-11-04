@@ -1,7 +1,7 @@
 {
   "system": "TRADING BOLA MENIT 60 - LAST GOAL SYSTEM",
   "version": "2.1",
-  "last_updated_utc": "2026-11-04T21:18:33Z",
+  "last_updated_utc": "2026-11-04T21:22:54Z",
   "total_records": 99,
   "matches": [
     {
@@ -51,13 +51,26 @@
         {
           "minute": 71,
           "clock_display": "71'",
-          "period": 2,
-          "team": "Oxford United",
+          "period": 0,
+          "team_id": "311",
           "scorer": "Gatlin O'Donkor",
           "type": "Goal",
-          "text": "Gatlin O'Donkor (Oxford United) Goal at 71'",
+          "is_own_goal": false,
+          "is_penalty": false,
           "time_approximate": false,
-          "source": "ESPN_SUMMARY_KEY_EVENTS"
+          "source": "ESPN_OFFICIAL_DETAIL"
+        },
+        {
+          "minute": 78,
+          "clock_display": "78'",
+          "period": 0,
+          "team_id": "311",
+          "scorer": "Mo Missanga",
+          "type": "Goal",
+          "is_own_goal": false,
+          "is_penalty": false,
+          "time_approximate": false,
+          "source": "ESPN_OFFICIAL_DETAIL"
         }
       ],
       "current_score": "1-0",
@@ -73,7 +86,7 @@
       "actual_roi_contribution": null,
       "is_major": false,
       "created_at": "2026-11-04T21:06:07Z",
-      "updated_at": "2026-11-04T21:18:33Z",
+      "updated_at": "2026-11-04T21:22:54Z",
       "last_verified_at": "2026-11-04T21:06:07Z",
       "verification_status": "IN_PROGRESS_PENDING_FINAL",
       "revision_history": [],
@@ -127,13 +140,14 @@
         {
           "minute": 70,
           "clock_display": "70'",
-          "period": 2,
-          "team": "Wrexham",
+          "period": 0,
+          "team_id": "352",
           "scorer": "George Thomason",
           "type": "Goal",
-          "text": "Goal! Wrexham 1, Middlesbrough 0. George Thomason (Wrexham) left footed shot from outside the box to the centre of the goal. Assisted by Kieffer Moore with a headed pass.",
+          "is_own_goal": false,
+          "is_penalty": false,
           "time_approximate": false,
-          "source": "ESPN_SUMMARY_KEY_EVENTS"
+          "source": "ESPN_OFFICIAL_DETAIL"
         }
       ],
       "current_score": "1-0",
@@ -149,7 +163,7 @@
       "actual_roi_contribution": null,
       "is_major": false,
       "created_at": "2026-11-04T21:06:07Z",
-      "updated_at": "2026-11-04T21:18:33Z",
+      "updated_at": "2026-11-04T21:22:54Z",
       "last_verified_at": "2026-11-04T21:06:07Z",
       "verification_status": "IN_PROGRESS_PENDING_FINAL",
       "revision_history": [],
@@ -226,7 +240,7 @@
       "actual_roi_contribution": null,
       "is_major": false,
       "created_at": "2026-11-04T20:31:03Z",
-      "updated_at": "2026-11-04T21:18:33Z",
+      "updated_at": "2026-11-04T21:22:54Z",
       "last_verified_at": "2026-11-04T20:31:03Z",
       "verification_status": "IN_PROGRESS_PENDING_FINAL",
       "revision_history": [],
