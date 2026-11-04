@@ -1,6 +1,6 @@
 {
   "trading_day": "2026-11-04",
-  "last_updated_utc": "2026-11-04T19:47:56Z",
+  "last_updated_utc": "2026-11-04T19:52:53Z",
   "total_records": 7,
   "matches": [
     {
@@ -59,24 +59,26 @@
         {
           "minute": 63,
           "clock_display": "63'",
-          "period": 2,
-          "team": "Al Jazira Club",
+          "period": 0,
+          "team_id": "8364",
           "scorer": "Vinicius Mello",
           "type": "Goal",
-          "text": "Vinicius Mello (Al Jazira Club) Goal at 63'",
+          "is_own_goal": false,
+          "is_penalty": false,
           "time_approximate": false,
-          "source": "ESPN_SUMMARY_KEY_EVENTS"
+          "source": "ESPN_OFFICIAL_DETAIL"
         },
         {
           "minute": 69,
           "clock_display": "69'",
-          "period": 2,
-          "team": "Al Jazira Club",
+          "period": 0,
+          "team_id": "8364",
           "scorer": "Bruno",
           "type": "Goal",
-          "text": "Bruno (Al Jazira Club) Goal at 69'",
+          "is_own_goal": false,
+          "is_penalty": false,
           "time_approximate": false,
-          "source": "ESPN_SUMMARY_KEY_EVENTS"
+          "source": "ESPN_OFFICIAL_DETAIL"
         }
       ],
       "current_score": "0-2",
@@ -92,7 +94,7 @@
       "actual_roi_contribution": null,
       "is_major": false,
       "created_at": "2026-11-04T19:35:44Z",
-      "updated_at": "2026-11-04T19:47:56Z",
+      "updated_at": "2026-11-04T19:52:53Z",
       "last_verified_at": "2026-11-04T19:35:44Z",
       "verification_status": "IN_PROGRESS_PENDING_FINAL",
       "revision_history": [],
