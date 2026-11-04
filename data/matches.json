@@ -1,7 +1,7 @@
 {
   "system": "TRADING BOLA MENIT 60 - LAST GOAL SYSTEM",
   "version": "2.1",
-  "last_updated_utc": "2026-11-04T21:33:09Z",
+  "last_updated_utc": "2026-11-04T21:37:44Z",
   "total_records": 99,
   "matches": [
     {
@@ -95,7 +95,7 @@
       "actual_roi_contribution": null,
       "is_major": false,
       "created_at": "2026-11-04T21:06:07Z",
-      "updated_at": "2026-11-04T21:33:08Z",
+      "updated_at": "2026-11-04T21:37:44Z",
       "last_verified_at": "2026-11-04T21:06:07Z",
       "verification_status": "IN_PROGRESS_PENDING_FINAL",
       "revision_history": [],
@@ -158,24 +158,26 @@
         {
           "minute": 70,
           "clock_display": "70'",
-          "period": 2,
-          "team": "Wrexham",
+          "period": 0,
+          "team_id": "352",
           "scorer": "George Thomason",
           "type": "Goal",
-          "text": "Goal! Wrexham 1, Middlesbrough 0. George Thomason (Wrexham) left footed shot from outside the box to the centre of the goal. Assisted by Kieffer Moore with a headed pass.",
+          "is_own_goal": false,
+          "is_penalty": false,
           "time_approximate": false,
-          "source": "ESPN_SUMMARY_KEY_EVENTS"
+          "source": "ESPN_OFFICIAL_DETAIL"
         },
         {
           "minute": 84,
           "clock_display": "84'",
-          "period": 2,
-          "team": "Wrexham",
+          "period": 0,
+          "team_id": "352",
           "scorer": "Oliver Rathbone",
           "type": "Goal - Header",
-          "text": "Goal! Wrexham 2, Middlesbrough 0. Oliver Rathbone (Wrexham) header from the centre of the box to the top left corner. Assisted by Lewis O'Brien with a cross.",
+          "is_own_goal": false,
+          "is_penalty": false,
           "time_approximate": false,
-          "source": "ESPN_SUMMARY_KEY_EVENTS"
+          "source": "ESPN_OFFICIAL_DETAIL"
         }
       ],
       "current_score": "2-0",
@@ -191,7 +193,7 @@
       "actual_roi_contribution": null,
       "is_major": false,
       "created_at": "2026-11-04T21:06:07Z",
-      "updated_at": "2026-11-04T21:33:08Z",
+      "updated_at": "2026-11-04T21:37:44Z",
       "last_verified_at": "2026-11-04T21:06:07Z",
       "verification_status": "IN_PROGRESS_PENDING_FINAL",
       "revision_history": [],
