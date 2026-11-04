@@ -1,6 +1,6 @@
 {
   "trading_day": "2026-11-04",
-  "last_updated_utc": "2026-11-04T21:37:44Z",
+  "last_updated_utc": "2026-11-04T21:42:57Z",
   "total_records": 10,
   "matches": [
     {
@@ -53,52 +53,59 @@
           "score": "2-0",
           "match_status": "Second Half",
           "note": "GOAL DETECTED"
+        },
+        {
+          "timestamp_utc": "2026-11-04T21:42:57Z",
+          "timestamp_wita": "2026-11-05T05:42:57.117293+08:00",
+          "clock": "Final",
+          "minute": null,
+          "score": "2-0",
+          "match_status": "Final",
+          "note": "MATCH FINISHED"
         }
       ],
       "goal_events": [
         {
           "minute": 71,
           "clock_display": "71'",
-          "period": 0,
-          "team_id": "311",
+          "period": 2,
+          "team": "Oxford United",
           "scorer": "Gatlin O'Donkor",
           "type": "Goal",
-          "is_own_goal": false,
-          "is_penalty": false,
+          "text": "Gatlin O'Donkor (Oxford United) Goal at 71'",
           "time_approximate": false,
-          "source": "ESPN_OFFICIAL_DETAIL"
+          "source": "ESPN_SUMMARY_KEY_EVENTS"
         },
         {
           "minute": 78,
           "clock_display": "78'",
-          "period": 0,
-          "team_id": "311",
+          "period": 2,
+          "team": "Oxford United",
           "scorer": "Mo Missanga",
           "type": "Goal",
-          "is_own_goal": false,
-          "is_penalty": false,
+          "text": "Mo Missanga (Oxford United) Goal at 78'",
           "time_approximate": false,
-          "source": "ESPN_OFFICIAL_DETAIL"
+          "source": "ESPN_SUMMARY_KEY_EVENTS"
         }
       ],
       "current_score": "2-0",
-      "final_score": null,
-      "match_status": "Second Half",
-      "settlement_status": "PENDING",
-      "result": "PENDING",
-      "profit": 0,
-      "roi_contribution": 0.0,
-      "simulated_profit": 0,
-      "simulated_roi_contribution": 0.0,
+      "final_score": "2-0",
+      "match_status": "Final",
+      "settlement_status": "SETTLED",
+      "result": "WIN",
+      "profit": 40000,
+      "roi_contribution": 80.0,
+      "simulated_profit": 40000,
+      "simulated_roi_contribution": 80.0,
       "actual_profit": null,
       "actual_roi_contribution": null,
       "is_major": false,
       "created_at": "2026-11-04T21:06:07Z",
-      "updated_at": "2026-11-04T21:37:44Z",
-      "last_verified_at": "2026-11-04T21:06:07Z",
-      "verification_status": "IN_PROGRESS_PENDING_FINAL",
+      "updated_at": "2026-11-04T21:42:57Z",
+      "last_verified_at": "2026-11-04T21:42:57Z",
+      "verification_status": "VERIFIED_OFFICIAL_FINAL",
       "revision_history": [],
-      "audit_explanation": "Pertandingan 401880891 masih berstatus Second Half (Skor saat ini: 2-0). Menunggu status Final resmi dari provider (PENDING).",
+      "audit_explanation": "Pertandingan 401880891 masuk pada menit 63' dengan skor 0-0. Status resmi mencapai Final dengan skor akhir waktu normal 2-0. Minimal 1 gol tercipta setelah waktu entry sehingga dinyatakan WIN.",
       "audit_passed": true
     },
     {
@@ -151,52 +158,59 @@
           "score": "2-0",
           "match_status": "Second Half",
           "note": "GOAL DETECTED"
+        },
+        {
+          "timestamp_utc": "2026-11-04T21:42:57Z",
+          "timestamp_wita": "2026-11-05T05:42:57.004567+08:00",
+          "clock": "Final",
+          "minute": null,
+          "score": "2-0",
+          "match_status": "Final",
+          "note": "MATCH FINISHED"
         }
       ],
       "goal_events": [
         {
           "minute": 70,
           "clock_display": "70'",
-          "period": 0,
-          "team_id": "352",
+          "period": 2,
+          "team": "Wrexham",
           "scorer": "George Thomason",
           "type": "Goal",
-          "is_own_goal": false,
-          "is_penalty": false,
+          "text": "Goal! Wrexham 1, Middlesbrough 0. George Thomason (Wrexham) left footed shot from outside the box to the centre of the goal. Assisted by Kieffer Moore with a headed pass.",
           "time_approximate": false,
-          "source": "ESPN_OFFICIAL_DETAIL"
+          "source": "ESPN_SUMMARY_KEY_EVENTS"
         },
         {
           "minute": 84,
           "clock_display": "84'",
-          "period": 0,
-          "team_id": "352",
+          "period": 2,
+          "team": "Wrexham",
           "scorer": "Oliver Rathbone",
           "type": "Goal - Header",
-          "is_own_goal": false,
-          "is_penalty": false,
+          "text": "Goal! Wrexham 2, Middlesbrough 0. Oliver Rathbone (Wrexham) header from the centre of the box to the top left corner. Assisted by Lewis O'Brien with a cross.",
           "time_approximate": false,
-          "source": "ESPN_OFFICIAL_DETAIL"
+          "source": "ESPN_SUMMARY_KEY_EVENTS"
         }
       ],
       "current_score": "2-0",
-      "final_score": null,
-      "match_status": "Second Half",
-      "settlement_status": "PENDING",
-      "result": "PENDING",
-      "profit": 0,
-      "roi_contribution": 0.0,
-      "simulated_profit": 0,
-      "simulated_roi_contribution": 0.0,
+      "final_score": "2-0",
+      "match_status": "Final",
+      "settlement_status": "SETTLED",
+      "result": "WIN",
+      "profit": 40000,
+      "roi_contribution": 80.0,
+      "simulated_profit": 40000,
+      "simulated_roi_contribution": 80.0,
       "actual_profit": null,
       "actual_roi_contribution": null,
       "is_major": false,
       "created_at": "2026-11-04T21:06:07Z",
-      "updated_at": "2026-11-04T21:37:44Z",
-      "last_verified_at": "2026-11-04T21:06:07Z",
-      "verification_status": "IN_PROGRESS_PENDING_FINAL",
+      "updated_at": "2026-11-04T21:42:57Z",
+      "last_verified_at": "2026-11-04T21:42:57Z",
+      "verification_status": "VERIFIED_OFFICIAL_FINAL",
       "revision_history": [],
-      "audit_explanation": "Pertandingan 401880173 masih berstatus Second Half (Skor saat ini: 2-0). Menunggu status Final resmi dari provider (PENDING).",
+      "audit_explanation": "Pertandingan 401880173 masuk pada menit 63' dengan skor 0-0. Status resmi mencapai Final dengan skor akhir waktu normal 2-0. Minimal 1 gol tercipta setelah waktu entry sehingga dinyatakan WIN.",
       "audit_passed": true
     },
     {
