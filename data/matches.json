@@ -1,7 +1,7 @@
 {
   "system": "TRADING BOLA MENIT 60 - LAST GOAL SYSTEM",
   "version": "2.1",
-  "last_updated_utc": "2026-11-05T23:33:05Z",
+  "last_updated_utc": "2026-11-05T23:37:52Z",
   "total_records": 115,
   "matches": [
     {
@@ -60,46 +60,50 @@
         {
           "minute": 64,
           "clock_display": "64'",
-          "period": 2,
-          "team": "Tigres UANL",
+          "period": 0,
+          "team_id": "22413",
           "scorer": "Diana Ordóñez",
           "type": "Goal",
-          "text": "Diana Ordóñez (Tigres UANL) Goal at 64'",
+          "is_own_goal": false,
+          "is_penalty": false,
           "time_approximate": false,
-          "source": "ESPN_SUMMARY_KEY_EVENTS"
+          "source": "ESPN_OFFICIAL_DETAIL"
         },
         {
           "minute": 70,
           "clock_display": "70'",
-          "period": 2,
-          "team": "Tigres UANL",
+          "period": 0,
+          "team_id": "22413",
           "scorer": "Stephany Mayor",
           "type": "Goal",
-          "text": "Stephany Mayor (Tigres UANL) Goal at 70'",
+          "is_own_goal": false,
+          "is_penalty": false,
           "time_approximate": false,
-          "source": "ESPN_SUMMARY_KEY_EVENTS"
+          "source": "ESPN_OFFICIAL_DETAIL"
         },
         {
           "minute": 77,
           "clock_display": "77'",
-          "period": 2,
-          "team": "Tigres UANL",
+          "period": 0,
+          "team_id": "22413",
           "scorer": "Stephany Mayor",
           "type": "Goal",
-          "text": "Stephany Mayor (Tigres UANL) Goal at 77'",
+          "is_own_goal": false,
+          "is_penalty": false,
           "time_approximate": false,
-          "source": "ESPN_SUMMARY_KEY_EVENTS"
+          "source": "ESPN_OFFICIAL_DETAIL"
         },
         {
           "minute": 80,
           "clock_display": "80'",
-          "period": 2,
-          "team": "Tigres UANL",
+          "period": 0,
+          "team_id": "22413",
           "scorer": "Stephany Mayor",
           "type": "Goal",
-          "text": "Stephany Mayor (Tigres UANL) Goal at 80'",
+          "is_own_goal": false,
+          "is_penalty": false,
           "time_approximate": false,
-          "source": "ESPN_SUMMARY_KEY_EVENTS"
+          "source": "ESPN_OFFICIAL_DETAIL"
         }
       ],
       "current_score": "0-4",
@@ -115,7 +119,7 @@
       "actual_roi_contribution": null,
       "is_major": false,
       "created_at": "2026-11-05T23:10:52Z",
-      "updated_at": "2026-11-05T23:33:05Z",
+      "updated_at": "2026-11-05T23:37:52Z",
       "last_verified_at": "2026-11-05T23:10:52Z",
       "verification_status": "IN_PROGRESS_PENDING_FINAL",
       "revision_history": [],
