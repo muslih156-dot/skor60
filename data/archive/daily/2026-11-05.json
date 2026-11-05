@@ -1,6 +1,6 @@
 {
   "trading_day": "2026-11-05",
-  "last_updated_utc": "2026-11-05T19:33:17Z",
+  "last_updated_utc": "2026-11-05T19:37:55Z",
   "total_records": 5,
   "matches": [
     {
@@ -51,7 +51,7 @@
       "actual_roi_contribution": null,
       "is_major": false,
       "created_at": "2026-11-05T19:05:51Z",
-      "updated_at": "2026-11-05T19:33:17Z",
+      "updated_at": "2026-11-05T19:37:55Z",
       "last_verified_at": "2026-11-05T19:05:51Z",
       "verification_status": "IN_PROGRESS_PENDING_FINAL",
       "revision_history": [],
@@ -114,24 +114,26 @@
         {
           "minute": 62,
           "clock_display": "62'",
-          "period": 2,
-          "team": "Inter D'Escaldes",
+          "period": 0,
+          "team_id": "20703",
           "scorer": "Borja Arellano Monedero",
           "type": "Goal",
-          "text": "Goal! Red Star Belgrade 0, Inter Club D'Escaldes 1. Borja Arellano (Inter Club D'Escaldes) left footed shot from very close range to the top left corner. Assisted by Maurizio Pochettino with a cross.",
+          "is_own_goal": false,
+          "is_penalty": false,
           "time_approximate": false,
-          "source": "ESPN_SUMMARY_KEY_EVENTS"
+          "source": "ESPN_OFFICIAL_DETAIL"
         },
         {
           "minute": 80,
           "clock_display": "80'",
-          "period": 2,
-          "team": "Red Star Belgrade",
+          "period": 0,
+          "team_id": "2290",
           "scorer": "Vladimir Lucic",
           "type": "Goal",
-          "text": "Goal! Red Star Belgrade 1, Inter Club D'Escaldes 1. Vladimir Lucic (Red Star Belgrade) right footed shot from the centre of the box to the top right corner. Assisted by Rade Krunic.",
+          "is_own_goal": false,
+          "is_penalty": false,
           "time_approximate": false,
-          "source": "ESPN_SUMMARY_KEY_EVENTS"
+          "source": "ESPN_OFFICIAL_DETAIL"
         }
       ],
       "current_score": "1-1",
@@ -147,7 +149,7 @@
       "actual_roi_contribution": null,
       "is_major": false,
       "created_at": "2026-11-05T19:05:51Z",
-      "updated_at": "2026-11-05T19:33:17Z",
+      "updated_at": "2026-11-05T19:37:55Z",
       "last_verified_at": "2026-11-05T19:05:51Z",
       "verification_status": "IN_PROGRESS_PENDING_FINAL",
       "revision_history": [],
@@ -202,7 +204,7 @@
       "actual_roi_contribution": null,
       "is_major": false,
       "created_at": "2026-11-05T19:05:51Z",
-      "updated_at": "2026-11-05T19:33:17Z",
+      "updated_at": "2026-11-05T19:37:55Z",
       "last_verified_at": "2026-11-05T19:05:51Z",
       "verification_status": "IN_PROGRESS_PENDING_FINAL",
       "revision_history": [],
@@ -241,10 +243,31 @@
           "score": "0-0",
           "match_status": "Second Half",
           "note": "ENTRY"
+        },
+        {
+          "timestamp_utc": "2026-11-05T19:37:55Z",
+          "timestamp_wita": "2026-11-06T03:37:55.829488+08:00",
+          "clock": "90'+3'",
+          "minute": 90,
+          "score": "1-0",
+          "match_status": "Second Half",
+          "note": "GOAL DETECTED"
         }
       ],
-      "goal_events": [],
-      "current_score": "0-0",
+      "goal_events": [
+        {
+          "minute": 89,
+          "clock_display": "89'",
+          "period": 2,
+          "team": "Lincoln Red Imps",
+          "scorer": "Dennis Hadzikadunic",
+          "type": "Own Goal",
+          "text": "Own Goal by Dennis Hadzikadunic, Hajduk Split. Lincoln Red Imps 1, Hajduk Split 0.",
+          "time_approximate": false,
+          "source": "ESPN_SUMMARY_KEY_EVENTS"
+        }
+      ],
+      "current_score": "1-0",
       "final_score": null,
       "match_status": "Second Half",
       "settlement_status": "PENDING",
@@ -257,11 +280,11 @@
       "actual_roi_contribution": null,
       "is_major": false,
       "created_at": "2026-11-05T19:05:51Z",
-      "updated_at": "2026-11-05T19:33:17Z",
+      "updated_at": "2026-11-05T19:37:55Z",
       "last_verified_at": "2026-11-05T19:05:51Z",
       "verification_status": "IN_PROGRESS_PENDING_FINAL",
       "revision_history": [],
-      "audit_explanation": "Pertandingan 401915742 masih berstatus Second Half (Skor saat ini: 0-0). Menunggu status Final resmi dari provider (PENDING).",
+      "audit_explanation": "Pertandingan 401915742 masih berstatus Second Half (Skor saat ini: 1-0). Menunggu status Final resmi dari provider (PENDING).",
       "audit_passed": true
     },
     {
@@ -311,13 +334,14 @@
         {
           "minute": 83,
           "clock_display": "83'",
-          "period": 2,
-          "team": "Levski Sofia",
+          "period": 0,
+          "team_id": "490",
           "scorer": "Stivan Stoyanchov",
           "type": "Goal - Header",
-          "text": "Goal! Levski Sofia 1, Jagiellonia Białystok 0. Stivan Stoyanchov (Levski Sofia) header from the centre of the box to the bottom right corner. Assisted by David Kusso with a cross following a corner.",
+          "is_own_goal": false,
+          "is_penalty": false,
           "time_approximate": false,
-          "source": "ESPN_SUMMARY_KEY_EVENTS"
+          "source": "ESPN_OFFICIAL_DETAIL"
         }
       ],
       "current_score": "1-0",
@@ -333,7 +357,7 @@
       "actual_roi_contribution": null,
       "is_major": true,
       "created_at": "2026-11-05T19:05:51Z",
-      "updated_at": "2026-11-05T19:33:17Z",
+      "updated_at": "2026-11-05T19:37:55Z",
       "last_verified_at": "2026-11-05T19:05:51Z",
       "verification_status": "IN_PROGRESS_PENDING_FINAL",
       "revision_history": [],
