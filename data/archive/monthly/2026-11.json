@@ -1,6 +1,6 @@
 {
   "trading_month": "2026-11",
-  "last_updated_utc": "2026-11-05T19:22:58Z",
+  "last_updated_utc": "2026-11-05T19:27:44Z",
   "total_records": 69,
   "matches": [
     {
@@ -51,7 +51,7 @@
       "actual_roi_contribution": null,
       "is_major": false,
       "created_at": "2026-11-05T19:05:51Z",
-      "updated_at": "2026-11-05T19:22:57Z",
+      "updated_at": "2026-11-05T19:27:44Z",
       "last_verified_at": "2026-11-05T19:05:51Z",
       "verification_status": "IN_PROGRESS_PENDING_FINAL",
       "revision_history": [],
@@ -105,14 +105,24 @@
         {
           "minute": 62,
           "clock_display": "62'",
-          "period": 0,
-          "team_id": "20703",
+          "period": 2,
+          "team": "Inter D'Escaldes",
           "scorer": "Borja Arellano Monedero",
           "type": "Goal",
-          "is_own_goal": false,
-          "is_penalty": false,
+          "text": "Goal! Red Star Belgrade 0, Inter Club D'Escaldes 1. Borja Arellano (Inter Club D'Escaldes) left footed shot from very close range to the top left corner. Assisted by Maurizio Pochettino with a cross.",
           "time_approximate": false,
-          "source": "ESPN_OFFICIAL_DETAIL"
+          "source": "ESPN_SUMMARY_KEY_EVENTS"
+        },
+        {
+          "minute": 80,
+          "clock_display": "80'",
+          "period": 2,
+          "team": "Red Star Belgrade",
+          "scorer": "Vladimir Lucic",
+          "type": "Goal",
+          "text": "Goal! Red Star Belgrade 1, Inter Club D'Escaldes 1. Vladimir Lucic (Red Star Belgrade) right footed shot from the centre of the box to the top right corner. Assisted by Rade Krunic.",
+          "time_approximate": false,
+          "source": "ESPN_SUMMARY_KEY_EVENTS"
         }
       ],
       "current_score": "0-1",
@@ -128,7 +138,7 @@
       "actual_roi_contribution": null,
       "is_major": false,
       "created_at": "2026-11-05T19:05:51Z",
-      "updated_at": "2026-11-05T19:22:58Z",
+      "updated_at": "2026-11-05T19:27:44Z",
       "last_verified_at": "2026-11-05T19:05:51Z",
       "verification_status": "IN_PROGRESS_PENDING_FINAL",
       "revision_history": [],
@@ -183,7 +193,7 @@
       "actual_roi_contribution": null,
       "is_major": false,
       "created_at": "2026-11-05T19:05:51Z",
-      "updated_at": "2026-11-05T19:22:57Z",
+      "updated_at": "2026-11-05T19:27:44Z",
       "last_verified_at": "2026-11-05T19:05:51Z",
       "verification_status": "IN_PROGRESS_PENDING_FINAL",
       "revision_history": [],
@@ -238,7 +248,7 @@
       "actual_roi_contribution": null,
       "is_major": false,
       "created_at": "2026-11-05T19:05:51Z",
-      "updated_at": "2026-11-05T19:22:58Z",
+      "updated_at": "2026-11-05T19:27:44Z",
       "last_verified_at": "2026-11-05T19:05:51Z",
       "verification_status": "IN_PROGRESS_PENDING_FINAL",
       "revision_history": [],
@@ -293,7 +303,7 @@
       "actual_roi_contribution": null,
       "is_major": true,
       "created_at": "2026-11-05T19:05:51Z",
-      "updated_at": "2026-11-05T19:22:57Z",
+      "updated_at": "2026-11-05T19:27:44Z",
       "last_verified_at": "2026-11-05T19:05:51Z",
       "verification_status": "IN_PROGRESS_PENDING_FINAL",
       "revision_history": [],
