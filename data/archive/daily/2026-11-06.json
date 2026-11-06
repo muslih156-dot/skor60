@@ -1,6 +1,6 @@
 {
   "trading_day": "2026-11-06",
-  "last_updated_utc": "2026-11-06T18:03:08Z",
+  "last_updated_utc": "2026-11-06T18:07:45Z",
   "total_records": 2,
   "matches": [
     {
@@ -50,13 +50,14 @@
         {
           "minute": 71,
           "clock_display": "71'",
-          "period": 2,
-          "team": "Rubin Kazan",
+          "period": 0,
+          "team_id": "3851",
           "scorer": "Egor Teslenko",
           "type": "Goal",
-          "text": "Egor Teslenko (Rubin Kazan) Goal at 71'",
+          "is_own_goal": false,
+          "is_penalty": false,
           "time_approximate": false,
-          "source": "ESPN_SUMMARY_KEY_EVENTS"
+          "source": "ESPN_OFFICIAL_DETAIL"
         }
       ],
       "current_score": "0-1",
@@ -72,7 +73,7 @@
       "actual_roi_contribution": null,
       "is_major": false,
       "created_at": "2026-11-06T17:50:53Z",
-      "updated_at": "2026-11-06T18:03:08Z",
+      "updated_at": "2026-11-06T18:07:45Z",
       "last_verified_at": "2026-11-06T17:50:53Z",
       "verification_status": "IN_PROGRESS_PENDING_FINAL",
       "revision_history": [],
