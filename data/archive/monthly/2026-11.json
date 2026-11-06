@@ -1,6 +1,6 @@
 {
   "trading_month": "2026-11",
-  "last_updated_utc": "2026-11-06T00:48:05Z",
+  "last_updated_utc": "2026-11-06T00:53:05Z",
   "total_records": 77,
   "matches": [
     {
@@ -51,7 +51,7 @@
       "actual_roi_contribution": null,
       "is_major": false,
       "created_at": "2026-11-06T00:35:53Z",
-      "updated_at": "2026-11-06T00:48:05Z",
+      "updated_at": "2026-11-06T00:53:05Z",
       "last_verified_at": "2026-11-06T00:35:53Z",
       "verification_status": "IN_PROGRESS_PENDING_FINAL",
       "revision_history": [],
@@ -106,7 +106,7 @@
       "actual_roi_contribution": null,
       "is_major": false,
       "created_at": "2026-11-06T00:30:52Z",
-      "updated_at": "2026-11-06T00:48:05Z",
+      "updated_at": "2026-11-06T00:53:05Z",
       "last_verified_at": "2026-11-06T00:30:52Z",
       "verification_status": "IN_PROGRESS_PENDING_FINAL",
       "revision_history": [],
@@ -154,6 +154,15 @@
           "score": "1-0",
           "match_status": "Second Half",
           "note": "GOAL DETECTED"
+        },
+        {
+          "timestamp_utc": "2026-11-06T00:53:05Z",
+          "timestamp_wita": "2026-11-06T08:53:05.355179+08:00",
+          "clock": "87'",
+          "minute": 87,
+          "score": "1-1",
+          "match_status": "Second Half",
+          "note": "GOAL DETECTED"
         }
       ],
       "goal_events": [
@@ -168,9 +177,21 @@
           "time_approximate": true,
           "note": "GOAL EVENT TIME APPROXIMATE",
           "source": "SCORE_SNAPSHOT_DIFFERENCE"
+        },
+        {
+          "observed_at_utc": "2026-11-06T00:53:05Z",
+          "observed_at_wita": "2026-11-06T08:53:05.355179+08:00",
+          "minute": 87,
+          "clock_display": "87'",
+          "previous_score": "1-0",
+          "score_after": "1-1",
+          "team": "UNKNOWN_FROM_SNAPSHOT_DIFF",
+          "time_approximate": true,
+          "note": "GOAL EVENT TIME APPROXIMATE",
+          "source": "SCORE_SNAPSHOT_DIFFERENCE"
         }
       ],
-      "current_score": "1-0",
+      "current_score": "1-1",
       "final_score": null,
       "match_status": "Second Half",
       "settlement_status": "PENDING",
@@ -183,11 +204,11 @@
       "actual_roi_contribution": null,
       "is_major": false,
       "created_at": "2026-11-06T00:20:56Z",
-      "updated_at": "2026-11-06T00:48:05Z",
+      "updated_at": "2026-11-06T00:53:05Z",
       "last_verified_at": "2026-11-06T00:20:56Z",
       "verification_status": "IN_PROGRESS_PENDING_FINAL",
       "revision_history": [],
-      "audit_explanation": "Pertandingan 401898885 masih berstatus Second Half (Skor saat ini: 1-0). Menunggu status Final resmi dari provider (PENDING).",
+      "audit_explanation": "Pertandingan 401898885 masih berstatus Second Half (Skor saat ini: 1-1). Menunggu status Final resmi dari provider (PENDING).",
       "audit_passed": true
     },
     {
