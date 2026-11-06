@@ -1,6 +1,6 @@
 {
   "trading_month": "2026-11",
-  "last_updated_utc": "2026-11-06T00:53:05Z",
+  "last_updated_utc": "2026-11-06T00:57:58Z",
   "total_records": 77,
   "matches": [
     {
@@ -51,7 +51,7 @@
       "actual_roi_contribution": null,
       "is_major": false,
       "created_at": "2026-11-06T00:35:53Z",
-      "updated_at": "2026-11-06T00:53:05Z",
+      "updated_at": "2026-11-06T00:57:58Z",
       "last_verified_at": "2026-11-06T00:35:53Z",
       "verification_status": "IN_PROGRESS_PENDING_FINAL",
       "revision_history": [],
@@ -106,7 +106,7 @@
       "actual_roi_contribution": null,
       "is_major": false,
       "created_at": "2026-11-06T00:30:52Z",
-      "updated_at": "2026-11-06T00:53:05Z",
+      "updated_at": "2026-11-06T00:57:58Z",
       "last_verified_at": "2026-11-06T00:30:52Z",
       "verification_status": "IN_PROGRESS_PENDING_FINAL",
       "revision_history": [],
@@ -204,7 +204,7 @@
       "actual_roi_contribution": null,
       "is_major": false,
       "created_at": "2026-11-06T00:20:56Z",
-      "updated_at": "2026-11-06T00:53:05Z",
+      "updated_at": "2026-11-06T00:57:58Z",
       "last_verified_at": "2026-11-06T00:20:56Z",
       "verification_status": "IN_PROGRESS_PENDING_FINAL",
       "revision_history": [],
