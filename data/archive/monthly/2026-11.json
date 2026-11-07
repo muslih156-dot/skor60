@@ -1,6 +1,6 @@
 {
   "trading_month": "2026-11",
-  "last_updated_utc": "2026-11-07T20:38:00Z",
+  "last_updated_utc": "2026-11-07T20:42:55Z",
   "total_records": 113,
   "matches": [
     {
@@ -50,13 +50,14 @@
         {
           "minute": 71,
           "clock_display": "71'",
-          "period": 2,
-          "team": "São Bernardo",
+          "period": 0,
+          "team_id": "11268",
           "scorer": "Fabrício Daniel",
           "type": "Goal",
-          "text": "Goal! Avaí 0, São Bernardo 1. Fabrício Daniel (São Bernardo) left footed shot from the centre of the box to the high centre of the goal. Assisted by Pará.",
+          "is_own_goal": false,
+          "is_penalty": false,
           "time_approximate": false,
-          "source": "ESPN_SUMMARY_KEY_EVENTS"
+          "source": "ESPN_OFFICIAL_DETAIL"
         }
       ],
       "current_score": "0-1",
@@ -72,7 +73,7 @@
       "actual_roi_contribution": null,
       "is_major": false,
       "created_at": "2026-11-07T20:25:47Z",
-      "updated_at": "2026-11-07T20:38:00Z",
+      "updated_at": "2026-11-07T20:42:55Z",
       "last_verified_at": "2026-11-07T20:25:47Z",
       "verification_status": "IN_PROGRESS_PENDING_FINAL",
       "revision_history": [],
