@@ -1,6 +1,6 @@
 {
   "trading_month": "2026-11",
-  "last_updated_utc": "2026-11-07T20:52:53Z",
+  "last_updated_utc": "2026-11-07T20:57:50Z",
   "total_records": 113,
   "matches": [
     {
@@ -68,35 +68,38 @@
         {
           "minute": 71,
           "clock_display": "71'",
-          "period": 2,
-          "team": "São Bernardo",
+          "period": 0,
+          "team_id": "11268",
           "scorer": "Fabrício Daniel",
           "type": "Goal",
-          "text": "Goal! Avaí 0, São Bernardo 1. Fabrício Daniel (São Bernardo) left footed shot from the centre of the box to the high centre of the goal. Assisted by Pará.",
+          "is_own_goal": false,
+          "is_penalty": false,
           "time_approximate": false,
-          "source": "ESPN_SUMMARY_KEY_EVENTS"
+          "source": "ESPN_OFFICIAL_DETAIL"
         },
         {
           "minute": 79,
           "clock_display": "79'",
-          "period": 2,
-          "team": "Avaí",
+          "period": 0,
+          "team_id": "9966",
           "scorer": "Pará",
           "type": "Own Goal",
-          "text": "Own Goal by Pará, São Bernardo. Avaí 1, São Bernardo 1.",
+          "is_own_goal": true,
+          "is_penalty": false,
           "time_approximate": false,
-          "source": "ESPN_SUMMARY_KEY_EVENTS"
+          "source": "ESPN_OFFICIAL_DETAIL"
         },
         {
           "minute": 85,
           "clock_display": "85'",
-          "period": 2,
-          "team": "Avaí",
+          "period": 0,
+          "team_id": "9966",
           "scorer": "Luis Eduardo",
           "type": "Goal",
-          "text": "Goal! Avaí 2, São Bernardo 1. Gaspar (Avaí) right footed shot from the centre of the box to the bottom right corner. Assisted by Marcio Vitor.",
+          "is_own_goal": false,
+          "is_penalty": false,
           "time_approximate": false,
-          "source": "ESPN_SUMMARY_KEY_EVENTS"
+          "source": "ESPN_OFFICIAL_DETAIL"
         }
       ],
       "current_score": "2-1",
@@ -112,7 +115,7 @@
       "actual_roi_contribution": null,
       "is_major": false,
       "created_at": "2026-11-07T20:25:47Z",
-      "updated_at": "2026-11-07T20:52:53Z",
+      "updated_at": "2026-11-07T20:57:50Z",
       "last_verified_at": "2026-11-07T20:25:47Z",
       "verification_status": "IN_PROGRESS_PENDING_FINAL",
       "revision_history": [],
