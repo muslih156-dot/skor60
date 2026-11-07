@@ -1,6 +1,6 @@
 {
   "trading_month": "2026-11",
-  "last_updated_utc": "2026-11-07T20:47:46Z",
+  "last_updated_utc": "2026-11-07T20:52:53Z",
   "total_records": 113,
   "matches": [
     {
@@ -53,6 +53,15 @@
           "score": "1-1",
           "match_status": "Second Half",
           "note": "GOAL DETECTED"
+        },
+        {
+          "timestamp_utc": "2026-11-07T20:52:53Z",
+          "timestamp_wita": "2026-11-08T04:52:53.855272+08:00",
+          "clock": "90'",
+          "minute": 90,
+          "score": "2-1",
+          "match_status": "Second Half",
+          "note": "GOAL DETECTED"
         }
       ],
       "goal_events": [
@@ -77,9 +86,20 @@
           "text": "Own Goal by Pará, São Bernardo. Avaí 1, São Bernardo 1.",
           "time_approximate": false,
           "source": "ESPN_SUMMARY_KEY_EVENTS"
+        },
+        {
+          "minute": 85,
+          "clock_display": "85'",
+          "period": 2,
+          "team": "Avaí",
+          "scorer": "Luis Eduardo",
+          "type": "Goal",
+          "text": "Goal! Avaí 2, São Bernardo 1. Gaspar (Avaí) right footed shot from the centre of the box to the bottom right corner. Assisted by Marcio Vitor.",
+          "time_approximate": false,
+          "source": "ESPN_SUMMARY_KEY_EVENTS"
         }
       ],
-      "current_score": "1-1",
+      "current_score": "2-1",
       "final_score": null,
       "match_status": "Second Half",
       "settlement_status": "PENDING",
@@ -92,11 +112,11 @@
       "actual_roi_contribution": null,
       "is_major": false,
       "created_at": "2026-11-07T20:25:47Z",
-      "updated_at": "2026-11-07T20:47:46Z",
+      "updated_at": "2026-11-07T20:52:53Z",
       "last_verified_at": "2026-11-07T20:25:47Z",
       "verification_status": "IN_PROGRESS_PENDING_FINAL",
       "revision_history": [],
-      "audit_explanation": "Pertandingan 401860423 masih berstatus Second Half (Skor saat ini: 1-1). Menunggu status Final resmi dari provider (PENDING).",
+      "audit_explanation": "Pertandingan 401860423 masih berstatus Second Half (Skor saat ini: 2-1). Menunggu status Final resmi dari provider (PENDING).",
       "audit_passed": true
     },
     {
