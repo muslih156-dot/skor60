@@ -1,6 +1,6 @@
 {
   "trading_day": "2026-11-06",
-  "last_updated_utc": "2026-11-07T02:57:47Z",
+  "last_updated_utc": "2026-11-07T03:03:14Z",
   "total_records": 17,
   "matches": [
     {
@@ -35,10 +35,31 @@
           "score": "0-0",
           "match_status": "Second Half",
           "note": "ENTRY"
+        },
+        {
+          "timestamp_utc": "2026-11-07T03:03:14Z",
+          "timestamp_wita": "2026-11-07T11:03:14.030936+08:00",
+          "clock": "87'",
+          "minute": 87,
+          "score": "0-1",
+          "match_status": "Second Half",
+          "note": "GOAL DETECTED"
         }
       ],
-      "goal_events": [],
-      "current_score": "0-0",
+      "goal_events": [
+        {
+          "minute": 85,
+          "clock_display": "85'",
+          "period": 2,
+          "team": "FC Juárez",
+          "scorer": "Óscar Estupiñán",
+          "type": "Penalty - Scored",
+          "text": "Goal! Atlético San Luis 0, Juárez 1. Óscar Estupiñán (Juárez) converts the penalty with a left footed shot to the top right corner.",
+          "time_approximate": false,
+          "source": "ESPN_SUMMARY_KEY_EVENTS"
+        }
+      ],
+      "current_score": "0-1",
       "final_score": null,
       "match_status": "Second Half",
       "settlement_status": "PENDING",
@@ -51,11 +72,11 @@
       "actual_roi_contribution": null,
       "is_major": true,
       "created_at": "2026-11-07T02:35:54Z",
-      "updated_at": "2026-11-07T02:57:47Z",
+      "updated_at": "2026-11-07T03:03:14Z",
       "last_verified_at": "2026-11-07T02:35:54Z",
       "verification_status": "IN_PROGRESS_PENDING_FINAL",
       "revision_history": [],
-      "audit_explanation": "Pertandingan 401876910 masih berstatus Second Half (Skor saat ini: 0-0). Menunggu status Final resmi dari provider (PENDING).",
+      "audit_explanation": "Pertandingan 401876910 masih berstatus Second Half (Skor saat ini: 0-1). Menunggu status Final resmi dari provider (PENDING).",
       "audit_passed": true
     },
     {
@@ -106,7 +127,7 @@
       "actual_roi_contribution": null,
       "is_major": false,
       "created_at": "2026-11-07T02:25:49Z",
-      "updated_at": "2026-11-07T02:57:47Z",
+      "updated_at": "2026-11-07T03:03:14Z",
       "last_verified_at": "2026-11-07T02:25:49Z",
       "verification_status": "IN_PROGRESS_PENDING_FINAL",
       "revision_history": [],
@@ -172,40 +193,48 @@
           "score": "1-0",
           "match_status": "Second Half",
           "note": "GOAL DETECTED"
+        },
+        {
+          "timestamp_utc": "2026-11-07T03:03:14Z",
+          "timestamp_wita": "2026-11-07T11:03:14.189561+08:00",
+          "clock": "Final",
+          "minute": null,
+          "score": "1-0",
+          "match_status": "Final",
+          "note": "MATCH FINISHED"
         }
       ],
       "goal_events": [
         {
           "minute": 70,
           "clock_display": "70'",
-          "period": 0,
-          "team_id": "7767",
+          "period": 2,
+          "team": "Tigre",
           "scorer": "Santiago López",
           "type": "Goal",
-          "is_own_goal": false,
-          "is_penalty": false,
+          "text": "Goal! Tigre 1, Sarmiento 0. Santiago López (Tigre) right footed shot from the centre of the box to the centre of the goal. Assisted by Jabes Saralegui with a cross.",
           "time_approximate": false,
-          "source": "ESPN_OFFICIAL_DETAIL"
+          "source": "ESPN_SUMMARY_KEY_EVENTS"
         }
       ],
       "current_score": "1-0",
-      "final_score": null,
-      "match_status": "Second Half",
-      "settlement_status": "PENDING",
-      "result": "PENDING",
-      "profit": 0,
-      "roi_contribution": 0.0,
-      "simulated_profit": 0,
-      "simulated_roi_contribution": 0.0,
+      "final_score": "1-0",
+      "match_status": "Final",
+      "settlement_status": "SETTLED",
+      "result": "WIN",
+      "profit": 40000,
+      "roi_contribution": 80.0,
+      "simulated_profit": 40000,
+      "simulated_roi_contribution": 80.0,
       "actual_profit": null,
       "actual_roi_contribution": null,
       "is_major": true,
       "created_at": "2026-11-07T02:21:16Z",
-      "updated_at": "2026-11-07T02:57:47Z",
-      "last_verified_at": "2026-11-07T02:21:16Z",
-      "verification_status": "IN_PROGRESS_PENDING_FINAL",
+      "updated_at": "2026-11-07T03:03:14Z",
+      "last_verified_at": "2026-11-07T03:03:14Z",
+      "verification_status": "VERIFIED_OFFICIAL_FINAL",
       "revision_history": [],
-      "audit_explanation": "Pertandingan 401841673 masih berstatus Second Half (Skor saat ini: 1-0). Menunggu status Final resmi dari provider (PENDING).",
+      "audit_explanation": "Pertandingan 401841673 masuk pada menit 62' dengan skor 0-0. Status resmi mencapai Final dengan skor akhir waktu normal 1-0. Minimal 1 gol tercipta setelah waktu entry sehingga dinyatakan WIN.",
       "audit_passed": true
     },
     {
