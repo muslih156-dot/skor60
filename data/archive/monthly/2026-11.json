@@ -1,6 +1,6 @@
 {
   "trading_month": "2026-11",
-  "last_updated_utc": "2026-11-07T22:47:44Z",
+  "last_updated_utc": "2026-11-07T22:52:53Z",
   "total_records": 117,
   "matches": [
     {
@@ -51,7 +51,7 @@
       "actual_roi_contribution": null,
       "is_major": true,
       "created_at": "2026-11-07T22:31:01Z",
-      "updated_at": "2026-11-07T22:47:44Z",
+      "updated_at": "2026-11-07T22:52:53Z",
       "last_verified_at": "2026-11-07T22:31:01Z",
       "verification_status": "IN_PROGRESS_PENDING_FINAL",
       "revision_history": [],
