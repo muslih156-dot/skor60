@@ -1,6 +1,6 @@
 {
   "trading_day": "2026-11-07",
-  "last_updated_utc": "2026-11-07T20:32:17Z",
+  "last_updated_utc": "2026-11-07T20:38:00Z",
   "total_records": 18,
   "matches": [
     {
@@ -35,10 +35,31 @@
           "score": "0-0",
           "match_status": "Second Half",
           "note": "ENTRY"
+        },
+        {
+          "timestamp_utc": "2026-11-07T20:38:00Z",
+          "timestamp_wita": "2026-11-08T04:38:00.333627+08:00",
+          "clock": "74'",
+          "minute": 74,
+          "score": "0-1",
+          "match_status": "Second Half",
+          "note": "GOAL DETECTED"
         }
       ],
-      "goal_events": [],
-      "current_score": "0-0",
+      "goal_events": [
+        {
+          "minute": 71,
+          "clock_display": "71'",
+          "period": 2,
+          "team": "São Bernardo",
+          "scorer": "Fabrício Daniel",
+          "type": "Goal",
+          "text": "Goal! Avaí 0, São Bernardo 1. Fabrício Daniel (São Bernardo) left footed shot from the centre of the box to the high centre of the goal. Assisted by Pará.",
+          "time_approximate": false,
+          "source": "ESPN_SUMMARY_KEY_EVENTS"
+        }
+      ],
+      "current_score": "0-1",
       "final_score": null,
       "match_status": "Second Half",
       "settlement_status": "PENDING",
@@ -51,11 +72,11 @@
       "actual_roi_contribution": null,
       "is_major": false,
       "created_at": "2026-11-07T20:25:47Z",
-      "updated_at": "2026-11-07T20:32:17Z",
+      "updated_at": "2026-11-07T20:38:00Z",
       "last_verified_at": "2026-11-07T20:25:47Z",
       "verification_status": "IN_PROGRESS_PENDING_FINAL",
       "revision_history": [],
-      "audit_explanation": "Pertandingan 401860423 masih berstatus Second Half (Skor saat ini: 0-0). Menunggu status Final resmi dari provider (PENDING).",
+      "audit_explanation": "Pertandingan 401860423 masih berstatus Second Half (Skor saat ini: 0-1). Menunggu status Final resmi dari provider (PENDING).",
       "audit_passed": true
     },
     {
