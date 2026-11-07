@@ -1,7 +1,7 @@
 {
   "system": "TRADING BOLA MENIT 60 - LAST GOAL SYSTEM",
   "version": "2.1",
-  "last_updated_utc": "2026-11-07T20:42:55Z",
+  "last_updated_utc": "2026-11-07T20:47:46Z",
   "total_records": 154,
   "matches": [
     {
@@ -45,23 +45,42 @@
           "score": "0-1",
           "match_status": "Second Half",
           "note": "GOAL DETECTED"
+        },
+        {
+          "timestamp_utc": "2026-11-07T20:47:46Z",
+          "timestamp_wita": "2026-11-08T04:47:46.643923+08:00",
+          "clock": "86'",
+          "minute": 86,
+          "score": "1-1",
+          "match_status": "Second Half",
+          "note": "GOAL DETECTED"
         }
       ],
       "goal_events": [
         {
           "minute": 71,
           "clock_display": "71'",
-          "period": 0,
-          "team_id": "11268",
+          "period": 2,
+          "team": "São Bernardo",
           "scorer": "Fabrício Daniel",
           "type": "Goal",
-          "is_own_goal": false,
-          "is_penalty": false,
+          "text": "Goal! Avaí 0, São Bernardo 1. Fabrício Daniel (São Bernardo) left footed shot from the centre of the box to the high centre of the goal. Assisted by Pará.",
           "time_approximate": false,
-          "source": "ESPN_OFFICIAL_DETAIL"
+          "source": "ESPN_SUMMARY_KEY_EVENTS"
+        },
+        {
+          "minute": 79,
+          "clock_display": "79'",
+          "period": 2,
+          "team": "Avaí",
+          "scorer": "Pará",
+          "type": "Own Goal",
+          "text": "Own Goal by Pará, São Bernardo. Avaí 1, São Bernardo 1.",
+          "time_approximate": false,
+          "source": "ESPN_SUMMARY_KEY_EVENTS"
         }
       ],
-      "current_score": "0-1",
+      "current_score": "1-1",
       "final_score": null,
       "match_status": "Second Half",
       "settlement_status": "PENDING",
@@ -74,11 +93,11 @@
       "actual_roi_contribution": null,
       "is_major": false,
       "created_at": "2026-11-07T20:25:47Z",
-      "updated_at": "2026-11-07T20:42:55Z",
+      "updated_at": "2026-11-07T20:47:46Z",
       "last_verified_at": "2026-11-07T20:25:47Z",
       "verification_status": "IN_PROGRESS_PENDING_FINAL",
       "revision_history": [],
-      "audit_explanation": "Pertandingan 401860423 masih berstatus Second Half (Skor saat ini: 0-1). Menunggu status Final resmi dari provider (PENDING).",
+      "audit_explanation": "Pertandingan 401860423 masih berstatus Second Half (Skor saat ini: 1-1). Menunggu status Final resmi dari provider (PENDING).",
       "audit_passed": true
     },
     {
