@@ -1,6 +1,6 @@
 {
   "trading_day": "2026-11-08",
-  "last_updated_utc": "2026-11-08T14:47:49Z",
+  "last_updated_utc": "2026-11-08T14:52:05Z",
   "total_records": 5,
   "matches": [
     {
@@ -44,23 +44,42 @@
           "score": "0-1",
           "match_status": "Second Half",
           "note": "GOAL DETECTED"
+        },
+        {
+          "timestamp_utc": "2026-11-08T14:52:05Z",
+          "timestamp_wita": "2026-11-08T22:52:05.260403+08:00",
+          "clock": "90'+4'",
+          "minute": 90,
+          "score": "0-2",
+          "match_status": "Second Half",
+          "note": "GOAL DETECTED"
         }
       ],
       "goal_events": [
         {
           "minute": 81,
           "clock_display": "81'",
-          "period": 0,
-          "team_id": "244",
+          "period": 2,
+          "team": "Real Betis",
           "scorer": "Rodrigo Riquelme",
-          "type": "Goal - Volley",
-          "is_own_goal": false,
-          "is_penalty": false,
+          "type": "Goal",
+          "text": "Goal! Elche 0, Real Betis 1. Rodrigo Riquelme (Real Betis) right footed shot from very close range to the high centre of the goal.",
           "time_approximate": false,
-          "source": "ESPN_OFFICIAL_DETAIL"
+          "source": "ESPN_SUMMARY_KEY_EVENTS"
+        },
+        {
+          "minute": 89,
+          "clock_display": "89'",
+          "period": 2,
+          "team": "Real Betis",
+          "scorer": "Marc Bartra",
+          "type": "Goal - Header",
+          "text": "Goal! Elche 0, Real Betis 2. Marc Bartra (Real Betis) header from the centre of the box to the bottom left corner. Assisted by Dani Ceballos with a cross following a corner.",
+          "time_approximate": false,
+          "source": "ESPN_SUMMARY_KEY_EVENTS"
         }
       ],
-      "current_score": "0-1",
+      "current_score": "0-2",
       "final_score": null,
       "match_status": "Second Half",
       "settlement_status": "PENDING",
@@ -73,11 +92,11 @@
       "actual_roi_contribution": null,
       "is_major": true,
       "created_at": "2026-11-08T14:20:52Z",
-      "updated_at": "2026-11-08T14:47:49Z",
+      "updated_at": "2026-11-08T14:52:05Z",
       "last_verified_at": "2026-11-08T14:20:52Z",
       "verification_status": "IN_PROGRESS_PENDING_FINAL",
       "revision_history": [],
-      "audit_explanation": "Pertandingan 401882814 masih berstatus Second Half (Skor saat ini: 0-1). Menunggu status Final resmi dari provider (PENDING).",
+      "audit_explanation": "Pertandingan 401882814 masih berstatus Second Half (Skor saat ini: 0-2). Menunggu status Final resmi dari provider (PENDING).",
       "audit_passed": true
     },
     {
