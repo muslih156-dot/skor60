@@ -1,6 +1,6 @@
 {
   "trading_day": "2026-11-08",
-  "last_updated_utc": "2026-11-08T09:42:53Z",
+  "last_updated_utc": "2026-11-08T09:47:50Z",
   "total_records": 3,
   "matches": [
     {
@@ -35,10 +35,31 @@
           "score": "0-0",
           "match_status": "Second Half",
           "note": "ENTRY"
+        },
+        {
+          "timestamp_utc": "2026-11-08T09:47:50Z",
+          "timestamp_wita": "2026-11-08T17:47:50.350269+08:00",
+          "clock": "87'",
+          "minute": 87,
+          "score": "1-0",
+          "match_status": "Second Half",
+          "note": "GOAL DETECTED"
         }
       ],
-      "goal_events": [],
-      "current_score": "0-0",
+      "goal_events": [
+        {
+          "minute": 86,
+          "clock_display": "86'",
+          "period": 2,
+          "team": "JEF United Ichihara-Chiba",
+          "scorer": "Leonardo Rocha",
+          "type": "Penalty - Scored",
+          "text": "Leonardo Rocha (JEF United Ichihara-Chiba) Penalty - Scored at 86'",
+          "time_approximate": false,
+          "source": "ESPN_SUMMARY_KEY_EVENTS"
+        }
+      ],
+      "current_score": "1-0",
       "final_score": null,
       "match_status": "Second Half",
       "settlement_status": "PENDING",
@@ -51,11 +72,11 @@
       "actual_roi_contribution": null,
       "is_major": true,
       "created_at": "2026-11-08T09:20:58Z",
-      "updated_at": "2026-11-08T09:42:53Z",
+      "updated_at": "2026-11-08T09:47:50Z",
       "last_verified_at": "2026-11-08T09:20:58Z",
       "verification_status": "IN_PROGRESS_PENDING_FINAL",
       "revision_history": [],
-      "audit_explanation": "Pertandingan 401877577 masih berstatus Second Half (Skor saat ini: 0-0). Menunggu status Final resmi dari provider (PENDING).",
+      "audit_explanation": "Pertandingan 401877577 masih berstatus Second Half (Skor saat ini: 1-0). Menunggu status Final resmi dari provider (PENDING).",
       "audit_passed": true
     },
     {
