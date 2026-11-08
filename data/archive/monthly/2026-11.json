@@ -1,6 +1,6 @@
 {
   "trading_month": "2026-11",
-  "last_updated_utc": "2026-11-08T13:38:02Z",
+  "last_updated_utc": "2026-11-08T13:42:52Z",
   "total_records": 123,
   "matches": [
     {
@@ -50,13 +50,14 @@
         {
           "minute": 72,
           "clock_display": "72'",
-          "period": 2,
-          "team": "Manchester United",
+          "period": 0,
+          "team_id": "20061",
           "scorer": "Julia Zigiotti Olme",
           "type": "Goal - Header",
-          "text": "Goal! Aston Villa Women 0, Manchester United Women 1. Julia Zigiotti Olme (Manchester United Women) header from the right side of the six yard box to the bottom right corner. Assisted by Hanna Lundkvist with a cross following a corner.",
+          "is_own_goal": false,
+          "is_penalty": false,
           "time_approximate": false,
-          "source": "ESPN_SUMMARY_KEY_EVENTS"
+          "source": "ESPN_OFFICIAL_DETAIL"
         }
       ],
       "current_score": "0-1",
@@ -72,7 +73,7 @@
       "actual_roi_contribution": null,
       "is_major": false,
       "created_at": "2026-11-08T13:20:57Z",
-      "updated_at": "2026-11-08T13:38:02Z",
+      "updated_at": "2026-11-08T13:42:52Z",
       "last_verified_at": "2026-11-08T13:20:57Z",
       "verification_status": "IN_PROGRESS_PENDING_FINAL",
       "revision_history": [],
