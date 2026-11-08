@@ -1,6 +1,6 @@
 {
   "trading_month": "2026-11",
-  "last_updated_utc": "2026-11-08T19:22:54Z",
+  "last_updated_utc": "2026-11-08T19:28:15Z",
   "total_records": 132,
   "matches": [
     {
@@ -51,7 +51,7 @@
       "actual_roi_contribution": null,
       "is_major": true,
       "created_at": "2026-11-08T18:55:52Z",
-      "updated_at": "2026-11-08T19:22:54Z",
+      "updated_at": "2026-11-08T19:28:15Z",
       "last_verified_at": "2026-11-08T18:55:52Z",
       "verification_status": "IN_PROGRESS_PENDING_FINAL",
       "revision_history": [],
@@ -108,6 +108,15 @@
           "score": "2-0",
           "match_status": "Second Half",
           "note": "GOAL DETECTED"
+        },
+        {
+          "timestamp_utc": "2026-11-08T19:28:15Z",
+          "timestamp_wita": "2026-11-09T03:28:15.671603+08:00",
+          "clock": "Final",
+          "minute": null,
+          "score": "2-0",
+          "match_status": "Final",
+          "note": "MATCH FINISHED"
         }
       ],
       "goal_events": [
@@ -135,23 +144,23 @@
         }
       ],
       "current_score": "2-0",
-      "final_score": null,
-      "match_status": "Second Half",
-      "settlement_status": "PENDING",
-      "result": "PENDING",
-      "profit": 0,
-      "roi_contribution": 0.0,
-      "simulated_profit": 0,
-      "simulated_roi_contribution": 0.0,
+      "final_score": "2-0",
+      "match_status": "Final",
+      "settlement_status": "SETTLED",
+      "result": "WIN",
+      "profit": 40000,
+      "roi_contribution": 80.0,
+      "simulated_profit": 40000,
+      "simulated_roi_contribution": 80.0,
       "actual_profit": null,
       "actual_roi_contribution": null,
       "is_major": true,
       "created_at": "2026-11-08T18:50:52Z",
-      "updated_at": "2026-11-08T19:22:54Z",
-      "last_verified_at": "2026-11-08T18:50:52Z",
-      "verification_status": "IN_PROGRESS_PENDING_FINAL",
+      "updated_at": "2026-11-08T19:28:15Z",
+      "last_verified_at": "2026-11-08T19:28:15Z",
+      "verification_status": "VERIFIED_OFFICIAL_FINAL",
       "revision_history": [],
-      "audit_explanation": "Pertandingan 401882807 masih berstatus Second Half (Skor saat ini: 2-0). Menunggu status Final resmi dari provider (PENDING).",
+      "audit_explanation": "Pertandingan 401882807 masuk pada menit 62' dengan skor 0-0. Status resmi mencapai Final dengan skor akhir waktu normal 2-0. Minimal 1 gol tercipta setelah waktu entry sehingga dinyatakan WIN.",
       "audit_passed": true
     },
     {
@@ -195,40 +204,48 @@
           "score": "1-0",
           "match_status": "Second Half",
           "note": "GOAL DETECTED"
+        },
+        {
+          "timestamp_utc": "2026-11-08T19:28:15Z",
+          "timestamp_wita": "2026-11-09T03:28:15.861907+08:00",
+          "clock": "Final",
+          "minute": null,
+          "score": "1-0",
+          "match_status": "Final",
+          "note": "MATCH FINISHED"
         }
       ],
       "goal_events": [
         {
           "minute": 76,
           "clock_display": "76'",
-          "period": 0,
-          "team_id": "5807",
+          "period": 2,
+          "team": "Union St.-Gilloise",
           "scorer": "Ross Sykes",
           "type": "Goal",
-          "is_own_goal": false,
-          "is_penalty": false,
+          "text": "Ross Sykes (Union St.-Gilloise) Goal at 76'",
           "time_approximate": false,
-          "source": "ESPN_OFFICIAL_DETAIL"
+          "source": "ESPN_SUMMARY_KEY_EVENTS"
         }
       ],
       "current_score": "1-0",
-      "final_score": null,
-      "match_status": "Second Half",
-      "settlement_status": "PENDING",
-      "result": "PENDING",
-      "profit": 0,
-      "roi_contribution": 0.0,
-      "simulated_profit": 0,
-      "simulated_roi_contribution": 0.0,
+      "final_score": "1-0",
+      "match_status": "Final",
+      "settlement_status": "SETTLED",
+      "result": "WIN",
+      "profit": 40000,
+      "roi_contribution": 80.0,
+      "simulated_profit": 40000,
+      "simulated_roi_contribution": 80.0,
       "actual_profit": null,
       "actual_roi_contribution": null,
       "is_major": true,
       "created_at": "2026-11-08T18:50:52Z",
-      "updated_at": "2026-11-08T19:22:54Z",
-      "last_verified_at": "2026-11-08T18:50:52Z",
-      "verification_status": "IN_PROGRESS_PENDING_FINAL",
+      "updated_at": "2026-11-08T19:28:15Z",
+      "last_verified_at": "2026-11-08T19:28:15Z",
+      "verification_status": "VERIFIED_OFFICIAL_FINAL",
       "revision_history": [],
-      "audit_explanation": "Pertandingan 401878943 masih berstatus Second Half (Skor saat ini: 1-0). Menunggu status Final resmi dari provider (PENDING).",
+      "audit_explanation": "Pertandingan 401878943 masuk pada menit 60' dengan skor 0-0. Status resmi mencapai Final dengan skor akhir waktu normal 1-0. Minimal 1 gol tercipta setelah waktu entry sehingga dinyatakan WIN.",
       "audit_passed": true
     },
     {
