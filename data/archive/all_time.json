@@ -1,7 +1,7 @@
 {
   "system": "TRADING BOLA MENIT 60 - LAST GOAL SYSTEM",
   "version": "2.1",
-  "last_updated_utc": "2026-11-08T21:57:50Z",
+  "last_updated_utc": "2026-11-08T22:03:02Z",
   "total_records": 174,
   "matches": [
     {
@@ -51,13 +51,14 @@
         {
           "minute": 67,
           "clock_display": "67'",
-          "period": 2,
-          "team": "Braga",
+          "period": 0,
+          "team_id": "2994",
           "scorer": "Ricardo Horta",
           "type": "Penalty - Scored",
-          "text": "Goal! Rio Ave 0, Sporting Braga 1. Ricardo Horta (Sporting Braga) converts the penalty with a right footed shot to the bottom left corner.",
+          "is_own_goal": false,
+          "is_penalty": true,
           "time_approximate": false,
-          "source": "ESPN_SUMMARY_KEY_EVENTS"
+          "source": "ESPN_OFFICIAL_DETAIL"
         }
       ],
       "current_score": "0-1",
@@ -73,7 +74,7 @@
       "actual_roi_contribution": null,
       "is_major": true,
       "created_at": "2026-11-08T21:50:50Z",
-      "updated_at": "2026-11-08T21:57:50Z",
+      "updated_at": "2026-11-08T22:03:02Z",
       "last_verified_at": "2026-11-08T21:50:50Z",
       "verification_status": "IN_PROGRESS_PENDING_FINAL",
       "revision_history": [],
