@@ -1,7 +1,7 @@
 {
   "system": "TRADING BOLA MENIT 60 - LAST GOAL SYSTEM",
   "version": "2.1",
-  "last_updated_utc": "2026-11-09T04:03:15Z",
+  "last_updated_utc": "2026-11-09T04:07:47Z",
   "total_records": 176,
   "matches": [
     {
@@ -60,24 +60,26 @@
         {
           "minute": 69,
           "clock_display": "69'",
-          "period": 2,
-          "team": "Guadalajara",
+          "period": 0,
+          "team_id": "219",
           "scorer": "Ricardo Marín",
           "type": "Goal",
-          "text": "Goal! León 0, Guadalajara 1. Ricardo Marín (Guadalajara) left footed shot from the centre of the box to the centre of the goal. Assisted by Daniel Aguirre.",
+          "is_own_goal": false,
+          "is_penalty": false,
           "time_approximate": false,
-          "source": "ESPN_SUMMARY_KEY_EVENTS"
+          "source": "ESPN_OFFICIAL_DETAIL"
         },
         {
           "minute": 87,
           "clock_display": "87'",
-          "period": 2,
-          "team": "León",
+          "period": 0,
+          "team_id": "228",
           "scorer": "Paul Saracho",
           "type": "Goal",
-          "text": "Goal! León 1, Guadalajara 1. Paúl Bellón (León) right footed shot from the centre of the box to the bottom right corner. Assisted by Jhohan Romaña following a corner.",
+          "is_own_goal": false,
+          "is_penalty": false,
           "time_approximate": false,
-          "source": "ESPN_SUMMARY_KEY_EVENTS"
+          "source": "ESPN_OFFICIAL_DETAIL"
         }
       ],
       "current_score": "1-1",
@@ -93,7 +95,7 @@
       "actual_roi_contribution": null,
       "is_major": true,
       "created_at": "2026-11-09T03:35:53Z",
-      "updated_at": "2026-11-09T04:03:15Z",
+      "updated_at": "2026-11-09T04:07:47Z",
       "last_verified_at": "2026-11-09T03:35:53Z",
       "verification_status": "IN_PROGRESS_PENDING_FINAL",
       "revision_history": [],
