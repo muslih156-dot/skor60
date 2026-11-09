@@ -1,6 +1,6 @@
 {
   "trading_day": "2026-11-09",
-  "last_updated_utc": "2026-11-09T19:28:37Z",
+  "last_updated_utc": "2026-11-09T19:33:04Z",
   "total_records": 1,
   "matches": [
     {
@@ -44,6 +44,15 @@
           "score": "1-0",
           "match_status": "Second Half",
           "note": "GOAL DETECTED"
+        },
+        {
+          "timestamp_utc": "2026-11-09T19:33:04Z",
+          "timestamp_wita": "2026-11-10T03:33:04.881660+08:00",
+          "clock": "76'",
+          "minute": 76,
+          "score": "2-0",
+          "match_status": "Second Half",
+          "note": "GOAL DETECTED"
         }
       ],
       "goal_events": [
@@ -70,7 +79,7 @@
           "source": "ESPN_SUMMARY_KEY_EVENTS"
         }
       ],
-      "current_score": "1-0",
+      "current_score": "2-0",
       "final_score": null,
       "match_status": "Second Half",
       "settlement_status": "PENDING",
@@ -83,11 +92,11 @@
       "actual_roi_contribution": null,
       "is_major": false,
       "created_at": "2026-11-09T19:20:52Z",
-      "updated_at": "2026-11-09T19:28:37Z",
+      "updated_at": "2026-11-09T19:33:04Z",
       "last_verified_at": "2026-11-09T19:20:52Z",
       "verification_status": "IN_PROGRESS_PENDING_FINAL",
       "revision_history": [],
-      "audit_explanation": "Pertandingan 401882467 masih berstatus Second Half (Skor saat ini: 1-0). Menunggu status Final resmi dari provider (PENDING).",
+      "audit_explanation": "Pertandingan 401882467 masih berstatus Second Half (Skor saat ini: 2-0). Menunggu status Final resmi dari provider (PENDING).",
       "audit_passed": true
     }
   ]
