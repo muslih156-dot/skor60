@@ -1,7 +1,7 @@
 {
   "system": "TRADING BOLA MENIT 60 - LAST GOAL SYSTEM",
   "version": "2.1",
-  "last_updated_utc": "2026-11-09T19:33:04Z",
+  "last_updated_utc": "2026-11-09T19:37:53Z",
   "total_records": 177,
   "matches": [
     {
@@ -60,24 +60,26 @@
         {
           "minute": 63,
           "clock_display": "63'",
-          "period": 2,
-          "team": "Atlético Madrid",
+          "period": 0,
+          "team_id": "20093",
           "scorer": "Synne Jensen",
           "type": "Goal",
-          "text": "Synne Jensen (Atlético Madrid) Goal at 63'",
+          "is_own_goal": false,
+          "is_penalty": false,
           "time_approximate": false,
-          "source": "ESPN_SUMMARY_KEY_EVENTS"
+          "source": "ESPN_OFFICIAL_DETAIL"
         },
         {
           "minute": 69,
           "clock_display": "69'",
-          "period": 2,
-          "team": "Atlético Madrid",
+          "period": 0,
+          "team_id": "20093",
           "scorer": "Viola Calligaris",
           "type": "Goal",
-          "text": "Viola Calligaris (Atlético Madrid) Goal at 69'",
+          "is_own_goal": false,
+          "is_penalty": false,
           "time_approximate": false,
-          "source": "ESPN_SUMMARY_KEY_EVENTS"
+          "source": "ESPN_OFFICIAL_DETAIL"
         }
       ],
       "current_score": "2-0",
@@ -93,7 +95,7 @@
       "actual_roi_contribution": null,
       "is_major": false,
       "created_at": "2026-11-09T19:20:52Z",
-      "updated_at": "2026-11-09T19:33:04Z",
+      "updated_at": "2026-11-09T19:37:53Z",
       "last_verified_at": "2026-11-09T19:20:52Z",
       "verification_status": "IN_PROGRESS_PENDING_FINAL",
       "revision_history": [],
