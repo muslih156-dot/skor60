@@ -1,6 +1,6 @@
 {
   "trading_day": "2026-11-10",
-  "last_updated_utc": "2026-11-10T19:42:59Z",
+  "last_updated_utc": "2026-11-10T19:48:43Z",
   "total_records": 3,
   "matches": [
     {
@@ -51,7 +51,7 @@
       "actual_roi_contribution": null,
       "is_major": false,
       "created_at": "2026-11-10T19:25:54Z",
-      "updated_at": "2026-11-10T19:42:58Z",
+      "updated_at": "2026-11-10T19:48:43Z",
       "last_verified_at": "2026-11-10T19:25:54Z",
       "verification_status": "IN_PROGRESS_PENDING_FINAL",
       "revision_history": [],
@@ -114,24 +114,38 @@
         {
           "minute": 72,
           "clock_display": "72'",
-          "period": 2,
-          "team": "VfL Wolfsburg",
+          "period": 0,
+          "team_id": "20107",
           "scorer": "Katharina Piljić",
           "type": "Goal",
-          "text": "Katharina Piljić (VfL Wolfsburg) Goal at 72'",
+          "is_own_goal": false,
+          "is_penalty": false,
           "time_approximate": false,
-          "source": "ESPN_SUMMARY_KEY_EVENTS"
+          "source": "ESPN_OFFICIAL_DETAIL"
         },
         {
           "minute": 83,
           "clock_display": "83'",
-          "period": 2,
-          "team": "VfL Wolfsburg",
+          "period": 0,
+          "team_id": "20107",
           "scorer": "Anny Kerim-Lindland",
           "type": "Goal",
-          "text": "Anny Kerim-Lindland (VfL Wolfsburg) Goal at 83'",
+          "is_own_goal": false,
+          "is_penalty": false,
           "time_approximate": false,
-          "source": "ESPN_SUMMARY_KEY_EVENTS"
+          "source": "ESPN_OFFICIAL_DETAIL"
+        },
+        {
+          "minute": 87,
+          "clock_display": "87'",
+          "period": 0,
+          "team_id": "20107",
+          "scorer": "Kessya Bussy",
+          "type": "Goal",
+          "is_own_goal": false,
+          "is_penalty": false,
+          "time_approximate": false,
+          "source": "ESPN_OFFICIAL_DETAIL"
         }
       ],
       "current_score": "0-3",
@@ -147,7 +161,7 @@
       "actual_roi_contribution": null,
       "is_major": false,
       "created_at": "2026-11-10T19:16:04Z",
-      "updated_at": "2026-11-10T19:42:58Z",
+      "updated_at": "2026-11-10T19:48:43Z",
       "last_verified_at": "2026-11-10T19:16:04Z",
       "verification_status": "IN_PROGRESS_PENDING_FINAL",
       "revision_history": [],
