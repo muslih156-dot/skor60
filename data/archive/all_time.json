@@ -1,7 +1,7 @@
 {
   "system": "TRADING BOLA MENIT 60 - LAST GOAL SYSTEM",
   "version": "2.1",
-  "last_updated_utc": "2026-11-10T02:03:16Z",
+  "last_updated_utc": "2026-11-10T02:07:50Z",
   "total_records": 181,
   "matches": [
     {
@@ -51,13 +51,14 @@
         {
           "minute": 69,
           "clock_display": "69'",
-          "period": 2,
-          "team": "Universitario de Vinto",
+          "period": 0,
+          "team_id": "21379",
           "scorer": "Andrés Llano",
           "type": "Goal",
-          "text": "Andrés Llano (Universitario de Vinto) Goal at 69'",
+          "is_own_goal": false,
+          "is_penalty": false,
           "time_approximate": false,
-          "source": "ESPN_SUMMARY_KEY_EVENTS"
+          "source": "ESPN_OFFICIAL_DETAIL"
         }
       ],
       "current_score": "0-1",
@@ -73,7 +74,7 @@
       "actual_roi_contribution": null,
       "is_major": false,
       "created_at": "2026-11-10T01:50:02Z",
-      "updated_at": "2026-11-10T02:03:16Z",
+      "updated_at": "2026-11-10T02:07:50Z",
       "last_verified_at": "2026-11-10T01:50:02Z",
       "verification_status": "IN_PROGRESS_PENDING_FINAL",
       "revision_history": [],
