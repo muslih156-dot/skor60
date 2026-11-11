@@ -1,7 +1,7 @@
 {
   "system": "TRADING BOLA MENIT 60 - LAST GOAL SYSTEM",
   "version": "2.1",
-  "last_updated_utc": "2026-11-11T19:26:43Z",
+  "last_updated_utc": "2026-11-11T19:33:02Z",
   "total_records": 194,
   "matches": [
     {
@@ -52,7 +52,7 @@
       "actual_roi_contribution": null,
       "is_major": false,
       "created_at": "2026-11-11T19:20:56Z",
-      "updated_at": "2026-11-11T19:26:42Z",
+      "updated_at": "2026-11-11T19:33:01Z",
       "last_verified_at": "2026-11-11T19:20:56Z",
       "verification_status": "IN_PROGRESS_PENDING_FINAL",
       "revision_history": [],
@@ -91,10 +91,42 @@
           "score": "0-0",
           "match_status": "Second Half",
           "note": "ENTRY"
+        },
+        {
+          "timestamp_utc": "2026-11-11T19:33:02Z",
+          "timestamp_wita": "2026-11-12T03:33:02.075494+08:00",
+          "clock": "77'",
+          "minute": 77,
+          "score": "2-0",
+          "match_status": "Second Half",
+          "note": "GOAL DETECTED"
         }
       ],
-      "goal_events": [],
-      "current_score": "0-0",
+      "goal_events": [
+        {
+          "minute": 73,
+          "clock_display": "73'",
+          "period": 2,
+          "team": "Hammarby IF",
+          "scorer": "Elin Sørum",
+          "type": "Goal",
+          "text": "Elin Sørum (Hammarby IF) Goal at 73'",
+          "time_approximate": false,
+          "source": "ESPN_SUMMARY_KEY_EVENTS"
+        },
+        {
+          "minute": 75,
+          "clock_display": "75'",
+          "period": 2,
+          "team": "Hammarby IF",
+          "scorer": "Ída Hermannsdóttir",
+          "type": "Goal",
+          "text": "Ída Hermannsdóttir (Hammarby IF) Goal at 75'",
+          "time_approximate": false,
+          "source": "ESPN_SUMMARY_KEY_EVENTS"
+        }
+      ],
+      "current_score": "2-0",
       "final_score": null,
       "match_status": "Second Half",
       "settlement_status": "PENDING",
@@ -107,11 +139,11 @@
       "actual_roi_contribution": null,
       "is_major": false,
       "created_at": "2026-11-11T19:15:49Z",
-      "updated_at": "2026-11-11T19:26:43Z",
+      "updated_at": "2026-11-11T19:33:02Z",
       "last_verified_at": "2026-11-11T19:15:49Z",
       "verification_status": "IN_PROGRESS_PENDING_FINAL",
       "revision_history": [],
-      "audit_explanation": "Pertandingan 401928151 masih berstatus Second Half (Skor saat ini: 0-0). Menunggu status Final resmi dari provider (PENDING).",
+      "audit_explanation": "Pertandingan 401928151 masih berstatus Second Half (Skor saat ini: 2-0). Menunggu status Final resmi dari provider (PENDING).",
       "audit_passed": true
     },
     {
@@ -170,24 +202,26 @@
         {
           "minute": 79,
           "clock_display": "79'",
-          "period": 2,
-          "team": "OH Leuven",
+          "period": 0,
+          "team_id": "131423",
           "scorer": "Jada Conijnenberg",
           "type": "Goal - Header",
-          "text": "Goal! OH Leuven Ladies 1, HB Køge Women 0. Jada Conijnenberg (OH Leuven Ladies) header from the centre of the box to the centre of the goal. Assisted by Flo Hermans.",
+          "is_own_goal": false,
+          "is_penalty": false,
           "time_approximate": false,
-          "source": "ESPN_SUMMARY_KEY_EVENTS"
+          "source": "ESPN_OFFICIAL_DETAIL"
         },
         {
           "minute": 82,
           "clock_display": "82'",
-          "period": 2,
-          "team": "HB Køge",
+          "period": 0,
+          "team_id": "21127",
           "scorer": "Simone Boye",
           "type": "Goal - Header",
-          "text": "Goal! OH Leuven Ladies 1, HB Køge Women 1. Simone Boye (HB Køge Women) header from the centre of the box to the bottom left corner. Assisted by Sarah Thygesen with a cross following a corner.",
+          "is_own_goal": false,
+          "is_penalty": false,
           "time_approximate": false,
-          "source": "ESPN_SUMMARY_KEY_EVENTS"
+          "source": "ESPN_OFFICIAL_DETAIL"
         }
       ],
       "current_score": "1-1",
@@ -203,7 +237,7 @@
       "actual_roi_contribution": null,
       "is_major": false,
       "created_at": "2026-11-11T19:01:08Z",
-      "updated_at": "2026-11-11T19:26:43Z",
+      "updated_at": "2026-11-11T19:33:02Z",
       "last_verified_at": "2026-11-11T19:01:08Z",
       "verification_status": "IN_PROGRESS_PENDING_FINAL",
       "revision_history": [],
