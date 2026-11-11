@@ -1,7 +1,7 @@
 {
   "system": "TRADING BOLA MENIT 60 - LAST GOAL SYSTEM",
   "version": "2.1",
-  "last_updated_utc": "2026-11-11T23:48:18Z",
+  "last_updated_utc": "2026-11-11T23:53:01Z",
   "total_records": 199,
   "matches": [
     {
@@ -36,10 +36,32 @@
           "score": "0-0",
           "match_status": "Second Half",
           "note": "ENTRY"
+        },
+        {
+          "timestamp_utc": "2026-11-11T23:53:01Z",
+          "timestamp_wita": "2026-11-12T07:53:01.247063+08:00",
+          "clock": "77'",
+          "minute": 77,
+          "score": "1-0",
+          "match_status": "Second Half",
+          "note": "GOAL DETECTED"
         }
       ],
-      "goal_events": [],
-      "current_score": "0-0",
+      "goal_events": [
+        {
+          "observed_at_utc": "2026-11-11T23:53:01Z",
+          "observed_at_wita": "2026-11-12T07:53:01.247063+08:00",
+          "minute": 77,
+          "clock_display": "77'",
+          "previous_score": "0-0",
+          "score_after": "1-0",
+          "team": "UNKNOWN_FROM_SNAPSHOT_DIFF",
+          "time_approximate": true,
+          "note": "GOAL EVENT TIME APPROXIMATE",
+          "source": "SCORE_SNAPSHOT_DIFFERENCE"
+        }
+      ],
+      "current_score": "1-0",
       "final_score": null,
       "match_status": "Second Half",
       "settlement_status": "PENDING",
@@ -52,11 +74,11 @@
       "actual_roi_contribution": null,
       "is_major": false,
       "created_at": "2026-11-11T23:30:56Z",
-      "updated_at": "2026-11-11T23:48:18Z",
+      "updated_at": "2026-11-11T23:53:01Z",
       "last_verified_at": "2026-11-11T23:30:56Z",
       "verification_status": "IN_PROGRESS_PENDING_FINAL",
       "revision_history": [],
-      "audit_explanation": "Pertandingan 401929896 masih berstatus Second Half (Skor saat ini: 0-0). Menunggu status Final resmi dari provider (PENDING).",
+      "audit_explanation": "Pertandingan 401929896 masih berstatus Second Half (Skor saat ini: 1-0). Menunggu status Final resmi dari provider (PENDING).",
       "audit_passed": true
     },
     {
@@ -107,7 +129,7 @@
       "actual_roi_contribution": null,
       "is_major": false,
       "created_at": "2026-11-11T23:20:56Z",
-      "updated_at": "2026-11-11T23:48:18Z",
+      "updated_at": "2026-11-11T23:53:01Z",
       "last_verified_at": "2026-11-11T23:20:56Z",
       "verification_status": "IN_PROGRESS_PENDING_FINAL",
       "revision_history": [],
@@ -155,23 +177,53 @@
           "score": "0-1",
           "match_status": "Second Half",
           "note": "GOAL DETECTED"
+        },
+        {
+          "timestamp_utc": "2026-11-11T23:53:01Z",
+          "timestamp_wita": "2026-11-12T07:53:01.349334+08:00",
+          "clock": "90'+4'",
+          "minute": 90,
+          "score": "2-1",
+          "match_status": "Second Half",
+          "note": "GOAL DETECTED"
         }
       ],
       "goal_events": [
         {
           "minute": 80,
           "clock_display": "80'",
-          "period": 0,
-          "team_id": "7633",
+          "period": 2,
+          "team": "Náutico",
           "scorer": "Halan",
           "type": "Goal - Header",
-          "is_own_goal": false,
-          "is_penalty": false,
+          "text": "Goal! Londrina 0, Náutico 1. Halan (Náutico) header from the centre of the box to the top right corner. Assisted by Victor Andrade.",
           "time_approximate": false,
-          "source": "ESPN_OFFICIAL_DETAIL"
+          "source": "ESPN_SUMMARY_KEY_EVENTS"
+        },
+        {
+          "minute": 88,
+          "clock_display": "88'",
+          "period": 2,
+          "team": "Londrina",
+          "scorer": "Cachoeira",
+          "type": "Goal",
+          "text": "Goal! Londrina 1, Náutico 1. Guilherme Cachoeira (Londrina) right footed shot from the centre of the box to the centre of the goal. Assisted by Kauã Jonathan following a fast break.",
+          "time_approximate": false,
+          "source": "ESPN_SUMMARY_KEY_EVENTS"
+        },
+        {
+          "minute": 90,
+          "clock_display": "90'+1'",
+          "period": 2,
+          "team": "Londrina",
+          "scorer": "João Coni",
+          "type": "Goal - Volley",
+          "text": "Goal! Londrina 2, Náutico 1. João Andrade (Londrina) left footed shot from a difficult angle on the right to the high centre of the goal.",
+          "time_approximate": false,
+          "source": "ESPN_SUMMARY_KEY_EVENTS"
         }
       ],
-      "current_score": "0-1",
+      "current_score": "2-1",
       "final_score": null,
       "match_status": "Second Half",
       "settlement_status": "PENDING",
@@ -184,11 +236,11 @@
       "actual_roi_contribution": null,
       "is_major": false,
       "created_at": "2026-11-11T23:20:56Z",
-      "updated_at": "2026-11-11T23:48:18Z",
+      "updated_at": "2026-11-11T23:53:01Z",
       "last_verified_at": "2026-11-11T23:20:56Z",
       "verification_status": "IN_PROGRESS_PENDING_FINAL",
       "revision_history": [],
-      "audit_explanation": "Pertandingan 401860435 masih berstatus Second Half (Skor saat ini: 0-1). Menunggu status Final resmi dari provider (PENDING).",
+      "audit_explanation": "Pertandingan 401860435 masih berstatus Second Half (Skor saat ini: 2-1). Menunggu status Final resmi dari provider (PENDING).",
       "audit_passed": true
     },
     {
