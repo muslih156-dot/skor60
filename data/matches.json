@@ -1,7 +1,7 @@
 {
   "system": "TRADING BOLA MENIT 60 - LAST GOAL SYSTEM",
   "version": "2.1",
-  "last_updated_utc": "2026-11-11T19:48:08Z",
+  "last_updated_utc": "2026-11-11T19:52:57Z",
   "total_records": 194,
   "matches": [
     {
@@ -45,6 +45,15 @@
           "score": "0-1",
           "match_status": "Second Half",
           "note": "GOAL DETECTED"
+        },
+        {
+          "timestamp_utc": "2026-11-11T19:52:57Z",
+          "timestamp_wita": "2026-11-12T03:52:57.163056+08:00",
+          "clock": "Final",
+          "minute": null,
+          "score": "0-2",
+          "match_status": "Final",
+          "note": "GOAL DETECTED"
         }
       ],
       "goal_events": [
@@ -58,26 +67,37 @@
           "text": "Bo Van Egmond (Ajax Amsterdam) Goal at 86'",
           "time_approximate": false,
           "source": "ESPN_SUMMARY_KEY_EVENTS"
+        },
+        {
+          "minute": 90,
+          "clock_display": "90'",
+          "period": 2,
+          "team": "Ajax Amsterdam",
+          "scorer": "Sherida Spitse",
+          "type": "Goal",
+          "text": "Sherida Spitse (Ajax Amsterdam) Goal at 90'",
+          "time_approximate": false,
+          "source": "ESPN_SUMMARY_KEY_EVENTS"
         }
       ],
-      "current_score": "0-1",
-      "final_score": null,
-      "match_status": "Second Half",
-      "settlement_status": "PENDING",
-      "result": "PENDING",
-      "profit": 0,
-      "roi_contribution": 0.0,
-      "simulated_profit": 0,
-      "simulated_roi_contribution": 0.0,
+      "current_score": "0-2",
+      "final_score": "0-2",
+      "match_status": "Final",
+      "settlement_status": "SETTLED",
+      "result": "WIN",
+      "profit": 40000,
+      "roi_contribution": 80.0,
+      "simulated_profit": 40000,
+      "simulated_roi_contribution": 80.0,
       "actual_profit": null,
       "actual_roi_contribution": null,
       "is_major": false,
       "created_at": "2026-11-11T19:20:56Z",
-      "updated_at": "2026-11-11T19:48:08Z",
-      "last_verified_at": "2026-11-11T19:20:56Z",
-      "verification_status": "IN_PROGRESS_PENDING_FINAL",
+      "updated_at": "2026-11-11T19:52:57Z",
+      "last_verified_at": "2026-11-11T19:52:57Z",
+      "verification_status": "VERIFIED_OFFICIAL_FINAL",
       "revision_history": [],
-      "audit_explanation": "Pertandingan 401928152 masih berstatus Second Half (Skor saat ini: 0-1). Menunggu status Final resmi dari provider (PENDING).",
+      "audit_explanation": "Pertandingan 401928152 masuk pada menit 64' dengan skor 0-0. Status resmi mencapai Final dengan skor akhir waktu normal 0-2. Minimal 1 gol tercipta setelah waktu entry sehingga dinyatakan WIN.",
       "audit_passed": true
     },
     {
@@ -139,76 +159,81 @@
           "score": "4-0",
           "match_status": "Second Half",
           "note": "GOAL DETECTED"
+        },
+        {
+          "timestamp_utc": "2026-11-11T19:52:57Z",
+          "timestamp_wita": "2026-11-12T03:52:57.289148+08:00",
+          "clock": "Final",
+          "minute": null,
+          "score": "4-0",
+          "match_status": "Final",
+          "note": "MATCH FINISHED"
         }
       ],
       "goal_events": [
         {
           "minute": 73,
           "clock_display": "73'",
-          "period": 0,
-          "team_id": "22408",
+          "period": 2,
+          "team": "Hammarby IF",
           "scorer": "Elin Sørum",
           "type": "Goal",
-          "is_own_goal": false,
-          "is_penalty": false,
+          "text": "Elin Sørum (Hammarby IF) Goal at 73'",
           "time_approximate": false,
-          "source": "ESPN_OFFICIAL_DETAIL"
+          "source": "ESPN_SUMMARY_KEY_EVENTS"
         },
         {
           "minute": 75,
           "clock_display": "75'",
-          "period": 0,
-          "team_id": "22408",
+          "period": 2,
+          "team": "Hammarby IF",
           "scorer": "Ída Hermannsdóttir",
           "type": "Goal",
-          "is_own_goal": false,
-          "is_penalty": false,
+          "text": "Ída Hermannsdóttir (Hammarby IF) Goal at 75'",
           "time_approximate": false,
-          "source": "ESPN_OFFICIAL_DETAIL"
+          "source": "ESPN_SUMMARY_KEY_EVENTS"
         },
         {
           "minute": 80,
           "clock_display": "80'",
-          "period": 0,
-          "team_id": "22408",
+          "period": 2,
+          "team": "Hammarby IF",
           "scorer": "Elin Sørum",
           "type": "Goal",
-          "is_own_goal": false,
-          "is_penalty": false,
+          "text": "Elin Sørum (Hammarby IF) Goal at 80'",
           "time_approximate": false,
-          "source": "ESPN_OFFICIAL_DETAIL"
+          "source": "ESPN_SUMMARY_KEY_EVENTS"
         },
         {
           "minute": 84,
           "clock_display": "84'",
-          "period": 0,
-          "team_id": "22408",
+          "period": 2,
+          "team": "Hammarby IF",
           "scorer": "Stella Maiquez",
           "type": "Goal",
-          "is_own_goal": false,
-          "is_penalty": false,
+          "text": "Stella Maiquez (Hammarby IF) Goal at 84'",
           "time_approximate": false,
-          "source": "ESPN_OFFICIAL_DETAIL"
+          "source": "ESPN_SUMMARY_KEY_EVENTS"
         }
       ],
       "current_score": "4-0",
-      "final_score": null,
-      "match_status": "Second Half",
-      "settlement_status": "PENDING",
-      "result": "PENDING",
-      "profit": 0,
-      "roi_contribution": 0.0,
-      "simulated_profit": 0,
-      "simulated_roi_contribution": 0.0,
+      "final_score": "4-0",
+      "match_status": "Final",
+      "settlement_status": "SETTLED",
+      "result": "WIN",
+      "profit": 40000,
+      "roi_contribution": 80.0,
+      "simulated_profit": 40000,
+      "simulated_roi_contribution": 80.0,
       "actual_profit": null,
       "actual_roi_contribution": null,
       "is_major": false,
       "created_at": "2026-11-11T19:15:49Z",
-      "updated_at": "2026-11-11T19:48:08Z",
-      "last_verified_at": "2026-11-11T19:15:49Z",
-      "verification_status": "IN_PROGRESS_PENDING_FINAL",
+      "updated_at": "2026-11-11T19:52:57Z",
+      "last_verified_at": "2026-11-11T19:52:57Z",
+      "verification_status": "VERIFIED_OFFICIAL_FINAL",
       "revision_history": [],
-      "audit_explanation": "Pertandingan 401928151 masih berstatus Second Half (Skor saat ini: 4-0). Menunggu status Final resmi dari provider (PENDING).",
+      "audit_explanation": "Pertandingan 401928151 masuk pada menit 60' dengan skor 0-0. Status resmi mencapai Final dengan skor akhir waktu normal 4-0. Minimal 1 gol tercipta setelah waktu entry sehingga dinyatakan WIN.",
       "audit_passed": true
     },
     {
