@@ -1,6 +1,6 @@
 {
   "trading_month": "2026-11",
-  "last_updated_utc": "2026-11-11T23:42:58Z",
+  "last_updated_utc": "2026-11-11T23:48:18Z",
   "total_records": 158,
   "matches": [
     {
@@ -51,7 +51,7 @@
       "actual_roi_contribution": null,
       "is_major": false,
       "created_at": "2026-11-11T23:30:56Z",
-      "updated_at": "2026-11-11T23:42:58Z",
+      "updated_at": "2026-11-11T23:48:18Z",
       "last_verified_at": "2026-11-11T23:30:56Z",
       "verification_status": "IN_PROGRESS_PENDING_FINAL",
       "revision_history": [],
@@ -106,7 +106,7 @@
       "actual_roi_contribution": null,
       "is_major": false,
       "created_at": "2026-11-11T23:20:56Z",
-      "updated_at": "2026-11-11T23:42:58Z",
+      "updated_at": "2026-11-11T23:48:18Z",
       "last_verified_at": "2026-11-11T23:20:56Z",
       "verification_status": "IN_PROGRESS_PENDING_FINAL",
       "revision_history": [],
@@ -160,13 +160,14 @@
         {
           "minute": 80,
           "clock_display": "80'",
-          "period": 2,
-          "team": "Náutico",
+          "period": 0,
+          "team_id": "7633",
           "scorer": "Halan",
           "type": "Goal - Header",
-          "text": "Goal! Londrina 0, Náutico 1. Halan (Náutico) header from the centre of the box to the top right corner. Assisted by Victor Andrade following a fast break.",
+          "is_own_goal": false,
+          "is_penalty": false,
           "time_approximate": false,
-          "source": "ESPN_SUMMARY_KEY_EVENTS"
+          "source": "ESPN_OFFICIAL_DETAIL"
         }
       ],
       "current_score": "0-1",
@@ -182,7 +183,7 @@
       "actual_roi_contribution": null,
       "is_major": false,
       "created_at": "2026-11-11T23:20:56Z",
-      "updated_at": "2026-11-11T23:42:58Z",
+      "updated_at": "2026-11-11T23:48:18Z",
       "last_verified_at": "2026-11-11T23:20:56Z",
       "verification_status": "IN_PROGRESS_PENDING_FINAL",
       "revision_history": [],
