@@ -1,7 +1,7 @@
 {
   "system": "TRADING BOLA MENIT 60 - LAST GOAL SYSTEM",
   "version": "2.1",
-  "last_updated_utc": "2026-11-11T19:07:55Z",
+  "last_updated_utc": "2026-11-11T19:13:03Z",
   "total_records": 192,
   "matches": [
     {
@@ -52,7 +52,7 @@
       "actual_roi_contribution": null,
       "is_major": false,
       "created_at": "2026-11-11T19:01:08Z",
-      "updated_at": "2026-11-11T19:07:55Z",
+      "updated_at": "2026-11-11T19:13:03Z",
       "last_verified_at": "2026-11-11T19:01:08Z",
       "verification_status": "IN_PROGRESS_PENDING_FINAL",
       "revision_history": [],
