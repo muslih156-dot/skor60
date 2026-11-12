@@ -19,9 +19,9 @@
       "trading_day": "2026-11-11",
       "minute_detected": 60,
       "score_at_entry": "0-0",
-      "odds_entry": 2.53,
+      "odds_entry": 2.2,
       "simulated_odds": 1.8,
-      "odds_source": "Est - Liga English Premier League (14 match, lam=1.2)",
+      "odds_source": "Est - Liga English Premier League (11 match, lam=1.3)",
       "stake": 50000,
       "source": "ESPN_API",
       "source_event_id": "401500001",
@@ -55,10 +55,11 @@
       "last_verified_at": "2026-11-12T03:31:06Z",
       "verification_status": "VERIFIED_ENTRY",
       "revision_history": [],
-      "odds": 2.53,
+      "odds": 2.2,
       "odds_entry_type": "Est",
       "odds_migrated_from_sim": true,
-      "odds_migrated_old_value": 0
+      "odds_migrated_old_value": 2.53,
+      "odds_migrated_v5_manual": true
     }
   ]
 }

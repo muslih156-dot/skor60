@@ -18,7 +18,7 @@
       "trading_day": "2026-10-29",
       "minute_detected": 62,
       "score_at_entry": "0-0",
-      "odds_entry": 1.25,
+      "odds_entry": 1.72,
       "simulated_odds": 1.8,
       "odds_source": "Est - Global",
       "stake": 50000,
@@ -65,13 +65,14 @@
       "revision_history": [],
       "audit_explanation": "Pertandingan 401879594 masuk pada menit 62' dengan skor 0-0. Hingga status resmi Final, skor akhir waktu normal tetap 0-0 (tidak ada gol setelah entry) sehingga dinyatakan LOSE.",
       "audit_passed": true,
-      "odds": 1.25,
+      "odds": 1.72,
       "odds_entry_type": "Est",
       "odds_migrated_from_sim": true,
-      "odds_migrated_old_value": 2.53,
+      "odds_migrated_old_value": 1.25,
       "pnl": -50000.0,
       "p_l": -50000.0,
-      "odds_migrated_v3_fixed": true
+      "odds_migrated_v3_fixed": true,
+      "odds_migrated_v5_manual": true
     }
   ]
 }
