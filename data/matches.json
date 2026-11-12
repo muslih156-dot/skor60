@@ -20,7 +20,7 @@
       "trading_day": "2026-11-11",
       "minute_detected": 64,
       "score_at_entry": "0-0",
-      "odds_entry": 1.8,
+      "odds_entry": 1.72,
       "simulated_odds": 1.8,
       "odds_source": "Sim",
       "stake": 50000,
@@ -102,8 +102,8 @@
       "odds_entry_type": "Sim",
       "audit_explanation": "Pertandingan 401931279 masih berstatus Second Half (Skor saat ini: 1-1). Menunggu status Final resmi dari provider (PENDING).",
       "audit_passed": true,
-      "odds": 1.8,
-      "entry_odds": 1.8,
+      "odds": 1.72,
+      "entry_odds": 1.72,
       "odds_type": "Sim"
     },
     {
@@ -122,7 +122,7 @@
       "trading_day": "2026-11-11",
       "minute_detected": 62,
       "score_at_entry": "0-0",
-      "odds_entry": null,
+      "odds_entry": 1.72,
       "simulated_odds": 1.8,
       "odds_source": "SIMULATED_DEFAULT",
       "stake": 50000,
@@ -168,7 +168,9 @@
       "verification_status": "VERIFIED_REGULATION_LINESCORE",
       "revision_history": [],
       "audit_explanation": "Pertandingan 401931353 masuk pada menit 62' dengan skor 0-0. Hingga status resmi Extra Time, skor akhir waktu normal tetap 0-0 (tidak ada gol setelah entry) sehingga dinyatakan LOSE.",
-      "audit_passed": true
+      "audit_passed": true,
+      "odds": 1.72,
+      "entry_odds": 1.72
     },
     {
       "match_id": "401929715",
@@ -186,7 +188,7 @@
       "trading_day": "2026-11-11",
       "minute_detected": 64,
       "score_at_entry": "0-0",
-      "odds_entry": null,
+      "odds_entry": 1.72,
       "simulated_odds": 1.8,
       "odds_source": "SIMULATED_DEFAULT",
       "stake": 50000,
@@ -232,7 +234,9 @@
       "verification_status": "VERIFIED_REGULATION_LINESCORE",
       "revision_history": [],
       "audit_explanation": "Pertandingan 401929715 masuk pada menit 64' dengan skor 0-0. Hingga status resmi Extra Time, skor akhir waktu normal tetap 0-0 (tidak ada gol setelah entry) sehingga dinyatakan LOSE.",
-      "audit_passed": true
+      "audit_passed": true,
+      "odds": 1.72,
+      "entry_odds": 1.72
     },
     {
       "match_id": "401929783",
@@ -250,7 +254,7 @@
       "trading_day": "2026-11-11",
       "minute_detected": 60,
       "score_at_entry": "0-0",
-      "odds_entry": null,
+      "odds_entry": 1.72,
       "simulated_odds": 1.8,
       "odds_source": "SIMULATED_DEFAULT",
       "stake": 50000,
@@ -309,7 +313,9 @@
       "verification_status": "VERIFIED_OFFICIAL_FINAL",
       "revision_history": [],
       "audit_explanation": "Pertandingan 401929783 masuk pada menit 60' dengan skor 0-0. Status resmi mencapai Final dengan skor akhir waktu normal 0-1. Minimal 1 gol tercipta setelah waktu entry sehingga dinyatakan WIN.",
-      "audit_passed": true
+      "audit_passed": true,
+      "odds": 1.72,
+      "entry_odds": 1.72
     },
     {
       "match_id": "401929896",
@@ -327,7 +333,7 @@
       "trading_day": "2026-11-11",
       "minute_detected": 60,
       "score_at_entry": "0-0",
-      "odds_entry": null,
+      "odds_entry": 1.72,
       "simulated_odds": 1.8,
       "odds_source": "SIMULATED_DEFAULT",
       "stake": 50000,
@@ -416,7 +422,9 @@
       "verification_status": "VERIFIED_REGULATION_LINESCORE",
       "revision_history": [],
       "audit_explanation": "Pertandingan 401929896 masuk pada menit 60' dengan skor 0-0. Status resmi mencapai Extra Time dengan skor akhir waktu normal 1-1. Minimal 1 gol tercipta setelah waktu entry sehingga dinyatakan WIN.",
-      "audit_passed": true
+      "audit_passed": true,
+      "odds": 1.72,
+      "entry_odds": 1.72
     },
     {
       "match_id": "401930275",
@@ -434,7 +442,7 @@
       "trading_day": "2026-11-11",
       "minute_detected": 62,
       "score_at_entry": "0-0",
-      "odds_entry": null,
+      "odds_entry": 1.72,
       "simulated_odds": 1.8,
       "odds_source": "SIMULATED_DEFAULT",
       "stake": 50000,
@@ -480,7 +488,9 @@
       "verification_status": "VERIFIED_OFFICIAL_FINAL",
       "revision_history": [],
       "audit_explanation": "Pertandingan 401930275 masuk pada menit 62' dengan skor 0-0. Hingga status resmi Final, skor akhir waktu normal tetap 0-0 (tidak ada gol setelah entry) sehingga dinyatakan LOSE.",
-      "audit_passed": true
+      "audit_passed": true,
+      "odds": 1.72,
+      "entry_odds": 1.72
     },
     {
       "match_id": "401860435",
@@ -498,7 +508,7 @@
       "trading_day": "2026-11-11",
       "minute_detected": 62,
       "score_at_entry": "0-0",
-      "odds_entry": null,
+      "odds_entry": 2.16,
       "simulated_odds": 1.8,
       "odds_source": "SIMULATED_DEFAULT",
       "stake": 50000,
@@ -596,7 +606,9 @@
       "verification_status": "VERIFIED_OFFICIAL_FINAL",
       "revision_history": [],
       "audit_explanation": "Pertandingan 401860435 masuk pada menit 62' dengan skor 0-0. Status resmi mencapai Final dengan skor akhir waktu normal 2-1. Minimal 1 gol tercipta setelah waktu entry sehingga dinyatakan WIN.",
-      "audit_passed": true
+      "audit_passed": true,
+      "odds": 2.16,
+      "entry_odds": 2.16
     },
     {
       "match_id": "401899280",
@@ -614,7 +626,7 @@
       "trading_day": "2026-11-11",
       "minute_detected": 63,
       "score_at_entry": "0-0",
-      "odds_entry": null,
+      "odds_entry": 1.72,
       "simulated_odds": 1.8,
       "odds_source": "SIMULATED_DEFAULT",
       "stake": 50000,
@@ -681,7 +693,9 @@
       "verification_status": "VERIFIED_OFFICIAL_FINAL",
       "revision_history": [],
       "audit_explanation": "Pertandingan 401899280 masuk pada menit 63' dengan skor 0-0. Status resmi mencapai Final dengan skor akhir waktu normal 1-0. Minimal 1 gol tercipta setelah waktu entry sehingga dinyatakan WIN.",
-      "audit_passed": true
+      "audit_passed": true,
+      "odds": 1.72,
+      "entry_odds": 1.72
     },
     {
       "match_id": "401929847",
@@ -699,7 +713,7 @@
       "trading_day": "2026-11-11",
       "minute_detected": 64,
       "score_at_entry": "0-0",
-      "odds_entry": null,
+      "odds_entry": 1.72,
       "simulated_odds": 1.8,
       "odds_source": "SIMULATED_DEFAULT",
       "stake": 50000,
@@ -767,7 +781,9 @@
       "verification_status": "VERIFIED_OFFICIAL_FINAL",
       "revision_history": [],
       "audit_explanation": "Pertandingan 401929847 masuk pada menit 64' dengan skor 0-0. Status resmi mencapai Final dengan skor akhir waktu normal 1-0. Minimal 1 gol tercipta setelah waktu entry sehingga dinyatakan WIN.",
-      "audit_passed": true
+      "audit_passed": true,
+      "odds": 1.72,
+      "entry_odds": 1.72
     },
     {
       "match_id": "401928152",
@@ -785,7 +801,7 @@
       "trading_day": "2026-11-11",
       "minute_detected": 64,
       "score_at_entry": "0-0",
-      "odds_entry": null,
+      "odds_entry": 1.72,
       "simulated_odds": 1.8,
       "odds_source": "SIMULATED_DEFAULT",
       "stake": 50000,
@@ -863,7 +879,9 @@
       "verification_status": "VERIFIED_OFFICIAL_FINAL",
       "revision_history": [],
       "audit_explanation": "Pertandingan 401928152 masuk pada menit 64' dengan skor 0-0. Status resmi mencapai Final dengan skor akhir waktu normal 0-2. Minimal 1 gol tercipta setelah waktu entry sehingga dinyatakan WIN.",
-      "audit_passed": true
+      "audit_passed": true,
+      "odds": 1.72,
+      "entry_odds": 1.72
     },
     {
       "match_id": "401928151",
@@ -881,7 +899,7 @@
       "trading_day": "2026-11-11",
       "minute_detected": 60,
       "score_at_entry": "0-0",
-      "odds_entry": null,
+      "odds_entry": 1.72,
       "simulated_odds": 1.8,
       "odds_source": "SIMULATED_DEFAULT",
       "stake": 50000,
@@ -999,7 +1017,9 @@
       "verification_status": "VERIFIED_OFFICIAL_FINAL",
       "revision_history": [],
       "audit_explanation": "Pertandingan 401928151 masuk pada menit 60' dengan skor 0-0. Status resmi mencapai Final dengan skor akhir waktu normal 4-0. Minimal 1 gol tercipta setelah waktu entry sehingga dinyatakan WIN.",
-      "audit_passed": true
+      "audit_passed": true,
+      "odds": 1.72,
+      "entry_odds": 1.72
     },
     {
       "match_id": "401916985",
@@ -1017,7 +1037,7 @@
       "trading_day": "2026-11-11",
       "minute_detected": 60,
       "score_at_entry": "0-0",
-      "odds_entry": null,
+      "odds_entry": 1.72,
       "simulated_odds": 1.8,
       "odds_source": "SIMULATED_DEFAULT",
       "stake": 50000,
@@ -1104,7 +1124,9 @@
       "verification_status": "VERIFIED_OFFICIAL_FINAL",
       "revision_history": [],
       "audit_explanation": "Pertandingan 401916985 masuk pada menit 60' dengan skor 0-0. Status resmi mencapai Final dengan skor akhir waktu normal 1-1. Minimal 1 gol tercipta setelah waktu entry sehingga dinyatakan WIN.",
-      "audit_passed": true
+      "audit_passed": true,
+      "odds": 1.72,
+      "entry_odds": 1.72
     },
     {
       "match_id": "401932078",
@@ -1122,7 +1144,7 @@
       "trading_day": "2026-11-11",
       "minute_detected": 62,
       "score_at_entry": "0-0",
-      "odds_entry": null,
+      "odds_entry": 1.72,
       "simulated_odds": 1.8,
       "odds_source": "SIMULATED_DEFAULT",
       "stake": 50000,
@@ -1168,7 +1190,9 @@
       "verification_status": "VERIFIED_OFFICIAL_FINAL",
       "revision_history": [],
       "audit_explanation": "Pertandingan 401932078 masuk pada menit 62' dengan skor 0-0. Hingga status resmi Final, skor akhir waktu normal tetap 0-0 (tidak ada gol setelah entry) sehingga dinyatakan LOSE.",
-      "audit_passed": true
+      "audit_passed": true,
+      "odds": 1.72,
+      "entry_odds": 1.72
     },
     {
       "match_id": "401929907",
@@ -1186,7 +1210,7 @@
       "trading_day": "2026-11-10",
       "minute_detected": 62,
       "score_at_entry": "0-0",
-      "odds_entry": null,
+      "odds_entry": 1.72,
       "simulated_odds": 1.8,
       "odds_source": "SIMULATED_DEFAULT",
       "stake": 50000,
@@ -1232,7 +1256,9 @@
       "verification_status": "VERIFIED_REGULATION_LINESCORE",
       "revision_history": [],
       "audit_explanation": "Pertandingan 401929907 masuk pada menit 62' dengan skor 0-0. Hingga status resmi Extra Time, skor akhir waktu normal tetap 0-0 (tidak ada gol setelah entry) sehingga dinyatakan LOSE.",
-      "audit_passed": true
+      "audit_passed": true,
+      "odds": 1.72,
+      "entry_odds": 1.72
     },
     {
       "match_id": "401931289",
@@ -1250,7 +1276,7 @@
       "trading_day": "2026-11-10",
       "minute_detected": 61,
       "score_at_entry": "0-0",
-      "odds_entry": null,
+      "odds_entry": 1.72,
       "simulated_odds": 1.8,
       "odds_source": "SIMULATED_DEFAULT",
       "stake": 50000,
@@ -1360,7 +1386,9 @@
       "verification_status": "VERIFIED_OFFICIAL_FINAL",
       "revision_history": [],
       "audit_explanation": "Pertandingan 401931289 masuk pada menit 61' dengan skor 0-0. Status resmi mencapai Final dengan skor akhir waktu normal 2-1. Minimal 1 gol tercipta setelah waktu entry sehingga dinyatakan WIN.",
-      "audit_passed": true
+      "audit_passed": true,
+      "odds": 1.72,
+      "entry_odds": 1.72
     },
     {
       "match_id": "401906271",
@@ -1378,7 +1406,7 @@
       "trading_day": "2026-11-10",
       "minute_detected": 62,
       "score_at_entry": "0-0",
-      "odds_entry": null,
+      "odds_entry": 1.72,
       "simulated_odds": 1.8,
       "odds_source": "SIMULATED_DEFAULT",
       "stake": 50000,
@@ -1424,7 +1452,9 @@
       "verification_status": "VERIFIED_REGULATION_LINESCORE",
       "revision_history": [],
       "audit_explanation": "Pertandingan 401906271 masuk pada menit 62' dengan skor 0-0. Hingga status resmi Penalties, skor akhir waktu normal tetap 0-0 (tidak ada gol setelah entry) sehingga dinyatakan LOSE.",
-      "audit_passed": true
+      "audit_passed": true,
+      "odds": 1.72,
+      "entry_odds": 1.72
     },
     {
       "match_id": "401906337",
@@ -1442,7 +1472,7 @@
       "trading_day": "2026-11-10",
       "minute_detected": 63,
       "score_at_entry": "0-0",
-      "odds_entry": null,
+      "odds_entry": 1.72,
       "simulated_odds": 1.8,
       "odds_source": "SIMULATED_DEFAULT",
       "stake": 50000,
@@ -1488,7 +1518,9 @@
       "verification_status": "VERIFIED_REGULATION_LINESCORE",
       "revision_history": [],
       "audit_explanation": "Pertandingan 401906337 masuk pada menit 63' dengan skor 0-0. Hingga status resmi Penalties, skor akhir waktu normal tetap 0-0 (tidak ada gol setelah entry) sehingga dinyatakan LOSE.",
-      "audit_passed": true
+      "audit_passed": true,
+      "odds": 1.72,
+      "entry_odds": 1.72
     },
     {
       "match_id": "401928519",
@@ -1506,7 +1538,7 @@
       "trading_day": "2026-11-10",
       "minute_detected": 60,
       "score_at_entry": "0-0",
-      "odds_entry": null,
+      "odds_entry": 2.2,
       "simulated_odds": 1.8,
       "odds_source": "SIMULATED_DEFAULT",
       "stake": 50000,
@@ -1573,7 +1605,9 @@
       "verification_status": "VERIFIED_OFFICIAL_FINAL",
       "revision_history": [],
       "audit_explanation": "Pertandingan 401928519 masuk pada menit 60' dengan skor 0-0. Status resmi mencapai Final dengan skor akhir waktu normal 1-0. Minimal 1 gol tercipta setelah waktu entry sehingga dinyatakan WIN.",
-      "audit_passed": true
+      "audit_passed": true,
+      "odds": 2.2,
+      "entry_odds": 2.2
     },
     {
       "match_id": "401929959",
@@ -1591,7 +1625,7 @@
       "trading_day": "2026-11-10",
       "minute_detected": 63,
       "score_at_entry": "0-0",
-      "odds_entry": null,
+      "odds_entry": 1.72,
       "simulated_odds": 1.8,
       "odds_source": "SIMULATED_DEFAULT",
       "stake": 50000,
@@ -1637,7 +1671,9 @@
       "verification_status": "VERIFIED_REGULATION_LINESCORE",
       "revision_history": [],
       "audit_explanation": "Pertandingan 401929959 masuk pada menit 63' dengan skor 0-0. Hingga status resmi Extra Time, skor akhir waktu normal tetap 0-0 (tidak ada gol setelah entry) sehingga dinyatakan LOSE.",
-      "audit_passed": true
+      "audit_passed": true,
+      "odds": 1.72,
+      "entry_odds": 1.72
     },
     {
       "match_id": "401928137",
@@ -1655,7 +1691,7 @@
       "trading_day": "2026-11-10",
       "minute_detected": 60,
       "score_at_entry": "0-0",
-      "odds_entry": null,
+      "odds_entry": 1.72,
       "simulated_odds": 1.8,
       "odds_source": "SIMULATED_DEFAULT",
       "stake": 50000,
@@ -1753,7 +1789,9 @@
       "verification_status": "VERIFIED_OFFICIAL_FINAL",
       "revision_history": [],
       "audit_explanation": "Pertandingan 401928137 masuk pada menit 60' dengan skor 0-0. Status resmi mencapai Final dengan skor akhir waktu normal 0-3. Minimal 1 gol tercipta setelah waktu entry sehingga dinyatakan WIN.",
-      "audit_passed": true
+      "audit_passed": true,
+      "odds": 1.72,
+      "entry_odds": 1.72
     },
     {
       "match_id": "401916991",
@@ -1771,7 +1809,7 @@
       "trading_day": "2026-11-10",
       "minute_detected": 62,
       "score_at_entry": "0-0",
-      "odds_entry": null,
+      "odds_entry": 1.72,
       "simulated_odds": 1.8,
       "odds_source": "SIMULATED_DEFAULT",
       "stake": 50000,
@@ -1817,7 +1855,9 @@
       "verification_status": "VERIFIED_OFFICIAL_FINAL",
       "revision_history": [],
       "audit_explanation": "Pertandingan 401916991 masuk pada menit 62' dengan skor 0-0. Hingga status resmi Final, skor akhir waktu normal tetap 0-0 (tidak ada gol setelah entry) sehingga dinyatakan LOSE.",
-      "audit_passed": true
+      "audit_passed": true,
+      "odds": 1.72,
+      "entry_odds": 1.72
     },
     {
       "match_id": "401929892",
@@ -1835,7 +1875,7 @@
       "trading_day": "2026-11-09",
       "minute_detected": 60,
       "score_at_entry": "0-0",
-      "odds_entry": null,
+      "odds_entry": 1.72,
       "simulated_odds": 1.8,
       "odds_source": "SIMULATED_DEFAULT",
       "stake": 50000,
@@ -1903,7 +1943,9 @@
       "verification_status": "VERIFIED_OFFICIAL_FINAL",
       "revision_history": [],
       "audit_explanation": "Pertandingan 401929892 masuk pada menit 60' dengan skor 0-0. Status resmi mencapai Final dengan skor akhir waktu normal 1-0. Minimal 1 gol tercipta setelah waktu entry sehingga dinyatakan WIN.",
-      "audit_passed": true
+      "audit_passed": true,
+      "odds": 1.72,
+      "entry_odds": 1.72
     },
     {
       "match_id": "401930004",
@@ -1921,7 +1963,7 @@
       "trading_day": "2026-11-09",
       "minute_detected": 61,
       "score_at_entry": "0-0",
-      "odds_entry": null,
+      "odds_entry": 1.72,
       "simulated_odds": 1.8,
       "odds_source": "SIMULATED_DEFAULT",
       "stake": 50000,
@@ -1999,7 +2041,9 @@
       "verification_status": "VERIFIED_OFFICIAL_FINAL",
       "revision_history": [],
       "audit_explanation": "Pertandingan 401930004 masuk pada menit 61' dengan skor 0-0. Status resmi mencapai Final dengan skor akhir waktu normal 1-1. Minimal 1 gol tercipta setelah waktu entry sehingga dinyatakan WIN.",
-      "audit_passed": true
+      "audit_passed": true,
+      "odds": 1.72,
+      "entry_odds": 1.72
     },
     {
       "match_id": "401882465",
@@ -2017,7 +2061,7 @@
       "trading_day": "2026-11-09",
       "minute_detected": 63,
       "score_at_entry": "0-0",
-      "odds_entry": null,
+      "odds_entry": 1.72,
       "simulated_odds": 1.8,
       "odds_source": "SIMULATED_DEFAULT",
       "stake": 50000,
@@ -2104,7 +2148,9 @@
       "verification_status": "VERIFIED_OFFICIAL_FINAL",
       "revision_history": [],
       "audit_explanation": "Pertandingan 401882465 masuk pada menit 63' dengan skor 0-0. Status resmi mencapai Final dengan skor akhir waktu normal 0-2. Minimal 1 gol tercipta setelah waktu entry sehingga dinyatakan WIN.",
-      "audit_passed": true
+      "audit_passed": true,
+      "odds": 1.72,
+      "entry_odds": 1.72
     },
     {
       "match_id": "401883139",
@@ -2122,7 +2168,7 @@
       "trading_day": "2026-11-09",
       "minute_detected": 63,
       "score_at_entry": "0-0",
-      "odds_entry": null,
+      "odds_entry": 2.2,
       "simulated_odds": 1.8,
       "odds_source": "SIMULATED_DEFAULT",
       "stake": 50000,
@@ -2168,7 +2214,9 @@
       "verification_status": "VERIFIED_OFFICIAL_FINAL",
       "revision_history": [],
       "audit_explanation": "Pertandingan 401883139 masuk pada menit 63' dengan skor 0-0. Hingga status resmi Final, skor akhir waktu normal tetap 0-0 (tidak ada gol setelah entry) sehingga dinyatakan LOSE.",
-      "audit_passed": true
+      "audit_passed": true,
+      "odds": 2.2,
+      "entry_odds": 2.2
     },
     {
       "match_id": "401883140",
@@ -2186,7 +2234,7 @@
       "trading_day": "2026-11-09",
       "minute_detected": 64,
       "score_at_entry": "0-0",
-      "odds_entry": null,
+      "odds_entry": 2.2,
       "simulated_odds": 1.8,
       "odds_source": "SIMULATED_DEFAULT",
       "stake": 50000,
@@ -2264,7 +2312,9 @@
       "verification_status": "VERIFIED_OFFICIAL_FINAL",
       "revision_history": [],
       "audit_explanation": "Pertandingan 401883140 masuk pada menit 64' dengan skor 0-0. Status resmi mencapai Final dengan skor akhir waktu normal 2-0. Minimal 1 gol tercipta setelah waktu entry sehingga dinyatakan WIN.",
-      "audit_passed": true
+      "audit_passed": true,
+      "odds": 2.2,
+      "entry_odds": 2.2
     },
     {
       "match_id": "401882467",
@@ -2282,7 +2332,7 @@
       "trading_day": "2026-11-09",
       "minute_detected": 63,
       "score_at_entry": "0-0",
-      "odds_entry": null,
+      "odds_entry": 1.72,
       "simulated_odds": 1.8,
       "odds_source": "SIMULATED_DEFAULT",
       "stake": 50000,
@@ -2380,7 +2430,9 @@
       "verification_status": "VERIFIED_OFFICIAL_FINAL",
       "revision_history": [],
       "audit_explanation": "Pertandingan 401882467 masuk pada menit 63' dengan skor 0-0. Status resmi mencapai Final dengan skor akhir waktu normal 3-0. Minimal 1 gol tercipta setelah waktu entry sehingga dinyatakan WIN.",
-      "audit_passed": true
+      "audit_passed": true,
+      "odds": 1.72,
+      "entry_odds": 1.72
     },
     {
       "match_id": "401876902",
@@ -2398,7 +2450,7 @@
       "trading_day": "2026-11-08",
       "minute_detected": 63,
       "score_at_entry": "0-0",
-      "odds_entry": null,
+      "odds_entry": 2.2,
       "simulated_odds": 1.8,
       "odds_source": "SIMULATED_DEFAULT",
       "stake": 50000,
@@ -2485,7 +2537,9 @@
       "verification_status": "VERIFIED_OFFICIAL_FINAL",
       "revision_history": [],
       "audit_explanation": "Pertandingan 401876902 masuk pada menit 63' dengan skor 0-0. Status resmi mencapai Final dengan skor akhir waktu normal 1-1. Minimal 1 gol tercipta setelah waktu entry sehingga dinyatakan WIN.",
-      "audit_passed": true
+      "audit_passed": true,
+      "odds": 2.2,
+      "entry_odds": 2.2
     },
     {
       "match_id": "401860428",
@@ -2503,7 +2557,7 @@
       "trading_day": "2026-11-08",
       "minute_detected": 65,
       "score_at_entry": "0-0",
-      "odds_entry": null,
+      "odds_entry": 2.16,
       "simulated_odds": 1.8,
       "odds_source": "SIMULATED_DEFAULT",
       "stake": 50000,
@@ -2570,7 +2624,9 @@
       "verification_status": "VERIFIED_OFFICIAL_FINAL",
       "revision_history": [],
       "audit_explanation": "Pertandingan 401860428 masuk pada menit 65' dengan skor 0-0. Status resmi mencapai Final dengan skor akhir waktu normal 1-0. Minimal 1 gol tercipta setelah waktu entry sehingga dinyatakan WIN.",
-      "audit_passed": true
+      "audit_passed": true,
+      "odds": 2.16,
+      "entry_odds": 2.16
     },
     {
       "match_id": "401885397",
@@ -2588,7 +2644,7 @@
       "trading_day": "2026-11-08",
       "minute_detected": 63,
       "score_at_entry": "0-0",
-      "odds_entry": null,
+      "odds_entry": 2.2,
       "simulated_odds": 1.8,
       "odds_source": "SIMULATED_DEFAULT",
       "stake": 50000,
@@ -2655,7 +2711,9 @@
       "verification_status": "VERIFIED_OFFICIAL_FINAL",
       "revision_history": [],
       "audit_explanation": "Pertandingan 401885397 masuk pada menit 63' dengan skor 0-0. Status resmi mencapai Final dengan skor akhir waktu normal 0-1. Minimal 1 gol tercipta setelah waktu entry sehingga dinyatakan WIN.",
-      "audit_passed": true
+      "audit_passed": true,
+      "odds": 2.2,
+      "entry_odds": 2.2
     },
     {
       "match_id": "401882815",
@@ -2673,7 +2731,7 @@
       "trading_day": "2026-11-08",
       "minute_detected": 62,
       "score_at_entry": "0-0",
-      "odds_entry": null,
+      "odds_entry": 2.2,
       "simulated_odds": 1.8,
       "odds_source": "SIMULATED_DEFAULT",
       "stake": 50000,
@@ -2719,7 +2777,9 @@
       "verification_status": "VERIFIED_OFFICIAL_FINAL",
       "revision_history": [],
       "audit_explanation": "Pertandingan 401882815 masuk pada menit 62' dengan skor 0-0. Hingga status resmi Final, skor akhir waktu normal tetap 0-0 (tidak ada gol setelah entry) sehingga dinyatakan LOSE.",
-      "audit_passed": true
+      "audit_passed": true,
+      "odds": 2.2,
+      "entry_odds": 2.2
     },
     {
       "match_id": "401882807",
@@ -2737,7 +2797,7 @@
       "trading_day": "2026-11-08",
       "minute_detected": 62,
       "score_at_entry": "0-0",
-      "odds_entry": null,
+      "odds_entry": 2.2,
       "simulated_odds": 1.8,
       "odds_source": "SIMULATED_DEFAULT",
       "stake": 50000,
@@ -2824,7 +2884,9 @@
       "verification_status": "VERIFIED_OFFICIAL_FINAL",
       "revision_history": [],
       "audit_explanation": "Pertandingan 401882807 masuk pada menit 62' dengan skor 0-0. Status resmi mencapai Final dengan skor akhir waktu normal 2-0. Minimal 1 gol tercipta setelah waktu entry sehingga dinyatakan WIN.",
-      "audit_passed": true
+      "audit_passed": true,
+      "odds": 2.2,
+      "entry_odds": 2.2
     },
     {
       "match_id": "401878943",
@@ -2842,7 +2904,7 @@
       "trading_day": "2026-11-08",
       "minute_detected": 60,
       "score_at_entry": "0-0",
-      "odds_entry": null,
+      "odds_entry": 2.2,
       "simulated_odds": 1.8,
       "odds_source": "SIMULATED_DEFAULT",
       "stake": 50000,
@@ -2909,7 +2971,9 @@
       "verification_status": "VERIFIED_OFFICIAL_FINAL",
       "revision_history": [],
       "audit_explanation": "Pertandingan 401878943 masuk pada menit 60' dengan skor 0-0. Status resmi mencapai Final dengan skor akhir waktu normal 1-0. Minimal 1 gol tercipta setelah waktu entry sehingga dinyatakan WIN.",
-      "audit_passed": true
+      "audit_passed": true,
+      "odds": 2.2,
+      "entry_odds": 2.2
     },
     {
       "match_id": "401931108",
@@ -2927,7 +2991,7 @@
       "trading_day": "2026-11-08",
       "minute_detected": 60,
       "score_at_entry": "0-0",
-      "odds_entry": null,
+      "odds_entry": 2.16,
       "simulated_odds": 1.8,
       "odds_source": "SIMULATED_DEFAULT",
       "stake": 50000,
@@ -3016,7 +3080,9 @@
       "verification_status": "VERIFIED_REGULATION_LINESCORE",
       "revision_history": [],
       "audit_explanation": "Pertandingan 401931108 masuk pada menit 60' dengan skor 0-0. Status resmi mencapai Extra Time dengan skor akhir waktu normal 1-1. Minimal 1 gol tercipta setelah waktu entry sehingga dinyatakan WIN.",
-      "audit_passed": true
+      "audit_passed": true,
+      "odds": 2.16,
+      "entry_odds": 2.16
     },
     {
       "match_id": "401896729",
@@ -3034,7 +3100,7 @@
       "trading_day": "2026-11-08",
       "minute_detected": 64,
       "score_at_entry": "0-0",
-      "odds_entry": null,
+      "odds_entry": 1.72,
       "simulated_odds": 1.8,
       "odds_source": "SIMULATED_DEFAULT",
       "stake": 50000,
@@ -3080,7 +3146,9 @@
       "verification_status": "VERIFIED_OFFICIAL_FINAL",
       "revision_history": [],
       "audit_explanation": "Pertandingan 401896729 masuk pada menit 64' dengan skor 0-0. Hingga status resmi Final, skor akhir waktu normal tetap 0-0 (tidak ada gol setelah entry) sehingga dinyatakan LOSE.",
-      "audit_passed": true
+      "audit_passed": true,
+      "odds": 1.72,
+      "entry_odds": 1.72
     },
     {
       "match_id": "401885398",
@@ -3098,7 +3166,7 @@
       "trading_day": "2026-11-08",
       "minute_detected": 63,
       "score_at_entry": "0-0",
-      "odds_entry": null,
+      "odds_entry": 2.2,
       "simulated_odds": 1.8,
       "odds_source": "SIMULATED_DEFAULT",
       "stake": 50000,
@@ -3165,7 +3233,9 @@
       "verification_status": "VERIFIED_OFFICIAL_FINAL",
       "revision_history": [],
       "audit_explanation": "Pertandingan 401885398 masuk pada menit 63' dengan skor 0-0. Status resmi mencapai Final dengan skor akhir waktu normal 1-0. Minimal 1 gol tercipta setelah waktu entry sehingga dinyatakan WIN.",
-      "audit_passed": true
+      "audit_passed": true,
+      "odds": 2.2,
+      "entry_odds": 2.2
     },
     {
       "match_id": "401882810",
@@ -3183,7 +3253,7 @@
       "trading_day": "2026-11-08",
       "minute_detected": 65,
       "score_at_entry": "0-0",
-      "odds_entry": null,
+      "odds_entry": 2.2,
       "simulated_odds": 1.8,
       "odds_source": "SIMULATED_DEFAULT",
       "stake": 50000,
@@ -3250,7 +3320,9 @@
       "verification_status": "VERIFIED_OFFICIAL_FINAL",
       "revision_history": [],
       "audit_explanation": "Pertandingan 401882810 masuk pada menit 65' dengan skor 0-0. Status resmi mencapai Final dengan skor akhir waktu normal 1-0. Minimal 1 gol tercipta setelah waktu entry sehingga dinyatakan WIN.",
-      "audit_passed": true
+      "audit_passed": true,
+      "odds": 2.2,
+      "entry_odds": 2.2
     },
     {
       "match_id": "401883119",
@@ -3268,7 +3340,7 @@
       "trading_day": "2026-11-08",
       "minute_detected": 62,
       "score_at_entry": "0-0",
-      "odds_entry": null,
+      "odds_entry": 2.2,
       "simulated_odds": 1.8,
       "odds_source": "SIMULATED_DEFAULT",
       "stake": 50000,
@@ -3335,7 +3407,9 @@
       "verification_status": "VERIFIED_OFFICIAL_FINAL",
       "revision_history": [],
       "audit_explanation": "Pertandingan 401883119 masuk pada menit 62' dengan skor 0-0. Status resmi mencapai Final dengan skor akhir waktu normal 0-1. Minimal 1 gol tercipta setelah waktu entry sehingga dinyatakan WIN.",
-      "audit_passed": true
+      "audit_passed": true,
+      "odds": 2.2,
+      "entry_odds": 2.2
     },
     {
       "match_id": "401882814",
@@ -3353,7 +3427,7 @@
       "trading_day": "2026-11-08",
       "minute_detected": 63,
       "score_at_entry": "0-0",
-      "odds_entry": null,
+      "odds_entry": 2.2,
       "simulated_odds": 1.8,
       "odds_source": "SIMULATED_DEFAULT",
       "stake": 50000,
@@ -3440,7 +3514,9 @@
       "verification_status": "VERIFIED_OFFICIAL_FINAL",
       "revision_history": [],
       "audit_explanation": "Pertandingan 401882814 masuk pada menit 63' dengan skor 0-0. Status resmi mencapai Final dengan skor akhir waktu normal 0-2. Minimal 1 gol tercipta setelah waktu entry sehingga dinyatakan WIN.",
-      "audit_passed": true
+      "audit_passed": true,
+      "odds": 2.2,
+      "entry_odds": 2.2
     },
     {
       "match_id": "401902870",
@@ -3458,7 +3534,7 @@
       "trading_day": "2026-11-08",
       "minute_detected": 63,
       "score_at_entry": "0-0",
-      "odds_entry": null,
+      "odds_entry": 1.72,
       "simulated_odds": 1.8,
       "odds_source": "SIMULATED_DEFAULT",
       "stake": 50000,
@@ -3525,7 +3601,9 @@
       "verification_status": "VERIFIED_OFFICIAL_FINAL",
       "revision_history": [],
       "audit_explanation": "Pertandingan 401902870 masuk pada menit 63' dengan skor 0-0. Status resmi mencapai Final dengan skor akhir waktu normal 0-1. Minimal 1 gol tercipta setelah waktu entry sehingga dinyatakan WIN.",
-      "audit_passed": true
+      "audit_passed": true,
+      "odds": 1.72,
+      "entry_odds": 1.72
     },
     {
       "match_id": "401877577",
@@ -3543,7 +3621,7 @@
       "trading_day": "2026-11-08",
       "minute_detected": 61,
       "score_at_entry": "0-0",
-      "odds_entry": null,
+      "odds_entry": 2.2,
       "simulated_odds": 1.8,
       "odds_source": "SIMULATED_DEFAULT",
       "stake": 50000,
@@ -3610,7 +3688,9 @@
       "verification_status": "VERIFIED_OFFICIAL_FINAL",
       "revision_history": [],
       "audit_explanation": "Pertandingan 401877577 masuk pada menit 61' dengan skor 0-0. Status resmi mencapai Final dengan skor akhir waktu normal 1-0. Minimal 1 gol tercipta setelah waktu entry sehingga dinyatakan WIN.",
-      "audit_passed": true
+      "audit_passed": true,
+      "odds": 2.2,
+      "entry_odds": 2.2
     },
     {
       "match_id": "401861514",
@@ -3628,7 +3708,7 @@
       "trading_day": "2026-11-08",
       "minute_detected": 64,
       "score_at_entry": "0-0",
-      "odds_entry": null,
+      "odds_entry": 2.2,
       "simulated_odds": 1.8,
       "odds_source": "SIMULATED_DEFAULT",
       "stake": 50000,
@@ -3695,7 +3775,9 @@
       "verification_status": "VERIFIED_OFFICIAL_FINAL",
       "revision_history": [],
       "audit_explanation": "Pertandingan 401861514 masuk pada menit 64' dengan skor 0-0. Status resmi mencapai Final dengan skor akhir waktu normal 1-0. Minimal 1 gol tercipta setelah waktu entry sehingga dinyatakan WIN.",
-      "audit_passed": true
+      "audit_passed": true,
+      "odds": 2.2,
+      "entry_odds": 2.2
     },
     {
       "match_id": "401877559",
@@ -3713,7 +3795,7 @@
       "trading_day": "2026-11-08",
       "minute_detected": 63,
       "score_at_entry": "0-0",
-      "odds_entry": null,
+      "odds_entry": 2.2,
       "simulated_odds": 1.8,
       "odds_source": "SIMULATED_DEFAULT",
       "stake": 50000,
@@ -3759,7 +3841,9 @@
       "verification_status": "VERIFIED_OFFICIAL_FINAL",
       "revision_history": [],
       "audit_explanation": "Pertandingan 401877559 masuk pada menit 63' dengan skor 0-0. Hingga status resmi Final, skor akhir waktu normal tetap 0-0 (tidak ada gol setelah entry) sehingga dinyatakan LOSE.",
-      "audit_passed": true
+      "audit_passed": true,
+      "odds": 2.2,
+      "entry_odds": 2.2
     },
     {
       "match_id": "761947",
@@ -3777,7 +3861,7 @@
       "trading_day": "2026-11-07",
       "minute_detected": 62,
       "score_at_entry": "0-0",
-      "odds_entry": null,
+      "odds_entry": 2.2,
       "simulated_odds": 1.8,
       "odds_source": "SIMULATED_DEFAULT",
       "stake": 50000,
@@ -3844,7 +3928,9 @@
       "verification_status": "VERIFIED_OFFICIAL_FINAL",
       "revision_history": [],
       "audit_explanation": "Pertandingan 761947 masuk pada menit 62' dengan skor 0-0. Status resmi mencapai Final dengan skor akhir waktu normal 0-1. Minimal 1 gol tercipta setelah waktu entry sehingga dinyatakan WIN.",
-      "audit_passed": true
+      "audit_passed": true,
+      "odds": 2.2,
+      "entry_odds": 2.2
     },
     {
       "match_id": "761944",
@@ -3862,7 +3948,7 @@
       "trading_day": "2026-11-07",
       "minute_detected": 62,
       "score_at_entry": "0-0",
-      "odds_entry": null,
+      "odds_entry": 2.2,
       "simulated_odds": 1.8,
       "odds_source": "SIMULATED_DEFAULT",
       "stake": 50000,
@@ -3929,7 +4015,9 @@
       "verification_status": "VERIFIED_OFFICIAL_FINAL",
       "revision_history": [],
       "audit_explanation": "Pertandingan 761944 masuk pada menit 62' dengan skor 0-0. Status resmi mencapai Final dengan skor akhir waktu normal 0-1. Minimal 1 gol tercipta setelah waktu entry sehingga dinyatakan WIN.",
-      "audit_passed": true
+      "audit_passed": true,
+      "odds": 2.2,
+      "entry_odds": 2.2
     },
     {
       "match_id": "761936",
@@ -3947,7 +4035,7 @@
       "trading_day": "2026-11-07",
       "minute_detected": 63,
       "score_at_entry": "0-0",
-      "odds_entry": null,
+      "odds_entry": 2.2,
       "simulated_odds": 1.8,
       "odds_source": "SIMULATED_DEFAULT",
       "stake": 50000,
@@ -4014,7 +4102,9 @@
       "verification_status": "VERIFIED_OFFICIAL_FINAL",
       "revision_history": [],
       "audit_explanation": "Pertandingan 761936 masuk pada menit 63' dengan skor 0-0. Status resmi mencapai Final dengan skor akhir waktu normal 0-1. Minimal 1 gol tercipta setelah waktu entry sehingga dinyatakan WIN.",
-      "audit_passed": true
+      "audit_passed": true,
+      "odds": 2.2,
+      "entry_odds": 2.2
     },
     {
       "match_id": "401841669",
@@ -4032,7 +4122,7 @@
       "trading_day": "2026-11-07",
       "minute_detected": 64,
       "score_at_entry": "0-0",
-      "odds_entry": null,
+      "odds_entry": 2.2,
       "simulated_odds": 1.8,
       "odds_source": "SIMULATED_DEFAULT",
       "stake": 50000,
@@ -4090,7 +4180,9 @@
       "verification_status": "VERIFIED_OFFICIAL_FINAL",
       "revision_history": [],
       "audit_explanation": "Pertandingan 401841669 masuk pada menit 64' dengan skor 0-0. Status resmi mencapai Final dengan skor akhir waktu normal 1-0. Minimal 1 gol tercipta setelah waktu entry sehingga dinyatakan WIN.",
-      "audit_passed": true
+      "audit_passed": true,
+      "odds": 2.2,
+      "entry_odds": 2.2
     },
     {
       "match_id": "401885395",
@@ -4108,7 +4200,7 @@
       "trading_day": "2026-11-07",
       "minute_detected": 61,
       "score_at_entry": "0-0",
-      "odds_entry": null,
+      "odds_entry": 2.2,
       "simulated_odds": 1.8,
       "odds_source": "SIMULATED_DEFAULT",
       "stake": 50000,
@@ -4175,7 +4267,9 @@
       "verification_status": "VERIFIED_OFFICIAL_FINAL",
       "revision_history": [],
       "audit_explanation": "Pertandingan 401885395 masuk pada menit 61' dengan skor 0-0. Status resmi mencapai Final dengan skor akhir waktu normal 1-0. Minimal 1 gol tercipta setelah waktu entry sehingga dinyatakan WIN.",
-      "audit_passed": true
+      "audit_passed": true,
+      "odds": 2.2,
+      "entry_odds": 2.2
     },
     {
       "match_id": "401875554",
@@ -4193,7 +4287,7 @@
       "trading_day": "2026-11-07",
       "minute_detected": 60,
       "score_at_entry": "0-0",
-      "odds_entry": null,
+      "odds_entry": 2.2,
       "simulated_odds": 1.8,
       "odds_source": "SIMULATED_DEFAULT",
       "stake": 50000,
@@ -4260,7 +4354,9 @@
       "verification_status": "VERIFIED_OFFICIAL_FINAL",
       "revision_history": [],
       "audit_explanation": "Pertandingan 401875554 masuk pada menit 60' dengan skor 0-0. Status resmi mencapai Final dengan skor akhir waktu normal 0-1. Minimal 1 gol tercipta setelah waktu entry sehingga dinyatakan WIN.",
-      "audit_passed": true
+      "audit_passed": true,
+      "odds": 2.2,
+      "entry_odds": 2.2
     },
     {
       "match_id": "401860423",
@@ -4278,7 +4374,7 @@
       "trading_day": "2026-11-07",
       "minute_detected": 64,
       "score_at_entry": "0-0",
-      "odds_entry": null,
+      "odds_entry": 2.16,
       "simulated_odds": 1.8,
       "odds_source": "SIMULATED_DEFAULT",
       "stake": 50000,
@@ -4385,7 +4481,9 @@
       "verification_status": "VERIFIED_OFFICIAL_FINAL",
       "revision_history": [],
       "audit_explanation": "Pertandingan 401860423 masuk pada menit 64' dengan skor 0-0. Status resmi mencapai Final dengan skor akhir waktu normal 2-1. Minimal 1 gol tercipta setelah waktu entry sehingga dinyatakan WIN.",
-      "audit_passed": true
+      "audit_passed": true,
+      "odds": 2.16,
+      "entry_odds": 2.16
     },
     {
       "match_id": "401876411",
@@ -4403,7 +4501,7 @@
       "trading_day": "2026-11-07",
       "minute_detected": 61,
       "score_at_entry": "0-0",
-      "odds_entry": null,
+      "odds_entry": 2.2,
       "simulated_odds": 1.8,
       "odds_source": "SIMULATED_DEFAULT",
       "stake": 50000,
@@ -4470,7 +4568,9 @@
       "verification_status": "VERIFIED_OFFICIAL_FINAL",
       "revision_history": [],
       "audit_explanation": "Pertandingan 401876411 masuk pada menit 61' dengan skor 0-0. Status resmi mencapai Final dengan skor akhir waktu normal 0-1. Minimal 1 gol tercipta setelah waktu entry sehingga dinyatakan WIN.",
-      "audit_passed": true
+      "audit_passed": true,
+      "odds": 2.2,
+      "entry_odds": 2.2
     },
     {
       "match_id": "401882811",
@@ -4488,7 +4588,7 @@
       "trading_day": "2026-11-07",
       "minute_detected": 61,
       "score_at_entry": "0-0",
-      "odds_entry": null,
+      "odds_entry": 2.2,
       "simulated_odds": 1.8,
       "odds_source": "SIMULATED_DEFAULT",
       "stake": 50000,
@@ -4566,7 +4666,9 @@
       "verification_status": "VERIFIED_OFFICIAL_FINAL",
       "revision_history": [],
       "audit_explanation": "Pertandingan 401882811 masuk pada menit 61' dengan skor 0-0. Status resmi mencapai Final dengan skor akhir waktu normal 1-1. Minimal 1 gol tercipta setelah waktu entry sehingga dinyatakan WIN.",
-      "audit_passed": true
+      "audit_passed": true,
+      "odds": 2.2,
+      "entry_odds": 2.2
     },
     {
       "match_id": "401932976",
@@ -4584,7 +4686,7 @@
       "trading_day": "2026-11-07",
       "minute_detected": 60,
       "score_at_entry": "0-0",
-      "odds_entry": null,
+      "odds_entry": 1.72,
       "simulated_odds": 1.8,
       "odds_source": "SIMULATED_DEFAULT",
       "stake": 50000,
@@ -4630,7 +4732,9 @@
       "verification_status": "VERIFIED_REGULATION_LINESCORE",
       "revision_history": [],
       "audit_explanation": "Pertandingan 401932976 masuk pada menit 60' dengan skor 0-0. Hingga status resmi Extra Time, skor akhir waktu normal tetap 0-0 (tidak ada gol setelah entry) sehingga dinyatakan LOSE.",
-      "audit_passed": true
+      "audit_passed": true,
+      "odds": 1.72,
+      "entry_odds": 1.72
     },
     {
       "match_id": "401899553",
@@ -4648,7 +4752,7 @@
       "trading_day": "2026-11-07",
       "minute_detected": 62,
       "score_at_entry": "0-0",
-      "odds_entry": null,
+      "odds_entry": 2.2,
       "simulated_odds": 1.8,
       "odds_source": "SIMULATED_DEFAULT",
       "stake": 50000,
@@ -4694,7 +4798,9 @@
       "verification_status": "VERIFIED_OFFICIAL_FINAL",
       "revision_history": [],
       "audit_explanation": "Pertandingan 401899553 masuk pada menit 62' dengan skor 0-0. Hingga status resmi Final, skor akhir waktu normal tetap 0-0 (tidak ada gol setelah entry) sehingga dinyatakan LOSE.",
-      "audit_passed": true
+      "audit_passed": true,
+      "odds": 2.2,
+      "entry_odds": 2.2
     },
     {
       "match_id": "401875857",
@@ -4712,7 +4818,7 @@
       "trading_day": "2026-11-07",
       "minute_detected": 62,
       "score_at_entry": "0-0",
-      "odds_entry": null,
+      "odds_entry": 2.2,
       "simulated_odds": 1.8,
       "odds_source": "SIMULATED_DEFAULT",
       "stake": 50000,
@@ -4790,7 +4896,9 @@
       "verification_status": "VERIFIED_OFFICIAL_FINAL",
       "revision_history": [],
       "audit_explanation": "Pertandingan 401875857 masuk pada menit 62' dengan skor 0-0. Status resmi mencapai Final dengan skor akhir waktu normal 1-1. Minimal 1 gol tercipta setelah waktu entry sehingga dinyatakan WIN.",
-      "audit_passed": true
+      "audit_passed": true,
+      "odds": 2.2,
+      "entry_odds": 2.2
     },
     {
       "match_id": "401931092",
@@ -4808,7 +4916,7 @@
       "trading_day": "2026-11-07",
       "minute_detected": 63,
       "score_at_entry": "0-0",
-      "odds_entry": null,
+      "odds_entry": 2.16,
       "simulated_odds": 1.8,
       "odds_source": "SIMULATED_DEFAULT",
       "stake": 50000,
@@ -4866,7 +4974,9 @@
       "verification_status": "VERIFIED_OFFICIAL_FINAL",
       "revision_history": [],
       "audit_explanation": "Pertandingan 401931092 masuk pada menit 63' dengan skor 0-0. Status resmi mencapai Final dengan skor akhir waktu normal 1-0. Minimal 1 gol tercipta setelah waktu entry sehingga dinyatakan WIN.",
-      "audit_passed": true
+      "audit_passed": true,
+      "odds": 2.16,
+      "entry_odds": 2.16
     },
     {
       "match_id": "401882813",
@@ -4884,7 +4994,7 @@
       "trading_day": "2026-11-07",
       "minute_detected": 60,
       "score_at_entry": "0-0",
-      "odds_entry": null,
+      "odds_entry": 2.2,
       "simulated_odds": 1.8,
       "odds_source": "SIMULATED_DEFAULT",
       "stake": 50000,
@@ -4930,7 +5040,9 @@
       "verification_status": "VERIFIED_OFFICIAL_FINAL",
       "revision_history": [],
       "audit_explanation": "Pertandingan 401882813 masuk pada menit 60' dengan skor 0-0. Hingga status resmi Final, skor akhir waktu normal tetap 0-0 (tidak ada gol setelah entry) sehingga dinyatakan LOSE.",
-      "audit_passed": true
+      "audit_passed": true,
+      "odds": 2.2,
+      "entry_odds": 2.2
     },
     {
       "match_id": "401931103",
@@ -4948,7 +5060,7 @@
       "trading_day": "2026-11-07",
       "minute_detected": 63,
       "score_at_entry": "0-0",
-      "odds_entry": null,
+      "odds_entry": 2.16,
       "simulated_odds": 1.8,
       "odds_source": "SIMULATED_DEFAULT",
       "stake": 50000,
@@ -5046,7 +5158,9 @@
       "verification_status": "VERIFIED_OFFICIAL_FINAL",
       "revision_history": [],
       "audit_explanation": "Pertandingan 401931103 masuk pada menit 63' dengan skor 0-0. Status resmi mencapai Final dengan skor akhir waktu normal 3-0. Minimal 1 gol tercipta setelah waktu entry sehingga dinyatakan WIN.",
-      "audit_passed": true
+      "audit_passed": true,
+      "odds": 2.16,
+      "entry_odds": 2.16
     },
     {
       "match_id": "401931101",
@@ -5064,7 +5178,7 @@
       "trading_day": "2026-11-07",
       "minute_detected": 61,
       "score_at_entry": "0-0",
-      "odds_entry": null,
+      "odds_entry": 2.16,
       "simulated_odds": 1.8,
       "odds_source": "SIMULATED_DEFAULT",
       "stake": 50000,
@@ -5122,7 +5236,9 @@
       "verification_status": "VERIFIED_OFFICIAL_FINAL",
       "revision_history": [],
       "audit_explanation": "Pertandingan 401931101 masuk pada menit 61' dengan skor 0-0. Status resmi mencapai Final dengan skor akhir waktu normal 0-1. Minimal 1 gol tercipta setelah waktu entry sehingga dinyatakan WIN.",
-      "audit_passed": true
+      "audit_passed": true,
+      "odds": 2.16,
+      "entry_odds": 2.16
     },
     {
       "match_id": "401882468",
@@ -5140,7 +5256,7 @@
       "trading_day": "2026-11-07",
       "minute_detected": 62,
       "score_at_entry": "0-0",
-      "odds_entry": null,
+      "odds_entry": 1.72,
       "simulated_odds": 1.8,
       "odds_source": "SIMULATED_DEFAULT",
       "stake": 50000,
@@ -5218,7 +5334,9 @@
       "verification_status": "VERIFIED_OFFICIAL_FINAL",
       "revision_history": [],
       "audit_explanation": "Pertandingan 401882468 masuk pada menit 62' dengan skor 0-0. Status resmi mencapai Final dengan skor akhir waktu normal 1-1. Minimal 1 gol tercipta setelah waktu entry sehingga dinyatakan WIN.",
-      "audit_passed": true
+      "audit_passed": true,
+      "odds": 1.72,
+      "entry_odds": 1.72
     },
     {
       "match_id": "401880163",
@@ -5236,7 +5354,7 @@
       "trading_day": "2026-11-07",
       "minute_detected": 61,
       "score_at_entry": "0-0",
-      "odds_entry": null,
+      "odds_entry": 2.2,
       "simulated_odds": 1.8,
       "odds_source": "SIMULATED_DEFAULT",
       "stake": 50000,
@@ -5282,7 +5400,9 @@
       "verification_status": "VERIFIED_OFFICIAL_FINAL",
       "revision_history": [],
       "audit_explanation": "Pertandingan 401880163 masuk pada menit 61' dengan skor 0-0. Hingga status resmi Final, skor akhir waktu normal tetap 0-0 (tidak ada gol setelah entry) sehingga dinyatakan LOSE.",
-      "audit_passed": true
+      "audit_passed": true,
+      "odds": 2.2,
+      "entry_odds": 2.2
     },
     {
       "match_id": "401879241",
@@ -5300,7 +5420,7 @@
       "trading_day": "2026-11-07",
       "minute_detected": 62,
       "score_at_entry": "0-0",
-      "odds_entry": null,
+      "odds_entry": 2.2,
       "simulated_odds": 1.8,
       "odds_source": "SIMULATED_DEFAULT",
       "stake": 50000,
@@ -5378,7 +5498,9 @@
       "verification_status": "VERIFIED_OFFICIAL_FINAL",
       "revision_history": [],
       "audit_explanation": "Pertandingan 401879241 masuk pada menit 62' dengan skor 0-0. Status resmi mencapai Final dengan skor akhir waktu normal 1-1. Minimal 1 gol tercipta setelah waktu entry sehingga dinyatakan WIN.",
-      "audit_passed": true
+      "audit_passed": true,
+      "odds": 2.2,
+      "entry_odds": 2.2
     },
     {
       "match_id": "401878760",
@@ -5396,7 +5518,7 @@
       "trading_day": "2026-11-07",
       "minute_detected": 61,
       "score_at_entry": "0-0",
-      "odds_entry": null,
+      "odds_entry": 2.2,
       "simulated_odds": 1.8,
       "odds_source": "SIMULATED_DEFAULT",
       "stake": 50000,
@@ -5463,7 +5585,9 @@
       "verification_status": "VERIFIED_OFFICIAL_FINAL",
       "revision_history": [],
       "audit_explanation": "Pertandingan 401878760 masuk pada menit 61' dengan skor 0-0. Status resmi mencapai Final dengan skor akhir waktu normal 1-0. Minimal 1 gol tercipta setelah waktu entry sehingga dinyatakan WIN.",
-      "audit_passed": true
+      "audit_passed": true,
+      "odds": 2.2,
+      "entry_odds": 2.2
     },
     {
       "match_id": "401899556",
@@ -5481,7 +5605,7 @@
       "trading_day": "2026-11-07",
       "minute_detected": 62,
       "score_at_entry": "0-0",
-      "odds_entry": null,
+      "odds_entry": 2.2,
       "simulated_odds": 1.8,
       "odds_source": "SIMULATED_DEFAULT",
       "stake": 50000,
@@ -5548,7 +5672,9 @@
       "verification_status": "VERIFIED_OFFICIAL_FINAL",
       "revision_history": [],
       "audit_explanation": "Pertandingan 401899556 masuk pada menit 62' dengan skor 0-0. Status resmi mencapai Final dengan skor akhir waktu normal 1-0. Minimal 1 gol tercipta setelah waktu entry sehingga dinyatakan WIN.",
-      "audit_passed": true
+      "audit_passed": true,
+      "odds": 2.2,
+      "entry_odds": 2.2
     },
     {
       "match_id": "401876699",
@@ -5566,7 +5692,7 @@
       "trading_day": "2026-11-07",
       "minute_detected": 64,
       "score_at_entry": "0-0",
-      "odds_entry": null,
+      "odds_entry": 2.2,
       "simulated_odds": 1.8,
       "odds_source": "SIMULATED_DEFAULT",
       "stake": 50000,
@@ -5633,7 +5759,9 @@
       "verification_status": "VERIFIED_OFFICIAL_FINAL",
       "revision_history": [],
       "audit_explanation": "Pertandingan 401876699 masuk pada menit 64' dengan skor 0-0. Status resmi mencapai Final dengan skor akhir waktu normal 1-0. Minimal 1 gol tercipta setelah waktu entry sehingga dinyatakan WIN.",
-      "audit_passed": true
+      "audit_passed": true,
+      "odds": 2.2,
+      "entry_odds": 2.2
     },
     {
       "match_id": "401878758",
@@ -5651,7 +5779,7 @@
       "trading_day": "2026-11-07",
       "minute_detected": 64,
       "score_at_entry": "0-0",
-      "odds_entry": null,
+      "odds_entry": 2.2,
       "simulated_odds": 1.8,
       "odds_source": "SIMULATED_DEFAULT",
       "stake": 50000,
@@ -5718,7 +5846,9 @@
       "verification_status": "VERIFIED_OFFICIAL_FINAL",
       "revision_history": [],
       "audit_explanation": "Pertandingan 401878758 masuk pada menit 64' dengan skor 0-0. Status resmi mencapai Final dengan skor akhir waktu normal 1-0. Minimal 1 gol tercipta setelah waktu entry sehingga dinyatakan WIN.",
-      "audit_passed": true
+      "audit_passed": true,
+      "odds": 2.2,
+      "entry_odds": 2.2
     },
     {
       "match_id": "401876908",
@@ -5736,7 +5866,7 @@
       "trading_day": "2026-11-07",
       "minute_detected": 63,
       "score_at_entry": "0-0",
-      "odds_entry": null,
+      "odds_entry": 2.2,
       "simulated_odds": 1.8,
       "odds_source": "SIMULATED_DEFAULT",
       "stake": 50000,
@@ -5823,7 +5953,9 @@
       "verification_status": "VERIFIED_OFFICIAL_FINAL",
       "revision_history": [],
       "audit_explanation": "Pertandingan 401876908 masuk pada menit 63' dengan skor 0-0. Status resmi mencapai Final dengan skor akhir waktu normal 0-2. Minimal 1 gol tercipta setelah waktu entry sehingga dinyatakan WIN.",
-      "audit_passed": true
+      "audit_passed": true,
+      "odds": 2.2,
+      "entry_odds": 2.2
     },
     {
       "match_id": "401876910",
@@ -5841,7 +5973,7 @@
       "trading_day": "2026-11-06",
       "minute_detected": 61,
       "score_at_entry": "0-0",
-      "odds_entry": null,
+      "odds_entry": 2.2,
       "simulated_odds": 1.8,
       "odds_source": "SIMULATED_DEFAULT",
       "stake": 50000,
@@ -5908,7 +6040,9 @@
       "verification_status": "VERIFIED_OFFICIAL_FINAL",
       "revision_history": [],
       "audit_explanation": "Pertandingan 401876910 masuk pada menit 61' dengan skor 0-0. Status resmi mencapai Final dengan skor akhir waktu normal 0-1. Minimal 1 gol tercipta setelah waktu entry sehingga dinyatakan WIN.",
-      "audit_passed": true
+      "audit_passed": true,
+      "odds": 2.2,
+      "entry_odds": 2.2
     },
     {
       "match_id": "401929846",
@@ -5926,7 +6060,7 @@
       "trading_day": "2026-11-06",
       "minute_detected": 60,
       "score_at_entry": "0-0",
-      "odds_entry": null,
+      "odds_entry": 1.72,
       "simulated_odds": 1.8,
       "odds_source": "SIMULATED_DEFAULT",
       "stake": 50000,
@@ -5972,7 +6106,9 @@
       "verification_status": "VERIFIED_REGULATION_LINESCORE",
       "revision_history": [],
       "audit_explanation": "Pertandingan 401929846 masuk pada menit 60' dengan skor 0-0. Hingga status resmi Extra Time, skor akhir waktu normal tetap 0-0 (tidak ada gol setelah entry) sehingga dinyatakan LOSE.",
-      "audit_passed": true
+      "audit_passed": true,
+      "odds": 1.72,
+      "entry_odds": 1.72
     },
     {
       "match_id": "401841673",
@@ -5990,7 +6126,7 @@
       "trading_day": "2026-11-06",
       "minute_detected": 62,
       "score_at_entry": "0-0",
-      "odds_entry": null,
+      "odds_entry": 2.2,
       "simulated_odds": 1.8,
       "odds_source": "SIMULATED_DEFAULT",
       "stake": 50000,
@@ -6075,7 +6211,9 @@
       "verification_status": "VERIFIED_OFFICIAL_FINAL",
       "revision_history": [],
       "audit_explanation": "Pertandingan 401841673 masuk pada menit 62' dengan skor 0-0. Status resmi mencapai Final dengan skor akhir waktu normal 1-0. Minimal 1 gol tercipta setelah waktu entry sehingga dinyatakan WIN.",
-      "audit_passed": true
+      "audit_passed": true,
+      "odds": 2.2,
+      "entry_odds": 2.2
     },
     {
       "match_id": "401878613",
@@ -6093,7 +6231,7 @@
       "trading_day": "2026-11-06",
       "minute_detected": 61,
       "score_at_entry": "0-0",
-      "odds_entry": null,
+      "odds_entry": 1.72,
       "simulated_odds": 1.8,
       "odds_source": "SIMULATED_DEFAULT",
       "stake": 50000,
@@ -6139,7 +6277,9 @@
       "verification_status": "VERIFIED_OFFICIAL_FINAL",
       "revision_history": [],
       "audit_explanation": "Pertandingan 401878613 masuk pada menit 61' dengan skor 0-0. Hingga status resmi Final, skor akhir waktu normal tetap 0-0 (tidak ada gol setelah entry) sehingga dinyatakan LOSE.",
-      "audit_passed": true
+      "audit_passed": true,
+      "odds": 1.72,
+      "entry_odds": 1.72
     },
     {
       "match_id": "401929718",
@@ -6157,7 +6297,7 @@
       "trading_day": "2026-11-06",
       "minute_detected": 62,
       "score_at_entry": "0-0",
-      "odds_entry": null,
+      "odds_entry": 1.72,
       "simulated_odds": 1.8,
       "odds_source": "SIMULATED_DEFAULT",
       "stake": 50000,
@@ -6225,7 +6365,9 @@
       "verification_status": "VERIFIED_OFFICIAL_FINAL",
       "revision_history": [],
       "audit_explanation": "Pertandingan 401929718 masuk pada menit 62' dengan skor 0-0. Status resmi mencapai Final dengan skor akhir waktu normal 1-0. Minimal 1 gol tercipta setelah waktu entry sehingga dinyatakan WIN.",
-      "audit_passed": true
+      "audit_passed": true,
+      "odds": 1.72,
+      "entry_odds": 1.72
     },
     {
       "match_id": "401929878",
@@ -6243,7 +6385,7 @@
       "trading_day": "2026-11-06",
       "minute_detected": 63,
       "score_at_entry": "0-0",
-      "odds_entry": null,
+      "odds_entry": 1.72,
       "simulated_odds": 1.8,
       "odds_source": "SIMULATED_DEFAULT",
       "stake": 50000,
@@ -6311,7 +6453,9 @@
       "verification_status": "VERIFIED_OFFICIAL_FINAL",
       "revision_history": [],
       "audit_explanation": "Pertandingan 401929878 masuk pada menit 63' dengan skor 0-0. Status resmi mencapai Final dengan skor akhir waktu normal 1-0. Minimal 1 gol tercipta setelah waktu entry sehingga dinyatakan WIN.",
-      "audit_passed": true
+      "audit_passed": true,
+      "odds": 1.72,
+      "entry_odds": 1.72
     },
     {
       "match_id": "401885399",
@@ -6329,7 +6473,7 @@
       "trading_day": "2026-11-06",
       "minute_detected": 61,
       "score_at_entry": "0-0",
-      "odds_entry": null,
+      "odds_entry": 2.2,
       "simulated_odds": 1.8,
       "odds_source": "SIMULATED_DEFAULT",
       "stake": 50000,
@@ -6387,7 +6531,9 @@
       "verification_status": "VERIFIED_OFFICIAL_FINAL",
       "revision_history": [],
       "audit_explanation": "Pertandingan 401885399 masuk pada menit 61' dengan skor 0-0. Status resmi mencapai Final dengan skor akhir waktu normal 1-0. Minimal 1 gol tercipta setelah waktu entry sehingga dinyatakan WIN.",
-      "audit_passed": true
+      "audit_passed": true,
+      "odds": 2.2,
+      "entry_odds": 2.2
     },
     {
       "match_id": "401931338",
@@ -6405,7 +6551,7 @@
       "trading_day": "2026-11-06",
       "minute_detected": 61,
       "score_at_entry": "0-0",
-      "odds_entry": null,
+      "odds_entry": 1.72,
       "simulated_odds": 1.8,
       "odds_source": "SIMULATED_DEFAULT",
       "stake": 50000,
@@ -6451,7 +6597,9 @@
       "verification_status": "VERIFIED_OFFICIAL_FINAL",
       "revision_history": [],
       "audit_explanation": "Pertandingan 401931338 masuk pada menit 61' dengan skor 0-0. Hingga status resmi Final, skor akhir waktu normal tetap 0-0 (tidak ada gol setelah entry) sehingga dinyatakan LOSE.",
-      "audit_passed": true
+      "audit_passed": true,
+      "odds": 1.72,
+      "entry_odds": 1.72
     },
     {
       "match_id": "401929721",
@@ -6469,7 +6617,7 @@
       "trading_day": "2026-11-06",
       "minute_detected": 60,
       "score_at_entry": "0-0",
-      "odds_entry": null,
+      "odds_entry": 1.72,
       "simulated_odds": 1.8,
       "odds_source": "SIMULATED_DEFAULT",
       "stake": 50000,
@@ -6537,7 +6685,9 @@
       "verification_status": "VERIFIED_OFFICIAL_FINAL",
       "revision_history": [],
       "audit_explanation": "Pertandingan 401929721 masuk pada menit 60' dengan skor 0-0. Status resmi mencapai Final dengan skor akhir waktu normal 0-1. Minimal 1 gol tercipta setelah waktu entry sehingga dinyatakan WIN.",
-      "audit_passed": true
+      "audit_passed": true,
+      "odds": 1.72,
+      "entry_odds": 1.72
     },
     {
       "match_id": "401882809",
@@ -6555,7 +6705,7 @@
       "trading_day": "2026-11-06",
       "minute_detected": 63,
       "score_at_entry": "0-0",
-      "odds_entry": null,
+      "odds_entry": 2.2,
       "simulated_odds": 1.8,
       "odds_source": "SIMULATED_DEFAULT",
       "stake": 50000,
@@ -6601,7 +6751,9 @@
       "verification_status": "VERIFIED_OFFICIAL_FINAL",
       "revision_history": [],
       "audit_explanation": "Pertandingan 401882809 masuk pada menit 63' dengan skor 0-0. Hingga status resmi Final, skor akhir waktu normal tetap 0-0 (tidak ada gol setelah entry) sehingga dinyatakan LOSE.",
-      "audit_passed": true
+      "audit_passed": true,
+      "odds": 2.2,
+      "entry_odds": 2.2
     },
     {
       "match_id": "401878527",
@@ -6619,7 +6771,7 @@
       "trading_day": "2026-11-06",
       "minute_detected": 63,
       "score_at_entry": "0-0",
-      "odds_entry": null,
+      "odds_entry": 1.72,
       "simulated_odds": 1.8,
       "odds_source": "SIMULATED_DEFAULT",
       "stake": 50000,
@@ -6665,7 +6817,9 @@
       "verification_status": "VERIFIED_OFFICIAL_FINAL",
       "revision_history": [],
       "audit_explanation": "Pertandingan 401878527 masuk pada menit 63' dengan skor 0-0. Hingga status resmi Final, skor akhir waktu normal tetap 0-0 (tidak ada gol setelah entry) sehingga dinyatakan LOSE.",
-      "audit_passed": true
+      "audit_passed": true,
+      "odds": 1.72,
+      "entry_odds": 1.72
     },
     {
       "match_id": "401875864",
@@ -6683,7 +6837,7 @@
       "trading_day": "2026-11-06",
       "minute_detected": 60,
       "score_at_entry": "0-0",
-      "odds_entry": null,
+      "odds_entry": 2.2,
       "simulated_odds": 1.8,
       "odds_source": "SIMULATED_DEFAULT",
       "stake": 50000,
@@ -6729,7 +6883,9 @@
       "verification_status": "VERIFIED_OFFICIAL_FINAL",
       "revision_history": [],
       "audit_explanation": "Pertandingan 401875864 masuk pada menit 60' dengan skor 0-0. Hingga status resmi Final, skor akhir waktu normal tetap 0-0 (tidak ada gol setelah entry) sehingga dinyatakan LOSE.",
-      "audit_passed": true
+      "audit_passed": true,
+      "odds": 2.2,
+      "entry_odds": 2.2
     },
     {
       "match_id": "401876698",
@@ -6747,7 +6903,7 @@
       "trading_day": "2026-11-06",
       "minute_detected": 63,
       "score_at_entry": "0-0",
-      "odds_entry": null,
+      "odds_entry": 2.2,
       "simulated_odds": 1.8,
       "odds_source": "SIMULATED_DEFAULT",
       "stake": 50000,
@@ -6814,7 +6970,9 @@
       "verification_status": "VERIFIED_OFFICIAL_FINAL",
       "revision_history": [],
       "audit_explanation": "Pertandingan 401876698 masuk pada menit 63' dengan skor 0-0. Status resmi mencapai Final dengan skor akhir waktu normal 1-0. Minimal 1 gol tercipta setelah waktu entry sehingga dinyatakan WIN.",
-      "audit_passed": true
+      "audit_passed": true,
+      "odds": 2.2,
+      "entry_odds": 2.2
     },
     {
       "match_id": "401876692",
@@ -6832,7 +6990,7 @@
       "trading_day": "2026-11-06",
       "minute_detected": 61,
       "score_at_entry": "0-0",
-      "odds_entry": null,
+      "odds_entry": 2.2,
       "simulated_odds": 1.8,
       "odds_source": "SIMULATED_DEFAULT",
       "stake": 50000,
@@ -6899,7 +7057,9 @@
       "verification_status": "VERIFIED_OFFICIAL_FINAL",
       "revision_history": [],
       "audit_explanation": "Pertandingan 401876692 masuk pada menit 61' dengan skor 0-0. Status resmi mencapai Final dengan skor akhir waktu normal 1-0. Minimal 1 gol tercipta setelah waktu entry sehingga dinyatakan WIN.",
-      "audit_passed": true
+      "audit_passed": true,
+      "odds": 2.2,
+      "entry_odds": 2.2
     },
     {
       "match_id": "401885058",
@@ -6917,7 +7077,7 @@
       "trading_day": "2026-11-06",
       "minute_detected": 63,
       "score_at_entry": "0-0",
-      "odds_entry": null,
+      "odds_entry": 2.2,
       "simulated_odds": 1.8,
       "odds_source": "SIMULATED_DEFAULT",
       "stake": 50000,
@@ -6963,7 +7123,9 @@
       "verification_status": "VERIFIED_OFFICIAL_FINAL",
       "revision_history": [],
       "audit_explanation": "Pertandingan 401885058 masuk pada menit 63' dengan skor 0-0. Hingga status resmi Final, skor akhir waktu normal tetap 0-0 (tidak ada gol setelah entry) sehingga dinyatakan LOSE.",
-      "audit_passed": true
+      "audit_passed": true,
+      "odds": 2.2,
+      "entry_odds": 2.2
     },
     {
       "match_id": "401879812",
@@ -6981,7 +7143,7 @@
       "trading_day": "2026-11-06",
       "minute_detected": 63,
       "score_at_entry": "0-0",
-      "odds_entry": null,
+      "odds_entry": 1.72,
       "simulated_odds": 1.8,
       "odds_source": "SIMULATED_DEFAULT",
       "stake": 50000,
@@ -7048,7 +7210,9 @@
       "verification_status": "VERIFIED_OFFICIAL_FINAL",
       "revision_history": [],
       "audit_explanation": "Pertandingan 401879812 masuk pada menit 63' dengan skor 0-0. Status resmi mencapai Final dengan skor akhir waktu normal 0-1. Minimal 1 gol tercipta setelah waktu entry sehingga dinyatakan WIN.",
-      "audit_passed": true
+      "audit_passed": true,
+      "odds": 1.72,
+      "entry_odds": 1.72
     },
     {
       "match_id": "401931854",
@@ -7066,7 +7230,7 @@
       "trading_day": "2026-11-06",
       "minute_detected": 62,
       "score_at_entry": "0-0",
-      "odds_entry": null,
+      "odds_entry": 2.2,
       "simulated_odds": 1.8,
       "odds_source": "SIMULATED_DEFAULT",
       "stake": 50000,
@@ -7133,7 +7297,9 @@
       "verification_status": "VERIFIED_OFFICIAL_FINAL",
       "revision_history": [],
       "audit_explanation": "Pertandingan 401931854 masuk pada menit 62' dengan skor 0-0. Status resmi mencapai Final dengan skor akhir waktu normal 1-0. Minimal 1 gol tercipta setelah waktu entry sehingga dinyatakan WIN.",
-      "audit_passed": true
+      "audit_passed": true,
+      "odds": 2.2,
+      "entry_odds": 2.2
     },
     {
       "match_id": "401886864",
@@ -7151,7 +7317,7 @@
       "trading_day": "2026-11-05",
       "minute_detected": 62,
       "score_at_entry": "0-0",
-      "odds_entry": null,
+      "odds_entry": 1.72,
       "simulated_odds": 1.8,
       "odds_source": "SIMULATED_DEFAULT",
       "stake": 50000,
@@ -7197,7 +7363,9 @@
       "verification_status": "VERIFIED_OFFICIAL_FINAL",
       "revision_history": [],
       "audit_explanation": "Pertandingan 401886864 masuk pada menit 62' dengan skor 0-0. Hingga status resmi Final, skor akhir waktu normal tetap 0-0 (tidak ada gol setelah entry) sehingga dinyatakan LOSE.",
-      "audit_passed": true
+      "audit_passed": true,
+      "odds": 1.72,
+      "entry_odds": 1.72
     },
     {
       "match_id": "401926715",
@@ -7215,7 +7383,7 @@
       "trading_day": "2026-11-05",
       "minute_detected": 62,
       "score_at_entry": "0-0",
-      "odds_entry": null,
+      "odds_entry": 1.72,
       "simulated_odds": 1.8,
       "odds_source": "SIMULATED_DEFAULT",
       "stake": 50000,
@@ -7261,7 +7429,9 @@
       "verification_status": "VERIFIED_OFFICIAL_FINAL",
       "revision_history": [],
       "audit_explanation": "Pertandingan 401926715 masuk pada menit 62' dengan skor 0-0. Hingga status resmi Final, skor akhir waktu normal tetap 0-0 (tidak ada gol setelah entry) sehingga dinyatakan LOSE.",
-      "audit_passed": true
+      "audit_passed": true,
+      "odds": 1.72,
+      "entry_odds": 1.72
     },
     {
       "match_id": "401889758",
@@ -7279,7 +7449,7 @@
       "trading_day": "2026-11-05",
       "minute_detected": 62,
       "score_at_entry": "0-0",
-      "odds_entry": null,
+      "odds_entry": 1.72,
       "simulated_odds": 1.8,
       "odds_source": "SIMULATED_DEFAULT",
       "stake": 50000,
@@ -7325,7 +7495,9 @@
       "verification_status": "VERIFIED_OFFICIAL_FINAL",
       "revision_history": [],
       "audit_explanation": "Pertandingan 401889758 masuk pada menit 62' dengan skor 0-0. Hingga status resmi Final, skor akhir waktu normal tetap 0-0 (tidak ada gol setelah entry) sehingga dinyatakan LOSE.",
-      "audit_passed": true
+      "audit_passed": true,
+      "odds": 1.72,
+      "entry_odds": 1.72
     },
     {
       "match_id": "401898885",
@@ -7343,7 +7515,7 @@
       "trading_day": "2026-11-05",
       "minute_detected": 60,
       "score_at_entry": "0-0",
-      "odds_entry": null,
+      "odds_entry": 1.72,
       "simulated_odds": 1.8,
       "odds_source": "SIMULATED_DEFAULT",
       "stake": 50000,
@@ -7432,7 +7604,9 @@
       "verification_status": "VERIFIED_OFFICIAL_FINAL",
       "revision_history": [],
       "audit_explanation": "Pertandingan 401898885 masuk pada menit 60' dengan skor 0-0. Status resmi mencapai Final dengan skor akhir waktu normal 1-1. Minimal 1 gol tercipta setelah waktu entry sehingga dinyatakan WIN.",
-      "audit_passed": true
+      "audit_passed": true,
+      "odds": 1.72,
+      "entry_odds": 1.72
     },
     {
       "match_id": "401924349",
@@ -7450,7 +7624,7 @@
       "trading_day": "2026-11-05",
       "minute_detected": 62,
       "score_at_entry": "0-0",
-      "odds_entry": null,
+      "odds_entry": 1.72,
       "simulated_odds": 1.8,
       "odds_source": "SIMULATED_DEFAULT",
       "stake": 50000,
@@ -7559,7 +7733,9 @@
       "verification_status": "VERIFIED_OFFICIAL_FINAL",
       "revision_history": [],
       "audit_explanation": "Pertandingan 401924349 masuk pada menit 62' dengan skor 0-0. Status resmi mencapai Final dengan skor akhir waktu normal 0-4. Minimal 1 gol tercipta setelah waktu entry sehingga dinyatakan WIN.",
-      "audit_passed": true
+      "audit_passed": true,
+      "odds": 1.72,
+      "entry_odds": 1.72
     },
     {
       "match_id": "401929865",
@@ -7577,7 +7753,7 @@
       "trading_day": "2026-11-05",
       "minute_detected": 61,
       "score_at_entry": "0-0",
-      "odds_entry": null,
+      "odds_entry": 1.72,
       "simulated_odds": 1.8,
       "odds_source": "SIMULATED_DEFAULT",
       "stake": 50000,
@@ -7623,7 +7799,9 @@
       "verification_status": "VERIFIED_REGULATION_LINESCORE",
       "revision_history": [],
       "audit_explanation": "Pertandingan 401929865 masuk pada menit 61' dengan skor 0-0. Hingga status resmi Extra Time, skor akhir waktu normal tetap 0-0 (tidak ada gol setelah entry) sehingga dinyatakan LOSE.",
-      "audit_passed": true
+      "audit_passed": true,
+      "odds": 1.72,
+      "entry_odds": 1.72
     },
     {
       "match_id": "401915533",
@@ -7641,7 +7819,7 @@
       "trading_day": "2026-11-05",
       "minute_detected": 62,
       "score_at_entry": "0-0",
-      "odds_entry": null,
+      "odds_entry": 2.2,
       "simulated_odds": 1.8,
       "odds_source": "SIMULATED_DEFAULT",
       "stake": 50000,
@@ -7708,7 +7886,9 @@
       "verification_status": "VERIFIED_OFFICIAL_FINAL",
       "revision_history": [],
       "audit_explanation": "Pertandingan 401915533 masuk pada menit 62' dengan skor 0-0. Status resmi mencapai Final dengan skor akhir waktu normal 0-1. Minimal 1 gol tercipta setelah waktu entry sehingga dinyatakan WIN.",
-      "audit_passed": true
+      "audit_passed": true,
+      "odds": 2.2,
+      "entry_odds": 2.2
     },
     {
       "match_id": "401929922",
@@ -7726,7 +7906,7 @@
       "trading_day": "2026-11-05",
       "minute_detected": 62,
       "score_at_entry": "0-0",
-      "odds_entry": null,
+      "odds_entry": 1.72,
       "simulated_odds": 1.8,
       "odds_source": "SIMULATED_DEFAULT",
       "stake": 50000,
@@ -7794,7 +7974,9 @@
       "verification_status": "VERIFIED_OFFICIAL_FINAL",
       "revision_history": [],
       "audit_explanation": "Pertandingan 401929922 masuk pada menit 62' dengan skor 0-0. Status resmi mencapai Final dengan skor akhir waktu normal 0-1. Minimal 1 gol tercipta setelah waktu entry sehingga dinyatakan WIN.",
-      "audit_passed": true
+      "audit_passed": true,
+      "odds": 1.72,
+      "entry_odds": 1.72
     },
     {
       "match_id": "401901051",
@@ -7812,7 +7994,7 @@
       "trading_day": "2026-11-05",
       "minute_detected": 63,
       "score_at_entry": "0-0",
-      "odds_entry": null,
+      "odds_entry": 1.72,
       "simulated_odds": 1.8,
       "odds_source": "SIMULATED_DEFAULT",
       "stake": 50000,
@@ -7858,7 +8040,9 @@
       "verification_status": "VERIFIED_OFFICIAL_FINAL",
       "revision_history": [],
       "audit_explanation": "Pertandingan 401901051 masuk pada menit 63' dengan skor 0-0. Hingga status resmi Final, skor akhir waktu normal tetap 0-0 (tidak ada gol setelah entry) sehingga dinyatakan LOSE.",
-      "audit_passed": true
+      "audit_passed": true,
+      "odds": 1.72,
+      "entry_odds": 1.72
     },
     {
       "match_id": "401915831",
@@ -7876,7 +8060,7 @@
       "trading_day": "2026-11-05",
       "minute_detected": 62,
       "score_at_entry": "0-0",
-      "odds_entry": null,
+      "odds_entry": 2.2,
       "simulated_odds": 1.8,
       "odds_source": "SIMULATED_DEFAULT",
       "stake": 50000,
@@ -7922,7 +8106,9 @@
       "verification_status": "VERIFIED_OFFICIAL_FINAL",
       "revision_history": [],
       "audit_explanation": "Pertandingan 401915831 masuk pada menit 62' dengan skor 0-0. Hingga status resmi Final, skor akhir waktu normal tetap 0-0 (tidak ada gol setelah entry) sehingga dinyatakan LOSE.",
-      "audit_passed": true
+      "audit_passed": true,
+      "odds": 2.2,
+      "entry_odds": 2.2
     },
     {
       "match_id": "401915827",
@@ -7940,7 +8126,7 @@
       "trading_day": "2026-11-05",
       "minute_detected": 60,
       "score_at_entry": "0-0",
-      "odds_entry": null,
+      "odds_entry": 2.2,
       "simulated_odds": 1.8,
       "odds_source": "SIMULATED_DEFAULT",
       "stake": 50000,
@@ -8047,7 +8233,9 @@
       "verification_status": "VERIFIED_OFFICIAL_FINAL",
       "revision_history": [],
       "audit_explanation": "Pertandingan 401915827 masuk pada menit 60' dengan skor 0-0. Status resmi mencapai Final dengan skor akhir waktu normal 2-1. Minimal 1 gol tercipta setelah waktu entry sehingga dinyatakan WIN.",
-      "audit_passed": true
+      "audit_passed": true,
+      "odds": 2.2,
+      "entry_odds": 2.2
     },
     {
       "match_id": "401915826",
@@ -8065,7 +8253,7 @@
       "trading_day": "2026-11-05",
       "minute_detected": 62,
       "score_at_entry": "0-0",
-      "odds_entry": null,
+      "odds_entry": 2.2,
       "simulated_odds": 1.8,
       "odds_source": "SIMULATED_DEFAULT",
       "stake": 50000,
@@ -8111,7 +8299,9 @@
       "verification_status": "VERIFIED_OFFICIAL_FINAL",
       "revision_history": [],
       "audit_explanation": "Pertandingan 401915826 masuk pada menit 62' dengan skor 0-0. Hingga status resmi Final, skor akhir waktu normal tetap 0-0 (tidak ada gol setelah entry) sehingga dinyatakan LOSE.",
-      "audit_passed": true
+      "audit_passed": true,
+      "odds": 2.2,
+      "entry_odds": 2.2
     },
     {
       "match_id": "401915742",
@@ -8129,7 +8319,7 @@
       "trading_day": "2026-11-05",
       "minute_detected": 63,
       "score_at_entry": "0-0",
-      "odds_entry": null,
+      "odds_entry": 2.2,
       "simulated_odds": 1.8,
       "odds_source": "SIMULATED_DEFAULT",
       "stake": 50000,
@@ -8196,7 +8386,9 @@
       "verification_status": "VERIFIED_OFFICIAL_FINAL",
       "revision_history": [],
       "audit_explanation": "Pertandingan 401915742 masuk pada menit 63' dengan skor 0-0. Status resmi mencapai Final dengan skor akhir waktu normal 1-0. Minimal 1 gol tercipta setelah waktu entry sehingga dinyatakan WIN.",
-      "audit_passed": true
+      "audit_passed": true,
+      "odds": 2.2,
+      "entry_odds": 2.2
     },
     {
       "match_id": "401915536",
@@ -8214,7 +8406,7 @@
       "trading_day": "2026-11-05",
       "minute_detected": 62,
       "score_at_entry": "0-0",
-      "odds_entry": null,
+      "odds_entry": 2.2,
       "simulated_odds": 1.8,
       "odds_source": "SIMULATED_DEFAULT",
       "stake": 50000,
@@ -8281,7 +8473,9 @@
       "verification_status": "VERIFIED_OFFICIAL_FINAL",
       "revision_history": [],
       "audit_explanation": "Pertandingan 401915536 masuk pada menit 62' dengan skor 0-0. Status resmi mencapai Final dengan skor akhir waktu normal 1-0. Minimal 1 gol tercipta setelah waktu entry sehingga dinyatakan WIN.",
-      "audit_passed": true
+      "audit_passed": true,
+      "odds": 2.2,
+      "entry_odds": 2.2
     },
     {
       "match_id": "401877910",
@@ -8299,7 +8493,7 @@
       "trading_day": "2026-11-04",
       "minute_detected": 62,
       "score_at_entry": "0-0",
-      "odds_entry": null,
+      "odds_entry": 1.72,
       "simulated_odds": 1.8,
       "odds_source": "SIMULATED_DEFAULT",
       "stake": 50000,
@@ -8345,7 +8539,9 @@
       "verification_status": "VERIFIED_OFFICIAL_FINAL",
       "revision_history": [],
       "audit_explanation": "Pertandingan 401877910 masuk pada menit 62' dengan skor 0-0. Hingga status resmi Final, skor akhir waktu normal tetap 0-0 (tidak ada gol setelah entry) sehingga dinyatakan LOSE.",
-      "audit_passed": true
+      "audit_passed": true,
+      "odds": 1.72,
+      "entry_odds": 1.72
     },
     {
       "match_id": "401877959",
@@ -8363,7 +8559,7 @@
       "trading_day": "2026-11-04",
       "minute_detected": 62,
       "score_at_entry": "0-0",
-      "odds_entry": null,
+      "odds_entry": 1.72,
       "simulated_odds": 1.8,
       "odds_source": "SIMULATED_DEFAULT",
       "stake": 50000,
@@ -8430,7 +8626,9 @@
       "verification_status": "VERIFIED_OFFICIAL_FINAL",
       "revision_history": [],
       "audit_explanation": "Pertandingan 401877959 masuk pada menit 62' dengan skor 0-0. Status resmi mencapai Final dengan skor akhir waktu normal 1-0. Minimal 1 gol tercipta setelah waktu entry sehingga dinyatakan WIN.",
-      "audit_passed": true
+      "audit_passed": true,
+      "odds": 1.72,
+      "entry_odds": 1.72
     },
     {
       "match_id": "401841298",
@@ -8448,7 +8646,7 @@
       "trading_day": "2026-11-04",
       "minute_detected": 61,
       "score_at_entry": "0-0",
-      "odds_entry": null,
+      "odds_entry": 2.2,
       "simulated_odds": 1.8,
       "odds_source": "SIMULATED_DEFAULT",
       "stake": 50000,
@@ -8494,7 +8692,9 @@
       "verification_status": "VERIFIED_OFFICIAL_FINAL",
       "revision_history": [],
       "audit_explanation": "Pertandingan 401841298 masuk pada menit 61' dengan skor 0-0. Hingga status resmi Final, skor akhir waktu normal tetap 0-0 (tidak ada gol setelah entry) sehingga dinyatakan LOSE.",
-      "audit_passed": true
+      "audit_passed": true,
+      "odds": 2.2,
+      "entry_odds": 2.2
     },
     {
       "match_id": "401929726",
@@ -8512,7 +8712,7 @@
       "trading_day": "2026-11-04",
       "minute_detected": 60,
       "score_at_entry": "0-0",
-      "odds_entry": null,
+      "odds_entry": 1.72,
       "simulated_odds": 1.8,
       "odds_source": "SIMULATED_DEFAULT",
       "stake": 50000,
@@ -8601,7 +8801,9 @@
       "verification_status": "VERIFIED_REGULATION_LINESCORE",
       "revision_history": [],
       "audit_explanation": "Pertandingan 401929726 masuk pada menit 60' dengan skor 0-0. Status resmi mencapai Extra Time dengan skor akhir waktu normal 1-1. Minimal 1 gol tercipta setelah waktu entry sehingga dinyatakan WIN.",
-      "audit_passed": true
+      "audit_passed": true,
+      "odds": 1.72,
+      "entry_odds": 1.72
     },
     {
       "match_id": "401888567",
@@ -8619,7 +8821,7 @@
       "trading_day": "2026-11-04",
       "minute_detected": 60,
       "score_at_entry": "0-0",
-      "odds_entry": null,
+      "odds_entry": 1.72,
       "simulated_odds": 1.8,
       "odds_source": "SIMULATED_DEFAULT",
       "stake": 50000,
@@ -8677,7 +8879,9 @@
       "verification_status": "VERIFIED_OFFICIAL_FINAL",
       "revision_history": [],
       "audit_explanation": "Pertandingan 401888567 masuk pada menit 60' dengan skor 0-0. Status resmi mencapai Final dengan skor akhir waktu normal 0-1. Minimal 1 gol tercipta setelah waktu entry sehingga dinyatakan WIN.",
-      "audit_passed": true
+      "audit_passed": true,
+      "odds": 1.72,
+      "entry_odds": 1.72
     },
     {
       "match_id": "401926719",
@@ -8695,7 +8899,7 @@
       "trading_day": "2026-11-04",
       "minute_detected": 62,
       "score_at_entry": "0-0",
-      "odds_entry": null,
+      "odds_entry": 1.72,
       "simulated_odds": 1.8,
       "odds_source": "SIMULATED_DEFAULT",
       "stake": 50000,
@@ -8741,7 +8945,9 @@
       "verification_status": "VERIFIED_OFFICIAL_FINAL",
       "revision_history": [],
       "audit_explanation": "Pertandingan 401926719 masuk pada menit 62' dengan skor 0-0. Hingga status resmi Final, skor akhir waktu normal tetap 0-0 (tidak ada gol setelah entry) sehingga dinyatakan LOSE.",
-      "audit_passed": true
+      "audit_passed": true,
+      "odds": 1.72,
+      "entry_odds": 1.72
     },
     {
       "match_id": "401880891",
@@ -8759,7 +8965,7 @@
       "trading_day": "2026-11-04",
       "minute_detected": 63,
       "score_at_entry": "0-0",
-      "odds_entry": null,
+      "odds_entry": 2.2,
       "simulated_odds": 1.8,
       "odds_source": "SIMULATED_DEFAULT",
       "stake": 50000,
@@ -8846,7 +9052,9 @@
       "verification_status": "VERIFIED_OFFICIAL_FINAL",
       "revision_history": [],
       "audit_explanation": "Pertandingan 401880891 masuk pada menit 63' dengan skor 0-0. Status resmi mencapai Final dengan skor akhir waktu normal 2-0. Minimal 1 gol tercipta setelah waktu entry sehingga dinyatakan WIN.",
-      "audit_passed": true
+      "audit_passed": true,
+      "odds": 2.2,
+      "entry_odds": 2.2
     },
     {
       "match_id": "401880173",
@@ -8864,7 +9072,7 @@
       "trading_day": "2026-11-04",
       "minute_detected": 63,
       "score_at_entry": "0-0",
-      "odds_entry": null,
+      "odds_entry": 2.2,
       "simulated_odds": 1.8,
       "odds_source": "SIMULATED_DEFAULT",
       "stake": 50000,
@@ -8951,7 +9159,9 @@
       "verification_status": "VERIFIED_OFFICIAL_FINAL",
       "revision_history": [],
       "audit_explanation": "Pertandingan 401880173 masuk pada menit 63' dengan skor 0-0. Status resmi mencapai Final dengan skor akhir waktu normal 2-0. Minimal 1 gol tercipta setelah waktu entry sehingga dinyatakan WIN.",
-      "audit_passed": true
+      "audit_passed": true,
+      "odds": 2.2,
+      "entry_odds": 2.2
     },
     {
       "match_id": "401898260",
@@ -8969,7 +9179,7 @@
       "trading_day": "2026-11-04",
       "minute_detected": 61,
       "score_at_entry": "0-0",
-      "odds_entry": null,
+      "odds_entry": 1.72,
       "simulated_odds": 1.8,
       "odds_source": "SIMULATED_DEFAULT",
       "stake": 50000,
@@ -9037,7 +9247,9 @@
       "verification_status": "VERIFIED_OFFICIAL_FINAL",
       "revision_history": [],
       "audit_explanation": "Pertandingan 401898260 masuk pada menit 61' dengan skor 0-0. Status resmi mencapai Final dengan skor akhir waktu normal 0-1. Minimal 1 gol tercipta setelah waktu entry sehingga dinyatakan WIN.",
-      "audit_passed": true
+      "audit_passed": true,
+      "odds": 1.72,
+      "entry_odds": 1.72
     },
     {
       "match_id": "401912763",
@@ -9055,7 +9267,7 @@
       "trading_day": "2026-11-04",
       "minute_detected": 62,
       "score_at_entry": "0-0",
-      "odds_entry": null,
+      "odds_entry": 1.72,
       "simulated_odds": 1.8,
       "odds_source": "SIMULATED_DEFAULT",
       "stake": 50000,
@@ -9153,7 +9365,9 @@
       "verification_status": "VERIFIED_OFFICIAL_FINAL",
       "revision_history": [],
       "audit_explanation": "Pertandingan 401912763 masuk pada menit 62' dengan skor 0-0. Status resmi mencapai Final dengan skor akhir waktu normal 0-3. Minimal 1 gol tercipta setelah waktu entry sehingga dinyatakan WIN.",
-      "audit_passed": true
+      "audit_passed": true,
+      "odds": 1.72,
+      "entry_odds": 1.72
     },
     {
       "match_id": "401912764",
@@ -9171,7 +9385,7 @@
       "trading_day": "2026-11-04",
       "minute_detected": 61,
       "score_at_entry": "0-0",
-      "odds_entry": null,
+      "odds_entry": 1.72,
       "simulated_odds": 1.8,
       "odds_source": "SIMULATED_DEFAULT",
       "stake": 50000,
@@ -9258,7 +9472,9 @@
       "verification_status": "VERIFIED_OFFICIAL_FINAL",
       "revision_history": [],
       "audit_explanation": "Pertandingan 401912764 masuk pada menit 61' dengan skor 0-0. Status resmi mencapai Final dengan skor akhir waktu normal 2-0. Minimal 1 gol tercipta setelah waktu entry sehingga dinyatakan WIN.",
-      "audit_passed": true
+      "audit_passed": true,
+      "odds": 1.72,
+      "entry_odds": 1.72
     },
     {
       "match_id": "401915551",
@@ -9276,7 +9492,7 @@
       "trading_day": "2026-11-04",
       "minute_detected": 64,
       "score_at_entry": "0-0",
-      "odds_entry": null,
+      "odds_entry": 2.2,
       "simulated_odds": 1.8,
       "odds_source": "SIMULATED_DEFAULT",
       "stake": 50000,
@@ -9322,7 +9538,9 @@
       "verification_status": "VERIFIED_OFFICIAL_FINAL",
       "revision_history": [],
       "audit_explanation": "Pertandingan 401915551 masuk pada menit 64' dengan skor 0-0. Hingga status resmi Final, skor akhir waktu normal tetap 0-0 (tidak ada gol setelah entry) sehingga dinyatakan LOSE.",
-      "audit_passed": true
+      "audit_passed": true,
+      "odds": 2.2,
+      "entry_odds": 2.2
     },
     {
       "match_id": "401912767",
@@ -9340,7 +9558,7 @@
       "trading_day": "2026-11-04",
       "minute_detected": 62,
       "score_at_entry": "0-0",
-      "odds_entry": null,
+      "odds_entry": 1.72,
       "simulated_odds": 1.8,
       "odds_source": "SIMULATED_DEFAULT",
       "stake": 50000,
@@ -9407,7 +9625,9 @@
       "verification_status": "VERIFIED_OFFICIAL_FINAL",
       "revision_history": [],
       "audit_explanation": "Pertandingan 401912767 masuk pada menit 62' dengan skor 0-0. Status resmi mencapai Final dengan skor akhir waktu normal 1-0. Minimal 1 gol tercipta setelah waktu entry sehingga dinyatakan WIN.",
-      "audit_passed": true
+      "audit_passed": true,
+      "odds": 1.72,
+      "entry_odds": 1.72
     },
     {
       "match_id": "401912613",
@@ -9425,7 +9645,7 @@
       "trading_day": "2026-11-04",
       "minute_detected": 62,
       "score_at_entry": "0-0",
-      "odds_entry": null,
+      "odds_entry": 2.2,
       "simulated_odds": 1.8,
       "odds_source": "SIMULATED_DEFAULT",
       "stake": 50000,
@@ -9471,7 +9691,9 @@
       "verification_status": "VERIFIED_OFFICIAL_FINAL",
       "revision_history": [],
       "audit_explanation": "Pertandingan 401912613 masuk pada menit 62' dengan skor 0-0. Hingga status resmi Final, skor akhir waktu normal tetap 0-0 (tidak ada gol setelah entry) sehingga dinyatakan LOSE.",
-      "audit_passed": true
+      "audit_passed": true,
+      "odds": 2.2,
+      "entry_odds": 2.2
     },
     {
       "match_id": "401912768",
@@ -9489,7 +9711,7 @@
       "trading_day": "2026-11-04",
       "minute_detected": 63,
       "score_at_entry": "0-0",
-      "odds_entry": null,
+      "odds_entry": 1.72,
       "simulated_odds": 1.8,
       "odds_source": "SIMULATED_DEFAULT",
       "stake": 50000,
@@ -9596,7 +9818,9 @@
       "verification_status": "VERIFIED_OFFICIAL_FINAL",
       "revision_history": [],
       "audit_explanation": "Pertandingan 401912768 masuk pada menit 63' dengan skor 0-0. Status resmi mencapai Final dengan skor akhir waktu normal 3-0. Minimal 1 gol tercipta setelah waktu entry sehingga dinyatakan WIN.",
-      "audit_passed": true
+      "audit_passed": true,
+      "odds": 1.72,
+      "entry_odds": 1.72
     },
     {
       "match_id": "401912769",
@@ -9614,7 +9838,7 @@
       "trading_day": "2026-11-04",
       "minute_detected": 63,
       "score_at_entry": "0-0",
-      "odds_entry": null,
+      "odds_entry": 1.72,
       "simulated_odds": 1.8,
       "odds_source": "SIMULATED_DEFAULT",
       "stake": 50000,
@@ -9721,7 +9945,9 @@
       "verification_status": "VERIFIED_OFFICIAL_FINAL",
       "revision_history": [],
       "audit_explanation": "Pertandingan 401912769 masuk pada menit 63' dengan skor 0-0. Status resmi mencapai Final dengan skor akhir waktu normal 1-2. Minimal 1 gol tercipta setelah waktu entry sehingga dinyatakan WIN.",
-      "audit_passed": true
+      "audit_passed": true,
+      "odds": 1.72,
+      "entry_odds": 1.72
     },
     {
       "match_id": "401886148",
@@ -9739,7 +9965,7 @@
       "trading_day": "2026-11-03",
       "minute_detected": 61,
       "score_at_entry": "0-0",
-      "odds_entry": null,
+      "odds_entry": 1.72,
       "simulated_odds": 1.8,
       "odds_source": "SIMULATED_DEFAULT",
       "stake": 50000,
@@ -9806,7 +10032,9 @@
       "verification_status": "VERIFIED_OFFICIAL_FINAL",
       "revision_history": [],
       "audit_explanation": "Pertandingan 401886148 masuk pada menit 61' dengan skor 0-0. Status resmi mencapai Final dengan skor akhir waktu normal 1-0. Minimal 1 gol tercipta setelah waktu entry sehingga dinyatakan WIN.",
-      "audit_passed": true
+      "audit_passed": true,
+      "odds": 1.72,
+      "entry_odds": 1.72
     },
     {
       "match_id": "401841301",
@@ -9824,7 +10052,7 @@
       "trading_day": "2026-11-03",
       "minute_detected": 61,
       "score_at_entry": "0-0",
-      "odds_entry": null,
+      "odds_entry": 2.2,
       "simulated_odds": 1.8,
       "odds_source": "SIMULATED_DEFAULT",
       "stake": 50000,
@@ -9891,7 +10119,9 @@
       "verification_status": "VERIFIED_OFFICIAL_FINAL",
       "revision_history": [],
       "audit_explanation": "Pertandingan 401841301 masuk pada menit 61' dengan skor 0-0. Status resmi mencapai Final dengan skor akhir waktu normal 1-0. Minimal 1 gol tercipta setelah waktu entry sehingga dinyatakan WIN.",
-      "audit_passed": true
+      "audit_passed": true,
+      "odds": 2.2,
+      "entry_odds": 2.2
     },
     {
       "match_id": "401892259",
@@ -9909,7 +10139,7 @@
       "trading_day": "2026-11-03",
       "minute_detected": 61,
       "score_at_entry": "0-0",
-      "odds_entry": null,
+      "odds_entry": 1.72,
       "simulated_odds": 1.8,
       "odds_source": "SIMULATED_DEFAULT",
       "stake": 50000,
@@ -9955,7 +10185,9 @@
       "verification_status": "VERIFIED_OFFICIAL_FINAL",
       "revision_history": [],
       "audit_explanation": "Pertandingan 401892259 masuk pada menit 61' dengan skor 0-0. Hingga status resmi Final, skor akhir waktu normal tetap 0-0 (tidak ada gol setelah entry) sehingga dinyatakan LOSE.",
-      "audit_passed": true
+      "audit_passed": true,
+      "odds": 1.72,
+      "entry_odds": 1.72
     },
     {
       "match_id": "401877896",
@@ -9973,7 +10205,7 @@
       "trading_day": "2026-11-03",
       "minute_detected": 63,
       "score_at_entry": "0-0",
-      "odds_entry": null,
+      "odds_entry": 1.72,
       "simulated_odds": 1.8,
       "odds_source": "SIMULATED_DEFAULT",
       "stake": 50000,
@@ -10051,7 +10283,9 @@
       "verification_status": "VERIFIED_OFFICIAL_FINAL",
       "revision_history": [],
       "audit_explanation": "Pertandingan 401877896 masuk pada menit 63' dengan skor 0-0. Status resmi mencapai Final dengan skor akhir waktu normal 2-0. Minimal 1 gol tercipta setelah waktu entry sehingga dinyatakan WIN.",
-      "audit_passed": true
+      "audit_passed": true,
+      "odds": 1.72,
+      "entry_odds": 1.72
     },
     {
       "match_id": "401899022",
@@ -10069,7 +10303,7 @@
       "trading_day": "2026-11-03",
       "minute_detected": 61,
       "score_at_entry": "0-0",
-      "odds_entry": null,
+      "odds_entry": 1.72,
       "simulated_odds": 1.8,
       "odds_source": "SIMULATED_DEFAULT",
       "stake": 50000,
@@ -10179,7 +10413,9 @@
       "verification_status": "VERIFIED_OFFICIAL_FINAL",
       "revision_history": [],
       "audit_explanation": "Pertandingan 401899022 masuk pada menit 61' dengan skor 0-0. Status resmi mencapai Final dengan skor akhir waktu normal 2-1. Minimal 1 gol tercipta setelah waktu entry sehingga dinyatakan WIN.",
-      "audit_passed": true
+      "audit_passed": true,
+      "odds": 1.72,
+      "entry_odds": 1.72
     },
     {
       "match_id": "401930972",
@@ -10197,7 +10433,7 @@
       "trading_day": "2026-11-03",
       "minute_detected": 62,
       "score_at_entry": "0-0",
-      "odds_entry": null,
+      "odds_entry": 1.72,
       "simulated_odds": 1.8,
       "odds_source": "SIMULATED_DEFAULT",
       "stake": 50000,
@@ -10284,7 +10520,9 @@
       "verification_status": "VERIFIED_OFFICIAL_FINAL",
       "revision_history": [],
       "audit_explanation": "Pertandingan 401930972 masuk pada menit 62' dengan skor 0-0. Status resmi mencapai Final dengan skor akhir waktu normal 0-2. Minimal 1 gol tercipta setelah waktu entry sehingga dinyatakan WIN.",
-      "audit_passed": true
+      "audit_passed": true,
+      "odds": 1.72,
+      "entry_odds": 1.72
     },
     {
       "match_id": "401888650",
@@ -10302,7 +10540,7 @@
       "trading_day": "2026-11-03",
       "minute_detected": 61,
       "score_at_entry": "0-0",
-      "odds_entry": null,
+      "odds_entry": 1.72,
       "simulated_odds": 1.8,
       "odds_source": "SIMULATED_DEFAULT",
       "stake": 50000,
@@ -10348,7 +10586,9 @@
       "verification_status": "VERIFIED_OFFICIAL_FINAL",
       "revision_history": [],
       "audit_explanation": "Pertandingan 401888650 masuk pada menit 61' dengan skor 0-0. Hingga status resmi Final, skor akhir waktu normal tetap 0-0 (tidak ada gol setelah entry) sehingga dinyatakan LOSE.",
-      "audit_passed": true
+      "audit_passed": true,
+      "odds": 1.72,
+      "entry_odds": 1.72
     },
     {
       "match_id": "401915384",
@@ -10366,7 +10606,7 @@
       "trading_day": "2026-11-03",
       "minute_detected": 62,
       "score_at_entry": "0-0",
-      "odds_entry": null,
+      "odds_entry": 2.2,
       "simulated_odds": 1.8,
       "odds_source": "SIMULATED_DEFAULT",
       "stake": 50000,
@@ -10412,7 +10652,9 @@
       "verification_status": "VERIFIED_OFFICIAL_FINAL",
       "revision_history": [],
       "audit_explanation": "Pertandingan 401915384 masuk pada menit 62' dengan skor 0-0. Hingga status resmi Final, skor akhir waktu normal tetap 0-0 (tidak ada gol setelah entry) sehingga dinyatakan LOSE.",
-      "audit_passed": true
+      "audit_passed": true,
+      "odds": 2.2,
+      "entry_odds": 2.2
     },
     {
       "match_id": "401930421",
@@ -10430,7 +10672,7 @@
       "trading_day": "2026-11-03",
       "minute_detected": 63,
       "score_at_entry": "0-0",
-      "odds_entry": null,
+      "odds_entry": 1.72,
       "simulated_odds": 1.8,
       "odds_source": "SIMULATED_DEFAULT",
       "stake": 50000,
@@ -10497,7 +10739,9 @@
       "verification_status": "VERIFIED_OFFICIAL_FINAL",
       "revision_history": [],
       "audit_explanation": "Pertandingan 401930421 masuk pada menit 63' dengan skor 0-0. Status resmi mencapai Final dengan skor akhir waktu normal 1-0. Minimal 1 gol tercipta setelah waktu entry sehingga dinyatakan WIN.",
-      "audit_passed": true
+      "audit_passed": true,
+      "odds": 1.72,
+      "entry_odds": 1.72
     },
     {
       "match_id": "401930419",
@@ -10515,7 +10759,7 @@
       "trading_day": "2026-11-03",
       "minute_detected": 64,
       "score_at_entry": "0-0",
-      "odds_entry": null,
+      "odds_entry": 1.72,
       "simulated_odds": 1.8,
       "odds_source": "SIMULATED_DEFAULT",
       "stake": 50000,
@@ -10593,7 +10837,9 @@
       "verification_status": "VERIFIED_OFFICIAL_FINAL",
       "revision_history": [],
       "audit_explanation": "Pertandingan 401930419 masuk pada menit 64' dengan skor 0-0. Status resmi mencapai Final dengan skor akhir waktu normal 0-2. Minimal 1 gol tercipta setelah waktu entry sehingga dinyatakan WIN.",
-      "audit_passed": true
+      "audit_passed": true,
+      "odds": 1.72,
+      "entry_odds": 1.72
     },
     {
       "match_id": "401930417",
@@ -10611,7 +10857,7 @@
       "trading_day": "2026-11-03",
       "minute_detected": 64,
       "score_at_entry": "0-0",
-      "odds_entry": null,
+      "odds_entry": 1.72,
       "simulated_odds": 1.8,
       "odds_source": "SIMULATED_DEFAULT",
       "stake": 50000,
@@ -10678,7 +10924,9 @@
       "verification_status": "VERIFIED_OFFICIAL_FINAL",
       "revision_history": [],
       "audit_explanation": "Pertandingan 401930417 masuk pada menit 64' dengan skor 0-0. Status resmi mencapai Final dengan skor akhir waktu normal 1-0. Minimal 1 gol tercipta setelah waktu entry sehingga dinyatakan WIN.",
-      "audit_passed": true
+      "audit_passed": true,
+      "odds": 1.72,
+      "entry_odds": 1.72
     },
     {
       "match_id": "401881340",
@@ -10696,7 +10944,7 @@
       "trading_day": "2026-11-03",
       "minute_detected": 63,
       "score_at_entry": "0-0",
-      "odds_entry": null,
+      "odds_entry": 2.2,
       "simulated_odds": 1.8,
       "odds_source": "SIMULATED_DEFAULT",
       "stake": 50000,
@@ -10763,7 +11011,9 @@
       "verification_status": "VERIFIED_OFFICIAL_FINAL",
       "revision_history": [],
       "audit_explanation": "Pertandingan 401881340 masuk pada menit 63' dengan skor 0-0. Status resmi mencapai Final dengan skor akhir waktu normal 0-1. Minimal 1 gol tercipta setelah waktu entry sehingga dinyatakan WIN.",
-      "audit_passed": true
+      "audit_passed": true,
+      "odds": 2.2,
+      "entry_odds": 2.2
     },
     {
       "match_id": "401880815",
@@ -10781,7 +11031,7 @@
       "trading_day": "2026-11-03",
       "minute_detected": 60,
       "score_at_entry": "0-0",
-      "odds_entry": null,
+      "odds_entry": 2.2,
       "simulated_odds": 1.8,
       "odds_source": "SIMULATED_DEFAULT",
       "stake": 50000,
@@ -10827,7 +11077,9 @@
       "verification_status": "VERIFIED_OFFICIAL_FINAL",
       "revision_history": [],
       "audit_explanation": "Pertandingan 401880815 masuk pada menit 60' dengan skor 0-0. Hingga status resmi Final, skor akhir waktu normal tetap 0-0 (tidak ada gol setelah entry) sehingga dinyatakan LOSE.",
-      "audit_passed": true
+      "audit_passed": true,
+      "odds": 2.2,
+      "entry_odds": 2.2
     },
     {
       "match_id": "401901578",
@@ -10845,7 +11097,7 @@
       "trading_day": "2026-11-03",
       "minute_detected": 60,
       "score_at_entry": "0-0",
-      "odds_entry": null,
+      "odds_entry": 1.72,
       "simulated_odds": 1.8,
       "odds_source": "SIMULATED_DEFAULT",
       "stake": 50000,
@@ -10913,7 +11165,9 @@
       "verification_status": "VERIFIED_OFFICIAL_FINAL",
       "revision_history": [],
       "audit_explanation": "Pertandingan 401901578 masuk pada menit 60' dengan skor 0-0. Status resmi mencapai Final dengan skor akhir waktu normal 1-0. Minimal 1 gol tercipta setelah waktu entry sehingga dinyatakan WIN.",
-      "audit_passed": true
+      "audit_passed": true,
+      "odds": 1.72,
+      "entry_odds": 1.72
     },
     {
       "match_id": "401912607",
@@ -10931,7 +11185,7 @@
       "trading_day": "2026-11-03",
       "minute_detected": 63,
       "score_at_entry": "0-0",
-      "odds_entry": null,
+      "odds_entry": 2.2,
       "simulated_odds": 1.8,
       "odds_source": "SIMULATED_DEFAULT",
       "stake": 50000,
@@ -10998,7 +11252,9 @@
       "verification_status": "VERIFIED_OFFICIAL_FINAL",
       "revision_history": [],
       "audit_explanation": "Pertandingan 401912607 masuk pada menit 63' dengan skor 0-0. Status resmi mencapai Final dengan skor akhir waktu normal 1-0. Minimal 1 gol tercipta setelah waktu entry sehingga dinyatakan WIN.",
-      "audit_passed": true
+      "audit_passed": true,
+      "odds": 2.2,
+      "entry_odds": 2.2
     },
     {
       "match_id": "401912771",
@@ -11016,7 +11272,7 @@
       "trading_day": "2026-11-03",
       "minute_detected": 63,
       "score_at_entry": "0-0",
-      "odds_entry": null,
+      "odds_entry": 1.72,
       "simulated_odds": 1.8,
       "odds_source": "SIMULATED_DEFAULT",
       "stake": 50000,
@@ -11103,7 +11359,9 @@
       "verification_status": "VERIFIED_OFFICIAL_FINAL",
       "revision_history": [],
       "audit_explanation": "Pertandingan 401912771 masuk pada menit 63' dengan skor 0-0. Status resmi mencapai Final dengan skor akhir waktu normal 0-2. Minimal 1 gol tercipta setelah waktu entry sehingga dinyatakan WIN.",
-      "audit_passed": true
+      "audit_passed": true,
+      "odds": 1.72,
+      "entry_odds": 1.72
     },
     {
       "match_id": "401912615",
@@ -11121,7 +11379,7 @@
       "trading_day": "2026-11-03",
       "minute_detected": 62,
       "score_at_entry": "0-0",
-      "odds_entry": null,
+      "odds_entry": 2.2,
       "simulated_odds": 1.8,
       "odds_source": "SIMULATED_DEFAULT",
       "stake": 50000,
@@ -11167,7 +11425,9 @@
       "verification_status": "VERIFIED_OFFICIAL_FINAL",
       "revision_history": [],
       "audit_explanation": "Pertandingan 401912615 masuk pada menit 62' dengan skor 0-0. Hingga status resmi Final, skor akhir waktu normal tetap 0-0 (tidak ada gol setelah entry) sehingga dinyatakan LOSE.",
-      "audit_passed": true
+      "audit_passed": true,
+      "odds": 2.2,
+      "entry_odds": 2.2
     },
     {
       "match_id": "401931236",
@@ -11185,7 +11445,7 @@
       "trading_day": "2026-11-02",
       "minute_detected": 61,
       "score_at_entry": "0-0",
-      "odds_entry": null,
+      "odds_entry": 1.72,
       "simulated_odds": 1.8,
       "odds_source": "SIMULATED_DEFAULT",
       "stake": 50000,
@@ -11231,7 +11491,9 @@
       "verification_status": "VERIFIED_OFFICIAL_FINAL",
       "revision_history": [],
       "audit_explanation": "Pertandingan 401931236 masuk pada menit 61' dengan skor 0-0. Hingga status resmi Final, skor akhir waktu normal tetap 0-0 (tidak ada gol setelah entry) sehingga dinyatakan LOSE.",
-      "audit_passed": true
+      "audit_passed": true,
+      "odds": 1.72,
+      "entry_odds": 1.72
     },
     {
       "match_id": "401877772",
@@ -11249,7 +11511,7 @@
       "trading_day": "2026-11-02",
       "minute_detected": 62,
       "score_at_entry": "0-0",
-      "odds_entry": null,
+      "odds_entry": 1.72,
       "simulated_odds": 1.8,
       "odds_source": "SIMULATED_DEFAULT",
       "stake": 50000,
@@ -11316,7 +11578,9 @@
       "verification_status": "VERIFIED_OFFICIAL_FINAL",
       "revision_history": [],
       "audit_explanation": "Pertandingan 401877772 masuk pada menit 62' dengan skor 0-0. Status resmi mencapai Final dengan skor akhir waktu normal 1-0. Minimal 1 gol tercipta setelah waktu entry sehingga dinyatakan WIN.",
-      "audit_passed": true
+      "audit_passed": true,
+      "odds": 1.72,
+      "entry_odds": 1.72
     },
     {
       "match_id": "401885407",
@@ -11334,7 +11598,7 @@
       "trading_day": "2026-11-02",
       "minute_detected": 63,
       "score_at_entry": "0-0",
-      "odds_entry": null,
+      "odds_entry": 2.2,
       "simulated_odds": 1.8,
       "odds_source": "SIMULATED_DEFAULT",
       "stake": 50000,
@@ -11380,7 +11644,9 @@
       "verification_status": "VERIFIED_OFFICIAL_FINAL",
       "revision_history": [],
       "audit_explanation": "Pertandingan 401885407 masuk pada menit 63' dengan skor 0-0. Hingga status resmi Final, skor akhir waktu normal tetap 0-0 (tidak ada gol setelah entry) sehingga dinyatakan LOSE.",
-      "audit_passed": true
+      "audit_passed": true,
+      "odds": 2.2,
+      "entry_odds": 2.2
     },
     {
       "match_id": "401876419",
@@ -11398,7 +11664,7 @@
       "trading_day": "2026-11-02",
       "minute_detected": 65,
       "score_at_entry": "0-0",
-      "odds_entry": null,
+      "odds_entry": 2.2,
       "simulated_odds": 1.8,
       "odds_source": "SIMULATED_DEFAULT",
       "stake": 50000,
@@ -11476,7 +11742,9 @@
       "verification_status": "VERIFIED_OFFICIAL_FINAL",
       "revision_history": [],
       "audit_explanation": "Pertandingan 401876419 masuk pada menit 65' dengan skor 0-0. Status resmi mencapai Final dengan skor akhir waktu normal 0-2. Minimal 1 gol tercipta setelah waktu entry sehingga dinyatakan WIN.",
-      "audit_passed": true
+      "audit_passed": true,
+      "odds": 2.2,
+      "entry_odds": 2.2
     },
     {
       "match_id": "401875865",
@@ -11494,7 +11762,7 @@
       "trading_day": "2026-11-02",
       "minute_detected": 63,
       "score_at_entry": "0-0",
-      "odds_entry": null,
+      "odds_entry": 2.2,
       "simulated_odds": 1.8,
       "odds_source": "SIMULATED_DEFAULT",
       "stake": 50000,
@@ -11581,7 +11849,9 @@
       "verification_status": "VERIFIED_OFFICIAL_FINAL",
       "revision_history": [],
       "audit_explanation": "Pertandingan 401875865 masuk pada menit 63' dengan skor 0-0. Status resmi mencapai Final dengan skor akhir waktu normal 0-2. Minimal 1 gol tercipta setelah waktu entry sehingga dinyatakan WIN.",
-      "audit_passed": true
+      "audit_passed": true,
+      "odds": 2.2,
+      "entry_odds": 2.2
     },
     {
       "match_id": "401860420",
@@ -11599,7 +11869,7 @@
       "trading_day": "2026-11-02",
       "minute_detected": 60,
       "score_at_entry": "0-0",
-      "odds_entry": null,
+      "odds_entry": 2.16,
       "simulated_odds": 1.8,
       "odds_source": "SIMULATED_DEFAULT",
       "stake": 50000,
@@ -11645,7 +11915,9 @@
       "verification_status": "VERIFIED_OFFICIAL_FINAL",
       "revision_history": [],
       "audit_explanation": "Pertandingan 401860420 masuk pada menit 60' dengan skor 0-0. Hingga status resmi Final, skor akhir waktu normal tetap 0-0 (tidak ada gol setelah entry) sehingga dinyatakan LOSE.",
-      "audit_passed": true
+      "audit_passed": true,
+      "odds": 2.16,
+      "entry_odds": 2.16
     },
     {
       "match_id": "401845164",
@@ -11663,7 +11935,7 @@
       "trading_day": "2026-11-02",
       "minute_detected": 62,
       "score_at_entry": "0-0",
-      "odds_entry": null,
+      "odds_entry": 1.72,
       "simulated_odds": 1.8,
       "odds_source": "SIMULATED_DEFAULT",
       "stake": 50000,
@@ -11730,7 +12002,9 @@
       "verification_status": "VERIFIED_OFFICIAL_FINAL",
       "revision_history": [],
       "audit_explanation": "Pertandingan 401845164 masuk pada menit 62' dengan skor 0-0. Status resmi mencapai Final dengan skor akhir waktu normal 0-1. Minimal 1 gol tercipta setelah waktu entry sehingga dinyatakan WIN.",
-      "audit_passed": true
+      "audit_passed": true,
+      "odds": 1.72,
+      "entry_odds": 1.72
     },
     {
       "match_id": "401844258",
@@ -11748,7 +12022,7 @@
       "trading_day": "2026-11-02",
       "minute_detected": 60,
       "score_at_entry": "0-0",
-      "odds_entry": null,
+      "odds_entry": 2.2,
       "simulated_odds": 1.8,
       "odds_source": "SIMULATED_DEFAULT",
       "stake": 50000,
@@ -11794,7 +12068,9 @@
       "verification_status": "VERIFIED_OFFICIAL_FINAL",
       "revision_history": [],
       "audit_explanation": "Pertandingan 401844258 masuk pada menit 60' dengan skor 0-0. Hingga status resmi Final, skor akhir waktu normal tetap 0-0 (tidak ada gol setelah entry) sehingga dinyatakan LOSE.",
-      "audit_passed": true
+      "audit_passed": true,
+      "odds": 2.2,
+      "entry_odds": 2.2
     },
     {
       "match_id": "401842867",
@@ -11812,7 +12088,7 @@
       "trading_day": "2026-11-02",
       "minute_detected": 62,
       "score_at_entry": "0-0",
-      "odds_entry": null,
+      "odds_entry": 1.72,
       "simulated_odds": 1.8,
       "odds_source": "SIMULATED_DEFAULT",
       "stake": 50000,
@@ -11858,7 +12134,9 @@
       "verification_status": "VERIFIED_OFFICIAL_FINAL",
       "revision_history": [],
       "audit_explanation": "Pertandingan 401842867 masuk pada menit 62' dengan skor 0-0. Hingga status resmi Final, skor akhir waktu normal tetap 0-0 (tidak ada gol setelah entry) sehingga dinyatakan LOSE.",
-      "audit_passed": true
+      "audit_passed": true,
+      "odds": 1.72,
+      "entry_odds": 1.72
     },
     {
       "match_id": "401912630",
@@ -11876,7 +12154,7 @@
       "trading_day": "2026-11-02",
       "minute_detected": 62,
       "score_at_entry": "0-0",
-      "odds_entry": null,
+      "odds_entry": 1.72,
       "simulated_odds": 1.8,
       "odds_source": "SIMULATED_DEFAULT",
       "stake": 50000,
@@ -11922,7 +12200,9 @@
       "verification_status": "VERIFIED_OFFICIAL_FINAL",
       "revision_history": [],
       "audit_explanation": "Pertandingan 401912630 masuk pada menit 62' dengan skor 0-0. Hingga status resmi Final, skor akhir waktu normal tetap 0-0 (tidak ada gol setelah entry) sehingga dinyatakan LOSE.",
-      "audit_passed": true
+      "audit_passed": true,
+      "odds": 1.72,
+      "entry_odds": 1.72
     },
     {
       "match_id": "401886127",
@@ -11940,7 +12220,7 @@
       "trading_day": "2026-11-02",
       "minute_detected": 64,
       "score_at_entry": "0-0",
-      "odds_entry": null,
+      "odds_entry": 1.72,
       "simulated_odds": 1.8,
       "odds_source": "SIMULATED_DEFAULT",
       "stake": 50000,
@@ -12018,7 +12298,9 @@
       "verification_status": "VERIFIED_OFFICIAL_FINAL",
       "revision_history": [],
       "audit_explanation": "Pertandingan 401886127 masuk pada menit 64' dengan skor 0-0. Status resmi mencapai Final dengan skor akhir waktu normal 2-0. Minimal 1 gol tercipta setelah waktu entry sehingga dinyatakan WIN.",
-      "audit_passed": true
+      "audit_passed": true,
+      "odds": 1.72,
+      "entry_odds": 1.72
     },
     {
       "match_id": "401844260",
@@ -12036,7 +12318,7 @@
       "trading_day": "2026-11-02",
       "minute_detected": 60,
       "score_at_entry": "0-0",
-      "odds_entry": null,
+      "odds_entry": 2.2,
       "simulated_odds": 1.8,
       "odds_source": "SIMULATED_DEFAULT",
       "stake": 50000,
@@ -12103,7 +12385,9 @@
       "verification_status": "VERIFIED_OFFICIAL_FINAL",
       "revision_history": [],
       "audit_explanation": "Pertandingan 401844260 masuk pada menit 60' dengan skor 0-0. Status resmi mencapai Final dengan skor akhir waktu normal 1-0. Minimal 1 gol tercipta setelah waktu entry sehingga dinyatakan WIN.",
-      "audit_passed": true
+      "audit_passed": true,
+      "odds": 2.2,
+      "entry_odds": 2.2
     },
     {
       "match_id": "401931675",
@@ -12121,7 +12405,7 @@
       "trading_day": "2026-11-01",
       "minute_detected": 60,
       "score_at_entry": "0-0",
-      "odds_entry": null,
+      "odds_entry": 1.72,
       "simulated_odds": 1.8,
       "odds_source": "SIMULATED_DEFAULT",
       "stake": 50000,
@@ -12188,7 +12472,9 @@
       "verification_status": "VERIFIED_OFFICIAL_FINAL",
       "revision_history": [],
       "audit_explanation": "Pertandingan 401931675 masuk pada menit 60' dengan skor 0-0. Status resmi mencapai Final dengan skor akhir waktu normal 1-0. Minimal 1 gol tercipta setelah waktu entry sehingga dinyatakan WIN.",
-      "audit_passed": true
+      "audit_passed": true,
+      "odds": 1.72,
+      "entry_odds": 1.72
     },
     {
       "match_id": "401876912",
@@ -12206,7 +12492,7 @@
       "trading_day": "2026-11-01",
       "minute_detected": 62,
       "score_at_entry": "0-0",
-      "odds_entry": null,
+      "odds_entry": 2.2,
       "simulated_odds": 1.8,
       "odds_source": "SIMULATED_DEFAULT",
       "stake": 50000,
@@ -12273,7 +12559,9 @@
       "verification_status": "VERIFIED_OFFICIAL_FINAL",
       "revision_history": [],
       "audit_explanation": "Pertandingan 401876912 masuk pada menit 62' dengan skor 0-0. Status resmi mencapai Final dengan skor akhir waktu normal 1-0. Minimal 1 gol tercipta setelah waktu entry sehingga dinyatakan WIN.",
-      "audit_passed": true
+      "audit_passed": true,
+      "odds": 2.2,
+      "entry_odds": 2.2
     },
     {
       "match_id": "401878615",
@@ -12291,7 +12579,7 @@
       "trading_day": "2026-11-01",
       "minute_detected": 64,
       "score_at_entry": "0-0",
-      "odds_entry": null,
+      "odds_entry": 1.72,
       "simulated_odds": 1.8,
       "odds_source": "SIMULATED_DEFAULT",
       "stake": 50000,
@@ -12398,7 +12686,9 @@
       "verification_status": "VERIFIED_OFFICIAL_FINAL",
       "revision_history": [],
       "audit_explanation": "Pertandingan 401878615 masuk pada menit 64' dengan skor 0-0. Status resmi mencapai Final dengan skor akhir waktu normal 3-0. Minimal 1 gol tercipta setelah waktu entry sehingga dinyatakan WIN.",
-      "audit_passed": true
+      "audit_passed": true,
+      "odds": 1.72,
+      "entry_odds": 1.72
     },
     {
       "match_id": "401854096",
@@ -12416,7 +12706,7 @@
       "trading_day": "2026-11-01",
       "minute_detected": 60,
       "score_at_entry": "0-0",
-      "odds_entry": null,
+      "odds_entry": 1.72,
       "simulated_odds": 1.8,
       "odds_source": "SIMULATED_DEFAULT",
       "stake": 50000,
@@ -12474,7 +12764,9 @@
       "verification_status": "VERIFIED_OFFICIAL_FINAL",
       "revision_history": [],
       "audit_explanation": "Pertandingan 401854096 masuk pada menit 60' dengan skor 0-0. Status resmi mencapai Final dengan skor akhir waktu normal 1-0. Minimal 1 gol tercipta setelah waktu entry sehingga dinyatakan WIN.",
-      "audit_passed": true
+      "audit_passed": true,
+      "odds": 1.72,
+      "entry_odds": 1.72
     },
     {
       "match_id": "401854037",
@@ -12492,7 +12784,7 @@
       "trading_day": "2026-11-01",
       "minute_detected": 61,
       "score_at_entry": "0-0",
-      "odds_entry": null,
+      "odds_entry": 1.72,
       "simulated_odds": 1.8,
       "odds_source": "SIMULATED_DEFAULT",
       "stake": 50000,
@@ -12559,7 +12851,9 @@
       "verification_status": "VERIFIED_OFFICIAL_FINAL",
       "revision_history": [],
       "audit_explanation": "Pertandingan 401854037 masuk pada menit 61' dengan skor 0-0. Status resmi mencapai Final dengan skor akhir waktu normal 1-0. Minimal 1 gol tercipta setelah waktu entry sehingga dinyatakan WIN.",
-      "audit_passed": true
+      "audit_passed": true,
+      "odds": 1.72,
+      "entry_odds": 1.72
     },
     {
       "match_id": "401854035",
@@ -12577,7 +12871,7 @@
       "trading_day": "2026-11-01",
       "minute_detected": 60,
       "score_at_entry": "0-0",
-      "odds_entry": null,
+      "odds_entry": 1.72,
       "simulated_odds": 1.8,
       "odds_source": "SIMULATED_DEFAULT",
       "stake": 50000,
@@ -12664,7 +12958,9 @@
       "verification_status": "VERIFIED_OFFICIAL_FINAL",
       "revision_history": [],
       "audit_explanation": "Pertandingan 401854035 masuk pada menit 60' dengan skor 0-0. Status resmi mencapai Final dengan skor akhir waktu normal 2-0. Minimal 1 gol tercipta setelah waktu entry sehingga dinyatakan WIN.",
-      "audit_passed": true
+      "audit_passed": true,
+      "odds": 1.72,
+      "entry_odds": 1.72
     },
     {
       "match_id": "401844248",
@@ -12682,7 +12978,7 @@
       "trading_day": "2026-11-01",
       "minute_detected": 63,
       "score_at_entry": "0-0",
-      "odds_entry": null,
+      "odds_entry": 2.2,
       "simulated_odds": 1.8,
       "odds_source": "SIMULATED_DEFAULT",
       "stake": 50000,
@@ -12728,7 +13024,9 @@
       "verification_status": "VERIFIED_OFFICIAL_FINAL",
       "revision_history": [],
       "audit_explanation": "Pertandingan 401844248 masuk pada menit 63' dengan skor 0-0. Hingga status resmi Final, skor akhir waktu normal tetap 0-0 (tidak ada gol setelah entry) sehingga dinyatakan LOSE.",
-      "audit_passed": true
+      "audit_passed": true,
+      "odds": 2.2,
+      "entry_odds": 2.2
     },
     {
       "match_id": "401874949",
@@ -12746,7 +13044,7 @@
       "trading_day": "2026-11-01",
       "minute_detected": 62,
       "score_at_entry": "0-0",
-      "odds_entry": null,
+      "odds_entry": 1.97,
       "simulated_odds": 1.8,
       "odds_source": "SIMULATED_DEFAULT",
       "stake": 50000,
@@ -12833,7 +13131,9 @@
       "verification_status": "VERIFIED_OFFICIAL_FINAL",
       "revision_history": [],
       "audit_explanation": "Pertandingan 401874949 masuk pada menit 62' dengan skor 0-0. Status resmi mencapai Final dengan skor akhir waktu normal 2-0. Minimal 1 gol tercipta setelah waktu entry sehingga dinyatakan WIN.",
-      "audit_passed": true
+      "audit_passed": true,
+      "odds": 1.97,
+      "entry_odds": 1.97
     },
     {
       "match_id": "401882823",
@@ -12851,7 +13151,7 @@
       "trading_day": "2026-11-01",
       "minute_detected": 61,
       "score_at_entry": "0-0",
-      "odds_entry": null,
+      "odds_entry": 2.2,
       "simulated_odds": 1.8,
       "odds_source": "SIMULATED_DEFAULT",
       "stake": 50000,
@@ -12918,7 +13218,9 @@
       "verification_status": "VERIFIED_OFFICIAL_FINAL",
       "revision_history": [],
       "audit_explanation": "Pertandingan 401882823 masuk pada menit 61' dengan skor 0-0. Status resmi mencapai Final dengan skor akhir waktu normal 0-1. Minimal 1 gol tercipta setelah waktu entry sehingga dinyatakan WIN.",
-      "audit_passed": true
+      "audit_passed": true,
+      "odds": 2.2,
+      "entry_odds": 2.2
     },
     {
       "match_id": "401878954",
@@ -12936,7 +13238,7 @@
       "trading_day": "2026-11-01",
       "minute_detected": 62,
       "score_at_entry": "0-0",
-      "odds_entry": null,
+      "odds_entry": 2.2,
       "simulated_odds": 1.8,
       "odds_source": "SIMULATED_DEFAULT",
       "stake": 50000,
@@ -13014,7 +13316,9 @@
       "verification_status": "VERIFIED_OFFICIAL_FINAL",
       "revision_history": [],
       "audit_explanation": "Pertandingan 401878954 masuk pada menit 62' dengan skor 0-0. Status resmi mencapai Final dengan skor akhir waktu normal 2-0. Minimal 1 gol tercipta setelah waktu entry sehingga dinyatakan WIN.",
-      "audit_passed": true
+      "audit_passed": true,
+      "odds": 2.2,
+      "entry_odds": 2.2
     },
     {
       "match_id": "401885410",
@@ -13032,7 +13336,7 @@
       "trading_day": "2026-11-01",
       "minute_detected": 64,
       "score_at_entry": "0-0",
-      "odds_entry": null,
+      "odds_entry": 2.2,
       "simulated_odds": 1.8,
       "odds_source": "SIMULATED_DEFAULT",
       "stake": 50000,
@@ -13099,7 +13403,9 @@
       "verification_status": "VERIFIED_OFFICIAL_FINAL",
       "revision_history": [],
       "audit_explanation": "Pertandingan 401885410 masuk pada menit 64' dengan skor 0-0. Status resmi mencapai Final dengan skor akhir waktu normal 1-0. Minimal 1 gol tercipta setelah waktu entry sehingga dinyatakan WIN.",
-      "audit_passed": true
+      "audit_passed": true,
+      "odds": 2.2,
+      "entry_odds": 2.2
     },
     {
       "match_id": "401923291",
@@ -13117,7 +13423,7 @@
       "trading_day": "2026-11-01",
       "minute_detected": 63,
       "score_at_entry": "0-0",
-      "odds_entry": null,
+      "odds_entry": 1.72,
       "simulated_odds": 1.8,
       "odds_source": "SIMULATED_DEFAULT",
       "stake": 50000,
@@ -13206,7 +13512,9 @@
       "verification_status": "VERIFIED_REGULATION_LINESCORE",
       "revision_history": [],
       "audit_explanation": "Pertandingan 401923291 masuk pada menit 63' dengan skor 0-0. Status resmi mencapai Penalties dengan skor akhir waktu normal 1-1. Minimal 1 gol tercipta setelah waktu entry sehingga dinyatakan WIN.",
-      "audit_passed": true
+      "audit_passed": true,
+      "odds": 1.72,
+      "entry_odds": 1.72
     },
     {
       "match_id": "401923179",
@@ -13224,7 +13532,7 @@
       "trading_day": "2026-11-01",
       "minute_detected": 64,
       "score_at_entry": "0-0",
-      "odds_entry": null,
+      "odds_entry": 1.72,
       "simulated_odds": 1.8,
       "odds_source": "SIMULATED_DEFAULT",
       "stake": 50000,
@@ -13291,7 +13599,9 @@
       "verification_status": "VERIFIED_OFFICIAL_FINAL",
       "revision_history": [],
       "audit_explanation": "Pertandingan 401923179 masuk pada menit 64' dengan skor 0-0. Status resmi mencapai Final dengan skor akhir waktu normal 1-0. Minimal 1 gol tercipta setelah waktu entry sehingga dinyatakan WIN.",
-      "audit_passed": true
+      "audit_passed": true,
+      "odds": 1.72,
+      "entry_odds": 1.72
     },
     {
       "match_id": "401899569",
@@ -13309,7 +13619,7 @@
       "trading_day": "2026-11-01",
       "minute_detected": 62,
       "score_at_entry": "0-0",
-      "odds_entry": null,
+      "odds_entry": 2.2,
       "simulated_odds": 1.8,
       "odds_source": "SIMULATED_DEFAULT",
       "stake": 50000,
@@ -13355,7 +13665,9 @@
       "verification_status": "VERIFIED_OFFICIAL_FINAL",
       "revision_history": [],
       "audit_explanation": "Pertandingan 401899569 masuk pada menit 62' dengan skor 0-0. Hingga status resmi Final, skor akhir waktu normal tetap 0-0 (tidak ada gol setelah entry) sehingga dinyatakan LOSE.",
-      "audit_passed": true
+      "audit_passed": true,
+      "odds": 2.2,
+      "entry_odds": 2.2
     },
     {
       "match_id": "401883124",
@@ -13373,7 +13685,7 @@
       "trading_day": "2026-11-01",
       "minute_detected": 60,
       "score_at_entry": "0-0",
-      "odds_entry": null,
+      "odds_entry": 2.2,
       "simulated_odds": 1.8,
       "odds_source": "SIMULATED_DEFAULT",
       "stake": 50000,
@@ -13460,7 +13772,9 @@
       "verification_status": "VERIFIED_OFFICIAL_FINAL",
       "revision_history": [],
       "audit_explanation": "Pertandingan 401883124 masuk pada menit 60' dengan skor 0-0. Status resmi mencapai Final dengan skor akhir waktu normal 0-2. Minimal 1 gol tercipta setelah waktu entry sehingga dinyatakan WIN.",
-      "audit_passed": true
+      "audit_passed": true,
+      "odds": 2.2,
+      "entry_odds": 2.2
     },
     {
       "match_id": "401885067",
@@ -13478,7 +13792,7 @@
       "trading_day": "2026-11-01",
       "minute_detected": 62,
       "score_at_entry": "0-0",
-      "odds_entry": null,
+      "odds_entry": 2.2,
       "simulated_odds": 1.8,
       "odds_source": "SIMULATED_DEFAULT",
       "stake": 50000,
@@ -13536,7 +13850,9 @@
       "verification_status": "VERIFIED_OFFICIAL_FINAL",
       "revision_history": [],
       "audit_explanation": "Pertandingan 401885067 masuk pada menit 62' dengan skor 0-0. Status resmi mencapai Final dengan skor akhir waktu normal 1-0. Minimal 1 gol tercipta setelah waktu entry sehingga dinyatakan WIN.",
-      "audit_passed": true
+      "audit_passed": true,
+      "odds": 2.2,
+      "entry_odds": 2.2
     },
     {
       "match_id": "401879819",
@@ -13554,7 +13870,7 @@
       "trading_day": "2026-11-01",
       "minute_detected": 60,
       "score_at_entry": "0-0",
-      "odds_entry": null,
+      "odds_entry": 1.72,
       "simulated_odds": 1.8,
       "odds_source": "SIMULATED_DEFAULT",
       "stake": 50000,
@@ -13600,7 +13916,9 @@
       "verification_status": "VERIFIED_OFFICIAL_FINAL",
       "revision_history": [],
       "audit_explanation": "Pertandingan 401879819 masuk pada menit 60' dengan skor 0-0. Hingga status resmi Final, skor akhir waktu normal tetap 0-0 (tidak ada gol setelah entry) sehingga dinyatakan LOSE.",
-      "audit_passed": true
+      "audit_passed": true,
+      "odds": 1.72,
+      "entry_odds": 1.72
     },
     {
       "match_id": "401877581",
@@ -13618,7 +13936,7 @@
       "trading_day": "2026-11-01",
       "minute_detected": 60,
       "score_at_entry": "0-0",
-      "odds_entry": null,
+      "odds_entry": 2.2,
       "simulated_odds": 1.8,
       "odds_source": "SIMULATED_DEFAULT",
       "stake": 50000,
@@ -13664,7 +13982,9 @@
       "verification_status": "VERIFIED_OFFICIAL_FINAL",
       "revision_history": [],
       "audit_explanation": "Pertandingan 401877581 masuk pada menit 60' dengan skor 0-0. Hingga status resmi Final, skor akhir waktu normal tetap 0-0 (tidak ada gol setelah entry) sehingga dinyatakan LOSE.",
-      "audit_passed": true
+      "audit_passed": true,
+      "odds": 2.2,
+      "entry_odds": 2.2
     },
     {
       "match_id": "401892146",
@@ -13682,7 +14002,7 @@
       "trading_day": "2026-11-01",
       "minute_detected": 62,
       "score_at_entry": "0-0",
-      "odds_entry": null,
+      "odds_entry": 2.2,
       "simulated_odds": 1.8,
       "odds_source": "SIMULATED_DEFAULT",
       "stake": 50000,
@@ -13760,7 +14080,9 @@
       "verification_status": "VERIFIED_OFFICIAL_FINAL",
       "revision_history": [],
       "audit_explanation": "Pertandingan 401892146 masuk pada menit 62' dengan skor 0-0. Status resmi mencapai Final dengan skor akhir waktu normal 1-1. Minimal 1 gol tercipta setelah waktu entry sehingga dinyatakan WIN.",
-      "audit_passed": true
+      "audit_passed": true,
+      "odds": 2.2,
+      "entry_odds": 2.2
     },
     {
       "match_id": "401887405",
@@ -13778,7 +14100,7 @@
       "trading_day": "2026-10-31",
       "minute_detected": 62,
       "score_at_entry": "0-0",
-      "odds_entry": null,
+      "odds_entry": 2.2,
       "simulated_odds": 1.8,
       "odds_source": "SIMULATED_DEFAULT",
       "stake": 50000,
@@ -13865,7 +14187,9 @@
       "verification_status": "VERIFIED_OFFICIAL_FINAL",
       "revision_history": [],
       "audit_explanation": "Pertandingan 401887405 masuk pada menit 62' dengan skor 0-0. Status resmi mencapai Final dengan skor akhir waktu normal 1-1. Minimal 1 gol tercipta setelah waktu entry sehingga dinyatakan WIN.",
-      "audit_passed": true
+      "audit_passed": true,
+      "odds": 2.2,
+      "entry_odds": 2.2
     },
     {
       "match_id": "401886262",
@@ -13883,7 +14207,7 @@
       "trading_day": "2026-10-31",
       "minute_detected": 64,
       "score_at_entry": "0-0",
-      "odds_entry": null,
+      "odds_entry": 2.2,
       "simulated_odds": 1.8,
       "odds_source": "SIMULATED_DEFAULT",
       "stake": 50000,
@@ -13961,7 +14285,9 @@
       "verification_status": "VERIFIED_OFFICIAL_FINAL",
       "revision_history": [],
       "audit_explanation": "Pertandingan 401886262 masuk pada menit 64' dengan skor 0-0. Status resmi mencapai Final dengan skor akhir waktu normal 2-0. Minimal 1 gol tercipta setelah waktu entry sehingga dinyatakan WIN.",
-      "audit_passed": true
+      "audit_passed": true,
+      "odds": 2.2,
+      "entry_odds": 2.2
     },
     {
       "match_id": "401844255",
@@ -13979,7 +14305,7 @@
       "trading_day": "2026-10-31",
       "minute_detected": 62,
       "score_at_entry": "0-0",
-      "odds_entry": null,
+      "odds_entry": 2.2,
       "simulated_odds": 1.8,
       "odds_source": "SIMULATED_DEFAULT",
       "stake": 50000,
@@ -14066,7 +14392,9 @@
       "verification_status": "VERIFIED_OFFICIAL_FINAL",
       "revision_history": [],
       "audit_explanation": "Pertandingan 401844255 masuk pada menit 62' dengan skor 0-0. Status resmi mencapai Final dengan skor akhir waktu normal 2-0. Minimal 1 gol tercipta setelah waktu entry sehingga dinyatakan WIN.",
-      "audit_passed": true
+      "audit_passed": true,
+      "odds": 2.2,
+      "entry_odds": 2.2
     },
     {
       "match_id": "401844250",
@@ -14084,7 +14412,7 @@
       "trading_day": "2026-10-31",
       "minute_detected": 63,
       "score_at_entry": "0-0",
-      "odds_entry": null,
+      "odds_entry": 2.2,
       "simulated_odds": 1.8,
       "odds_source": "SIMULATED_DEFAULT",
       "stake": 50000,
@@ -14130,7 +14458,9 @@
       "verification_status": "VERIFIED_OFFICIAL_FINAL",
       "revision_history": [],
       "audit_explanation": "Pertandingan 401844250 masuk pada menit 63' dengan skor 0-0. Hingga status resmi Final, skor akhir waktu normal tetap 0-0 (tidak ada gol setelah entry) sehingga dinyatakan LOSE.",
-      "audit_passed": true
+      "audit_passed": true,
+      "odds": 2.2,
+      "entry_odds": 2.2
     },
     {
       "match_id": "401844259",
@@ -14148,7 +14478,7 @@
       "trading_day": "2026-10-31",
       "minute_detected": 61,
       "score_at_entry": "0-0",
-      "odds_entry": null,
+      "odds_entry": 2.2,
       "simulated_odds": 1.8,
       "odds_source": "SIMULATED_DEFAULT",
       "stake": 50000,
@@ -14194,7 +14524,9 @@
       "verification_status": "VERIFIED_OFFICIAL_FINAL",
       "revision_history": [],
       "audit_explanation": "Pertandingan 401844259 masuk pada menit 61' dengan skor 0-0. Hingga status resmi Final, skor akhir waktu normal tetap 0-0 (tidak ada gol setelah entry) sehingga dinyatakan LOSE.",
-      "audit_passed": true
+      "audit_passed": true,
+      "odds": 2.2,
+      "entry_odds": 2.2
     },
     {
       "match_id": "401844247",
@@ -14212,7 +14544,7 @@
       "trading_day": "2026-10-31",
       "minute_detected": 61,
       "score_at_entry": "0-0",
-      "odds_entry": null,
+      "odds_entry": 2.2,
       "simulated_odds": 1.8,
       "odds_source": "SIMULATED_DEFAULT",
       "stake": 50000,
@@ -14258,7 +14590,9 @@
       "verification_status": "VERIFIED_OFFICIAL_FINAL",
       "revision_history": [],
       "audit_explanation": "Pertandingan 401844247 masuk pada menit 61' dengan skor 0-0. Hingga status resmi Final, skor akhir waktu normal tetap 0-0 (tidak ada gol setelah entry) sehingga dinyatakan LOSE.",
-      "audit_passed": true
+      "audit_passed": true,
+      "odds": 2.2,
+      "entry_odds": 2.2
     },
     {
       "match_id": "401844246",
@@ -14276,7 +14610,7 @@
       "trading_day": "2026-10-31",
       "minute_detected": 60,
       "score_at_entry": "0-0",
-      "odds_entry": null,
+      "odds_entry": 2.2,
       "simulated_odds": 1.8,
       "odds_source": "SIMULATED_DEFAULT",
       "stake": 50000,
@@ -14322,7 +14656,9 @@
       "verification_status": "VERIFIED_OFFICIAL_FINAL",
       "revision_history": [],
       "audit_explanation": "Pertandingan 401844246 masuk pada menit 60' dengan skor 0-0. Hingga status resmi Final, skor akhir waktu normal tetap 0-0 (tidak ada gol setelah entry) sehingga dinyatakan LOSE.",
-      "audit_passed": true
+      "audit_passed": true,
+      "odds": 2.2,
+      "entry_odds": 2.2
     },
     {
       "match_id": "761919",
@@ -14340,7 +14676,7 @@
       "trading_day": "2026-10-31",
       "minute_detected": 60,
       "score_at_entry": "0-0",
-      "odds_entry": null,
+      "odds_entry": 2.2,
       "simulated_odds": 1.8,
       "odds_source": "SIMULATED_DEFAULT",
       "stake": 50000,
@@ -14407,7 +14743,9 @@
       "verification_status": "VERIFIED_OFFICIAL_FINAL",
       "revision_history": [],
       "audit_explanation": "Pertandingan 761919 masuk pada menit 60' dengan skor 0-0. Status resmi mencapai Final dengan skor akhir waktu normal 1-0. Minimal 1 gol tercipta setelah waktu entry sehingga dinyatakan WIN.",
-      "audit_passed": true
+      "audit_passed": true,
+      "odds": 2.2,
+      "entry_odds": 2.2
     },
     {
       "match_id": "401875563",
@@ -14425,7 +14763,7 @@
       "trading_day": "2026-10-31",
       "minute_detected": 62,
       "score_at_entry": "0-0",
-      "odds_entry": null,
+      "odds_entry": 2.2,
       "simulated_odds": 1.8,
       "odds_source": "SIMULATED_DEFAULT",
       "stake": 50000,
@@ -14492,7 +14830,9 @@
       "verification_status": "VERIFIED_OFFICIAL_FINAL",
       "revision_history": [],
       "audit_explanation": "Pertandingan 401875563 masuk pada menit 62' dengan skor 0-0. Status resmi mencapai Final dengan skor akhir waktu normal 1-0. Minimal 1 gol tercipta setelah waktu entry sehingga dinyatakan WIN.",
-      "audit_passed": true
+      "audit_passed": true,
+      "odds": 2.2,
+      "entry_odds": 2.2
     },
     {
       "match_id": "401920023",
@@ -14510,7 +14850,7 @@
       "trading_day": "2026-10-31",
       "minute_detected": 61,
       "score_at_entry": "0-0",
-      "odds_entry": null,
+      "odds_entry": 1.72,
       "simulated_odds": 1.8,
       "odds_source": "SIMULATED_DEFAULT",
       "stake": 50000,
@@ -14577,7 +14917,9 @@
       "verification_status": "VERIFIED_OFFICIAL_FINAL",
       "revision_history": [],
       "audit_explanation": "Pertandingan 401920023 masuk pada menit 61' dengan skor 0-0. Status resmi mencapai Final dengan skor akhir waktu normal 1-0. Minimal 1 gol tercipta setelah waktu entry sehingga dinyatakan WIN.",
-      "audit_passed": true
+      "audit_passed": true,
+      "odds": 1.72,
+      "entry_odds": 1.72
     },
     {
       "match_id": "401885653",
@@ -14595,7 +14937,7 @@
       "trading_day": "2026-10-31",
       "minute_detected": 60,
       "score_at_entry": "0-0",
-      "odds_entry": null,
+      "odds_entry": 1.72,
       "simulated_odds": 1.8,
       "odds_source": "SIMULATED_DEFAULT",
       "stake": 50000,
@@ -14641,7 +14983,9 @@
       "verification_status": "VERIFIED_OFFICIAL_FINAL",
       "revision_history": [],
       "audit_explanation": "Pertandingan 401885653 masuk pada menit 60' dengan skor 0-0. Hingga status resmi Final, skor akhir waktu normal tetap 0-0 (tidak ada gol setelah entry) sehingga dinyatakan LOSE.",
-      "audit_passed": true
+      "audit_passed": true,
+      "odds": 1.72,
+      "entry_odds": 1.72
     },
     {
       "match_id": "401879817",
@@ -14659,7 +15003,7 @@
       "trading_day": "2026-10-31",
       "minute_detected": 60,
       "score_at_entry": "0-0",
-      "odds_entry": null,
+      "odds_entry": 1.72,
       "simulated_odds": 1.8,
       "odds_source": "SIMULATED_DEFAULT",
       "stake": 50000,
@@ -14757,7 +15101,9 @@
       "verification_status": "VERIFIED_OFFICIAL_FINAL",
       "revision_history": [],
       "audit_explanation": "Pertandingan 401879817 masuk pada menit 60' dengan skor 0-0. Status resmi mencapai Final dengan skor akhir waktu normal 2-1. Minimal 1 gol tercipta setelah waktu entry sehingga dinyatakan WIN.",
-      "audit_passed": true
+      "audit_passed": true,
+      "odds": 1.72,
+      "entry_odds": 1.72
     },
     {
       "match_id": "401880195",
@@ -14775,7 +15121,7 @@
       "trading_day": "2026-10-31",
       "minute_detected": 63,
       "score_at_entry": "0-0",
-      "odds_entry": null,
+      "odds_entry": 2.2,
       "simulated_odds": 1.8,
       "odds_source": "SIMULATED_DEFAULT",
       "stake": 50000,
@@ -14821,7 +15167,9 @@
       "verification_status": "VERIFIED_OFFICIAL_FINAL",
       "revision_history": [],
       "audit_explanation": "Pertandingan 401880195 masuk pada menit 63' dengan skor 0-0. Hingga status resmi Final, skor akhir waktu normal tetap 0-0 (tidak ada gol setelah entry) sehingga dinyatakan LOSE.",
-      "audit_passed": true
+      "audit_passed": true,
+      "odds": 2.2,
+      "entry_odds": 2.2
     },
     {
       "match_id": "401928427",
@@ -14839,7 +15187,7 @@
       "trading_day": "2026-10-31",
       "minute_detected": 63,
       "score_at_entry": "0-0",
-      "odds_entry": null,
+      "odds_entry": 1.72,
       "simulated_odds": 1.8,
       "odds_source": "SIMULATED_DEFAULT",
       "stake": 50000,
@@ -14906,7 +15254,9 @@
       "verification_status": "VERIFIED_OFFICIAL_FINAL",
       "revision_history": [],
       "audit_explanation": "Pertandingan 401928427 masuk pada menit 63' dengan skor 0-0. Status resmi mencapai Final dengan skor akhir waktu normal 1-0. Minimal 1 gol tercipta setelah waktu entry sehingga dinyatakan WIN.",
-      "audit_passed": true
+      "audit_passed": true,
+      "odds": 1.72,
+      "entry_odds": 1.72
     },
     {
       "match_id": "401878346",
@@ -14924,7 +15274,7 @@
       "trading_day": "2026-10-31",
       "minute_detected": 63,
       "score_at_entry": "0-0",
-      "odds_entry": null,
+      "odds_entry": 1.72,
       "simulated_odds": 1.8,
       "odds_source": "SIMULATED_DEFAULT",
       "stake": 50000,
@@ -14991,7 +15341,9 @@
       "verification_status": "VERIFIED_OFFICIAL_FINAL",
       "revision_history": [],
       "audit_explanation": "Pertandingan 401878346 masuk pada menit 63' dengan skor 0-0. Status resmi mencapai Final dengan skor akhir waktu normal 1-0. Minimal 1 gol tercipta setelah waktu entry sehingga dinyatakan WIN.",
-      "audit_passed": true
+      "audit_passed": true,
+      "odds": 1.72,
+      "entry_odds": 1.72
     },
     {
       "match_id": "401884749",
@@ -15009,7 +15361,7 @@
       "trading_day": "2026-10-31",
       "minute_detected": 61,
       "score_at_entry": "0-0",
-      "odds_entry": null,
+      "odds_entry": 2.2,
       "simulated_odds": 1.8,
       "odds_source": "SIMULATED_DEFAULT",
       "stake": 50000,
@@ -15055,7 +15407,9 @@
       "verification_status": "VERIFIED_OFFICIAL_FINAL",
       "revision_history": [],
       "audit_explanation": "Pertandingan 401884749 masuk pada menit 61' dengan skor 0-0. Hingga status resmi Final, skor akhir waktu normal tetap 0-0 (tidak ada gol setelah entry) sehingga dinyatakan LOSE.",
-      "audit_passed": true
+      "audit_passed": true,
+      "odds": 2.2,
+      "entry_odds": 2.2
     },
     {
       "match_id": "401888257",
@@ -15073,7 +15427,7 @@
       "trading_day": "2026-10-31",
       "minute_detected": 64,
       "score_at_entry": "0-0",
-      "odds_entry": null,
+      "odds_entry": 2.2,
       "simulated_odds": 1.8,
       "odds_source": "SIMULATED_DEFAULT",
       "stake": 50000,
@@ -15119,7 +15473,9 @@
       "verification_status": "VERIFIED_OFFICIAL_FINAL",
       "revision_history": [],
       "audit_explanation": "Pertandingan 401888257 masuk pada menit 64' dengan skor 0-0. Hingga status resmi Final, skor akhir waktu normal tetap 0-0 (tidak ada gol setelah entry) sehingga dinyatakan LOSE.",
-      "audit_passed": true
+      "audit_passed": true,
+      "odds": 2.2,
+      "entry_odds": 2.2
     },
     {
       "match_id": "401883145",
@@ -15137,7 +15493,7 @@
       "trading_day": "2026-10-31",
       "minute_detected": 60,
       "score_at_entry": "0-0",
-      "odds_entry": null,
+      "odds_entry": 2.2,
       "simulated_odds": 1.8,
       "odds_source": "SIMULATED_DEFAULT",
       "stake": 50000,
@@ -15204,7 +15560,9 @@
       "verification_status": "VERIFIED_OFFICIAL_FINAL",
       "revision_history": [],
       "audit_explanation": "Pertandingan 401883145 masuk pada menit 60' dengan skor 0-0. Status resmi mencapai Final dengan skor akhir waktu normal 1-0. Minimal 1 gol tercipta setelah waktu entry sehingga dinyatakan WIN.",
-      "audit_passed": true
+      "audit_passed": true,
+      "odds": 2.2,
+      "entry_odds": 2.2
     },
     {
       "match_id": "401902879",
@@ -15222,7 +15580,7 @@
       "trading_day": "2026-10-31",
       "minute_detected": 61,
       "score_at_entry": "0-0",
-      "odds_entry": null,
+      "odds_entry": 1.72,
       "simulated_odds": 1.8,
       "odds_source": "SIMULATED_DEFAULT",
       "stake": 50000,
@@ -15268,7 +15626,9 @@
       "verification_status": "VERIFIED_OFFICIAL_FINAL",
       "revision_history": [],
       "audit_explanation": "Pertandingan 401902879 masuk pada menit 61' dengan skor 0-0. Hingga status resmi Final, skor akhir waktu normal tetap 0-0 (tidak ada gol setelah entry) sehingga dinyatakan LOSE.",
-      "audit_passed": true
+      "audit_passed": true,
+      "odds": 1.72,
+      "entry_odds": 1.72
     },
     {
       "match_id": "401880759",
@@ -15286,7 +15646,7 @@
       "trading_day": "2026-10-31",
       "minute_detected": 62,
       "score_at_entry": "0-0",
-      "odds_entry": null,
+      "odds_entry": 2.2,
       "simulated_odds": 1.8,
       "odds_source": "SIMULATED_DEFAULT",
       "stake": 50000,
@@ -15332,7 +15692,9 @@
       "verification_status": "VERIFIED_OFFICIAL_FINAL",
       "revision_history": [],
       "audit_explanation": "Pertandingan 401880759 masuk pada menit 62' dengan skor 0-0. Hingga status resmi Final, skor akhir waktu normal tetap 0-0 (tidak ada gol setelah entry) sehingga dinyatakan LOSE.",
-      "audit_passed": true
+      "audit_passed": true,
+      "odds": 2.2,
+      "entry_odds": 2.2
     },
     {
       "match_id": "401892147",
@@ -15350,7 +15712,7 @@
       "trading_day": "2026-10-31",
       "minute_detected": 62,
       "score_at_entry": "0-0",
-      "odds_entry": null,
+      "odds_entry": 2.2,
       "simulated_odds": 1.8,
       "odds_source": "SIMULATED_DEFAULT",
       "stake": 50000,
@@ -15396,7 +15758,9 @@
       "verification_status": "VERIFIED_OFFICIAL_FINAL",
       "revision_history": [],
       "audit_explanation": "Pertandingan 401892147 masuk pada menit 62' dengan skor 0-0. Hingga status resmi Final, skor akhir waktu normal tetap 0-0 (tidak ada gol setelah entry) sehingga dinyatakan LOSE.",
-      "audit_passed": true
+      "audit_passed": true,
+      "odds": 2.2,
+      "entry_odds": 2.2
     },
     {
       "match_id": "401913244",
@@ -15414,7 +15778,7 @@
       "trading_day": "2026-10-31",
       "minute_detected": 64,
       "score_at_entry": "0-0",
-      "odds_entry": null,
+      "odds_entry": 1.72,
       "simulated_odds": 1.8,
       "odds_source": "SIMULATED_DEFAULT",
       "stake": 50000,
@@ -15481,7 +15845,9 @@
       "verification_status": "VERIFIED_OFFICIAL_FINAL",
       "revision_history": [],
       "audit_explanation": "Pertandingan 401913244 masuk pada menit 64' dengan skor 0-0. Status resmi mencapai Final dengan skor akhir waktu normal 0-1. Minimal 1 gol tercipta setelah waktu entry sehingga dinyatakan WIN.",
-      "audit_passed": true
+      "audit_passed": true,
+      "odds": 1.72,
+      "entry_odds": 1.72
     },
     {
       "match_id": "401876829",
@@ -15499,7 +15865,7 @@
       "trading_day": "2026-10-30",
       "minute_detected": 62,
       "score_at_entry": "0-0",
-      "odds_entry": null,
+      "odds_entry": 1.72,
       "simulated_odds": 1.8,
       "odds_source": "SIMULATED_DEFAULT",
       "stake": 50000,
@@ -15586,7 +15952,9 @@
       "verification_status": "VERIFIED_OFFICIAL_FINAL",
       "revision_history": [],
       "audit_explanation": "Pertandingan 401876829 masuk pada menit 62' dengan skor 0-0. Status resmi mencapai Final dengan skor akhir waktu normal 1-1. Minimal 1 gol tercipta setelah waktu entry sehingga dinyatakan WIN.",
-      "audit_passed": true
+      "audit_passed": true,
+      "odds": 1.72,
+      "entry_odds": 1.72
     },
     {
       "match_id": "401899714",
@@ -15604,7 +15972,7 @@
       "trading_day": "2026-10-30",
       "minute_detected": 65,
       "score_at_entry": "0-0",
-      "odds_entry": null,
+      "odds_entry": 1.72,
       "simulated_odds": 1.8,
       "odds_source": "SIMULATED_DEFAULT",
       "stake": 50000,
@@ -15650,7 +16018,9 @@
       "verification_status": "VERIFIED_OFFICIAL_FINAL",
       "revision_history": [],
       "audit_explanation": "Pertandingan 401899714 masuk pada menit 65' dengan skor 0-0. Hingga status resmi Final, skor akhir waktu normal tetap 0-0 (tidak ada gol setelah entry) sehingga dinyatakan LOSE.",
-      "audit_passed": true
+      "audit_passed": true,
+      "odds": 1.72,
+      "entry_odds": 1.72
     },
     {
       "match_id": "401876919",
@@ -15668,7 +16038,7 @@
       "trading_day": "2026-10-30",
       "minute_detected": 62,
       "score_at_entry": "0-0",
-      "odds_entry": null,
+      "odds_entry": 2.2,
       "simulated_odds": 1.8,
       "odds_source": "SIMULATED_DEFAULT",
       "stake": 50000,
@@ -15735,7 +16105,9 @@
       "verification_status": "VERIFIED_OFFICIAL_FINAL",
       "revision_history": [],
       "audit_explanation": "Pertandingan 401876919 masuk pada menit 62' dengan skor 0-0. Status resmi mencapai Final dengan skor akhir waktu normal 0-1. Minimal 1 gol tercipta setelah waktu entry sehingga dinyatakan WIN.",
-      "audit_passed": true
+      "audit_passed": true,
+      "odds": 2.2,
+      "entry_odds": 2.2
     },
     {
       "match_id": "401886327",
@@ -15753,7 +16125,7 @@
       "trading_day": "2026-10-30",
       "minute_detected": 60,
       "score_at_entry": "0-0",
-      "odds_entry": null,
+      "odds_entry": 2.2,
       "simulated_odds": 1.8,
       "odds_source": "SIMULATED_DEFAULT",
       "stake": 50000,
@@ -15799,7 +16171,9 @@
       "verification_status": "VERIFIED_OFFICIAL_FINAL",
       "revision_history": [],
       "audit_explanation": "Pertandingan 401886327 masuk pada menit 60' dengan skor 0-0. Hingga status resmi Final, skor akhir waktu normal tetap 0-0 (tidak ada gol setelah entry) sehingga dinyatakan LOSE.",
-      "audit_passed": true
+      "audit_passed": true,
+      "odds": 2.2,
+      "entry_odds": 2.2
     },
     {
       "match_id": "401899274",
@@ -15816,7 +16190,7 @@
       "trading_day": "2026-10-30",
       "minute_detected": 62,
       "score_at_entry": "0-0",
-      "odds_entry": null,
+      "odds_entry": 1.72,
       "simulated_odds": 1.8,
       "odds_source": "SIMULATED_DEFAULT",
       "stake": 50000,
@@ -15905,7 +16279,9 @@
       "verification_status": "VERIFIED_OFFICIAL_FINAL",
       "revision_history": [],
       "audit_explanation": "Pertandingan 401899274 masuk pada menit 62' dengan skor 0-0. Status resmi mencapai Final dengan skor akhir waktu normal 1-1. Minimal 1 gol tercipta setelah waktu entry sehingga dinyatakan WIN.",
-      "audit_passed": true
+      "audit_passed": true,
+      "odds": 1.72,
+      "entry_odds": 1.72
     },
     {
       "match_id": "401901567",
@@ -15922,7 +16298,7 @@
       "trading_day": "2026-10-30",
       "minute_detected": 62,
       "score_at_entry": "0-0",
-      "odds_entry": null,
+      "odds_entry": 1.72,
       "simulated_odds": 1.8,
       "odds_source": "SIMULATED_DEFAULT",
       "stake": 50000,
@@ -15968,7 +16344,9 @@
       "verification_status": "VERIFIED_OFFICIAL_FINAL",
       "revision_history": [],
       "audit_explanation": "Pertandingan 401901567 masuk pada menit 62' dengan skor 0-0. Hingga status resmi Final, skor akhir waktu normal tetap 0-0 (tidak ada gol setelah entry) sehingga dinyatakan LOSE.",
-      "audit_passed": true
+      "audit_passed": true,
+      "odds": 1.72,
+      "entry_odds": 1.72
     },
     {
       "match_id": "401898939",
@@ -15985,7 +16363,7 @@
       "trading_day": "2026-10-30",
       "minute_detected": 61,
       "score_at_entry": "0-0",
-      "odds_entry": null,
+      "odds_entry": 1.72,
       "simulated_odds": 1.8,
       "odds_source": "SIMULATED_DEFAULT",
       "stake": 50000,
@@ -16053,7 +16431,9 @@
       "verification_status": "VERIFIED_OFFICIAL_FINAL",
       "revision_history": [],
       "audit_explanation": "Pertandingan 401898939 masuk pada menit 61' dengan skor 0-0. Status resmi mencapai Final dengan skor akhir waktu normal 1-0. Minimal 1 gol tercipta setelah waktu entry sehingga dinyatakan WIN.",
-      "audit_passed": true
+      "audit_passed": true,
+      "odds": 1.72,
+      "entry_odds": 1.72
     },
     {
       "match_id": "401891906",
@@ -16070,7 +16450,7 @@
       "trading_day": "2026-10-30",
       "minute_detected": 60,
       "score_at_entry": "0-0",
-      "odds_entry": null,
+      "odds_entry": 1.72,
       "simulated_odds": 1.8,
       "odds_source": "SIMULATED_DEFAULT",
       "stake": 50000,
@@ -16138,7 +16518,9 @@
       "verification_status": "VERIFIED_OFFICIAL_FINAL",
       "revision_history": [],
       "audit_explanation": "Pertandingan 401891906 masuk pada menit 60' dengan skor 0-0. Status resmi mencapai Final dengan skor akhir waktu normal 1-1. Minimal 1 gol tercipta setelah waktu entry sehingga dinyatakan WIN.",
-      "audit_passed": true
+      "audit_passed": true,
+      "odds": 1.72,
+      "entry_odds": 1.72
     },
     {
       "match_id": "401931662",
@@ -16155,7 +16537,7 @@
       "trading_day": "2026-10-30",
       "minute_detected": 63,
       "score_at_entry": "0-0",
-      "odds_entry": null,
+      "odds_entry": 1.72,
       "simulated_odds": 1.8,
       "odds_source": "SIMULATED_DEFAULT",
       "stake": 50000,
@@ -16201,7 +16583,9 @@
       "verification_status": "VERIFIED_REGULATION_LINESCORE",
       "revision_history": [],
       "audit_explanation": "Pertandingan 401931662 masuk pada menit 63' dengan skor 0-0. Hingga status resmi Extra Time, skor akhir waktu normal tetap 0-0 (tidak ada gol setelah entry) sehingga dinyatakan LOSE.",
-      "audit_passed": true
+      "audit_passed": true,
+      "odds": 1.72,
+      "entry_odds": 1.72
     },
     {
       "match_id": "401898880",
@@ -16218,7 +16602,7 @@
       "trading_day": "2026-10-30",
       "minute_detected": 61,
       "score_at_entry": "0-0",
-      "odds_entry": null,
+      "odds_entry": 1.72,
       "simulated_odds": 1.8,
       "odds_source": "SIMULATED_DEFAULT",
       "stake": 50000,
@@ -16264,7 +16648,9 @@
       "verification_status": "VERIFIED_OFFICIAL_FINAL",
       "revision_history": [],
       "audit_explanation": "Pertandingan 401898880 masuk pada menit 61' dengan skor 0-0. Hingga status resmi Final, skor akhir waktu normal tetap 0-0 (tidak ada gol setelah entry) sehingga dinyatakan LOSE.",
-      "audit_passed": true
+      "audit_passed": true,
+      "odds": 1.72,
+      "entry_odds": 1.72
     },
     {
       "match_id": "401850680",
@@ -16281,7 +16667,7 @@
       "trading_day": "2026-10-30",
       "minute_detected": 62,
       "score_at_entry": "0-0",
-      "odds_entry": null,
+      "odds_entry": 1.72,
       "simulated_odds": 1.8,
       "odds_source": "SIMULATED_DEFAULT",
       "stake": 50000,
@@ -16348,7 +16734,9 @@
       "verification_status": "VERIFIED_OFFICIAL_FINAL",
       "revision_history": [],
       "audit_explanation": "Pertandingan 401850680 masuk pada menit 62' dengan skor 0-0. Status resmi mencapai Final dengan skor akhir waktu normal 1-0. Minimal 1 gol tercipta setelah waktu entry sehingga dinyatakan WIN.",
-      "audit_passed": true
+      "audit_passed": true,
+      "odds": 1.72,
+      "entry_odds": 1.72
     },
     {
       "match_id": "401930003",
@@ -16365,7 +16753,7 @@
       "trading_day": "2026-10-30",
       "minute_detected": 62,
       "score_at_entry": "0-0",
-      "odds_entry": null,
+      "odds_entry": 1.72,
       "simulated_odds": 1.8,
       "odds_source": "SIMULATED_DEFAULT",
       "stake": 50000,
@@ -16452,7 +16840,9 @@
       "verification_status": "VERIFIED_OFFICIAL_FINAL",
       "revision_history": [],
       "audit_explanation": "Pertandingan 401930003 masuk pada menit 62' dengan skor 0-0. Status resmi mencapai Final dengan skor akhir waktu normal 1-1. Minimal 1 gol tercipta setelah waktu entry sehingga dinyatakan WIN.",
-      "audit_passed": true
+      "audit_passed": true,
+      "odds": 1.72,
+      "entry_odds": 1.72
     },
     {
       "match_id": "401892303",
@@ -16469,7 +16859,7 @@
       "trading_day": "2026-10-30",
       "minute_detected": 62,
       "score_at_entry": "0-0",
-      "odds_entry": null,
+      "odds_entry": 1.72,
       "simulated_odds": 1.8,
       "odds_source": "SIMULATED_DEFAULT",
       "stake": 50000,
@@ -16515,7 +16905,9 @@
       "verification_status": "VERIFIED_OFFICIAL_FINAL",
       "revision_history": [],
       "audit_explanation": "Pertandingan 401892303 masuk pada menit 62' dengan skor 0-0. Hingga status resmi Final, skor akhir waktu normal tetap 0-0 (tidak ada gol setelah entry) sehingga dinyatakan LOSE.",
-      "audit_passed": true
+      "audit_passed": true,
+      "odds": 1.72,
+      "entry_odds": 1.72
     },
     {
       "match_id": "401877995",
@@ -16532,7 +16924,7 @@
       "trading_day": "2026-10-30",
       "minute_detected": 60,
       "score_at_entry": "0-0",
-      "odds_entry": null,
+      "odds_entry": 1.72,
       "simulated_odds": 1.8,
       "odds_source": "SIMULATED_DEFAULT",
       "stake": 50000,
@@ -16599,7 +16991,9 @@
       "verification_status": "VERIFIED_OFFICIAL_FINAL",
       "revision_history": [],
       "audit_explanation": "Pertandingan 401877995 masuk pada menit 60' dengan skor 0-0. Status resmi mencapai Final dengan skor akhir waktu normal 1-0. Minimal 1 gol tercipta setelah waktu entry sehingga dinyatakan WIN.",
-      "audit_passed": true
+      "audit_passed": true,
+      "odds": 1.72,
+      "entry_odds": 1.72
     },
     {
       "match_id": "401892244",
@@ -16616,7 +17010,7 @@
       "trading_day": "2026-10-30",
       "minute_detected": 61,
       "score_at_entry": "0-0",
-      "odds_entry": null,
+      "odds_entry": 1.72,
       "simulated_odds": 1.8,
       "odds_source": "SIMULATED_DEFAULT",
       "stake": 50000,
@@ -16705,7 +17099,9 @@
       "verification_status": "VERIFIED_OFFICIAL_FINAL",
       "revision_history": [],
       "audit_explanation": "Pertandingan 401892244 masuk pada menit 61' dengan skor 0-0. Status resmi mencapai Final dengan skor akhir waktu normal 1-1. Minimal 1 gol tercipta setelah waktu entry sehingga dinyatakan WIN.",
-      "audit_passed": true
+      "audit_passed": true,
+      "odds": 1.72,
+      "entry_odds": 1.72
     },
     {
       "match_id": "401876420",
@@ -16722,7 +17118,7 @@
       "trading_day": "2026-10-30",
       "minute_detected": 64,
       "score_at_entry": "0-0",
-      "odds_entry": null,
+      "odds_entry": 2.2,
       "simulated_odds": 1.8,
       "odds_source": "SIMULATED_DEFAULT",
       "stake": 50000,
@@ -16789,7 +17185,9 @@
       "verification_status": "VERIFIED_OFFICIAL_FINAL",
       "revision_history": [],
       "audit_explanation": "Pertandingan 401876420 masuk pada menit 64' dengan skor 0-0. Status resmi mencapai Final dengan skor akhir waktu normal 1-0. Minimal 1 gol tercipta setelah waktu entry sehingga dinyatakan WIN.",
-      "audit_passed": true
+      "audit_passed": true,
+      "odds": 2.2,
+      "entry_odds": 2.2
     },
     {
       "match_id": "401901640",
@@ -16806,7 +17204,7 @@
       "trading_day": "2026-10-30",
       "minute_detected": 61,
       "score_at_entry": "0-0",
-      "odds_entry": null,
+      "odds_entry": 1.72,
       "simulated_odds": 1.8,
       "odds_source": "SIMULATED_DEFAULT",
       "stake": 50000,
@@ -16852,7 +17250,9 @@
       "verification_status": "VERIFIED_OFFICIAL_FINAL",
       "revision_history": [],
       "audit_explanation": "Pertandingan 401901640 masuk pada menit 61' dengan skor 0-0. Hingga status resmi Final, skor akhir waktu normal tetap 0-0 (tidak ada gol setelah entry) sehingga dinyatakan LOSE.",
-      "audit_passed": true
+      "audit_passed": true,
+      "odds": 1.72,
+      "entry_odds": 1.72
     },
     {
       "match_id": "401898423",
@@ -16869,7 +17269,7 @@
       "trading_day": "2026-10-30",
       "minute_detected": 63,
       "score_at_entry": "0-0",
-      "odds_entry": null,
+      "odds_entry": 1.72,
       "simulated_odds": 1.8,
       "odds_source": "SIMULATED_DEFAULT",
       "stake": 50000,
@@ -16979,7 +17379,9 @@
       "verification_status": "VERIFIED_OFFICIAL_FINAL",
       "revision_history": [],
       "audit_explanation": "Pertandingan 401898423 masuk pada menit 63' dengan skor 0-0. Status resmi mencapai Final dengan skor akhir waktu normal 2-1. Minimal 1 gol tercipta setelah waktu entry sehingga dinyatakan WIN.",
-      "audit_passed": true
+      "audit_passed": true,
+      "odds": 1.72,
+      "entry_odds": 1.72
     },
     {
       "match_id": "401879594",
@@ -16996,7 +17398,7 @@
       "trading_day": "2026-10-29",
       "minute_detected": 62,
       "score_at_entry": "0-0",
-      "odds_entry": null,
+      "odds_entry": 1.72,
       "simulated_odds": 1.8,
       "odds_source": "SIMULATED_DEFAULT",
       "stake": 50000,
@@ -17042,7 +17444,9 @@
       "verification_status": "VERIFIED_OFFICIAL_FINAL",
       "revision_history": [],
       "audit_explanation": "Pertandingan 401879594 masuk pada menit 62' dengan skor 0-0. Hingga status resmi Final, skor akhir waktu normal tetap 0-0 (tidak ada gol setelah entry) sehingga dinyatakan LOSE.",
-      "audit_passed": true
+      "audit_passed": true,
+      "odds": 1.72,
+      "entry_odds": 1.72
     }
   ]
 }
