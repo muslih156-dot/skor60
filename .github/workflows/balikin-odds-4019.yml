@@ -1,0 +1,90 @@
+name: Balikin Odds 4019 Hari Ini
+
+on:
+  workflow_dispatch:
+
+permissions:
+  contents: write
+
+jobs:
+  restore:
+    runs-on: ubuntu-latest
+    steps:
+      - uses: actions/checkout@v4
+        with:
+          fetch-depth: 0
+      - name: Cari odds asli 4019 di history + archive
+        run: |
+          python3 << 'PY'
+          import subprocess, json, os, glob
+          # 1. Cari di archive daily 2026-11-11, biasanya masih asli
+          print("=== Cek archive ===")
+          for f in sorted(glob.glob("data/archive/daily/*.json")) + ["data/matches.json"]:
+              if not os.path.exists(f): continue
+              try:
+                  with open(f, encoding="utf-8") as fh: d=json.load(fh)
+                  recs=d if isinstance(d,list) else d.get("matches", d.get("records",[]))
+                  for r in recs:
+                      mid=str(r.get("match_id","") or r.get("source_event_id",""))
+                      if mid.startswith("4019"):
+                          print(f"{f} {mid} {r.get('home_team')} odds={r.get('odds_entry', r.get('odds'))} src={r.get('odds_source')}")
+              except Exception as e: print(f, e)
+          print("")
+          print("=== Cari di git history, commit mana yang 4019 masih beragam ===")
+          commits=subprocess.check_output(["git","log","--format=%H","-n","40","--","data/matches.json"], text=True).splitlines()
+          for h in commits:
+              try:
+                  txt=subprocess.check_output(["git","show", f"{h}:data/matches.json"], text=True)
+                  d=json.loads(txt)
+                  recs=d if isinstance(d,list) else d.get("matches", d.get("records",[]))
+                  m4019=[r for r in recs if str(r.get("match_id","")).startswith("4019")]
+                  if not m4019: continue
+                  odds=set(str(r.get("odds_entry", r.get("odds"))) for r in m4019)
+                  print(f"{h[:7]} : {len(m4019)} match 4019, odds={sorted(list(odds))[:8]}")
+                  if len(odds)>1:
+                      print(f"  -> KETEMU COMMIT BENER BUAT 4019: {h}")
+                      # Simpan commit ini buat restore
+                      open("/tmp/good.txt","w").write(h)
+                      break
+              except Exception as e: print(h[:7], "skip")
+          PY
+      - name: Restore odds 4019 aja
+        run: |
+          python3 << 'PY'
+          import subprocess, json, os
+          if not os.path.exists("/tmp/good.txt"):
+              print("Gak ketemu commit beragam buat 4019, berarti odds asli 4019 emang 1.80 dari sananya")
+              print("Cek manual di bawah")
+              exit(0)
+          good=open("/tmp/good.txt").read().strip()
+          print(f"Pakai commit {good}")
+          txt=subprocess.check_output(["git","show", f"{good}:data/matches.json"], text=True)
+          old=json.loads(txt)
+          old_recs=old if isinstance(old,list) else old.get("matches", old.get("records",[]))
+          old_map={str(r.get("match_id","")):r for r in old_recs if str(r.get("match_id","")).startswith("4019")}
+          with open("data/matches.json", encoding="utf-8") as f: cur=json.load(f)
+          cur_recs=cur if isinstance(cur,list) else cur.get("matches", cur.get("records",[]))
+          key=None
+          if isinstance(cur, dict):
+              for k in ["matches","records"]:
+                  if k in cur: key=k; break
+          for r in cur_recs:
+              mid=str(r.get("match_id",""))
+              if mid in old_map:
+                  o=old_map[mid]
+                  orig=o.get("odds_entry", o.get("odds"))
+                  print(f"[BALIKIN 4019] {mid} {r.get('home_team')} : {r.get('odds_entry')} -> {orig}")
+                  r["odds_entry"]=orig; r["odds"]=orig; r["entry_odds"]=orig
+          if key: cur[key]=cur_recs
+          else: cur=cur_recs
+          with open("data/matches.json","w",encoding="utf-8") as f: json.dump(cur,f,indent=2,ensure_ascii=False)
+          print("Selesai")
+          PY
+      - name: Commit
+        run: |
+          git config user.name "bot-odds4019"
+          git config user.email "bot@odds.local"
+          git add data/matches.json
+          git diff --cached --quiet || git commit -m "Balikin odds 4019 asli"
+          git pull --rebase origin main
+          git push
