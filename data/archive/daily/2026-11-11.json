@@ -1,6 +1,6 @@
 {
   "trading_day": "2026-11-11",
-  "last_updated_utc": "2026-11-12T04:42:49Z",
+  "last_updated_utc": "2026-11-12T14:27:54Z",
   "total_records": 13,
   "matches": [
     {
@@ -21,7 +21,7 @@
       "score_at_entry": "0-0",
       "odds_entry": 1.72,
       "simulated_odds": 1.8,
-      "odds_source": "Sim",
+      "odds_source": "Est - Global",
       "stake": 50000,
       "source": "ESPN_API",
       "source_event_id": "401931279",
@@ -107,10 +107,9 @@
       "last_verified_at": "2026-11-12T04:42:49Z",
       "verification_status": "VERIFIED_REGULATION_LINESCORE",
       "revision_history": [],
-      "odds_entry_type": "Sim",
+      "odds_entry_type": "Est",
       "audit_explanation": "Pertandingan 401931279 masuk pada menit 64' dengan skor 0-0. Status resmi mencapai Extra Time dengan skor akhir waktu normal 1-1. Minimal 1 gol tercipta setelah waktu entry sehingga dinyatakan WIN.",
-      "audit_passed": true,
-      "odds_type": "Sim"
+      "audit_passed": true
     },
     {
       "match_id": "401931353",
