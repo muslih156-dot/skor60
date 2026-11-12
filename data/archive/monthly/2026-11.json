@@ -1,6 +1,6 @@
 {
   "trading_month": "2026-11",
-  "last_updated_utc": "2026-11-12T23:33:13Z",
+  "last_updated_utc": "2026-11-12T23:38:04Z",
   "total_records": 175,
   "matches": [
     {
@@ -51,7 +51,7 @@
       "actual_roi_contribution": null,
       "is_major": false,
       "created_at": "2026-11-12T23:21:32Z",
-      "updated_at": "2026-11-12T23:33:13Z",
+      "updated_at": "2026-11-12T23:38:04Z",
       "last_verified_at": "2026-11-12T23:21:32Z",
       "verification_status": "IN_PROGRESS_PENDING_FINAL",
       "revision_history": [],
@@ -105,13 +105,14 @@
         {
           "minute": 72,
           "clock_display": "72'",
-          "period": 2,
-          "team": "Operário PR",
+          "period": 0,
+          "team_id": "18187",
           "scorer": "Nicolas Schulz",
           "type": "Goal - Volley",
-          "text": "Goal! Ponte Preta 0, Operário PR 1. Nicolas (Operário PR) right footed shot from the right side of the six yard box to the bottom right corner.",
+          "is_own_goal": false,
+          "is_penalty": false,
           "time_approximate": false,
-          "source": "ESPN_SUMMARY_KEY_EVENTS"
+          "source": "ESPN_OFFICIAL_DETAIL"
         }
       ],
       "current_score": "0-1",
@@ -127,7 +128,7 @@
       "actual_roi_contribution": null,
       "is_major": false,
       "created_at": "2026-11-12T23:21:32Z",
-      "updated_at": "2026-11-12T23:33:13Z",
+      "updated_at": "2026-11-12T23:38:04Z",
       "last_verified_at": "2026-11-12T23:21:32Z",
       "verification_status": "IN_PROGRESS_PENDING_FINAL",
       "revision_history": [],
@@ -182,7 +183,7 @@
       "actual_roi_contribution": null,
       "is_major": false,
       "created_at": "2026-11-12T23:15:51Z",
-      "updated_at": "2026-11-12T23:33:13Z",
+      "updated_at": "2026-11-12T23:38:04Z",
       "last_verified_at": "2026-11-12T23:15:51Z",
       "verification_status": "IN_PROGRESS_PENDING_FINAL",
       "revision_history": [],
