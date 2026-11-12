@@ -1,0 +1,37 @@
+name: Migrasi Odds Lama Sim ke Est
+
+on:
+  workflow_dispatch:
+
+permissions:
+  contents: write
+
+jobs:
+  migrate:
+    runs-on: ubuntu-latest
+    steps:
+      - name: Checkout
+        uses: actions/checkout@v4
+
+      - name: Set up Python
+        uses: actions/setup-python@v5
+        with:
+          python-version: "3.11"
+
+      - name: Install Deps
+        run: |
+          pip install -r requirements.txt || true
+
+      - name: Run Migrasi
+        env:
+          ODDS_API_KEY: ${{ secrets.ODDS_API_KEY }}
+        run: |
+          python migrate_old_odds.py
+
+      - name: Commit Hasil Migrasi
+        run: |
+          git config user.name "skor60-audit-bot"
+          git config user.email "actions@users.noreply.github.com"
+          git add data/
+          git commit -m "chore(data): migrasi odds lama 1.80 Sim ke Est" || echo "Tidak ada perubahan"
+          git push origin HEAD:main || true
