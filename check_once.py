@@ -1,278 +1,228 @@
 """
-check_once.py - V7 FINAL - MANUAL 100%, TANPA ODDS API
-Jalan tiap 5 menit via GitHub Actions.
+check_once.py
+Skrip eksekusi siklus tunggal untuk TRADING BOLA MENIT 60 – LAST GOAL SYSTEM.
+Dijalankan oleh GitHub Actions setiap 5 menit atau melalui pemicu manual.
 Tugas:
-1. Ambil live score dari ESPN (gratis, tanpa key)
-2. Filter: Menit 60-70, Skor masih 0-0, Belum pernah di-entry
-3. Kasih odds MANUAL dari odds_provider.py (Est - Liga / Est - Global)
-4. Simpan ke data/archive/daily/YYYY-MM-DD.json + data/latest.json (buat dashboard)
-5. Settlement: Kalau match udah Final, hitung WIN/LOSE + Profit dari Result
+1. Memindai pertandingan live dari ESPN ALL dan ESPN MULTI LEAGUE.
+2. Mendeteksi kandidat baru pada menit 60–66 dengan skor 0-0 (secara idempotent).
+3. Memantau dan memperbarui status pertandingan yang masih PENDING / LIVE.
+4. Melakukan validasi settlement akhir (WIN/LOSE/VOID/REVIEW) menggunakan scoreboard + summary detail.
+5. Menyimpan metadata kesehatan sistem dan arsip JSON, serta mengirim notifikasi ke Telegram jika ada kandidat baru.
 
-TIDAK ADA LAGI: ODDS_API_KEY, The Odds API, Actual, 401
+UPDATE FINAL - Tanpa 1.80 Sim:
+- Odds diambil dari get_odds_with_fallback()
+- Urutan: Actual -> Est dari API -> Est dari Liga (history DB sendiri) -> Est Global
+- Kalau kuota Odds API habis / match nggak ada di API, langsung hitung manual, TIDAK balik ke Sim.
 """
 
-import os
+import argparse
 import json
-import glob
 import sys
-from datetime import datetime, timezone, timedelta
+from datetime import datetime, timezone
+from typing import Any, Dict
+
 import requests
 
-sys.path.insert(0, os.path.dirname(os.path.abspath(__file__)))
-
+from config import DEFAULT_STAKE
+from database import TradingDatabase, save_scan_metadata
+from espn_client import fetch_live_match, fetch_match_detail, fetch_match_events
+from parser import detect_candidate, format_iso_utc_and_wita
+from settlement import audit_result, validate_final_result
+from telegram_notifier import send_telegram_message
 from odds_provider import get_odds_with_fallback
 
-# ============ CONFIG ============
-try:
-    from config import DEFAULT_STAKE, MIN_ENTRY_MINUTE, MAX_ENTRY_MINUTE
-except:
-    DEFAULT_STAKE = 50000
-    MIN_ENTRY_MINUTE = 60
-    MAX_ENTRY_MINUTE = 70
+def run_scan_cycle() -> Dict[str, Any]:
+    """Menjalankan satu siklus penuh pemindaian, deteksi kandidat, settlement, dan notifikasi."""
+    db = TradingDatabase()
+    session = requests.Session()
+    cycle_start = datetime.now(timezone.utc)
+    cycle_utc_str, cycle_wita_str = format_iso_utc_and_wita(cycle_start)
 
-# ESPN Scoreboard - Gratis, tanpa key
-ESPN_URL = "https://site.api.espn.com/apis/site/v2/sports/soccer/{league}/scoreboard"
-# Liga yang di-scan, biar nggak kebanyakan
-ESPN_LEAGUES = [
-    "eng.1", "esp.1", "ita.1", "ger.1", "fra.1",
-    "eng.2", "esp.2", "ita.2", "ger.2",
-    "bra.1", "mex.1", "usa.1", "ned.1", "por.1", "bel.1",
-    "jpn.1", "kor.1", "aus.1", "arg.1",
-]
+    # 1. Ambil data scoreboard dari ESPN
+    scan_res = fetch_live_match(session=session)
+    scoreboard_map: Dict[str, Dict[str, Any]] = {}
+    for parsed_match in scan_res["matches"]:
+        m_id = parsed_match["score"]["match_id"]
+        scoreboard_map[m_id] = parsed_match
 
-DATA_DIR = "data"
-ARCHIVE_DIR = os.path.join(DATA_DIR, "archive", "daily")
-os.makedirs(ARCHIVE_DIR, exist_ok=True)
+    new_candidates_count = 0
+    existing_candidates_skipped = 0
+    live_matches_seen = 0
 
-# WIB = UTC+7
-WIB = timezone(timedelta(hours=7))
+    # 2. Evaluasi setiap pertandingan yang berhasil diparsing untuk deteksi kandidat
+    for parsed_match in scan_res["matches"]:
+        if parsed_match["status"].get("is_live", False):
+            live_matches_seen += 1
 
-def _safe_float(v, d=0.0):
-    try:
-        if v is None or v == "":
-            return d
-        return float(v)
-    except:
-        return d
+        cand_eval = detect_candidate(parsed_match)
+        if cand_eval["is_candidate"]:
+            # Ambil nama tim & liga untuk hitung odds
+            home_tmp = parsed_match.get("teams", {}).get("home", "") if isinstance(parsed_match.get("teams"), dict) else ""
+            away_tmp = parsed_match.get("teams", {}).get("away", "") if isinstance(parsed_match.get("teams"), dict) else ""
+            if not home_tmp:
+                home_tmp = parsed_match.get("home_team", "") or parsed_match.get("score", {}).get("home_team", "")
+            if not away_tmp:
+                away_tmp = parsed_match.get("away_team", "") or parsed_match.get("score", {}).get("away_team", "")
+            league_tmp = parsed_match.get("league", "Unknown League") or "Unknown League"
 
-def _today_str():
-    return datetime.now(WIB).strftime("%Y-%m-%d")
-
-def _load_today_records():
-    """Load record hari ini dari archive"""
-    fpath = os.path.join(ARCHIVE_DIR, f"{_today_str()}.json")
-    if os.path.exists(fpath):
-        try:
-            with open(fpath, "r", encoding="utf-8") as f:
-                data = json.load(f)
-                if isinstance(data, list):
-                    return data, fpath
-                if isinstance(data, dict) and isinstance(data.get("records"), list):
-                    return data["records"], fpath
-        except:
-            pass
-    return [], fpath
-
-def _save_today_records(records, fpath):
-    with open(fpath, "w", encoding="utf-8") as f:
-        json.dump(records, f, indent=2, ensure_ascii=False)
-
-def _parse_minute(detail):
-    """Ubah '64'' atau '60' jadi int 64"""
-    try:
-        s = str(detail or "").replace("'", "").replace("+", "").strip()
-        # Kalau ada 'HT', 'FT', dll
-        if not s or not s[0].isdigit():
-            return None
-        # 90+3 -> ambil 90
-        if "+" in str(detail):
-            s = str(detail).split("+")[0]
-        return int(s)
-    except:
-        return None
-
-def _fetch_espn_league(league_code):
-    """Ambil live score 1 liga dari ESPN"""
-    try:
-        url = ESPN_URL.format(league=league_code)
-        resp = requests.get(url, timeout=15, headers={"User-Agent": "Mozilla/5.0"})
-        if resp.status_code != 200:
-            return []
-        data = resp.json()
-        events = data.get("events", [])
-        out = []
-        for ev in events:
+            # [FINAL] Tanpa 1.80 lagi. Selalu hitung, selalu ada odds.
+            # get_odds_with_fallback() TIDAK PERNAH return None.
+            # Kalau API habis / nggak ada, dia hitung manual dari history liga / global.
             try:
-                comp = ev.get("competitions", [{}])[0]
-                status = comp.get("status", {})
-                status_type = status.get("type", {})
-                state = status_type.get("state", "")  # in, pre, post
-                detail = status.get("displayClock", "") or status_type.get("detail", "")
-                home_team = ""
-                away_team = ""
-                home_score = 0
-                away_score = 0
-                for team in comp.get("competitors", []):
-                    name = team.get("team", {}).get("displayName", "") or team.get("team", {}).get("shortDisplayName", "")
-                    score = _safe_float(team.get("score", 0), 0)
-                    if team.get("homeAway") == "home":
-                        home_team = name
-                        home_score = int(score)
-                    else:
-                        away_team = name
-                        away_score = int(score)
-                league_name = comp.get("venue", {}).get("fullName", "")  # fallback
-                # Nama liga dari events
-                league_name = ev.get("league", {}).get("name", "") or league_code
-                if not home_team or not away_team:
-                    continue
-                out.append({
-                    "id": str(ev.get("id", "")),
-                    "home": home_team,
-                    "away": away_team,
-                    "home_score": home_score,
-                    "away_score": away_score,
-                    "minute": _parse_minute(detail),
-                    "detail": detail,
-                    "state": state,  # in / pre / post
-                    "league": league_name,
-                    "league_code": league_code,
-                })
-            except:
-                continue
-        return out
-    except Exception as e:
-        print(f"[fetch] {league_code} gagal: {e}")
-        return []
+                real_odds = get_odds_with_fallback(home_tmp, away_tmp, league_tmp)
+            except Exception as e:
+                print(f"[odds] fallback error: {e}, pakai Est Global darurat")
+                real_odds = {"odds": 1.62, "source": "Est - Global (darurat)", "type": "Est"}
 
-def _settle_record(rec, live_match):
-    """Update record yang udah Final -> WIN / LOSE + Profit"""
-    # Kalau live_match udah post / FT
-    if live_match["state"] == "post":
-        final_score = f"{live_match['home_score']}-{live_match['away_score']}"
-        rec["current_score"] = final_score
-        rec["final_score"] = final_score
-        rec["score"] = final_score
-        # Over 0.5 After 60' itu WIN kalau ada gol SETELAH entry.
-        # Entry kita 0-0 di menit 60, jadi WIN kalau final_score BUKAN 0-0.
-        # Karena entry_score selalu 0-0, rumusnya simple:
-        if final_score != "0-0":
-            rec["result"] = "WIN"
-            rec["settlement_status"] = "SETTLED"
-            profit = round(rec["stake"] * (rec["odds_entry"] - 1), 2)
-        else:
-            rec["result"] = "LOSE"
-            rec["settlement_status"] = "SETTLED"
-            profit = round(-rec["stake"], 2)
-        rec["profit"] = profit
-        rec["pnl"] = profit
-        rec["p_l"] = profit
-        return True
+            parsed_match["odds_entry"] = real_odds["odds"]
+            parsed_match["odds_source"] = real_odds["source"]
+            parsed_match["odds_entry_type"] = real_odds["type"]
+
+            record, created = db.insert_candidate_idempotent(
+                parsed_match=parsed_match,
+                detected_dt_utc=cycle_start,
+                stake=DEFAULT_STAKE,
+            )
+            if created:
+                new_candidates_count += 1
+
+                # Paksa update record biar odds kesimpen walau database.py belum support odds_entry
+                try:
+                    record["odds_entry"] = parsed_match["odds_entry"]
+                    record["odds_source"] = parsed_match["odds_source"]
+                    record["odds_entry_type"] = parsed_match["odds_entry_type"]
+                    db.update_existing_record(record)
+                except Exception as e:
+                    print(f"[odds] gagal update record odds: {e}")
+
+                # Kirim notifikasi otomatis ke Telegram saat kandidat baru terdeteksi
+                home_team = record.get("home_team", home_tmp or "Home")
+                away_team = record.get("away_team", away_tmp or "Away")
+                league = record.get("league", league_tmp)
+                minute = record.get("minute_detected", "60-66")
+                score = record.get("score_at_entry", "0-0")
+                wita_time = record.get("detected_at_wita", cycle_wita_str)
+                odds_txt = f"{parsed_match['odds_entry']} ({parsed_match['odds_entry_type']})"
+                odds_src_txt = parsed_match["odds_source"]
+
+                telegram_msg = (
+                    f"🚨 *KANDIDAT TRADING BARU TERDETEKSI* 🚨\n\n"
+                    f"⚽ *Match:* {home_team} vs {away_team}\n"
+                    f"🏆 *League:* {league}\n"
+                    f"⏱ *Menit:* {minute}' (Babak 2)\n"
+                    f"📊 *Skor Entry:* {score}\n"
+                    f"💰 *Market:* Over 0.5 Goal After Entry\n"
+                    f"📈 *Odds:* {odds_txt}\n"
+                    f"🔍 *Sumber:* {odds_src_txt}\n"
+                    f"🕒 *Waktu (WITA):* {wita_time}"
+                )
+                send_telegram_message(telegram_msg)
+            else:
+                existing_candidates_skipped += 1
+
+    # 3. Pembaruan & Settlement untuk seluruh pertandingan yang masih PENDING / REVIEW
+    pending_records = db.get_pending_matches()
+    updated_count = 0
+    settled_this_cycle = 0
+    review_flagged_count = 0
+
+    for rec in pending_records:
+        match_id = rec["match_id"]
+        league_slug = rec.get("league_slug") or "all"
+        sb_match = scoreboard_map.get(match_id)
+
+        # Ambil detail pertandingan apabila:
+        # a) Pertandingan sudah tidak muncul di scoreboard, ATAU
+        # b) Scoreboard menunjukkan pertandingan sudah selesai / void / ada perubahan skor
+        detail_match = None
+        events_list = None
+        need_detail = (
+            sb_match is None
+            or sb_match["status"].get("is_final", False)
+            or sb_match["status"].get("is_void_candidate", False)
+            or sb_match["score"].get("formatted_score") != rec.get("current_score")
+        )
+
+        if need_detail and not str(match_id).startswith("PROVISIONAL_"):
+            detail_res = fetch_match_detail(match_id, league_slug=league_slug, session=session)
+            if detail_res["ok"] and detail_res["parsed"]:
+                detail_match = detail_res["parsed"]
+                events_list = fetch_match_events(
+                    match_id=match_id,
+                    league_slug=league_slug,
+                    summary_payload=detail_res["raw_summary"],
+                    session=session,
+                )
+
+        updated_rec = validate_final_result(
+            existing_record=rec,
+            scoreboard_match=sb_match,
+            detail_match=detail_match,
+            events_list=events_list,
+            now_utc=datetime.now(timezone.utc),
+        )
+
+        audit_info = audit_result(updated_rec)
+        updated_rec["audit_explanation"] = audit_info["explanation"]
+        updated_rec["audit_passed"] = audit_info["audit_passed"]
+
+        db.update_existing_record(updated_rec)
+        updated_count += 1
+
+        if updated_rec["settlement_status"] in ("SETTLED", "VOID"):
+            settled_this_cycle += 1
+        elif updated_rec["settlement_status"] == "REVIEW":
+            review_flagged_count += 1
+
+    # 4. Simpan metadata scan terakhir
+    meta_summary = {
+        "scan_timestamp_utc": cycle_utc_str,
+        "scan_timestamp_wita": cycle_wita_str,
+        "source_status": scan_res["source_status"],
+        "endpoints_queried": scan_res["endpoints_queried"],
+        "endpoints_succeeded": scan_res["endpoints_succeeded"],
+        "endpoints_failed": scan_res["endpoints_failed"],
+        "raw_events_received": scan_res["raw_events_received"],
+        "unique_events_count": scan_res["unique_events_count"],
+        "matches_processed": scan_res["matches_processed"],
+        "matches_failed_parsing": scan_res["matches_failed_parsing"],
+        "live_matches_seen": live_matches_seen,
+        "new_candidates_detected": new_candidates_count,
+        "existing_candidates_skipped": existing_candidates_skipped,
+        "pending_matches_checked": len(pending_records),
+        "matches_settled_this_cycle": settled_this_cycle,
+        "matches_flagged_review": review_flagged_count,
+        "endpoint_logs": scan_res["endpoint_logs"],
+    }
+    save_scan_metadata(meta_summary)
+    return meta_summary
+
+def main() -> int:
+    parser = argparse.ArgumentParser(
+        description="Run single scan & settlement cycle for TRADING BOLA MENIT 60."
+    )
+    parser.add_argument(
+        "--json",
+        action="store_true",
+        help="Print cycle summary in JSON format.",
+    )
+    args = parser.parse_args()
+
+    summary = run_scan_cycle()
+    if args.json:
+        print(json.dumps(summary, indent=2, ensure_ascii=False))
     else:
-        # Masih live, update current score aja
-        cur = f"{live_match['home_score']}-{live_match['away_score']}"
-        rec["current_score"] = cur
-        rec["score"] = cur
-        if rec.get("result") in ("", None):
-            rec["result"] = "LIVE"
-        return False
+        print(
+            f"[{summary['scan_timestamp_wita']}] Status={summary['source_status']} | "
+            f"Processed={summary['matches_processed']} | Live={summary['live_matches_seen']} | "
+            f"NewCandidates={summary['new_candidates_detected']} | "
+            f"Settled={summary['matches_settled_this_cycle']}"
+        )
 
-def main():
-    print(f"=== CHECK_ONCE V7 MANUAL - {_today_str()} {datetime.now(WIB).strftime('%H:%M:%S')} WIB ===")
-    print(f"Stake: {DEFAULT_STAKE} | Entry menit: {MIN_ENTRY_MINUTE}-{MAX_ENTRY_MINUTE} | Odds: MANUAL (Est)")
-
-    records, fpath = _load_today_records()
-    # Index biar gampang cari record lama
-    by_id = {str(r.get("match_id", "")): r for r in records if isinstance(r, dict)}
-    print(f"Record hari ini sebelum scan: {len(records)}")
-
-    new_entry = 0
-    settled = 0
-
-    for league_code in ESPN_LEAGUES:
-        matches = _fetch_espn_league(league_code)
-        for m in matches:
-            mid = m["id"]
-            # 1. Kalau udah ada record-nya, update settlement / live score
-            if mid in by_id:
-                rec = by_id[mid]
-                # Kalau udah SETTLED, skip, nggak usah diutak-atik lagi
-                if str(rec.get("settlement_status", "")).upper() == "SETTLED":
-                    continue
-                # Kalau masih LIVE / PENDING, update
-                if _settle_record(rec, m):
-                    settled += 1
-                    print(f"  [SETTLED] {m['home']} vs {m['away']} | Final {m['home_score']}-{m['away_score']} | {rec.get('result')} | Profit {rec.get('profit')}")
-                continue
-
-            # 2. Kalau belum ada, cek apakah layak entry?
-            # Syarat: state = in (live), menit 60-70, skor masih 0-0
-            if m["state"] != "in":
-                continue
-            if m["minute"] is None:
-                continue
-            if not (MIN_ENTRY_MINUTE <= m["minute"] <= MAX_ENTRY_MINUTE):
-                continue
-            if not (m["home_score"] == 0 and m["away_score"] == 0):
-                continue
-
-            # 3. LAYAK ENTRY - Kasih odds MANUAL, TANPA API
-            odds_info = get_odds_with_fallback(m["home"], m["away"], m["league"])
-            # odds_info = {"odds": 1.72, "source": "Est - Global", "type": "Est"}
-
-            rec = {
-                "match_id": mid,
-                "home_team": m["home"],
-                "away_team": m["away"],
-                "home": m["home"],
-                "away": m["away"],
-                "league": m["league"] if m["league"] else "Unknown League",
-                "league_code": league_code,
-                "badge": "NORMAL",
-                "activity": "NORMAL",
-                "min_entry": f"{m['minute']}'",
-                "entry_minute": m["minute"],
-                "entry_score": "0-0",
-                "current_score": "0-0",
-                "score": "0-0",
-                "final_score": "",
-                # ODDS MANUAL - TIDAK PERNAH Actual / Sim / 1.80
-                "odds_entry": odds_info["odds"],
-                "odds": odds_info["odds"],
-                "odds_source": odds_info["source"],
-                "odds_entry_type": odds_info["type"],  # Selalu "Est"
-                "stake": DEFAULT_STAKE,
-                "result": "LIVE",
-                "settlement_status": "PENDING",
-                "profit": 0,
-                "pnl": 0,
-                "p_l": 0,
-                "trading_day": _today_str(),
-                "created_at": datetime.now(WIB).isoformat(),
-            }
-            records.append(rec)
-            by_id[mid] = rec
-            new_entry += 1
-            print(f"  [ENTRY] {m['home']} vs {m['away']} | {m['league']} | Menit {m['minute']}' | 0-0 | Odds {odds_info['odds']} ({odds_info['source']})")
-
-    # Simpan archive hari ini
-    _save_today_records(records, fpath)
-    print(f" -> Disimpan {fpath}: {len(records)} record")
-
-    # Simpan juga latest.json buat dashboard Tab B baca
-    # Dashboard baca file ini, jadi harus sama isinya
-    try:
-        with open(os.path.join(DATA_DIR, "latest.json"), "w", encoding="utf-8") as f:
-            json.dump(records, f, indent=2, ensure_ascii=False)
-        # Simpan juga all.json buat rekap
-        with open(os.path.join(DATA_DIR, "trades.json"), "w", encoding="utf-8") as f:
-            json.dump(records, f, indent=2, ensure_ascii=False)
-    except Exception as e:
-        print(f"  [save latest] gagal: {e}")
-
-    print(f"=== SELESAI ===")
-    print(f"Entry baru: {new_entry} | Settled baru: {settled} | Total hari ini: {len(records)}")
-    print(f"Semua odds baru: Est manual, tanpa API.")
+    # Jika seluruh endpoint gagal total, kembalikan kode keluar non-zero untuk visibilitas log
+    if summary["source_status"] == "CRITICAL_ALL_ENDPOINTS_FAILED":
+        return 2
+    return 0
 
 if __name__ == "__main__":
-    main()
+    sys.exit(main())
