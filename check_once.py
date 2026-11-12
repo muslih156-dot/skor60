@@ -24,7 +24,8 @@ from espn_client import fetch_live_match, fetch_match_detail, fetch_match_events
 from parser import detect_candidate, format_iso_utc_and_wita
 from settlement import audit_result, validate_final_result
 from telegram_notifier import send_telegram_message
-
+# [ODDS NYATA] Tambahan baru
+from odds_provider import get_live_over_05_odds
 
 def run_scan_cycle() -> Dict[str, Any]:
     """Menjalankan satu siklus penuh pemindaian, deteksi kandidat, settlement, dan notifikasi."""
@@ -51,6 +52,31 @@ def run_scan_cycle() -> Dict[str, Any]:
 
         cand_eval = detect_candidate(parsed_match)
         if cand_eval["is_candidate"]:
+            # [ODDS NYATA] Ambil odds dulu SEBELUM insert, biar kesimpen di database
+            home_tmp = parsed_match.get("teams", {}).get("home", "") or parsed_match.get("home_team", "")
+            away_tmp = parsed_match.get("teams", {}).get("away", "") or parsed_match.get("away_team", "")
+            # Fallback: ambil dari score dict kalau format beda
+            if not home_tmp:
+                home_tmp = parsed_match.get("score", {}).get("home_team", "")
+            if not away_tmp:
+                away_tmp = parsed_match.get("score", {}).get("away_team", "")
+
+            real_odds = None
+            try:
+                real_odds = get_live_over_05_odds(home_tmp, away_tmp)
+            except Exception as e:
+                print(f"[odds] error: {e}")
+                real_odds = None
+
+            if real_odds:
+                parsed_match["odds_entry"] = real_odds["odds"]
+                parsed_match["odds_source"] = real_odds["source"]
+                parsed_match["odds_entry_type"] = "Actual"
+            else:
+                parsed_match["odds_entry"] = 1.80
+                parsed_match["odds_source"] = "Sim"
+                parsed_match["odds_entry_type"] = "Sim"
+
             record, created = db.insert_candidate_idempotent(
                 parsed_match=parsed_match,
                 detected_dt_utc=cycle_start,
@@ -58,6 +84,15 @@ def run_scan_cycle() -> Dict[str, Any]:
             )
             if created:
                 new_candidates_count += 1
+
+                # [ODDS NYATA] Paksa update record biar odds kesimpen walau database.py belum support odds_entry
+                try:
+                    record["odds_entry"] = parsed_match["odds_entry"]
+                    record["odds_source"] = parsed_match["odds_source"]
+                    record["odds_entry_type"] = parsed_match["odds_entry_type"]
+                    db.update_existing_record(record)
+                except Exception as e:
+                    print(f"[odds] gagal update record odds: {e}")
                 
                 # Kirim notifikasi otomatis ke Telegram saat kandidat baru terdeteksi
                 home_team = record.get("home_team", "Home")
@@ -66,6 +101,7 @@ def run_scan_cycle() -> Dict[str, Any]:
                 minute = record.get("minute_detected", "60-66")
                 score = record.get("score_at_entry", "0-0")
                 wita_time = record.get("detected_at_wita", cycle_wita_str)
+                odds_txt = f"{parsed_match['odds_entry']} ({parsed_match['odds_entry_type']})"
 
                 telegram_msg = (
                     f"🚨 *KANDIDAT TRADING BARU TERDETEKSI* 🚨\n\n"
@@ -74,6 +110,7 @@ def run_scan_cycle() -> Dict[str, Any]:
                     f"⏱ *Menit:* {minute}' (Babak 2)\n"
                     f"📊 *Skor Entry:* {score}\n"
                     f"💰 *Market:* Over 0.5 Goal After Entry\n"
+                    f"📈 *Odds:* {odds_txt}\n"
                     f"🕒 *Waktu (WITA):* {wita_time}"
                 )
                 send_telegram_message(telegram_msg)
@@ -91,9 +128,6 @@ def run_scan_cycle() -> Dict[str, Any]:
         league_slug = rec.get("league_slug") or "all"
         sb_match = scoreboard_map.get(match_id)
 
-        # Ambil detail pertandingan apabila:
-        # a) Pertandingan sudah tidak muncul di scoreboard, ATAU
-        # b) Scoreboard menunjukkan pertandingan sudah selesai / void / ada perubahan skor
         detail_match = None
         events_list = None
         need_detail = (
@@ -157,7 +191,6 @@ def run_scan_cycle() -> Dict[str, Any]:
     save_scan_metadata(meta_summary)
     return meta_summary
 
-
 def main() -> int:
     parser = argparse.ArgumentParser(
         description="Run single scan & settlement cycle for TRADING BOLA MENIT 60."
@@ -180,11 +213,9 @@ def main() -> int:
             f"Settled={summary['matches_settled_this_cycle']}"
         )
 
-    # Jika seluruh endpoint gagal total, kembalikan kode keluar non-zero untuk visibilitas log
     if summary["source_status"] == "CRITICAL_ALL_ENDPOINTS_FAILED":
         return 2
     return 0
-
 
 if __name__ == "__main__":
     sys.exit(main())
