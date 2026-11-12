@@ -19,9 +19,9 @@
       "trading_day": "2026-10-28",
       "minute_detected": 61,
       "score_at_entry": "0-0",
-      "odds_entry": null,
+      "odds_entry": 2.2,
       "simulated_odds": 1.8,
-      "odds_source": "SIMULATED_DEFAULT",
+      "odds_source": "Est - Liga English Premier League (16 match, lam=1.3)",
       "stake": 50000,
       "source": "ESPN_API",
       "source_event_id": "401777666",
@@ -65,7 +65,7 @@
       "match_status": "Final",
       "settlement_status": "SETTLED",
       "result": "WIN",
-      "profit": 40000,
+      "profit": 60000.0,
       "roi_contribution": 80.0,
       "simulated_profit": 40000,
       "simulated_roi_contribution": 80.0,
@@ -76,7 +76,12 @@
       "updated_at": "2026-10-29T04:15:00Z",
       "last_verified_at": "2026-10-29T04:15:00Z",
       "verification_status": "VERIFIED_OFFICIAL_FINAL",
-      "revision_history": []
+      "revision_history": [],
+      "odds": 2.2,
+      "odds_entry_type": "Est",
+      "odds_migrated_v6_fixed": true,
+      "pnl": 60000.0,
+      "p_l": 60000.0
     }
   ]
 }
