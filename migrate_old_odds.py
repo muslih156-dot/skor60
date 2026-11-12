@@ -1,8 +1,7 @@
 """
-migrate_old_odds.py - SATU KALI JALAN SAJA
-Tugas: Ubah semua record lama yang masih 1.80 (Sim) jadi Est - Liga / Est - Global
-Caranya: Baca semua file di data/*.json, hitung ulang pakai get_odds_with_fallback()
-Terus hitung ulang juga P/L nya kalau match-nya udah SETTLED.
+migrate_old_odds.py - SATU KALI JALAN SAJA - V2 FIX None
+Tugas: Ubah semua record lama yang masih 1.80 (Sim) / kosong jadi Est - Liga / Est - Global
+FIX: Tadi crash karena ada odds_entry = None, sekarang udah aman.
 
 Jalankan: python migrate_old_odds.py
 """
@@ -17,18 +16,24 @@ sys.path.insert(0, os.path.dirname(os.path.abspath(__file__)))
 
 from odds_provider import get_odds_with_fallback
 
+def _safe_float(val, default=0.0):
+    """FIX UTAMA: Ubah apapun jadi float dengan aman, kalau None / string kosong -> default"""
+    try:
+        if val is None or val == "":
+            return default
+        return float(val)
+    except:
+        return default
+
 def recalc_profit(rec, new_odds):
     """
     Hitung ulang profit kalau match udah settled.
-    Kita handle semua nama field yang mungkin ada di DB bapak.
     """
     try:
-        stake = float(rec.get("stake", rec.get("bet_stake", rec.get("amount", 10))))
-        # Cari hasil: WIN / LOSE / VOID
+        stake = _safe_float(rec.get("stake", rec.get("bet_stake", rec.get("amount", 10))), 10)
         result = str(rec.get("result", rec.get("outcome", rec.get("settlement_result", "")))).upper()
         status = str(rec.get("settlement_status", "")).upper()
 
-        # Kalau belum settled, profit 0 / kosongin, jangan diutak-atik
         if status not in ("SETTLED", "SETTLED_WIN", "SETTLED_LOSE"):
             if "WIN" not in result and "LOSE" not in result and "VOID" not in result:
                 return rec
@@ -93,16 +98,20 @@ def main():
                 continue
             total_checked += 1
 
-            odds_type = str(rec.get("odds_entry_type", "")).lower()
-            odds_source = str(rec.get("odds_source", "")).lower()
-            odds_val = rec.get("odds_entry", rec.get("odds", 0))
+            odds_type = str(rec.get("odds_entry_type", "") or "").lower()
+            odds_source = str(rec.get("odds_source", "") or "").lower()
+            # [FIX] Pakai _safe_float, jangan float() langsung, biar None nggak crash
+            odds_val = _safe_float(rec.get("odds_entry", rec.get("odds", 0)), 0)
 
             # Cek apakah ini record lama Sim? Kriterianya:
             # - type == Sim, ATAU source == Sim, ATAU odds == 1.80 dan type kosong
+            # - ATAU odds == 0 / None (match lama yang odds-nya kosong)
             is_sim = (
                 odds_type == "sim" or
                 odds_source == "sim" or
-                (float(odds_val) == 1.80 and odds_type in ("", "sim"))
+                odds_source == "" or
+                odds_val == 0 or
+                (odds_val == 1.80 and odds_type in ("", "sim"))
             )
 
             if not is_sim:
