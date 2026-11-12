@@ -1,0 +1,101 @@
+name: Balikin Odds Asli dari History
+
+on:
+  workflow_dispatch:
+
+permissions:
+  contents: write
+
+jobs:
+  restore:
+    runs-on: ubuntu-latest
+    steps:
+      - uses: actions/checkout@v4
+        with:
+          fetch-depth: 0
+      - name: Cari commit terakhir sebelum odds jadi 1.80 semua
+        run: |
+          echo "=== History data/matches.json ==="
+          git log --oneline -n 20 -- data/matches.json
+          echo ""
+          echo "=== Cek odds di commit lama ==="
+          python3 << 'PY'
+          import subprocess, json
+          # Ambil 15 commit terakhir file matches.json
+          out = subprocess.check_output(["git","log","--format=%H","-n","15","--","data/matches.json"], text=True).splitlines()
+          for h in out:
+              try:
+                  txt = subprocess.check_output(["git","show", f"{h}:data/matches.json"], text=True)
+                  data=json.loads(txt)
+                  recs=data if isinstance(data,list) else data.get("matches", data.get("records",[]))
+                  odds=set()
+                  for r in recs:
+                      o=r.get("odds_entry", r.get("odds", r.get("entry_odds")))
+                      if o: odds.add(str(o))
+                  print(f"{h[:7]} : {len(recs)} match, odds unik: {sorted(list(odds))[:10]}")
+                  # Kalau udah ketemu yang odds-nya masih beragam (bukan 1.80 semua), itu yang bener
+                  if len(odds)>1:
+                      print(f"  -> KETEMU COMMIT BENER: {h}")
+                      break
+              except Exception as e:
+                  print(f"{h[:7]} : error {e}")
+          PY
+      - name: Restore odds asli per match_id
+        run: |
+          python3 << 'PY'
+          import subprocess, json, os, glob
+          # Cari commit pertama yang odds-nya masih beragam
+          commits = subprocess.check_output(["git","log","--format=%H","-n","30","--","data/matches.json"], text=True).splitlines()
+          good=None
+          for h in commits:
+              try:
+                  txt=subprocess.check_output(["git","show", f"{h}:data/matches.json"], text=True)
+                  data=json.loads(txt)
+                  recs=data if isinstance(data,list) else data.get("matches", data.get("records",[]))
+                  odds=set(str(r.get("odds_entry", r.get("odds", ""))) for r in recs if r.get("odds_entry") or r.get("odds"))
+                  if len(odds)>1 and "1.8" not in odds or len(odds)>2:
+                      good=h; break
+              except: continue
+          if not good:
+              print("Gak ketemu commit bener, coba manual")
+              exit(0)
+          print(f"Pakai commit: {good}")
+          txt=subprocess.check_output(["git","show", f"{good}:data/matches.json"], text=True)
+          old=json.loads(txt)
+          old_recs=old if isinstance(old,list) else old.get("matches", old.get("records",[]))
+          old_map={}
+          for r in old_recs:
+              mid=str(r.get("match_id","") or r.get("source_event_id",""))
+              if mid: old_map[mid]=r
+          print(f"Old map: {len(old_map)} match")
+          # Timpa odds di file sekarang, TAPI cuma odds-nya aja, jangan timpa profit / status
+          with open("data/matches.json", encoding="utf-8") as f: cur=json.load(f)
+          cur_recs=cur if isinstance(cur,list) else cur.get("matches", cur.get("records",[]))
+          key=None
+          if isinstance(cur, dict):
+              for k in ["matches","records"]:
+                  if k in cur: key=k; break
+          for r in cur_recs:
+              mid=str(r.get("match_id","") or r.get("source_event_id",""))
+              if mid in old_map:
+                  o=old_map[mid]
+                  orig_o=o.get("odds_entry", o.get("odds", o.get("entry_odds")))
+                  orig_src=o.get("odds_source", o.get("odds_entry_type",""))
+                  print(f"  [BALIKIN] {mid} {r.get('home_team')} vs {r.get('away_team')} : {r.get('odds_entry')} -> {orig_o} ({orig_src})")
+                  r["odds_entry"]=orig_o; r["odds"]=orig_o; r["entry_odds"]=orig_o
+                  # Jangan timpa odds_source jadi Actual lagi, pertahanin Sim/Est tapi odds-nya asli
+                  if r.get("odds_source") in ("Actual","actual"):
+                      r["odds_source"]="Sim"; r["odds_entry_type"]="Sim"; r["odds_type"]="Sim"
+          if key: cur[key]=cur_recs
+          else: cur=cur_recs
+          with open("data/matches.json","w",encoding="utf-8") as f: json.dump(cur,f,indent=2,ensure_ascii=False)
+          print("Selesai balikin odds")
+          PY
+      - name: Commit
+        run: |
+          git config user.name "bot-odds"
+          git config user.email "bot@odds.local"
+          git add data/matches.json
+          git diff --cached --quiet || git commit -m "Balikin odds asli dari history, bukan 1.80 fallback"
+          git pull --rebase origin main
+          git push
