@@ -20,9 +20,9 @@
       "trading_day": "2026-11-11",
       "minute_detected": 64,
       "score_at_entry": "0-0",
-      "odds_entry": 1.72,
+      "odds_entry": 1.8,
       "simulated_odds": 1.8,
-      "odds_source": "Est - Global",
+      "odds_source": "Sim",
       "stake": 50000,
       "source": "ESPN_API",
       "source_event_id": "401931279",
@@ -99,9 +99,12 @@
       "last_verified_at": "2026-11-12T03:45:58Z",
       "verification_status": "IN_PROGRESS_PENDING_FINAL",
       "revision_history": [],
-      "odds_entry_type": "Est",
+      "odds_entry_type": "Sim",
       "audit_explanation": "Pertandingan 401931279 masih berstatus Second Half (Skor saat ini: 1-1). Menunggu status Final resmi dari provider (PENDING).",
-      "audit_passed": true
+      "audit_passed": true,
+      "odds": 1.8,
+      "entry_odds": 1.8,
+      "odds_type": "Sim"
     },
     {
       "match_id": "401931353",
