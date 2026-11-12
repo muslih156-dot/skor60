@@ -274,7 +274,7 @@ def render_dashboard() -> None:
                 a1, a2, a3, a4 = st.columns(4)
                 a1.metric("Settled Matches (Actual Odds)", act_stats["settled_matches"])
                 a2.metric("Average Entry Odds", f"{act_stats['average_odds']:.3f}" if act_stats["average_odds"] else "N/A")
-                a3.metric("Break-Even WR (Actual)", f"{act_stats['break_even_win_rate']:.2f}%" if act_stats["break_even_win_rate"] else "N/A")
+                a3.metric("Break-Even WR (Est)", f"{act_stats['break_even_win_rate']:.2f}%" if act_stats["break_even_win_rate"] else "N/A")
                 a4.metric("Actual Net Profit", format_idr(act_stats["net_profit"]))
 
         with tab_tier:
@@ -513,7 +513,7 @@ def render_dashboard() -> None:
             )
 
             badge_tier = "MAJOR" if rec.get("is_major") else str(rec.get("league_category") or "UNKNOWN")
-            odds_disp = f"{rec.get('odds_entry', SIMULATED_ODDS):.2f} (Actual)" if rec.get("odds_entry") is not None else f"{SIMULATED_ODDS:.2f} (Sim)"
+            odds_disp = f"{rec.get('odds_entry', SIMULATED_ODDS):.2f} (Est)" if rec.get("odds_entry") is not None else f"{SIMULATED_ODDS:.2f} (Sim)"
             pnl_val = rec.get("actual_profit") if rec.get("odds_entry") is not None else rec.get("simulated_profit", 0)
 
             # Tambahan untuk Aktivitas
