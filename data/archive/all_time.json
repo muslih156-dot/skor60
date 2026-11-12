@@ -1,7 +1,7 @@
 {
   "system": "TRADING BOLA MENIT 60 - LAST GOAL SYSTEM",
   "version": "2.1",
-  "last_updated_utc": "2026-11-12T14:53:05Z",
+  "last_updated_utc": "2026-11-12T14:57:51Z",
   "total_records": 204,
   "matches": [
     {
@@ -36,10 +36,42 @@
           "score": "0-0",
           "match_status": "Second Half",
           "note": "ENTRY"
+        },
+        {
+          "timestamp_utc": "2026-11-12T14:57:51Z",
+          "timestamp_wita": "2026-11-12T22:57:51.715632+08:00",
+          "clock": "90'+6'",
+          "minute": 90,
+          "score": "1-1",
+          "match_status": "Second Half",
+          "note": "GOAL DETECTED"
         }
       ],
-      "goal_events": [],
-      "current_score": "0-0",
+      "goal_events": [
+        {
+          "minute": 89,
+          "clock_display": "89'",
+          "period": 2,
+          "team": "Iceland U21",
+          "scorer": "Hilmir Rafn Mikaelsson",
+          "type": "Goal",
+          "text": "Hilmir Rafn Mikaelsson (Iceland U21) Goal at 89'",
+          "time_approximate": false,
+          "source": "ESPN_SUMMARY_KEY_EVENTS"
+        },
+        {
+          "minute": 90,
+          "clock_display": "90'+2'",
+          "period": 2,
+          "team": "Greece U21",
+          "scorer": "Hilmir Rafn Mikaelsson",
+          "type": "Own Goal",
+          "text": "Hilmir Rafn Mikaelsson (Iceland U21) Own Goal at 90'+2'",
+          "time_approximate": false,
+          "source": "ESPN_SUMMARY_KEY_EVENTS"
+        }
+      ],
+      "current_score": "1-1",
       "final_score": null,
       "match_status": "Second Half",
       "settlement_status": "PENDING",
@@ -52,11 +84,11 @@
       "actual_roi_contribution": null,
       "is_major": false,
       "created_at": "2026-11-12T14:25:54Z",
-      "updated_at": "2026-11-12T14:53:05Z",
+      "updated_at": "2026-11-12T14:57:51Z",
       "last_verified_at": "2026-11-12T14:25:54Z",
       "verification_status": "IN_PROGRESS_PENDING_FINAL",
       "revision_history": [],
-      "audit_explanation": "Pertandingan 401929701 masih berstatus Second Half (Skor saat ini: 0-0). Menunggu status Final resmi dari provider (PENDING).",
+      "audit_explanation": "Pertandingan 401929701 masih berstatus Second Half (Skor saat ini: 1-1). Menunggu status Final resmi dari provider (PENDING).",
       "audit_passed": true
     },
     {
