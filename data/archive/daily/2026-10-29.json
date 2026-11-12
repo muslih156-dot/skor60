@@ -1,6 +1,6 @@
 {
   "trading_day": "2026-10-29",
-  "last_updated_utc": "2026-11-12T04:18:01Z",
+  "last_updated_utc": "2026-11-12T04:23:04Z",
   "total_records": 1,
   "matches": [
     {
@@ -18,9 +18,9 @@
       "trading_day": "2026-10-29",
       "minute_detected": 62,
       "score_at_entry": "0-0",
-      "odds_entry": 1.72,
+      "odds_entry": null,
       "simulated_odds": 1.8,
-      "odds_source": "Est - Global",
+      "odds_source": "SIMULATED_DEFAULT",
       "stake": 50000,
       "source": "ESPN_API",
       "source_event_id": "401879594",
@@ -51,7 +51,7 @@
       "match_status": "Final",
       "settlement_status": "SETTLED",
       "result": "LOSE",
-      "profit": -50000.0,
+      "profit": -50000,
       "roi_contribution": -100.0,
       "simulated_profit": -50000,
       "simulated_roi_contribution": -100.0,
@@ -64,12 +64,7 @@
       "verification_status": "VERIFIED_OFFICIAL_FINAL",
       "revision_history": [],
       "audit_explanation": "Pertandingan 401879594 masuk pada menit 62' dengan skor 0-0. Hingga status resmi Final, skor akhir waktu normal tetap 0-0 (tidak ada gol setelah entry) sehingga dinyatakan LOSE.",
-      "audit_passed": true,
-      "odds": 1.72,
-      "odds_entry_type": "Est",
-      "odds_migrated_v7_fixed": true,
-      "pnl": -50000.0,
-      "p_l": -50000.0
+      "audit_passed": true
     }
   ]
 }
