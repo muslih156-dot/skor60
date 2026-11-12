@@ -21,7 +21,7 @@
       "score_at_entry": "0-0",
       "odds_entry": 1.72,
       "simulated_odds": 1.8,
-      "odds_source": "Est - Global",
+      "odds_source": "Sim",
       "stake": 50000,
       "source": "ESPN_API",
       "source_event_id": "401931279",
@@ -107,9 +107,10 @@
       "last_verified_at": "2026-11-12T04:42:49Z",
       "verification_status": "VERIFIED_REGULATION_LINESCORE",
       "revision_history": [],
-      "odds_entry_type": "Est",
+      "odds_entry_type": "Sim",
       "audit_explanation": "Pertandingan 401931279 masuk pada menit 64' dengan skor 0-0. Status resmi mencapai Extra Time dengan skor akhir waktu normal 1-1. Minimal 1 gol tercipta setelah waktu entry sehingga dinyatakan WIN.",
-      "audit_passed": true
+      "audit_passed": true,
+      "odds_type": "Sim"
     },
     {
       "match_id": "401931353",
