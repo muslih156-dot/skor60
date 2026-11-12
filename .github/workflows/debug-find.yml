@@ -1,0 +1,23 @@
+name: Debug Cari File Dashboard
+
+on:
+  workflow_dispatch:
+
+permissions:
+  contents: read
+
+jobs:
+  debug:
+    runs-on: ubuntu-latest
+    steps:
+      - uses: actions/checkout@v4
+      - name: Cari file yang isinya 401931279
+        run: |
+          echo "=== Cari ID Washington vs Rutgers ==="
+          grep -r "401931279" --include="*.json" . || echo "TIDAK KETEMU DI JSON"
+          echo ""
+          echo "=== Semua file json ==="
+          find data -type f -name "*.json" | head -n 50
+          echo ""
+          echo "=== Dashboard baca file apa? ==="
+          grep -rn "fetch\|trades.json\|latest.json\|data/" --include="*.html" . | head -n 30
