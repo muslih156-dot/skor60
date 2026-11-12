@@ -1,64 +1,55 @@
 """
-odds_provider.py - V3 FIX FINAL
-Sistem Odds Tanpa 1.80 Sim
-Urutan: 1. Actual dari The Odds API -> 2. Est dari History Liga (hanya SETTLED) -> 3. Est Global
-FIX V3:
-- Unknown League langsung ke Global, jangan hitung 292 match campur aduk
-- History Liga cuma hitung match SETTLED yang ada final_score, jangan hitung PENDING 0-0
+odds_provider.py - V5 FINAL - MANUAL SEMUA, TANPA ODDS API
+Lupakan The Odds API. Semua odds dihitung manual dari history kita sendiri.
+
+Rumus:
+- Kita entry menit 60, sisa waktu ~32 menit (30 + injury)
+- lam_sisa = lam_full * (32 / 90) = lam_full * 0.355
+- P(Over 0.5) = 1 - exp(-lam_sisa)
+- Odds = 1 / P
+
+Contoh:
+lam_full 2.45 (Global) -> lam_sisa 0.87 -> P 58% -> Odds 1.71
+lam_full 2.80 (Liga gol banyak) -> lam_sisa 0.99 -> P 63% -> Odds 1.59
+lam_full 1.80 (Liga gol dikit) -> lam_sisa 0.64 -> P 47% -> Odds 2.12
 """
 
-import os
 import json
 import glob
 import math
-import requests
-
-# API Key dari GitHub Secrets / env
-ODDS_API_KEY = os.environ.get("ODDS_API_KEY", "").strip()
-ODDS_API_URL = "https://api.the-odds-api.com/v4/sports/soccer/odds"
-
-# Cache biar nggak boros request
-_odds_cache = {}
-
-def _safe_float(val, default=0.0):
-    try:
-        if val is None or val == "":
-            return default
-        return float(val)
-    except:
-        return default
 
 def _get_lambda_to_odds_over05(lam):
     """
-    Rumus Poisson: P(Over 0.5) = 1 - exp(-lam)
-    Odds = 1 / P
-    lam = rata-rata total gol per match di liga itu
+    lam = rata-rata total gol per match full 90 menit di liga itu
+    Output = odds Over 0.5 untuk sisa 30 menit (menit 60 ke atas)
     """
     try:
         lam = float(lam)
         if lam <= 0:
             lam = 2.45
-        p_over = 1 - math.exp(-lam)
-        if p_over <= 0.05:
-            p_over = 0.05
-        if p_over >= 0.95:
-            p_over = 0.95
+        # Sisa waktu menit 60 -> 90+ = ~32 menit
+        lam_remaining = lam * 0.355
+        p_over = 1 - math.exp(-lam_remaining)
+        if p_over <= 0.10:
+            p_over = 0.10
+        if p_over >= 0.90:
+            p_over = 0.90
         odds = 1 / p_over
-        # Batas wajar untuk Over 0.5 After 60': 1.25 - 2.80
-        odds = max(1.25, min(2.80, odds))
+        # Batas wajar Over 0.5 After 60': 1.35 - 2.20
+        odds = max(1.35, min(2.20, odds))
         return round(odds, 2)
     except:
-        return 1.62
+        return 1.71
 
 def _estimate_lambda_from_league_history(league_name):
     """
-    HITUNG MANUAL TANPA API: Baca database kita sendiri
-    FIX V3: Cuma hitung match yang UDAH SELESAI (SETTLED), jangan hitung yang masih 0-0 / PENDING.
-    Kalau league-nya Unknown League, JANGAN dipakai, langsung ke Global.
+    Hitung lam dari database kita sendiri.
+    Cuma hitung match yang UDAH SETTLED + ada final_score.
+    Jangan hitung yang masih PENDING 0-0, nanti lam-nya kekecilan.
+    Kalau liga Unknown, langsung return None -> ke Global.
     """
     try:
         league_key = str(league_name or "").lower().strip()
-        # [FIX] Kalau Unknown, langsung skip, jangan ngitung 292 match campur aduk
         if league_key in ("", "unknown league", "unknown", "none"):
             return None, 0
 
@@ -72,7 +63,6 @@ def _estimate_lambda_from_league_history(league_name):
                 if isinstance(data, list):
                     records = data
                 elif isinstance(data, dict):
-                    # Coba semua key yang mungkin
                     if isinstance(data.get("records"), list):
                         records = data.get("records", [])
                     elif isinstance(data.get("matches"), list):
@@ -84,7 +74,6 @@ def _estimate_lambda_from_league_history(league_name):
                 for rec in records:
                     if not isinstance(rec, dict):
                         continue
-                    # [FIX] Cuma hitung yang udah SETTLED / final, jangan yang PENDING 0-0
                     status = str(rec.get("settlement_status", "")).upper()
                     if status not in ("SETTLED", "SETTLED_WIN", "SETTLED_LOSE", "VOID"):
                         continue
@@ -92,11 +81,9 @@ def _estimate_lambda_from_league_history(league_name):
                     if rec_league != league_key:
                         continue
                     score_str = str(rec.get("final_score", "") or rec.get("current_score", "") or rec.get("score", ""))
-                    # [FIX] Harus ada final_score yang bener, bukan 0-0 entry
                     if "-" not in score_str:
                         continue
                     try:
-                        # Ambil format "2-1" atau "2 - 1"
                         clean = score_str.replace(" ", "").split("|")[0].strip()
                         a, b = clean.split("-")[:2]
                         total_goals += int(a) + int(b)
@@ -113,81 +100,16 @@ def _estimate_lambda_from_league_history(league_name):
         print(f"[odds] gagal baca history liga: {e}")
         return None, 0
 
-def _get_actual_odds_from_api(home_team, away_team, league_name):
-    """
-    Ambil odds Actual dari The Odds API
-    Return None kalau gagal / key salah / kuota habis / match nggak ketemu
-    """
-    if not ODDS_API_KEY:
-        print("[odds] ODDS_API_KEY kosong, skip API")
-        return None
-
-    # Cache key biar nggak request berkali-kali untuk match yang sama
-    cache_key = f"{home_team}|{away_team}".lower()
-    if cache_key in _odds_cache:
-        return _odds_cache[cache_key]
-
-    try:
-        params = {
-            "apiKey": ODDS_API_KEY,
-            "regions": "eu",
-            "markets": "totals",
-            "oddsFormat": "decimal",
-            "dateFormat": "iso",
-        }
-        resp = requests.get(ODDS_API_URL, params=params, timeout=15)
-        if resp.status_code == 401:
-            print("[odds] API gagal / kuota habis (HTTP Error 401: Unauthorized), pakai hitung manual Liga")
-            return None
-        if resp.status_code == 429:
-            print("[odds] API kuota habis (429), pakai hitung manual Liga")
-            return None
-        if resp.status_code != 200:
-            print(f"[odds] API gagal status {resp.status_code}, pakai hitung manual Liga")
-            return None
-
-        data = resp.json()
-        home_low = str(home_team or "").lower().strip()
-        away_low = str(away_team or "").lower().strip()
-
-        for match in data:
-            api_home = str(match.get("home_team", "")).lower().strip()
-            api_away = str(match.get("away_team", "")).lower().strip()
-            # Cocokin nama tim, boleh kebalik / sebagian
-            if (home_low in api_home or api_home in home_low) and (away_low in api_away or api_away in away_low):
-                # Cari market totals Over 0.5
-                for bookmaker in match.get("bookmakers", []):
-                    for market in bookmaker.get("markets", []):
-                        if market.get("key") == "totals":
-                            for outcome in market.get("outcomes", []):
-                                if outcome.get("name") == "Over" and _safe_float(outcome.get("point"), 99) == 0.5:
-                                    odds_val = _safe_float(outcome.get("price"), 0)
-                                    if odds_val > 1.01:
-                                        result = {"odds": round(odds_val, 2), "source": f"Actual - {bookmaker.get('title','API')}", "type": "Actual"}
-                                        _odds_cache[cache_key] = result
-                                        return result
-        # Match nggak ketemu di API
-        _odds_cache[cache_key] = None
-        return None
-    except Exception as e:
-        print(f"[odds] API error: {e}, pakai hitung manual Liga")
-        return None
-
 def get_odds_with_fallback(home_team, away_team, league_name):
     """
     FUNGSI UTAMA - DIPAKAI check_once.py DAN migrate_old_odds.py
-    TIDAK PERNAH return None, selalu ada odds.
-    Urutan:
-    1. Actual dari API
-    2. Est dari History Liga (kalau liga dikenal + ada minimal 5 match SETTLED)
-    3. Est Global (lam = 2.45 -> odds 1.62)
-    """
-    # 1. Coba Actual
-    actual = _get_actual_odds_from_api(home_team, away_team, league_name)
-    if actual:
-        return actual
+    MANUAL 100%, TIDAK PERNAH KE API, TIDAK PERNAH return None.
 
-    # 2. Coba Est dari Liga
+    Urutan:
+        1. Est dari History Liga (kalau liga dikenal + minimal 5 match SETTLED)
+        2. Est Global (lam = 2.45 -> odds 1.71)
+    """
+    # 1. Coba Est dari Liga
     lam, count = _estimate_lambda_from_league_history(league_name)
     if lam is not None and count >= 5:
         odds = _get_lambda_to_odds_over05(lam)
@@ -197,7 +119,7 @@ def get_odds_with_fallback(home_team, away_team, league_name):
             "type": "Est"
         }
 
-    # 3. Fallback Global - lam rata-rata dunia 2.45
+    # 2. Fallback Global - lam rata-rata dunia 2.45
     odds_global = _get_lambda_to_odds_over05(2.45)
     return {
         "odds": odds_global,
