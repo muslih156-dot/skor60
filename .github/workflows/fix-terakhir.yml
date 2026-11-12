@@ -1,0 +1,59 @@
+name: Fix Terakhir Hapus Arsenal + Washington
+
+on:
+  workflow_dispatch:
+
+permissions:
+  contents: write
+
+jobs:
+  fix:
+    runs-on: ubuntu-latest
+    steps:
+      - uses: actions/checkout@v4
+      - name: Hapus Arsenal + Fix Washington
+        run: |
+          python3 << 'PY'
+          import json, glob, os
+          targets = ["data/matches.json"] + sorted(glob.glob("data/archive/daily/*.json"))
+          for fpath in targets:
+              if not os.path.exists(fpath): continue
+              with open(fpath, encoding="utf-8") as f: data=json.load(f)
+              records=None; key=None
+              if isinstance(data, list): records=data
+              elif isinstance(data, dict):
+                  for k in ["matches","records","data"]:
+                      if k in data and isinstance(data[k], list):
+                          records=data[k]; key=k; break
+              if records is None: continue
+              out=[]
+              changed=0
+              for r in records:
+                  mid=str(r.get("match_id","") or r.get("source_event_id",""))
+                  home=str(r.get("home_team","") or r.get("home",""))
+                  if mid=="401500001" or ("Arsenal" in home and "Chelsea" in str(r.get("away_team",""))):
+                      print(f"  [HAPUS] Arsenal {mid}")
+                      changed+=1
+                      continue
+                  # Fix Washington yang masih Actual -> Sim
+                  if mid=="401931279":
+                      print(f"  [FIX] Washington {mid} {r.get('odds_source')} -> 1.80 (Sim)")
+                      r["odds_entry"]=1.80; r["odds"]=1.80; r["entry_odds"]=1.80
+                      r["odds_entry_type"]="Sim"; r["odds_source"]="Sim"; r["odds_type"]="Sim"
+                      changed+=1
+                  out.append(r)
+              if changed>0:
+                  if key: data[key]=out
+                  else: data=out
+                  with open(fpath,"w",encoding="utf-8") as f: json.dump(data,f,indent=2,ensure_ascii=False)
+                  print(f" -> Simpan {fpath}: {changed} diubah")
+          print("Selesai")
+          PY
+      - name: Commit
+        run: |
+          git config user.name "bot-fix"
+          git config user.email "bot@fix.local"
+          git add -A
+          git diff --cached --quiet || git commit -m "Hapus Arsenal + Fix Washington Actual->Sim"
+          git pull --rebase origin main
+          git push
