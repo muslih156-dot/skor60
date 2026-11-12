@@ -1,6 +1,6 @@
 {
   "trading_day": "2026-11-11",
-  "last_updated_utc": "2026-11-12T04:23:04Z",
+  "last_updated_utc": "2026-11-12T04:38:00Z",
   "total_records": 13,
   "matches": [
     {
@@ -19,9 +19,9 @@
       "trading_day": "2026-11-11",
       "minute_detected": 64,
       "score_at_entry": "0-0",
-      "odds_entry": 1.8,
+      "odds_entry": 1.72,
       "simulated_odds": 1.8,
-      "odds_source": "Sim",
+      "odds_source": "Est - Global",
       "stake": 50000,
       "source": "ESPN_API",
       "source_event_id": "401931279",
@@ -94,16 +94,13 @@
       "actual_roi_contribution": 0.0,
       "is_major": false,
       "created_at": "2026-11-12T03:45:58Z",
-      "updated_at": "2026-11-12T04:23:04Z",
+      "updated_at": "2026-11-12T04:38:00Z",
       "last_verified_at": "2026-11-12T03:45:58Z",
       "verification_status": "IN_PROGRESS_PENDING_FINAL",
       "revision_history": [],
-      "odds_entry_type": "Sim",
+      "odds_entry_type": "Est",
       "audit_explanation": "Pertandingan 401931279 masih berstatus Second Half (Skor saat ini: 1-1). Menunggu status Final resmi dari provider (PENDING).",
-      "audit_passed": true,
-      "odds": 1.8,
-      "entry_odds": 1.8,
-      "odds_type": "Sim"
+      "audit_passed": true
     },
     {
       "match_id": "401931353",
