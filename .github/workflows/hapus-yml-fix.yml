@@ -1,0 +1,36 @@
+name: Hapus Semua YML Fix
+
+on:
+  workflow_dispatch:
+
+permissions:
+  contents: write
+
+jobs:
+  hapus:
+    runs-on: ubuntu-latest
+    steps:
+      - uses: actions/checkout@v4
+      - name: Hapus 5 YML fix, sisain bot.yml aja
+        run: |
+          echo "=== Sebelum dihapus ==="
+          ls -1 .github/workflows/
+          # Hapus 5 file fix-nya, pakai rm -f biar nggak error kalau udah kehapus
+          rm -f .github/workflows/fix-app.yml
+          rm -f .github/workflows/fix-profit.yml
+          rm -f .github/workflows/fix-terakhir.yml
+          rm -f .github/workflows/balikin-odds.yml
+          rm -f .github/workflows/balikin-odds-4019.yml
+          rm -f .github/workflows/fix-arsenal-odds-profit.yml
+          rm -f .github/workflows/blokir-arsenal-final.yml
+          rm -f .github/workflows/batalin-blokir.yml
+          echo "=== Sesudah dihapus, harusnya tinggal bot.yml ==="
+          ls -1 .github/workflows/
+      - name: Commit hapus YML
+        run: |
+          git config user.name "bot-bersih"
+          git config user.email "bot@bersih.local"
+          git add -A
+          git diff --cached --quiet || git commit -m "Hapus semua YML fix, sisain bot.yml"
+          git pull --rebase origin main
+          git push
