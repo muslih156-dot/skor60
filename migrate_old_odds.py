@@ -1,7 +1,8 @@
 """
-migrate_old_odds.py - SATU KALI JALAN SAJA - V2 FIX None
-Tugas: Ubah semua record lama yang masih 1.80 (Sim) / kosong jadi Est - Liga / Est - Global
-FIX: Tadi crash karena ada odds_entry = None, sekarang udah aman.
+migrate_old_odds.py - SATU KALI JALAN SAJA - V3 FIX Unknown League 2.53
+Tugas: 
+1. Ubah semua record lama yang masih 1.80 (Sim) / kosong jadi Est
+2. [V3] Benerin yang udah terlanjur migrasi tapi salah jadi 2.53 Unknown League -> jadi Est Global 1.62
 
 Jalankan: python migrate_old_odds.py
 """
@@ -17,7 +18,7 @@ sys.path.insert(0, os.path.dirname(os.path.abspath(__file__)))
 from odds_provider import get_odds_with_fallback
 
 def _safe_float(val, default=0.0):
-    """FIX UTAMA: Ubah apapun jadi float dengan aman, kalau None / string kosong -> default"""
+    """Ubah apapun jadi float dengan aman, kalau None / string kosong -> default"""
     try:
         if val is None or val == "":
             return default
@@ -100,18 +101,26 @@ def main():
 
             odds_type = str(rec.get("odds_entry_type", "") or "").lower()
             odds_source = str(rec.get("odds_source", "") or "").lower()
-            # [FIX] Pakai _safe_float, jangan float() langsung, biar None nggak crash
             odds_val = _safe_float(rec.get("odds_entry", rec.get("odds", 0)), 0)
 
-            # Cek apakah ini record lama Sim? Kriterianya:
-            # - type == Sim, ATAU source == Sim, ATAU odds == 1.80 dan type kosong
-            # - ATAU odds == 0 / None (match lama yang odds-nya kosong)
+            # [FIX V3] Migrasi juga yang udah terlanjur jadi Est tapi salah (Unknown League + 2.53)
+            # Tandanya: pernah dimigrasi dari Sim DAN source-nya Unknown League
+            is_migrated_wrong = (
+                rec.get("odds_migrated_from_sim") is True and
+                "unknown league" in odds_source
+            )
+            # Kalau udah di-fix V3, skip biar nggak keulang-ulang
+            if rec.get("odds_migrated_v3_fixed") is True:
+                total_skipped += 1
+                continue
+
             is_sim = (
                 odds_type == "sim" or
                 odds_source == "sim" or
                 odds_source == "" or
                 odds_val == 0 or
-                (odds_val == 1.80 and odds_type in ("", "sim"))
+                (odds_val == 1.80 and odds_type in ("", "sim")) or
+                is_migrated_wrong
             )
 
             if not is_sim:
@@ -132,6 +141,7 @@ def main():
                 # Tandain biar ketauan ini hasil migrasi
                 rec["odds_migrated_from_sim"] = True
                 rec["odds_migrated_old_value"] = old_odds
+                rec["odds_migrated_v3_fixed"] = True
 
                 # Hitung ulang P/L kalau udah settled
                 rec = recalc_profit(rec, new_odds_info["odds"])
