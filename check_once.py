@@ -8,6 +8,11 @@ Tugas:
 3. Memantau dan memperbarui status pertandingan yang masih PENDING / LIVE.
 4. Melakukan validasi settlement akhir (WIN/LOSE/VOID/REVIEW) menggunakan scoreboard + summary detail.
 5. Menyimpan metadata kesehatan sistem dan arsip JSON, serta mengirim notifikasi ke Telegram jika ada kandidat baru.
+
+UPDATE FINAL - Tanpa 1.80 Sim:
+- Odds diambil dari get_odds_with_fallback()
+- Urutan: Actual -> Est dari API -> Est dari Liga (history DB sendiri) -> Est Global
+- Kalau kuota Odds API habis / match nggak ada di API, langsung hitung manual, TIDAK balik ke Sim.
 """
 
 import argparse
@@ -24,8 +29,7 @@ from espn_client import fetch_live_match, fetch_match_detail, fetch_match_events
 from parser import detect_candidate, format_iso_utc_and_wita
 from settlement import audit_result, validate_final_result
 from telegram_notifier import send_telegram_message
-# [ODDS NYATA] Tambahan baru
-from odds_provider import get_live_over_05_odds
+from odds_provider import get_odds_with_fallback
 
 def run_scan_cycle() -> Dict[str, Any]:
     """Menjalankan satu siklus penuh pemindaian, deteksi kandidat, settlement, dan notifikasi."""
@@ -52,30 +56,27 @@ def run_scan_cycle() -> Dict[str, Any]:
 
         cand_eval = detect_candidate(parsed_match)
         if cand_eval["is_candidate"]:
-            # [ODDS NYATA] Ambil odds dulu SEBELUM insert, biar kesimpen di database
-            home_tmp = parsed_match.get("teams", {}).get("home", "") or parsed_match.get("home_team", "")
-            away_tmp = parsed_match.get("teams", {}).get("away", "") or parsed_match.get("away_team", "")
-            # Fallback: ambil dari score dict kalau format beda
+            # Ambil nama tim & liga untuk hitung odds
+            home_tmp = parsed_match.get("teams", {}).get("home", "") if isinstance(parsed_match.get("teams"), dict) else ""
+            away_tmp = parsed_match.get("teams", {}).get("away", "") if isinstance(parsed_match.get("teams"), dict) else ""
             if not home_tmp:
-                home_tmp = parsed_match.get("score", {}).get("home_team", "")
+                home_tmp = parsed_match.get("home_team", "") or parsed_match.get("score", {}).get("home_team", "")
             if not away_tmp:
-                away_tmp = parsed_match.get("score", {}).get("away_team", "")
+                away_tmp = parsed_match.get("away_team", "") or parsed_match.get("score", {}).get("away_team", "")
+            league_tmp = parsed_match.get("league", "Unknown League") or "Unknown League"
 
-            real_odds = None
+            # [FINAL] Tanpa 1.80 lagi. Selalu hitung, selalu ada odds.
+            # get_odds_with_fallback() TIDAK PERNAH return None.
+            # Kalau API habis / nggak ada, dia hitung manual dari history liga / global.
             try:
-                real_odds = get_live_over_05_odds(home_tmp, away_tmp)
+                real_odds = get_odds_with_fallback(home_tmp, away_tmp, league_tmp)
             except Exception as e:
-                print(f"[odds] error: {e}")
-                real_odds = None
+                print(f"[odds] fallback error: {e}, pakai Est Global darurat")
+                real_odds = {"odds": 1.62, "source": "Est - Global (darurat)", "type": "Est"}
 
-            if real_odds:
-                parsed_match["odds_entry"] = real_odds["odds"]
-                parsed_match["odds_source"] = real_odds["source"]
-                parsed_match["odds_entry_type"] = "Actual"
-            else:
-                parsed_match["odds_entry"] = 1.80
-                parsed_match["odds_source"] = "Sim"
-                parsed_match["odds_entry_type"] = "Sim"
+            parsed_match["odds_entry"] = real_odds["odds"]
+            parsed_match["odds_source"] = real_odds["source"]
+            parsed_match["odds_entry_type"] = real_odds["type"]
 
             record, created = db.insert_candidate_idempotent(
                 parsed_match=parsed_match,
@@ -85,7 +86,7 @@ def run_scan_cycle() -> Dict[str, Any]:
             if created:
                 new_candidates_count += 1
 
-                # [ODDS NYATA] Paksa update record biar odds kesimpen walau database.py belum support odds_entry
+                # Paksa update record biar odds kesimpen walau database.py belum support odds_entry
                 try:
                     record["odds_entry"] = parsed_match["odds_entry"]
                     record["odds_source"] = parsed_match["odds_source"]
@@ -93,15 +94,16 @@ def run_scan_cycle() -> Dict[str, Any]:
                     db.update_existing_record(record)
                 except Exception as e:
                     print(f"[odds] gagal update record odds: {e}")
-                
+
                 # Kirim notifikasi otomatis ke Telegram saat kandidat baru terdeteksi
-                home_team = record.get("home_team", "Home")
-                away_team = record.get("away_team", "Away")
-                league = record.get("league", "Unknown League")
+                home_team = record.get("home_team", home_tmp or "Home")
+                away_team = record.get("away_team", away_tmp or "Away")
+                league = record.get("league", league_tmp)
                 minute = record.get("minute_detected", "60-66")
                 score = record.get("score_at_entry", "0-0")
                 wita_time = record.get("detected_at_wita", cycle_wita_str)
                 odds_txt = f"{parsed_match['odds_entry']} ({parsed_match['odds_entry_type']})"
+                odds_src_txt = parsed_match["odds_source"]
 
                 telegram_msg = (
                     f"🚨 *KANDIDAT TRADING BARU TERDETEKSI* 🚨\n\n"
@@ -111,6 +113,7 @@ def run_scan_cycle() -> Dict[str, Any]:
                     f"📊 *Skor Entry:* {score}\n"
                     f"💰 *Market:* Over 0.5 Goal After Entry\n"
                     f"📈 *Odds:* {odds_txt}\n"
+                    f"🔍 *Sumber:* {odds_src_txt}\n"
                     f"🕒 *Waktu (WITA):* {wita_time}"
                 )
                 send_telegram_message(telegram_msg)
@@ -128,6 +131,9 @@ def run_scan_cycle() -> Dict[str, Any]:
         league_slug = rec.get("league_slug") or "all"
         sb_match = scoreboard_map.get(match_id)
 
+        # Ambil detail pertandingan apabila:
+        # a) Pertandingan sudah tidak muncul di scoreboard, ATAU
+        # b) Scoreboard menunjukkan pertandingan sudah selesai / void / ada perubahan skor
         detail_match = None
         events_list = None
         need_detail = (
@@ -213,6 +219,7 @@ def main() -> int:
             f"Settled={summary['matches_settled_this_cycle']}"
         )
 
+    # Jika seluruh endpoint gagal total, kembalikan kode keluar non-zero untuk visibilitas log
     if summary["source_status"] == "CRITICAL_ALL_ENDPOINTS_FAILED":
         return 2
     return 0
