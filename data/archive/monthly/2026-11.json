@@ -1,6 +1,6 @@
 {
   "trading_month": "2026-11",
-  "last_updated_utc": "2026-11-14T14:57:46Z",
+  "last_updated_utc": "2026-11-14T15:02:38Z",
   "total_records": 181,
   "matches": [
     {
@@ -44,40 +44,48 @@
           "score": "0-1",
           "match_status": "Second Half",
           "note": "GOAL DETECTED"
+        },
+        {
+          "timestamp_utc": "2026-11-14T15:02:38Z",
+          "timestamp_wita": "2026-11-14T23:02:38.054361+08:00",
+          "clock": "Final",
+          "minute": null,
+          "score": "0-1",
+          "match_status": "Final",
+          "note": "MATCH FINISHED"
         }
       ],
       "goal_events": [
         {
           "minute": 67,
           "clock_display": "67'",
-          "period": 0,
-          "team_id": "4438",
+          "period": 2,
+          "team": "Castellón",
           "scorer": "Adam Jakobsen",
           "type": "Goal",
-          "is_own_goal": false,
-          "is_penalty": false,
+          "text": "Adam Jakobsen (Castellón) Goal at 67'",
           "time_approximate": false,
-          "source": "ESPN_OFFICIAL_DETAIL"
+          "source": "ESPN_SUMMARY_KEY_EVENTS"
         }
       ],
       "current_score": "0-1",
-      "final_score": null,
-      "match_status": "Second Half",
-      "settlement_status": "PENDING",
-      "result": "PENDING",
-      "profit": 0,
-      "roi_contribution": 0.0,
-      "simulated_profit": 0,
-      "simulated_roi_contribution": 0.0,
+      "final_score": "0-1",
+      "match_status": "Final",
+      "settlement_status": "SETTLED",
+      "result": "WIN",
+      "profit": 40000,
+      "roi_contribution": 80.0,
+      "simulated_profit": 40000,
+      "simulated_roi_contribution": 80.0,
       "actual_profit": null,
       "actual_roi_contribution": null,
       "is_major": false,
       "created_at": "2026-11-14T14:26:30Z",
-      "updated_at": "2026-11-14T14:57:46Z",
-      "last_verified_at": "2026-11-14T14:26:30Z",
-      "verification_status": "IN_PROGRESS_PENDING_FINAL",
+      "updated_at": "2026-11-14T15:02:38Z",
+      "last_verified_at": "2026-11-14T15:02:38Z",
+      "verification_status": "VERIFIED_OFFICIAL_FINAL",
       "revision_history": [],
-      "audit_explanation": "Pertandingan 401883114 masih berstatus Second Half (Skor saat ini: 0-1). Menunggu status Final resmi dari provider (PENDING).",
+      "audit_explanation": "Pertandingan 401883114 masuk pada menit 62' dengan skor 0-0. Status resmi mencapai Final dengan skor akhir waktu normal 0-1. Minimal 1 gol tercipta setelah waktu entry sehingga dinyatakan WIN.",
       "audit_passed": true
     },
     {
