@@ -1,7 +1,7 @@
 {
   "system": "TRADING BOLA MENIT 60 - LAST GOAL SYSTEM",
   "version": "2.1",
-  "last_updated_utc": "2026-11-14T21:12:53Z",
+  "last_updated_utc": "2026-11-14T21:17:55Z",
   "total_records": 237,
   "matches": [
     {
@@ -52,7 +52,7 @@
       "actual_roi_contribution": null,
       "is_major": false,
       "created_at": "2026-11-14T21:05:42Z",
-      "updated_at": "2026-11-14T21:12:53Z",
+      "updated_at": "2026-11-14T21:17:55Z",
       "last_verified_at": "2026-11-14T21:05:42Z",
       "verification_status": "IN_PROGRESS_PENDING_FINAL",
       "revision_history": [],
@@ -91,10 +91,31 @@
           "score": "0-0",
           "match_status": "Second Half",
           "note": "ENTRY"
+        },
+        {
+          "timestamp_utc": "2026-11-14T21:17:55Z",
+          "timestamp_wita": "2026-11-15T05:17:55.597588+08:00",
+          "clock": "74'",
+          "minute": 74,
+          "score": "1-0",
+          "match_status": "Second Half",
+          "note": "GOAL DETECTED"
         }
       ],
-      "goal_events": [],
-      "current_score": "0-0",
+      "goal_events": [
+        {
+          "minute": 68,
+          "clock_display": "68'",
+          "period": 2,
+          "team": "Northern Ireland",
+          "scorer": "Terry Devlin",
+          "type": "Goal",
+          "text": "Goal! Northern Ireland 1, Ukraine 0. Terry Devlin (Northern Ireland) right footed shot from outside the box to the high centre of the goal. Assisted by Ethan Galbraith following a corner.",
+          "time_approximate": false,
+          "source": "ESPN_SUMMARY_KEY_EVENTS"
+        }
+      ],
+      "current_score": "1-0",
       "final_score": null,
       "match_status": "Second Half",
       "settlement_status": "PENDING",
@@ -107,11 +128,11 @@
       "actual_roi_contribution": null,
       "is_major": false,
       "created_at": "2026-11-14T21:05:42Z",
-      "updated_at": "2026-11-14T21:12:53Z",
+      "updated_at": "2026-11-14T21:17:55Z",
       "last_verified_at": "2026-11-14T21:05:42Z",
       "verification_status": "IN_PROGRESS_PENDING_FINAL",
       "revision_history": [],
-      "audit_explanation": "Pertandingan 401861169 masih berstatus Second Half (Skor saat ini: 0-0). Menunggu status Final resmi dari provider (PENDING).",
+      "audit_explanation": "Pertandingan 401861169 masih berstatus Second Half (Skor saat ini: 1-0). Menunggu status Final resmi dari provider (PENDING).",
       "audit_passed": true
     },
     {
@@ -146,10 +167,42 @@
           "score": "0-0",
           "match_status": "Second Half",
           "note": "ENTRY"
+        },
+        {
+          "timestamp_utc": "2026-11-14T21:17:55Z",
+          "timestamp_wita": "2026-11-15T05:17:55.699842+08:00",
+          "clock": "73'",
+          "minute": 73,
+          "score": "2-0",
+          "match_status": "Second Half",
+          "note": "GOAL DETECTED"
         }
       ],
-      "goal_events": [],
-      "current_score": "0-0",
+      "goal_events": [
+        {
+          "minute": 68,
+          "clock_display": "68'",
+          "period": 2,
+          "team": "Romania",
+          "scorer": "Alexandru Cicaldau",
+          "type": "Goal",
+          "text": "Goal! Romania 1, Poland 0. Alexandru Cicâldau (Romania) right footed shot from outside the box to the bottom left corner.",
+          "time_approximate": false,
+          "source": "ESPN_SUMMARY_KEY_EVENTS"
+        },
+        {
+          "minute": 72,
+          "clock_display": "72'",
+          "period": 2,
+          "team": "Romania",
+          "scorer": "Dennis Man",
+          "type": "Goal",
+          "text": "Goal! Romania 2, Poland 0. Dennis Man (Romania) left footed shot from the centre of the box to the bottom left corner. Assisted by Daniel Bîrligea following a fast break.",
+          "time_approximate": false,
+          "source": "ESPN_SUMMARY_KEY_EVENTS"
+        }
+      ],
+      "current_score": "2-0",
       "final_score": null,
       "match_status": "Second Half",
       "settlement_status": "PENDING",
@@ -162,11 +215,11 @@
       "actual_roi_contribution": null,
       "is_major": false,
       "created_at": "2026-11-14T21:05:42Z",
-      "updated_at": "2026-11-14T21:12:53Z",
+      "updated_at": "2026-11-14T21:17:55Z",
       "last_verified_at": "2026-11-14T21:05:42Z",
       "verification_status": "IN_PROGRESS_PENDING_FINAL",
       "revision_history": [],
-      "audit_explanation": "Pertandingan 401861168 masih berstatus Second Half (Skor saat ini: 0-0). Menunggu status Final resmi dari provider (PENDING).",
+      "audit_explanation": "Pertandingan 401861168 masih berstatus Second Half (Skor saat ini: 2-0). Menunggu status Final resmi dari provider (PENDING).",
       "audit_passed": true
     },
     {
@@ -239,7 +292,7 @@
       "actual_roi_contribution": null,
       "is_major": false,
       "created_at": "2026-11-14T21:01:00Z",
-      "updated_at": "2026-11-14T21:12:53Z",
+      "updated_at": "2026-11-14T21:17:55Z",
       "last_verified_at": "2026-11-14T21:01:00Z",
       "verification_status": "IN_PROGRESS_PENDING_FINAL",
       "revision_history": [],
@@ -293,13 +346,14 @@
         {
           "minute": 68,
           "clock_display": "68'",
-          "period": 2,
-          "team": "Novorizontino",
+          "period": 0,
+          "team_id": "18127",
           "scorer": "Juninho",
           "type": "Goal",
-          "text": "Goal! Criciúma 0, Novorizontino 1. Juninho (Novorizontino) right footed shot from outside the box to the bottom left corner. Assisted by Reidiney.",
+          "is_own_goal": false,
+          "is_penalty": false,
           "time_approximate": false,
-          "source": "ESPN_SUMMARY_KEY_EVENTS"
+          "source": "ESPN_OFFICIAL_DETAIL"
         }
       ],
       "current_score": "0-1",
@@ -315,7 +369,7 @@
       "actual_roi_contribution": null,
       "is_major": false,
       "created_at": "2026-11-14T21:01:00Z",
-      "updated_at": "2026-11-14T21:12:53Z",
+      "updated_at": "2026-11-14T21:17:55Z",
       "last_verified_at": "2026-11-14T21:01:00Z",
       "verification_status": "IN_PROGRESS_PENDING_FINAL",
       "revision_history": [],
@@ -363,23 +417,42 @@
           "score": "0-1",
           "match_status": "Second Half",
           "note": "GOAL DETECTED"
+        },
+        {
+          "timestamp_utc": "2026-11-14T21:17:55Z",
+          "timestamp_wita": "2026-11-15T05:17:55.831515+08:00",
+          "clock": "78'",
+          "minute": 78,
+          "score": "0-2",
+          "match_status": "Second Half",
+          "note": "GOAL DETECTED"
         }
       ],
       "goal_events": [
         {
           "minute": 60,
           "clock_display": "60'",
-          "period": 0,
-          "team_id": "9966",
+          "period": 2,
+          "team": "Avaí",
           "scorer": "Luis Eduardo",
           "type": "Goal - Header",
-          "is_own_goal": false,
-          "is_penalty": false,
+          "text": "Goal! América Mineiro 0, Avaí 1. Gaspar (Avaí) header from very close range to the bottom left corner. Assisted by Jean Lucas with a cross.",
           "time_approximate": false,
-          "source": "ESPN_OFFICIAL_DETAIL"
+          "source": "ESPN_SUMMARY_KEY_EVENTS"
+        },
+        {
+          "minute": 71,
+          "clock_display": "71'",
+          "period": 2,
+          "team": "Avaí",
+          "scorer": "Léo Gamalho",
+          "type": "Goal",
+          "text": "Goal! América Mineiro 0, Avaí 2. Léo Gamalho (Avaí) right footed shot from the centre of the box to the bottom right corner. Assisted by Daniel Penha.",
+          "time_approximate": false,
+          "source": "ESPN_SUMMARY_KEY_EVENTS"
         }
       ],
-      "current_score": "0-1",
+      "current_score": "0-2",
       "final_score": null,
       "match_status": "Second Half",
       "settlement_status": "PENDING",
@@ -392,11 +465,11 @@
       "actual_roi_contribution": null,
       "is_major": false,
       "created_at": "2026-11-14T21:01:00Z",
-      "updated_at": "2026-11-14T21:12:53Z",
+      "updated_at": "2026-11-14T21:17:55Z",
       "last_verified_at": "2026-11-14T21:01:00Z",
       "verification_status": "IN_PROGRESS_PENDING_FINAL",
       "revision_history": [],
-      "audit_explanation": "Pertandingan 401860432 masih berstatus Second Half (Skor saat ini: 0-1). Menunggu status Final resmi dari provider (PENDING).",
+      "audit_explanation": "Pertandingan 401860432 masih berstatus Second Half (Skor saat ini: 0-2). Menunggu status Final resmi dari provider (PENDING).",
       "audit_passed": true
     },
     {
