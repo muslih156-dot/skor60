@@ -1,6 +1,6 @@
 {
   "trading_day": "2026-11-14",
-  "last_updated_utc": "2026-11-14T16:33:05Z",
+  "last_updated_utc": "2026-11-14T16:37:51Z",
   "total_records": 5,
   "matches": [
     {
@@ -51,7 +51,7 @@
       "actual_roi_contribution": null,
       "is_major": false,
       "created_at": "2026-11-14T16:25:50Z",
-      "updated_at": "2026-11-14T16:33:04Z",
+      "updated_at": "2026-11-14T16:37:51Z",
       "last_verified_at": "2026-11-14T16:25:50Z",
       "verification_status": "IN_PROGRESS_PENDING_FINAL",
       "revision_history": [],
@@ -106,7 +106,7 @@
       "actual_roi_contribution": null,
       "is_major": false,
       "created_at": "2026-11-14T16:21:30Z",
-      "updated_at": "2026-11-14T16:33:05Z",
+      "updated_at": "2026-11-14T16:37:51Z",
       "last_verified_at": "2026-11-14T16:21:30Z",
       "verification_status": "IN_PROGRESS_PENDING_FINAL",
       "revision_history": [],
@@ -145,10 +145,42 @@
           "score": "0-0",
           "match_status": "Second Half",
           "note": "ENTRY"
+        },
+        {
+          "timestamp_utc": "2026-11-14T16:37:51Z",
+          "timestamp_wita": "2026-11-15T00:37:51.273205+08:00",
+          "clock": "80'",
+          "minute": 80,
+          "score": "2-0",
+          "match_status": "Second Half",
+          "note": "GOAL DETECTED"
         }
       ],
-      "goal_events": [],
-      "current_score": "0-0",
+      "goal_events": [
+        {
+          "minute": 73,
+          "clock_display": "73'",
+          "period": 2,
+          "team": "Shrewsbury Town",
+          "scorer": "Kevin Berkoe",
+          "type": "Goal",
+          "text": "Kevin Berkoe (Shrewsbury Town) Goal at 73'",
+          "time_approximate": false,
+          "source": "ESPN_SUMMARY_KEY_EVENTS"
+        },
+        {
+          "minute": 77,
+          "clock_display": "77'",
+          "period": 2,
+          "team": "Shrewsbury Town",
+          "scorer": "Josh Davison",
+          "type": "Goal",
+          "text": "Josh Davison (Shrewsbury Town) Goal at 77'",
+          "time_approximate": false,
+          "source": "ESPN_SUMMARY_KEY_EVENTS"
+        }
+      ],
+      "current_score": "2-0",
       "final_score": null,
       "match_status": "Second Half",
       "settlement_status": "PENDING",
@@ -161,11 +193,11 @@
       "actual_roi_contribution": null,
       "is_major": false,
       "created_at": "2026-11-14T16:21:30Z",
-      "updated_at": "2026-11-14T16:33:05Z",
+      "updated_at": "2026-11-14T16:37:51Z",
       "last_verified_at": "2026-11-14T16:21:30Z",
       "verification_status": "IN_PROGRESS_PENDING_FINAL",
       "revision_history": [],
-      "audit_explanation": "Pertandingan 401881267 masih berstatus Second Half (Skor saat ini: 0-0). Menunggu status Final resmi dari provider (PENDING).",
+      "audit_explanation": "Pertandingan 401881267 masih berstatus Second Half (Skor saat ini: 2-0). Menunggu status Final resmi dari provider (PENDING).",
       "audit_passed": true
     },
     {
