@@ -1,6 +1,6 @@
 {
   "trading_day": "2026-11-14",
-  "last_updated_utc": "2026-11-14T16:53:04Z",
+  "last_updated_utc": "2026-11-14T16:57:46Z",
   "total_records": 5,
   "matches": [
     {
@@ -50,24 +50,26 @@
         {
           "minute": 76,
           "clock_display": "76'",
-          "period": 2,
-          "team": "Iran",
+          "period": 0,
+          "team_id": "469",
           "scorer": "Sardar Azmoun",
           "type": "Goal",
-          "text": "Goal! Palestine 0, IR Iran 1. Sardar Azmoun (IR Iran) right footed shot from the centre of the box to the centre of the goal. Assisted by Hossein Goudarzi.",
+          "is_own_goal": false,
+          "is_penalty": false,
           "time_approximate": false,
-          "source": "ESPN_SUMMARY_KEY_EVENTS"
+          "source": "ESPN_OFFICIAL_DETAIL"
         },
         {
           "minute": 84,
           "clock_display": "84'",
-          "period": 2,
-          "team": "Iran",
+          "period": 0,
+          "team_id": "469",
           "scorer": "Saleh Hardani",
           "type": "Goal",
-          "text": "Goal! Palestine 0, IR Iran 2. Saleh Hardani (IR Iran) right footed shot from the centre of the box to the high centre of the goal.",
+          "is_own_goal": false,
+          "is_penalty": false,
           "time_approximate": false,
-          "source": "ESPN_SUMMARY_KEY_EVENTS"
+          "source": "ESPN_OFFICIAL_DETAIL"
         }
       ],
       "current_score": "0-2",
@@ -83,7 +85,7 @@
       "actual_roi_contribution": null,
       "is_major": false,
       "created_at": "2026-11-14T16:25:50Z",
-      "updated_at": "2026-11-14T16:53:03Z",
+      "updated_at": "2026-11-14T16:57:46Z",
       "last_verified_at": "2026-11-14T16:25:50Z",
       "verification_status": "IN_PROGRESS_PENDING_FINAL",
       "revision_history": [],
@@ -195,64 +197,70 @@
           "score": "2-0",
           "match_status": "Second Half",
           "note": "GOAL DETECTED"
+        },
+        {
+          "timestamp_utc": "2026-11-14T16:57:46Z",
+          "timestamp_wita": "2026-11-15T00:57:46.551603+08:00",
+          "clock": "Final",
+          "minute": null,
+          "score": "2-1",
+          "match_status": "Final",
+          "note": "GOAL DETECTED"
         }
       ],
       "goal_events": [
         {
           "minute": 73,
           "clock_display": "73'",
-          "period": 0,
-          "team_id": "302",
+          "period": 2,
+          "team": "Shrewsbury Town",
           "scorer": "Kevin Berkoe",
           "type": "Goal",
-          "is_own_goal": false,
-          "is_penalty": false,
+          "text": "Kevin Berkoe (Shrewsbury Town) Goal at 73'",
           "time_approximate": false,
-          "source": "ESPN_OFFICIAL_DETAIL"
+          "source": "ESPN_SUMMARY_KEY_EVENTS"
         },
         {
           "minute": 77,
           "clock_display": "77'",
-          "period": 0,
-          "team_id": "302",
+          "period": 2,
+          "team": "Shrewsbury Town",
           "scorer": "Josh Davison",
           "type": "Goal",
-          "is_own_goal": false,
-          "is_penalty": false,
+          "text": "Josh Davison (Shrewsbury Town) Goal at 77'",
           "time_approximate": false,
-          "source": "ESPN_OFFICIAL_DETAIL"
+          "source": "ESPN_SUMMARY_KEY_EVENTS"
         },
         {
           "minute": 90,
           "clock_display": "90'+3'",
-          "period": 0,
-          "team_id": "332",
+          "period": 2,
+          "team": "Oldham Athletic",
           "scorer": "Favour Fawunmi",
           "type": "Goal",
-          "is_own_goal": false,
-          "is_penalty": false,
+          "text": "Favour Fawunmi (Oldham Athletic) Goal at 90'+3'",
           "time_approximate": false,
-          "source": "ESPN_OFFICIAL_DETAIL"
+          "source": "ESPN_SUMMARY_KEY_EVENTS"
         }
       ],
-      "current_score": "2-0",
-      "final_score": null,
-      "match_status": "Second Half",
-      "settlement_status": "PENDING",
-      "result": "PENDING",
-      "profit": 0,
-      "roi_contribution": 0.0,
-      "simulated_profit": 0,
-      "simulated_roi_contribution": 0.0,
+      "current_score": "2-1",
+      "final_score": "2-1",
+      "match_status": "Final",
+      "settlement_status": "SETTLED",
+      "result": "WIN",
+      "profit": 40000,
+      "roi_contribution": 80.0,
+      "simulated_profit": 40000,
+      "simulated_roi_contribution": 80.0,
       "actual_profit": null,
       "actual_roi_contribution": null,
       "is_major": false,
       "created_at": "2026-11-14T16:21:30Z",
-      "updated_at": "2026-11-14T16:53:04Z",
-      "last_verified_at": "2026-11-14T16:21:30Z",
-      "verification_status": "IN_PROGRESS_PENDING_FINAL",
+      "updated_at": "2026-11-14T16:57:46Z",
+      "last_verified_at": "2026-11-14T16:57:46Z",
+      "verification_status": "VERIFIED_OFFICIAL_FINAL",
       "revision_history": [],
-      "audit_explanation": "Pertandingan 401881267 masih berstatus Second Half (Skor saat ini: 2-0). Menunggu status Final resmi dari provider (PENDING).",
+      "audit_explanation": "Pertandingan 401881267 masuk pada menit 64' dengan skor 0-0. Status resmi mencapai Final dengan skor akhir waktu normal 2-1. Minimal 1 gol tercipta setelah waktu entry sehingga dinyatakan WIN.",
       "audit_passed": true
     },
     {
