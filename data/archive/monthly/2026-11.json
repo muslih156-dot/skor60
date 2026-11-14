@@ -1,6 +1,6 @@
 {
   "trading_month": "2026-11",
-  "last_updated_utc": "2026-11-14T21:07:42Z",
+  "last_updated_utc": "2026-11-14T21:12:53Z",
   "total_records": 196,
   "matches": [
     {
@@ -51,7 +51,7 @@
       "actual_roi_contribution": null,
       "is_major": false,
       "created_at": "2026-11-14T21:05:42Z",
-      "updated_at": "2026-11-14T21:07:41Z",
+      "updated_at": "2026-11-14T21:12:53Z",
       "last_verified_at": "2026-11-14T21:05:42Z",
       "verification_status": "IN_PROGRESS_PENDING_FINAL",
       "revision_history": [],
@@ -106,7 +106,7 @@
       "actual_roi_contribution": null,
       "is_major": false,
       "created_at": "2026-11-14T21:05:42Z",
-      "updated_at": "2026-11-14T21:07:41Z",
+      "updated_at": "2026-11-14T21:12:53Z",
       "last_verified_at": "2026-11-14T21:05:42Z",
       "verification_status": "IN_PROGRESS_PENDING_FINAL",
       "revision_history": [],
@@ -161,7 +161,7 @@
       "actual_roi_contribution": null,
       "is_major": false,
       "created_at": "2026-11-14T21:05:42Z",
-      "updated_at": "2026-11-14T21:07:41Z",
+      "updated_at": "2026-11-14T21:12:53Z",
       "last_verified_at": "2026-11-14T21:05:42Z",
       "verification_status": "IN_PROGRESS_PENDING_FINAL",
       "revision_history": [],
@@ -215,13 +215,14 @@
         {
           "minute": 61,
           "clock_display": "61'",
-          "period": 2,
-          "team": "Atlético Goianiense",
+          "period": 0,
+          "team_id": "10357",
           "scorer": "David Terans",
           "type": "Goal",
-          "text": "Goal! Atlético Goianiense 1, Cuiabá 0. David Terans (Atlético Goianiense) left footed shot from very close range to the bottom left corner. Assisted by Warley following a fast break.",
+          "is_own_goal": false,
+          "is_penalty": false,
           "time_approximate": false,
-          "source": "ESPN_SUMMARY_KEY_EVENTS"
+          "source": "ESPN_OFFICIAL_DETAIL"
         }
       ],
       "current_score": "1-0",
@@ -237,7 +238,7 @@
       "actual_roi_contribution": null,
       "is_major": false,
       "created_at": "2026-11-14T21:01:00Z",
-      "updated_at": "2026-11-14T21:07:41Z",
+      "updated_at": "2026-11-14T21:12:53Z",
       "last_verified_at": "2026-11-14T21:01:00Z",
       "verification_status": "IN_PROGRESS_PENDING_FINAL",
       "revision_history": [],
@@ -276,10 +277,31 @@
           "score": "0-0",
           "match_status": "Second Half",
           "note": "ENTRY"
+        },
+        {
+          "timestamp_utc": "2026-11-14T21:12:53Z",
+          "timestamp_wita": "2026-11-15T05:12:53.600686+08:00",
+          "clock": "72'",
+          "minute": 72,
+          "score": "0-1",
+          "match_status": "Second Half",
+          "note": "GOAL DETECTED"
         }
       ],
-      "goal_events": [],
-      "current_score": "0-0",
+      "goal_events": [
+        {
+          "minute": 68,
+          "clock_display": "68'",
+          "period": 2,
+          "team": "Novorizontino",
+          "scorer": "Juninho",
+          "type": "Goal",
+          "text": "Goal! Criciúma 0, Novorizontino 1. Juninho (Novorizontino) right footed shot from outside the box to the bottom left corner. Assisted by Reidiney.",
+          "time_approximate": false,
+          "source": "ESPN_SUMMARY_KEY_EVENTS"
+        }
+      ],
+      "current_score": "0-1",
       "final_score": null,
       "match_status": "Second Half",
       "settlement_status": "PENDING",
@@ -292,11 +314,11 @@
       "actual_roi_contribution": null,
       "is_major": false,
       "created_at": "2026-11-14T21:01:00Z",
-      "updated_at": "2026-11-14T21:07:42Z",
+      "updated_at": "2026-11-14T21:12:53Z",
       "last_verified_at": "2026-11-14T21:01:00Z",
       "verification_status": "IN_PROGRESS_PENDING_FINAL",
       "revision_history": [],
-      "audit_explanation": "Pertandingan 401860438 masih berstatus Second Half (Skor saat ini: 0-0). Menunggu status Final resmi dari provider (PENDING).",
+      "audit_explanation": "Pertandingan 401860438 masih berstatus Second Half (Skor saat ini: 0-1). Menunggu status Final resmi dari provider (PENDING).",
       "audit_passed": true
     },
     {
@@ -346,13 +368,14 @@
         {
           "minute": 60,
           "clock_display": "60'",
-          "period": 2,
-          "team": "Avaí",
+          "period": 0,
+          "team_id": "9966",
           "scorer": "Luis Eduardo",
           "type": "Goal - Header",
-          "text": "Goal! América Mineiro 0, Avaí 1. Gaspar (Avaí) header from very close range to the bottom left corner. Assisted by Jean Lucas with a cross.",
+          "is_own_goal": false,
+          "is_penalty": false,
           "time_approximate": false,
-          "source": "ESPN_SUMMARY_KEY_EVENTS"
+          "source": "ESPN_OFFICIAL_DETAIL"
         }
       ],
       "current_score": "0-1",
@@ -368,7 +391,7 @@
       "actual_roi_contribution": null,
       "is_major": false,
       "created_at": "2026-11-14T21:01:00Z",
-      "updated_at": "2026-11-14T21:07:41Z",
+      "updated_at": "2026-11-14T21:12:53Z",
       "last_verified_at": "2026-11-14T21:01:00Z",
       "verification_status": "IN_PROGRESS_PENDING_FINAL",
       "revision_history": [],
