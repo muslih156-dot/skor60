@@ -1,6 +1,6 @@
 {
   "trading_month": "2026-11",
-  "last_updated_utc": "2026-11-14T19:12:57Z",
+  "last_updated_utc": "2026-11-14T19:17:47Z",
   "total_records": 188,
   "matches": [
     {
@@ -50,13 +50,14 @@
         {
           "minute": 82,
           "clock_display": "82'",
-          "period": 2,
-          "team": "Fleetwood Town",
+          "period": 0,
+          "team_id": "3891",
           "scorer": "Shaun Rooney",
           "type": "Goal",
-          "text": "Shaun Rooney (Fleetwood Town) Goal at 82'",
+          "is_own_goal": false,
+          "is_penalty": false,
           "time_approximate": false,
-          "source": "ESPN_SUMMARY_KEY_EVENTS"
+          "source": "ESPN_OFFICIAL_DETAIL"
         }
       ],
       "current_score": "1-0",
@@ -72,7 +73,7 @@
       "actual_roi_contribution": null,
       "is_major": false,
       "created_at": "2026-11-14T18:51:08Z",
-      "updated_at": "2026-11-14T19:12:57Z",
+      "updated_at": "2026-11-14T19:17:47Z",
       "last_verified_at": "2026-11-14T18:51:08Z",
       "verification_status": "IN_PROGRESS_PENDING_FINAL",
       "revision_history": [],
