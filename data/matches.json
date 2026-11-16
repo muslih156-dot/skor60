@@ -1,7 +1,7 @@
 {
   "system": "TRADING BOLA MENIT 60 - LAST GOAL SYSTEM",
   "version": "2.1",
-  "last_updated_utc": "2026-11-16T21:17:57Z",
+  "last_updated_utc": "2026-11-16T21:22:59Z",
   "total_records": 248,
   "matches": [
     {
@@ -51,13 +51,14 @@
         {
           "minute": 69,
           "clock_display": "69'",
-          "period": 2,
-          "team": "Greece",
+          "period": 0,
+          "team_id": "455",
           "scorer": "Georgios Masouras",
           "type": "Goal",
-          "text": "Goal! Greece 1, Serbia 0. Giorgos Masouras (Greece) right footed shot from the right side of the six yard box to the centre of the goal. Assisted by Vangelis Pavlidis with a cross.",
+          "is_own_goal": false,
+          "is_penalty": false,
           "time_approximate": false,
-          "source": "ESPN_SUMMARY_KEY_EVENTS"
+          "source": "ESPN_OFFICIAL_DETAIL"
         }
       ],
       "current_score": "1-0",
@@ -73,7 +74,7 @@
       "actual_roi_contribution": null,
       "is_major": false,
       "created_at": "2026-11-16T21:05:44Z",
-      "updated_at": "2026-11-16T21:17:57Z",
+      "updated_at": "2026-11-16T21:22:59Z",
       "last_verified_at": "2026-11-16T21:05:44Z",
       "verification_status": "IN_PROGRESS_PENDING_FINAL",
       "revision_history": [],
