@@ -1,6 +1,6 @@
 {
   "trading_day": "2026-11-19",
-  "last_updated_utc": "2026-11-19T19:52:58Z",
+  "last_updated_utc": "2026-11-19T19:57:58Z",
   "total_records": 2,
   "matches": [
     {
@@ -59,24 +59,26 @@
         {
           "minute": 82,
           "clock_display": "82'",
-          "period": 2,
-          "team": "CD Argual",
+          "period": 0,
+          "team_id": "133286",
           "scorer": "Nora Linzazasoro Narvarte",
           "type": "Goal",
-          "text": "Nora Linzazasoro Narvarte (CD Argual) Goal at 82'",
+          "is_own_goal": false,
+          "is_penalty": false,
           "time_approximate": false,
-          "source": "ESPN_SUMMARY_KEY_EVENTS"
+          "source": "ESPN_OFFICIAL_DETAIL"
         },
         {
           "minute": 90,
           "clock_display": "90'+1'",
-          "period": 2,
-          "team": "CD Argual",
+          "period": 0,
+          "team_id": "133286",
           "scorer": "Marta Carro Nolasco",
           "type": "Goal",
-          "text": "Marta Carro Nolasco (CD Argual) Goal at 90'+1'",
+          "is_own_goal": false,
+          "is_penalty": false,
           "time_approximate": false,
-          "source": "ESPN_SUMMARY_KEY_EVENTS"
+          "source": "ESPN_OFFICIAL_DETAIL"
         }
       ],
       "current_score": "2-0",
@@ -92,7 +94,7 @@
       "actual_roi_contribution": null,
       "is_major": false,
       "created_at": "2026-11-19T19:21:03Z",
-      "updated_at": "2026-11-19T19:52:58Z",
+      "updated_at": "2026-11-19T19:57:58Z",
       "last_verified_at": "2026-11-19T19:21:03Z",
       "verification_status": "IN_PROGRESS_PENDING_FINAL",
       "revision_history": [],
