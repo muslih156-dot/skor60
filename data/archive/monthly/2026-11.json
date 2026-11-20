@@ -1,6 +1,6 @@
 {
   "trading_month": "2026-11",
-  "last_updated_utc": "2026-11-20T22:03:01Z",
+  "last_updated_utc": "2026-11-20T22:07:59Z",
   "total_records": 232,
   "matches": [
     {
@@ -50,13 +50,14 @@
         {
           "minute": 62,
           "clock_display": "62'",
-          "period": 2,
-          "team": "Sportivo Ameliano",
+          "period": 0,
+          "team_id": "21313",
           "scorer": "Richard Torales",
           "type": "Goal",
-          "text": "Richard Torales (Sportivo Ameliano) Goal at 62'",
+          "is_own_goal": false,
+          "is_penalty": false,
           "time_approximate": false,
-          "source": "ESPN_SUMMARY_KEY_EVENTS"
+          "source": "ESPN_OFFICIAL_DETAIL"
         }
       ],
       "current_score": "1-0",
@@ -72,7 +73,7 @@
       "actual_roi_contribution": null,
       "is_major": false,
       "created_at": "2026-11-20T21:55:44Z",
-      "updated_at": "2026-11-20T22:03:01Z",
+      "updated_at": "2026-11-20T22:07:59Z",
       "last_verified_at": "2026-11-20T21:55:44Z",
       "verification_status": "IN_PROGRESS_PENDING_FINAL",
       "revision_history": [],
