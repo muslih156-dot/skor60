@@ -1,7 +1,7 @@
 {
   "system": "TRADING BOLA MENIT 60 - LAST GOAL SYSTEM",
   "version": "2.1",
-  "last_updated_utc": "2026-11-20T21:07:57Z",
+  "last_updated_utc": "2026-11-20T21:13:04Z",
   "total_records": 271,
   "matches": [
     {
@@ -52,7 +52,7 @@
       "actual_roi_contribution": null,
       "is_major": true,
       "created_at": "2026-11-20T21:05:57Z",
-      "updated_at": "2026-11-20T21:07:56Z",
+      "updated_at": "2026-11-20T21:13:03Z",
       "last_verified_at": "2026-11-20T21:05:57Z",
       "verification_status": "IN_PROGRESS_PENDING_FINAL",
       "revision_history": [],
@@ -107,7 +107,7 @@
       "actual_roi_contribution": null,
       "is_major": false,
       "created_at": "2026-11-20T20:51:05Z",
-      "updated_at": "2026-11-20T21:07:56Z",
+      "updated_at": "2026-11-20T21:13:04Z",
       "last_verified_at": "2026-11-20T20:51:05Z",
       "verification_status": "IN_PROGRESS_PENDING_FINAL",
       "revision_history": [],
@@ -161,13 +161,14 @@
         {
           "minute": 75,
           "clock_display": "75'",
-          "period": 2,
-          "team": "Racing (Montevideo)",
+          "period": 0,
+          "team_id": "9903",
           "scorer": "Thiago Fernández",
           "type": "Goal",
-          "text": "Thiago Fernández (Racing (Montevideo)) Goal at 75'",
+          "is_own_goal": false,
+          "is_penalty": false,
           "time_approximate": false,
-          "source": "ESPN_SUMMARY_KEY_EVENTS"
+          "source": "ESPN_OFFICIAL_DETAIL"
         }
       ],
       "current_score": "1-0",
@@ -183,7 +184,7 @@
       "actual_roi_contribution": null,
       "is_major": false,
       "created_at": "2026-11-20T20:45:56Z",
-      "updated_at": "2026-11-20T21:07:57Z",
+      "updated_at": "2026-11-20T21:13:04Z",
       "last_verified_at": "2026-11-20T20:45:56Z",
       "verification_status": "IN_PROGRESS_PENDING_FINAL",
       "revision_history": [],
