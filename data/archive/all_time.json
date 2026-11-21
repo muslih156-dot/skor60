@@ -1,7 +1,7 @@
 {
   "system": "TRADING BOLA MENIT 60 - LAST GOAL SYSTEM",
   "version": "2.1",
-  "last_updated_utc": "2026-11-21T04:52:49Z",
+  "last_updated_utc": "2026-11-21T04:57:54Z",
   "total_records": 279,
   "matches": [
     {
@@ -51,13 +51,14 @@
         {
           "minute": 77,
           "clock_display": "77'",
-          "period": 2,
-          "team": "Tijuana",
+          "period": 0,
+          "team_id": "10125",
           "scorer": "Gilberto Mora",
           "type": "Penalty - Scored",
-          "text": "Goal! Club Tijuana 1, Atlante 0. Gilberto Mora (Club Tijuana) converts the penalty with a right footed shot to the top right corner.",
+          "is_own_goal": false,
+          "is_penalty": true,
           "time_approximate": false,
-          "source": "ESPN_SUMMARY_KEY_EVENTS"
+          "source": "ESPN_OFFICIAL_DETAIL"
         }
       ],
       "current_score": "1-0",
@@ -73,7 +74,7 @@
       "actual_roi_contribution": null,
       "is_major": true,
       "created_at": "2026-11-21T04:29:06Z",
-      "updated_at": "2026-11-21T04:52:49Z",
+      "updated_at": "2026-11-21T04:57:54Z",
       "last_verified_at": "2026-11-21T04:29:06Z",
       "verification_status": "IN_PROGRESS_PENDING_FINAL",
       "revision_history": [],
