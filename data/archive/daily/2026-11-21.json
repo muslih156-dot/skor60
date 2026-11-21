@@ -1,6 +1,6 @@
 {
   "trading_day": "2026-11-21",
-  "last_updated_utc": "2026-11-21T15:56:19Z",
+  "last_updated_utc": "2026-11-21T16:03:19Z",
   "total_records": 9,
   "matches": [
     {
@@ -51,7 +51,7 @@
       "actual_roi_contribution": null,
       "is_major": true,
       "created_at": "2026-11-21T15:50:58Z",
-      "updated_at": "2026-11-21T15:56:19Z",
+      "updated_at": "2026-11-21T16:03:19Z",
       "last_verified_at": "2026-11-21T15:50:58Z",
       "verification_status": "IN_PROGRESS_PENDING_FINAL",
       "revision_history": [],
@@ -90,10 +90,31 @@
           "score": "0-0",
           "match_status": "Second Half",
           "note": "ENTRY"
+        },
+        {
+          "timestamp_utc": "2026-11-21T16:03:19Z",
+          "timestamp_wita": "2026-11-22T00:03:19.327156+08:00",
+          "clock": "74'",
+          "minute": 74,
+          "score": "0-1",
+          "match_status": "Second Half",
+          "note": "GOAL DETECTED"
         }
       ],
-      "goal_events": [],
-      "current_score": "0-0",
+      "goal_events": [
+        {
+          "minute": 68,
+          "clock_display": "68'",
+          "period": 2,
+          "team": "SC Freiburg",
+          "scorer": "Igor Matanovic",
+          "type": "Goal",
+          "text": "Goal! Elversberg 0, Freiburg 1. Igor Matanovic (Freiburg) right footed shot from the centre of the box to the bottom right corner. Assisted by Niklas Beste.",
+          "time_approximate": false,
+          "source": "ESPN_SUMMARY_KEY_EVENTS"
+        }
+      ],
+      "current_score": "0-1",
       "final_score": null,
       "match_status": "Second Half",
       "settlement_status": "PENDING",
@@ -106,11 +127,11 @@
       "actual_roi_contribution": null,
       "is_major": true,
       "created_at": "2026-11-21T15:50:58Z",
-      "updated_at": "2026-11-21T15:56:19Z",
+      "updated_at": "2026-11-21T16:03:19Z",
       "last_verified_at": "2026-11-21T15:50:58Z",
       "verification_status": "IN_PROGRESS_PENDING_FINAL",
       "revision_history": [],
-      "audit_explanation": "Pertandingan 401884728 masih berstatus Second Half (Skor saat ini: 0-0). Menunggu status Final resmi dari provider (PENDING).",
+      "audit_explanation": "Pertandingan 401884728 masih berstatus Second Half (Skor saat ini: 0-1). Menunggu status Final resmi dari provider (PENDING).",
       "audit_passed": true
     },
     {
@@ -163,52 +184,59 @@
           "score": "2-0",
           "match_status": "Second Half",
           "note": "GOAL DETECTED"
+        },
+        {
+          "timestamp_utc": "2026-11-21T16:03:19Z",
+          "timestamp_wita": "2026-11-22T00:03:19.461237+08:00",
+          "clock": "Final",
+          "minute": null,
+          "score": "2-0",
+          "match_status": "Final",
+          "note": "MATCH FINISHED"
         }
       ],
       "goal_events": [
         {
           "minute": 69,
           "clock_display": "69'",
-          "period": 0,
-          "team_id": "2573",
+          "period": 2,
+          "team": "Modena",
           "scorer": "Giuseppe Ambrosino",
           "type": "Goal",
-          "is_own_goal": false,
-          "is_penalty": false,
+          "text": "Giuseppe Ambrosino (Modena) Goal at 69'",
           "time_approximate": false,
-          "source": "ESPN_OFFICIAL_DETAIL"
+          "source": "ESPN_SUMMARY_KEY_EVENTS"
         },
         {
           "minute": 76,
           "clock_display": "76'",
-          "period": 0,
-          "team_id": "2573",
+          "period": 2,
+          "team": "Modena",
           "scorer": "Kleis Bozhanaj",
           "type": "Goal",
-          "is_own_goal": false,
-          "is_penalty": false,
+          "text": "Kleis Bozhanaj (Modena) Goal at 76'",
           "time_approximate": false,
-          "source": "ESPN_OFFICIAL_DETAIL"
+          "source": "ESPN_SUMMARY_KEY_EVENTS"
         }
       ],
       "current_score": "2-0",
-      "final_score": null,
-      "match_status": "Second Half",
-      "settlement_status": "PENDING",
-      "result": "PENDING",
-      "profit": 0,
-      "roi_contribution": 0.0,
-      "simulated_profit": 0,
-      "simulated_roi_contribution": 0.0,
+      "final_score": "2-0",
+      "match_status": "Final",
+      "settlement_status": "SETTLED",
+      "result": "WIN",
+      "profit": 40000,
+      "roi_contribution": 80.0,
+      "simulated_profit": 40000,
+      "simulated_roi_contribution": 80.0,
       "actual_profit": null,
       "actual_roi_contribution": null,
       "is_major": false,
       "created_at": "2026-11-21T15:21:02Z",
-      "updated_at": "2026-11-21T15:56:19Z",
-      "last_verified_at": "2026-11-21T15:21:02Z",
-      "verification_status": "IN_PROGRESS_PENDING_FINAL",
+      "updated_at": "2026-11-21T16:03:19Z",
+      "last_verified_at": "2026-11-21T16:03:19Z",
+      "verification_status": "VERIFIED_OFFICIAL_FINAL",
       "revision_history": [],
-      "audit_explanation": "Pertandingan 401899542 masih berstatus Second Half (Skor saat ini: 2-0). Menunggu status Final resmi dari provider (PENDING).",
+      "audit_explanation": "Pertandingan 401899542 masuk pada menit 61' dengan skor 0-0. Status resmi mencapai Final dengan skor akhir waktu normal 2-0. Minimal 1 gol tercipta setelah waktu entry sehingga dinyatakan WIN.",
       "audit_passed": true
     },
     {
