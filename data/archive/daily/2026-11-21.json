@@ -1,6 +1,6 @@
 {
   "trading_day": "2026-11-21",
-  "last_updated_utc": "2026-11-21T22:12:58Z",
+  "last_updated_utc": "2026-11-21T22:18:03Z",
   "total_records": 21,
   "matches": [
     {
@@ -51,7 +51,7 @@
       "actual_roi_contribution": null,
       "is_major": false,
       "created_at": "2026-11-21T22:01:09Z",
-      "updated_at": "2026-11-21T22:12:58Z",
+      "updated_at": "2026-11-21T22:18:03Z",
       "last_verified_at": "2026-11-21T22:01:09Z",
       "verification_status": "IN_PROGRESS_PENDING_FINAL",
       "revision_history": [],
@@ -105,13 +105,14 @@
         {
           "minute": 74,
           "clock_display": "74'",
-          "period": 2,
-          "team": "Coritiba",
+          "period": 0,
+          "team_id": "3456",
           "scorer": "Breno",
           "type": "Goal",
-          "text": "Goal! Bahia 0, Coritiba 1. Breno Lopes (Coritiba) right footed shot from the centre of the box to the bottom right corner. Assisted by Tinga with a through ball following a fast break.Goal confirmed following VAR Review.",
+          "is_own_goal": false,
+          "is_penalty": false,
           "time_approximate": false,
-          "source": "ESPN_SUMMARY_KEY_EVENTS"
+          "source": "ESPN_OFFICIAL_DETAIL"
         }
       ],
       "current_score": "0-1",
@@ -127,7 +128,7 @@
       "actual_roi_contribution": null,
       "is_major": true,
       "created_at": "2026-11-21T21:56:04Z",
-      "updated_at": "2026-11-21T22:12:58Z",
+      "updated_at": "2026-11-21T22:18:03Z",
       "last_verified_at": "2026-11-21T21:56:04Z",
       "verification_status": "IN_PROGRESS_PENDING_FINAL",
       "revision_history": [],
