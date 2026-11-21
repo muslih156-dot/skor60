@@ -1,6 +1,6 @@
 {
   "trading_month": "2026-11",
-  "last_updated_utc": "2026-11-21T16:03:19Z",
+  "last_updated_utc": "2026-11-21T16:07:51Z",
   "total_records": 246,
   "matches": [
     {
@@ -51,7 +51,7 @@
       "actual_roi_contribution": null,
       "is_major": true,
       "created_at": "2026-11-21T15:50:58Z",
-      "updated_at": "2026-11-21T16:03:19Z",
+      "updated_at": "2026-11-21T16:07:51Z",
       "last_verified_at": "2026-11-21T15:50:58Z",
       "verification_status": "IN_PROGRESS_PENDING_FINAL",
       "revision_history": [],
@@ -105,13 +105,14 @@
         {
           "minute": 68,
           "clock_display": "68'",
-          "period": 2,
-          "team": "SC Freiburg",
+          "period": 0,
+          "team_id": "126",
           "scorer": "Igor Matanovic",
           "type": "Goal",
-          "text": "Goal! Elversberg 0, Freiburg 1. Igor Matanovic (Freiburg) right footed shot from the centre of the box to the bottom right corner. Assisted by Niklas Beste.",
+          "is_own_goal": false,
+          "is_penalty": false,
           "time_approximate": false,
-          "source": "ESPN_SUMMARY_KEY_EVENTS"
+          "source": "ESPN_OFFICIAL_DETAIL"
         }
       ],
       "current_score": "0-1",
@@ -127,7 +128,7 @@
       "actual_roi_contribution": null,
       "is_major": true,
       "created_at": "2026-11-21T15:50:58Z",
-      "updated_at": "2026-11-21T16:03:19Z",
+      "updated_at": "2026-11-21T16:07:51Z",
       "last_verified_at": "2026-11-21T15:50:58Z",
       "verification_status": "IN_PROGRESS_PENDING_FINAL",
       "revision_history": [],
