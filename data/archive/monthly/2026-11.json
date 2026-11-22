@@ -1,6 +1,6 @@
 {
   "trading_month": "2026-11",
-  "last_updated_utc": "2026-11-22T21:27:53Z",
+  "last_updated_utc": "2026-11-22T21:33:07Z",
   "total_records": 280,
   "matches": [
     {
@@ -50,13 +50,14 @@
         {
           "minute": 66,
           "clock_display": "66'",
-          "period": 2,
-          "team": "Burgos",
+          "period": 0,
+          "team_id": "12597",
           "scorer": "Carlos Neva",
           "type": "Own Goal",
-          "text": "Carlos Neva (Albacete) Own Goal at 66'",
+          "is_own_goal": true,
+          "is_penalty": false,
           "time_approximate": false,
-          "source": "ESPN_SUMMARY_KEY_EVENTS"
+          "source": "ESPN_OFFICIAL_DETAIL"
         }
       ],
       "current_score": "1-0",
@@ -72,7 +73,7 @@
       "actual_roi_contribution": null,
       "is_major": false,
       "created_at": "2026-11-22T21:15:58Z",
-      "updated_at": "2026-11-22T21:27:53Z",
+      "updated_at": "2026-11-22T21:33:07Z",
       "last_verified_at": "2026-11-22T21:15:58Z",
       "verification_status": "IN_PROGRESS_PENDING_FINAL",
       "revision_history": [],
