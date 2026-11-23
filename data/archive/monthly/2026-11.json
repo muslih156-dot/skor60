@@ -1,6 +1,6 @@
 {
   "trading_month": "2026-11",
-  "last_updated_utc": "2026-11-23T22:33:05Z",
+  "last_updated_utc": "2026-11-23T22:37:54Z",
   "total_records": 288,
   "matches": [
     {
@@ -37,7 +37,20 @@
           "note": "ENTRY"
         }
       ],
-      "goal_events": [],
+      "goal_events": [
+        {
+          "minute": 78,
+          "clock_display": "78'",
+          "period": 0,
+          "team_id": "6097",
+          "scorer": "Pedro Sosa",
+          "type": "Goal",
+          "is_own_goal": false,
+          "is_penalty": false,
+          "time_approximate": false,
+          "source": "ESPN_OFFICIAL_DETAIL"
+        }
+      ],
       "current_score": "0-0",
       "final_score": null,
       "match_status": "Second Half",
@@ -51,7 +64,7 @@
       "actual_roi_contribution": null,
       "is_major": false,
       "created_at": "2026-11-23T22:21:03Z",
-      "updated_at": "2026-11-23T22:33:05Z",
+      "updated_at": "2026-11-23T22:37:54Z",
       "last_verified_at": "2026-11-23T22:21:03Z",
       "verification_status": "IN_PROGRESS_PENDING_FINAL",
       "revision_history": [],
