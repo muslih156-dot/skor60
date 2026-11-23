@@ -1,6 +1,6 @@
 {
   "trading_month": "2026-11",
-  "last_updated_utc": "2026-11-23T20:48:17Z",
+  "last_updated_utc": "2026-11-23T20:53:02Z",
   "total_records": 286,
   "matches": [
     {
@@ -35,10 +35,31 @@
           "score": "0-0",
           "match_status": "Second Half",
           "note": "ENTRY"
+        },
+        {
+          "timestamp_utc": "2026-11-23T20:53:02Z",
+          "timestamp_wita": "2026-11-24T04:53:02.087352+08:00",
+          "clock": "66'",
+          "minute": 66,
+          "score": "0-1",
+          "match_status": "Second Half",
+          "note": "GOAL DETECTED"
         }
       ],
-      "goal_events": [],
-      "current_score": "0-0",
+      "goal_events": [
+        {
+          "minute": 59,
+          "clock_display": "59'",
+          "period": 2,
+          "team": "Defensor Sporting",
+          "scorer": "Lautaro Navarro",
+          "type": "Penalty - Scored",
+          "text": "Lautaro Navarro (Defensor Sporting) Penalty - Scored at 59'",
+          "time_approximate": false,
+          "source": "ESPN_SUMMARY_KEY_EVENTS"
+        }
+      ],
+      "current_score": "0-1",
       "final_score": null,
       "match_status": "Second Half",
       "settlement_status": "PENDING",
@@ -51,11 +72,11 @@
       "actual_roi_contribution": null,
       "is_major": false,
       "created_at": "2026-11-23T20:45:59Z",
-      "updated_at": "2026-11-23T20:48:17Z",
+      "updated_at": "2026-11-23T20:53:02Z",
       "last_verified_at": "2026-11-23T20:45:59Z",
       "verification_status": "IN_PROGRESS_PENDING_FINAL",
       "revision_history": [],
-      "audit_explanation": "Pertandingan 401934684 masih berstatus Second Half (Skor saat ini: 0-0). Menunggu status Final resmi dari provider (PENDING).",
+      "audit_explanation": "Pertandingan 401934684 masih berstatus Second Half (Skor saat ini: 0-1). Menunggu status Final resmi dari provider (PENDING).",
       "audit_passed": true
     },
     {
@@ -90,10 +111,31 @@
           "score": "0-0",
           "match_status": "Second Half",
           "note": "ENTRY"
+        },
+        {
+          "timestamp_utc": "2026-11-23T20:53:02Z",
+          "timestamp_wita": "2026-11-24T04:53:02.274026+08:00",
+          "clock": "87'",
+          "minute": 87,
+          "score": "0-1",
+          "match_status": "Second Half",
+          "note": "GOAL DETECTED"
         }
       ],
-      "goal_events": [],
-      "current_score": "0-0",
+      "goal_events": [
+        {
+          "minute": 82,
+          "clock_display": "82'",
+          "period": 2,
+          "team": "De Graafschap",
+          "scorer": "Julian Kania",
+          "type": "Goal",
+          "text": "Julian Kania (De Graafschap) Goal at 82'",
+          "time_approximate": false,
+          "source": "ESPN_SUMMARY_KEY_EVENTS"
+        }
+      ],
+      "current_score": "0-1",
       "final_score": null,
       "match_status": "Second Half",
       "settlement_status": "PENDING",
@@ -106,11 +148,11 @@
       "actual_roi_contribution": null,
       "is_major": false,
       "created_at": "2026-11-23T20:25:58Z",
-      "updated_at": "2026-11-23T20:48:17Z",
+      "updated_at": "2026-11-23T20:53:02Z",
       "last_verified_at": "2026-11-23T20:25:58Z",
       "verification_status": "IN_PROGRESS_PENDING_FINAL",
       "revision_history": [],
-      "audit_explanation": "Pertandingan 401875856 masih berstatus Second Half (Skor saat ini: 0-0). Menunggu status Final resmi dari provider (PENDING).",
+      "audit_explanation": "Pertandingan 401875856 masih berstatus Second Half (Skor saat ini: 0-1). Menunggu status Final resmi dari provider (PENDING).",
       "audit_passed": true
     },
     {
