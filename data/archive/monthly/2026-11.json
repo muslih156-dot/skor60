@@ -1,6 +1,6 @@
 {
   "trading_month": "2026-11",
-  "last_updated_utc": "2026-11-23T20:53:02Z",
+  "last_updated_utc": "2026-11-23T20:57:51Z",
   "total_records": 286,
   "matches": [
     {
@@ -50,13 +50,14 @@
         {
           "minute": 59,
           "clock_display": "59'",
-          "period": 2,
-          "team": "Defensor Sporting",
+          "period": 0,
+          "team_id": "1007",
           "scorer": "Lautaro Navarro",
           "type": "Penalty - Scored",
-          "text": "Lautaro Navarro (Defensor Sporting) Penalty - Scored at 59'",
+          "is_own_goal": false,
+          "is_penalty": true,
           "time_approximate": false,
-          "source": "ESPN_SUMMARY_KEY_EVENTS"
+          "source": "ESPN_OFFICIAL_DETAIL"
         }
       ],
       "current_score": "0-1",
@@ -72,7 +73,7 @@
       "actual_roi_contribution": null,
       "is_major": false,
       "created_at": "2026-11-23T20:45:59Z",
-      "updated_at": "2026-11-23T20:53:02Z",
+      "updated_at": "2026-11-23T20:57:51Z",
       "last_verified_at": "2026-11-23T20:45:59Z",
       "verification_status": "IN_PROGRESS_PENDING_FINAL",
       "revision_history": [],
@@ -126,13 +127,14 @@
         {
           "minute": 82,
           "clock_display": "82'",
-          "period": 2,
-          "team": "De Graafschap",
+          "period": 0,
+          "team_id": "144",
           "scorer": "Julian Kania",
           "type": "Goal",
-          "text": "Julian Kania (De Graafschap) Goal at 82'",
+          "is_own_goal": false,
+          "is_penalty": false,
           "time_approximate": false,
-          "source": "ESPN_SUMMARY_KEY_EVENTS"
+          "source": "ESPN_OFFICIAL_DETAIL"
         }
       ],
       "current_score": "0-1",
@@ -148,7 +150,7 @@
       "actual_roi_contribution": null,
       "is_major": false,
       "created_at": "2026-11-23T20:25:58Z",
-      "updated_at": "2026-11-23T20:53:02Z",
+      "updated_at": "2026-11-23T20:57:51Z",
       "last_verified_at": "2026-11-23T20:25:58Z",
       "verification_status": "IN_PROGRESS_PENDING_FINAL",
       "revision_history": [],
