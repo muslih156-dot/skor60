@@ -1,6 +1,6 @@
 {
   "trading_day": "2026-11-22",
-  "last_updated_utc": "2026-11-23T00:03:39Z",
+  "last_updated_utc": "2026-11-23T00:07:56Z",
   "total_records": 21,
   "matches": [
     {
@@ -50,13 +50,14 @@
         {
           "minute": 66,
           "clock_display": "66'",
-          "period": 2,
-          "team": "Red Bull Bragantino",
+          "period": 0,
+          "team_id": "6079",
           "scorer": "Eduardo Sasha",
           "type": "Goal - Header",
-          "text": "Goal! RB Bragantino 1, Vasco da Gama 0. Eduardo Sasha (RB Bragantino) header from very close range to the bottom left corner.",
+          "is_own_goal": false,
+          "is_penalty": false,
           "time_approximate": false,
-          "source": "ESPN_SUMMARY_KEY_EVENTS"
+          "source": "ESPN_OFFICIAL_DETAIL"
         }
       ],
       "current_score": "1-0",
@@ -72,7 +73,7 @@
       "actual_roi_contribution": null,
       "is_major": true,
       "created_at": "2026-11-22T23:55:47Z",
-      "updated_at": "2026-11-23T00:03:39Z",
+      "updated_at": "2026-11-23T00:07:56Z",
       "last_verified_at": "2026-11-22T23:55:47Z",
       "verification_status": "IN_PROGRESS_PENDING_FINAL",
       "revision_history": [],
