@@ -1,7 +1,7 @@
 {
   "system": "TRADING BOLA MENIT 60 - LAST GOAL SYSTEM",
   "version": "2.1",
-  "last_updated_utc": "2026-11-24T14:53:02Z",
+  "last_updated_utc": "2026-11-24T14:57:47Z",
   "total_records": 333,
   "matches": [
     {
@@ -45,52 +45,70 @@
           "score": "1-1",
           "match_status": "Second Half",
           "note": "GOAL DETECTED"
+        },
+        {
+          "timestamp_utc": "2026-11-24T14:57:47Z",
+          "timestamp_wita": "2026-11-24T22:57:47.900834+08:00",
+          "clock": "Final",
+          "minute": null,
+          "score": "2-1",
+          "match_status": "Final",
+          "note": "GOAL DETECTED"
         }
       ],
       "goal_events": [
         {
           "minute": 82,
           "clock_display": "82'",
-          "period": 0,
-          "team_id": "131707",
+          "period": 2,
+          "team": "Chanmari FC",
           "scorer": "Aron Vanlalrinchhana",
           "type": "Goal",
-          "is_own_goal": false,
-          "is_penalty": false,
+          "text": "Aron Vanlalrinchhana (Chanmari FC) Goal at 82'",
           "time_approximate": false,
-          "source": "ESPN_OFFICIAL_DETAIL"
+          "source": "ESPN_SUMMARY_KEY_EVENTS"
         },
         {
           "minute": 86,
           "clock_display": "86'",
-          "period": 0,
-          "team_id": "21311",
+          "period": 2,
+          "team": "Sreenidi Deccan FC",
           "scorer": "Deepak DP",
           "type": "Goal",
-          "is_own_goal": false,
-          "is_penalty": false,
+          "text": "Deepak DP (Sreenidi Deccan FC) Goal at 86'",
           "time_approximate": false,
-          "source": "ESPN_OFFICIAL_DETAIL"
+          "source": "ESPN_SUMMARY_KEY_EVENTS"
+        },
+        {
+          "minute": 90,
+          "clock_display": "90'+1'",
+          "period": 2,
+          "team": "Sreenidi Deccan FC",
+          "scorer": "Jerry Mawihmingthanga",
+          "type": "Goal",
+          "text": "Jerry Mawihmingthanga (Sreenidi Deccan FC) Goal at 90'+1'",
+          "time_approximate": false,
+          "source": "ESPN_SUMMARY_KEY_EVENTS"
         }
       ],
-      "current_score": "1-1",
-      "final_score": null,
-      "match_status": "Second Half",
-      "settlement_status": "PENDING",
-      "result": "PENDING",
-      "profit": 0,
-      "roi_contribution": 0.0,
-      "simulated_profit": 0,
-      "simulated_roi_contribution": 0.0,
+      "current_score": "2-1",
+      "final_score": "2-1",
+      "match_status": "Final",
+      "settlement_status": "SETTLED",
+      "result": "WIN",
+      "profit": 40000,
+      "roi_contribution": 80.0,
+      "simulated_profit": 40000,
+      "simulated_roi_contribution": 80.0,
       "actual_profit": null,
       "actual_roi_contribution": null,
       "is_major": false,
       "created_at": "2026-11-24T14:21:01Z",
-      "updated_at": "2026-11-24T14:53:02Z",
-      "last_verified_at": "2026-11-24T14:21:01Z",
-      "verification_status": "IN_PROGRESS_PENDING_FINAL",
+      "updated_at": "2026-11-24T14:57:47Z",
+      "last_verified_at": "2026-11-24T14:57:47Z",
+      "verification_status": "VERIFIED_OFFICIAL_FINAL",
       "revision_history": [],
-      "audit_explanation": "Pertandingan 401930687 masih berstatus Second Half (Skor saat ini: 1-1). Menunggu status Final resmi dari provider (PENDING).",
+      "audit_explanation": "Pertandingan 401930687 masuk pada menit 61' dengan skor 0-0. Status resmi mencapai Final dengan skor akhir waktu normal 2-1. Minimal 1 gol tercipta setelah waktu entry sehingga dinyatakan WIN.",
       "audit_passed": true
     },
     {
