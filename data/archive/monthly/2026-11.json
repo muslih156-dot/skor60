@@ -1,6 +1,6 @@
 {
   "trading_month": "2026-11",
-  "last_updated_utc": "2026-11-24T14:48:42Z",
+  "last_updated_utc": "2026-11-24T14:53:02Z",
   "total_records": 292,
   "matches": [
     {
@@ -50,24 +50,26 @@
         {
           "minute": 82,
           "clock_display": "82'",
-          "period": 2,
-          "team": "Chanmari FC",
+          "period": 0,
+          "team_id": "131707",
           "scorer": "Aron Vanlalrinchhana",
           "type": "Goal",
-          "text": "Aron Vanlalrinchhana (Chanmari FC) Goal at 82'",
+          "is_own_goal": false,
+          "is_penalty": false,
           "time_approximate": false,
-          "source": "ESPN_SUMMARY_KEY_EVENTS"
+          "source": "ESPN_OFFICIAL_DETAIL"
         },
         {
           "minute": 86,
           "clock_display": "86'",
-          "period": 2,
-          "team": "Sreenidi Deccan FC",
+          "period": 0,
+          "team_id": "21311",
           "scorer": "Deepak DP",
           "type": "Goal",
-          "text": "Deepak DP (Sreenidi Deccan FC) Goal at 86'",
+          "is_own_goal": false,
+          "is_penalty": false,
           "time_approximate": false,
-          "source": "ESPN_SUMMARY_KEY_EVENTS"
+          "source": "ESPN_OFFICIAL_DETAIL"
         }
       ],
       "current_score": "1-1",
@@ -83,7 +85,7 @@
       "actual_roi_contribution": null,
       "is_major": false,
       "created_at": "2026-11-24T14:21:01Z",
-      "updated_at": "2026-11-24T14:48:42Z",
+      "updated_at": "2026-11-24T14:53:02Z",
       "last_verified_at": "2026-11-24T14:21:01Z",
       "verification_status": "IN_PROGRESS_PENDING_FINAL",
       "revision_history": [],
