@@ -1,7 +1,7 @@
 {
   "system": "TRADING BOLA MENIT 60 - LAST GOAL SYSTEM",
   "version": "2.1",
-  "last_updated_utc": "2026-11-24T00:12:52Z",
+  "last_updated_utc": "2026-11-24T00:17:59Z",
   "total_records": 330,
   "matches": [
     {
@@ -60,24 +60,26 @@
         {
           "minute": 74,
           "clock_display": "74'",
-          "period": 2,
-          "team": "Albion FC",
+          "period": 0,
+          "team_id": "21403",
           "scorer": "Álvaro López",
           "type": "Penalty - Scored",
-          "text": "Álvaro López (Albion FC) Penalty - Scored at 74'",
+          "is_own_goal": false,
+          "is_penalty": true,
           "time_approximate": false,
-          "source": "ESPN_SUMMARY_KEY_EVENTS"
+          "source": "ESPN_OFFICIAL_DETAIL"
         },
         {
           "minute": 82,
           "clock_display": "82'",
-          "period": 2,
-          "team": "Danubio",
+          "period": 0,
+          "team_id": "4817",
           "scorer": "Mauro Brasil",
           "type": "Goal",
-          "text": "Mauro Brasil (Danubio) Goal at 82'",
+          "is_own_goal": false,
+          "is_penalty": false,
           "time_approximate": false,
-          "source": "ESPN_SUMMARY_KEY_EVENTS"
+          "source": "ESPN_OFFICIAL_DETAIL"
         }
       ],
       "current_score": "1-1",
@@ -93,7 +95,7 @@
       "actual_roi_contribution": null,
       "is_major": false,
       "created_at": "2026-11-23T23:50:49Z",
-      "updated_at": "2026-11-24T00:12:52Z",
+      "updated_at": "2026-11-24T00:17:59Z",
       "last_verified_at": "2026-11-23T23:50:49Z",
       "verification_status": "IN_PROGRESS_PENDING_FINAL",
       "revision_history": [],
