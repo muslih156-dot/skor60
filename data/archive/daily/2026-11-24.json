@@ -1,6 +1,6 @@
 {
   "trading_day": "2026-11-24",
-  "last_updated_utc": "2026-11-24T17:18:03Z",
+  "last_updated_utc": "2026-11-24T17:22:59Z",
   "total_records": 5,
   "matches": [
     {
@@ -59,24 +59,26 @@
         {
           "minute": 76,
           "clock_display": "76'",
-          "period": 2,
-          "team": "Colombia U17",
+          "period": 0,
+          "team_id": "18768",
           "scorer": "Matías Caicedo",
           "type": "Goal",
-          "text": "Matías Caicedo (Colombia U17) Goal at 76'",
+          "is_own_goal": false,
+          "is_penalty": false,
           "time_approximate": false,
-          "source": "ESPN_SUMMARY_KEY_EVENTS"
+          "source": "ESPN_OFFICIAL_DETAIL"
         },
         {
           "minute": 84,
           "clock_display": "84'",
-          "period": 2,
-          "team": "Colombia U17",
+          "period": 0,
+          "team_id": "18768",
           "scorer": "José Rafael Escorcia De La Cruz",
           "type": "Goal",
-          "text": "José Rafael Escorcia De La Cruz (Colombia U17) Goal at 84'",
+          "is_own_goal": false,
+          "is_penalty": false,
           "time_approximate": false,
-          "source": "ESPN_SUMMARY_KEY_EVENTS"
+          "source": "ESPN_OFFICIAL_DETAIL"
         }
       ],
       "current_score": "0-2",
@@ -92,7 +94,7 @@
       "actual_roi_contribution": null,
       "is_major": false,
       "created_at": "2026-11-24T16:49:08Z",
-      "updated_at": "2026-11-24T17:18:03Z",
+      "updated_at": "2026-11-24T17:22:59Z",
       "last_verified_at": "2026-11-24T16:49:08Z",
       "verification_status": "IN_PROGRESS_PENDING_FINAL",
       "revision_history": [],
