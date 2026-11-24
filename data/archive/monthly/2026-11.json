@@ -1,6 +1,6 @@
 {
   "trading_month": "2026-11",
-  "last_updated_utc": "2026-11-24T21:23:04Z",
+  "last_updated_utc": "2026-11-24T21:27:55Z",
   "total_records": 304,
   "matches": [
     {
@@ -51,7 +51,7 @@
       "actual_roi_contribution": null,
       "is_major": false,
       "created_at": "2026-11-24T21:05:50Z",
-      "updated_at": "2026-11-24T21:23:04Z",
+      "updated_at": "2026-11-24T21:27:55Z",
       "last_verified_at": "2026-11-24T21:05:50Z",
       "verification_status": "IN_PROGRESS_PENDING_FINAL",
       "revision_history": [],
@@ -128,7 +128,7 @@
       "actual_roi_contribution": null,
       "is_major": false,
       "created_at": "2026-11-24T21:05:50Z",
-      "updated_at": "2026-11-24T21:23:04Z",
+      "updated_at": "2026-11-24T21:27:54Z",
       "last_verified_at": "2026-11-24T21:05:50Z",
       "verification_status": "IN_PROGRESS_PENDING_FINAL",
       "revision_history": [],
@@ -182,13 +182,14 @@
         {
           "minute": 73,
           "clock_display": "73'",
-          "period": 2,
-          "team": "Barrow",
+          "period": 0,
+          "team_id": "642",
           "scorer": "Danny Amos",
           "type": "Goal",
-          "text": "Danny Amos (Barrow) Goal at 73'",
+          "is_own_goal": false,
+          "is_penalty": false,
           "time_approximate": false,
-          "source": "ESPN_SUMMARY_KEY_EVENTS"
+          "source": "ESPN_OFFICIAL_DETAIL"
         }
       ],
       "current_score": "0-1",
@@ -204,7 +205,7 @@
       "actual_roi_contribution": null,
       "is_major": false,
       "created_at": "2026-11-24T21:05:50Z",
-      "updated_at": "2026-11-24T21:23:04Z",
+      "updated_at": "2026-11-24T21:27:55Z",
       "last_verified_at": "2026-11-24T21:05:50Z",
       "verification_status": "IN_PROGRESS_PENDING_FINAL",
       "revision_history": [],
@@ -267,24 +268,26 @@
         {
           "minute": 54,
           "clock_display": "54'",
-          "period": 2,
-          "team": "Southend United",
+          "period": 0,
+          "team_id": "310",
           "scorer": "Harry Cardwell",
           "type": "Goal",
-          "text": "Harry Cardwell (Southend United) Goal at 54'",
+          "is_own_goal": false,
+          "is_penalty": false,
           "time_approximate": false,
-          "source": "ESPN_SUMMARY_KEY_EVENTS"
+          "source": "ESPN_OFFICIAL_DETAIL"
         },
         {
           "minute": 74,
           "clock_display": "74'",
-          "period": 2,
-          "team": "Southend United",
+          "period": 0,
+          "team_id": "310",
           "scorer": "Kyle Mcadam",
           "type": "Goal",
-          "text": "Kyle Mcadam (Southend United) Goal at 74'",
+          "is_own_goal": false,
+          "is_penalty": false,
           "time_approximate": false,
-          "source": "ESPN_SUMMARY_KEY_EVENTS"
+          "source": "ESPN_OFFICIAL_DETAIL"
         }
       ],
       "current_score": "0-2",
@@ -300,7 +303,7 @@
       "actual_roi_contribution": null,
       "is_major": false,
       "created_at": "2026-11-24T21:05:50Z",
-      "updated_at": "2026-11-24T21:23:04Z",
+      "updated_at": "2026-11-24T21:27:55Z",
       "last_verified_at": "2026-11-24T21:05:50Z",
       "verification_status": "IN_PROGRESS_PENDING_FINAL",
       "revision_history": [],
@@ -355,7 +358,7 @@
       "actual_roi_contribution": null,
       "is_major": false,
       "created_at": "2026-11-24T21:05:50Z",
-      "updated_at": "2026-11-24T21:23:04Z",
+      "updated_at": "2026-11-24T21:27:54Z",
       "last_verified_at": "2026-11-24T21:05:50Z",
       "verification_status": "IN_PROGRESS_PENDING_FINAL",
       "revision_history": [],
@@ -410,7 +413,7 @@
       "actual_roi_contribution": null,
       "is_major": false,
       "created_at": "2026-11-24T21:05:50Z",
-      "updated_at": "2026-11-24T21:23:03Z",
+      "updated_at": "2026-11-24T21:27:54Z",
       "last_verified_at": "2026-11-24T21:05:50Z",
       "verification_status": "IN_PROGRESS_PENDING_FINAL",
       "revision_history": [],
@@ -458,23 +461,42 @@
           "score": "0-1",
           "match_status": "Second Half",
           "note": "GOAL DETECTED"
+        },
+        {
+          "timestamp_utc": "2026-11-24T21:27:55Z",
+          "timestamp_wita": "2026-11-25T05:27:55.679420+08:00",
+          "clock": "86'",
+          "minute": 86,
+          "score": "1-1",
+          "match_status": "Second Half",
+          "note": "GOAL DETECTED"
         }
       ],
       "goal_events": [
         {
           "minute": 66,
           "clock_display": "66'",
-          "period": 0,
-          "team_id": "375",
+          "period": 2,
+          "team": "Leicester City",
           "scorer": "Will Alves",
           "type": "Goal",
-          "is_own_goal": false,
-          "is_penalty": false,
+          "text": "Will Alves (Leicester City) Goal at 66'",
           "time_approximate": false,
-          "source": "ESPN_OFFICIAL_DETAIL"
+          "source": "ESPN_SUMMARY_KEY_EVENTS"
+        },
+        {
+          "minute": 84,
+          "clock_display": "84'",
+          "period": 2,
+          "team": "Blackpool",
+          "scorer": "Niall Ennis",
+          "type": "Goal",
+          "text": "Niall Ennis (Blackpool) Goal at 84'",
+          "time_approximate": false,
+          "source": "ESPN_SUMMARY_KEY_EVENTS"
         }
       ],
-      "current_score": "0-1",
+      "current_score": "1-1",
       "final_score": null,
       "match_status": "Second Half",
       "settlement_status": "PENDING",
@@ -487,11 +509,11 @@
       "actual_roi_contribution": null,
       "is_major": false,
       "created_at": "2026-11-24T21:01:05Z",
-      "updated_at": "2026-11-24T21:23:04Z",
+      "updated_at": "2026-11-24T21:27:55Z",
       "last_verified_at": "2026-11-24T21:01:05Z",
       "verification_status": "IN_PROGRESS_PENDING_FINAL",
       "revision_history": [],
-      "audit_explanation": "Pertandingan 401880824 masih berstatus Second Half (Skor saat ini: 0-1). Menunggu status Final resmi dari provider (PENDING).",
+      "audit_explanation": "Pertandingan 401880824 masih berstatus Second Half (Skor saat ini: 1-1). Menunggu status Final resmi dari provider (PENDING).",
       "audit_passed": true
     },
     {
