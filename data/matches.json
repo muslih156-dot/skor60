@@ -1,7 +1,7 @@
 {
   "system": "TRADING BOLA MENIT 60 - LAST GOAL SYSTEM",
   "version": "2.1",
-  "last_updated_utc": "2026-11-25T20:53:08Z",
+  "last_updated_utc": "2026-11-25T20:57:59Z",
   "total_records": 354,
   "matches": [
     {
@@ -54,52 +54,70 @@
           "score": "2-0",
           "match_status": "Second Half",
           "note": "GOAL DETECTED"
+        },
+        {
+          "timestamp_utc": "2026-11-25T20:57:59Z",
+          "timestamp_wita": "2026-11-26T04:57:59.981729+08:00",
+          "clock": "Final",
+          "minute": null,
+          "score": "2-1",
+          "match_status": "Final",
+          "note": "GOAL DETECTED"
         }
       ],
       "goal_events": [
         {
           "minute": 79,
           "clock_display": "79'",
-          "period": 0,
-          "team_id": "3891",
+          "period": 2,
+          "team": "Fleetwood Town",
           "scorer": "Aaron Loupalo-Bi",
           "type": "Goal",
-          "is_own_goal": false,
-          "is_penalty": false,
+          "text": "Aaron Loupalo-Bi (Fleetwood Town) Goal at 79'",
           "time_approximate": false,
-          "source": "ESPN_OFFICIAL_DETAIL"
+          "source": "ESPN_SUMMARY_KEY_EVENTS"
         },
         {
           "minute": 87,
           "clock_display": "87'",
-          "period": 0,
-          "team_id": "3891",
+          "period": 2,
+          "team": "Fleetwood Town",
           "scorer": "Josh Robertson",
           "type": "Goal",
-          "is_own_goal": false,
-          "is_penalty": false,
+          "text": "Josh Robertson (Fleetwood Town) Goal at 87'",
           "time_approximate": false,
-          "source": "ESPN_OFFICIAL_DETAIL"
+          "source": "ESPN_SUMMARY_KEY_EVENTS"
+        },
+        {
+          "minute": 90,
+          "clock_display": "90'+5'",
+          "period": 2,
+          "team": "Leeds United U21",
+          "scorer": "Carrick Njinko",
+          "type": "Penalty - Scored",
+          "text": "Carrick Njinko (Leeds United U21) Penalty - Scored at 90'+5'",
+          "time_approximate": false,
+          "source": "ESPN_SUMMARY_KEY_EVENTS"
         }
       ],
-      "current_score": "2-0",
-      "final_score": null,
-      "match_status": "Second Half",
-      "settlement_status": "PENDING",
-      "result": "PENDING",
-      "profit": 0,
-      "roi_contribution": 0.0,
-      "simulated_profit": 0,
-      "simulated_roi_contribution": 0.0,
+      "current_score": "2-1",
+      "final_score": "2-1",
+      "match_status": "Final",
+      "settlement_status": "SETTLED",
+      "result": "WIN",
+      "profit": 40000,
+      "roi_contribution": 80.0,
+      "simulated_profit": 40000,
+      "simulated_roi_contribution": 80.0,
       "actual_profit": null,
       "actual_roi_contribution": null,
       "is_major": false,
       "created_at": "2026-11-25T20:21:05Z",
-      "updated_at": "2026-11-25T20:53:08Z",
-      "last_verified_at": "2026-11-25T20:21:05Z",
-      "verification_status": "IN_PROGRESS_PENDING_FINAL",
+      "updated_at": "2026-11-25T20:57:59Z",
+      "last_verified_at": "2026-11-25T20:57:59Z",
+      "verification_status": "VERIFIED_OFFICIAL_FINAL",
       "revision_history": [],
-      "audit_explanation": "Pertandingan 401906325 masih berstatus Second Half (Skor saat ini: 2-0). Menunggu status Final resmi dari provider (PENDING).",
+      "audit_explanation": "Pertandingan 401906325 masuk pada menit 64' dengan skor 0-0. Status resmi mencapai Final dengan skor akhir waktu normal 2-1. Minimal 1 gol tercipta setelah waktu entry sehingga dinyatakan WIN.",
       "audit_passed": true
     },
     {
