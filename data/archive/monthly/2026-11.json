@@ -1,6 +1,6 @@
 {
   "trading_month": "2026-11",
-  "last_updated_utc": "2026-11-26T21:37:51Z",
+  "last_updated_utc": "2026-11-26T21:42:53Z",
   "total_records": 323,
   "matches": [
     {
@@ -51,7 +51,7 @@
       "actual_roi_contribution": null,
       "is_major": true,
       "created_at": "2026-11-26T21:21:00Z",
-      "updated_at": "2026-11-26T21:37:51Z",
+      "updated_at": "2026-11-26T21:42:53Z",
       "last_verified_at": "2026-11-26T21:21:00Z",
       "verification_status": "IN_PROGRESS_PENDING_FINAL",
       "revision_history": [],
@@ -108,35 +108,53 @@
           "score": "1-1",
           "match_status": "Second Half",
           "note": "GOAL DETECTED"
+        },
+        {
+          "timestamp_utc": "2026-11-26T21:42:53Z",
+          "timestamp_wita": "2026-11-27T05:42:53.299082+08:00",
+          "clock": "86'",
+          "minute": 86,
+          "score": "2-1",
+          "match_status": "Second Half",
+          "note": "GOAL DETECTED"
         }
       ],
       "goal_events": [
         {
           "minute": 66,
           "clock_display": "66'",
-          "period": 0,
-          "team_id": "89",
+          "period": 2,
+          "team": "Real Sociedad",
           "scorer": "Mamadou Sarr",
           "type": "Goal",
-          "is_own_goal": false,
-          "is_penalty": false,
+          "text": "Goal! Crystal Palace 0, Real Sociedad 1. Mamadou Sarr (Real Sociedad) right footed shot from the centre of the box to the centre of the goal. Assisted by Job Ochieng.",
           "time_approximate": false,
-          "source": "ESPN_OFFICIAL_DETAIL"
+          "source": "ESPN_SUMMARY_KEY_EVENTS"
         },
         {
           "minute": 73,
           "clock_display": "73'",
-          "period": 0,
-          "team_id": "384",
+          "period": 2,
+          "team": "Crystal Palace",
           "scorer": "Jean-Philippe Mateta",
           "type": "Penalty - Scored",
-          "is_own_goal": false,
-          "is_penalty": true,
+          "text": "Goal! Crystal Palace 1, Real Sociedad 1. Jean-Philippe Mateta (Crystal Palace) converts the penalty with a right footed shot to the centre of the goal.",
           "time_approximate": false,
-          "source": "ESPN_OFFICIAL_DETAIL"
+          "source": "ESPN_SUMMARY_KEY_EVENTS"
+        },
+        {
+          "minute": 81,
+          "clock_display": "81'",
+          "period": 2,
+          "team": "Crystal Palace",
+          "scorer": "Dwight McNeil",
+          "type": "Goal",
+          "text": "Goal! Crystal Palace 2, Real Sociedad 1. Dwight McNeil (Crystal Palace) left footed shot from very close range to the bottom left corner. Assisted by Jørgen Strand Larsen.",
+          "time_approximate": false,
+          "source": "ESPN_SUMMARY_KEY_EVENTS"
         }
       ],
-      "current_score": "1-1",
+      "current_score": "2-1",
       "final_score": null,
       "match_status": "Second Half",
       "settlement_status": "PENDING",
@@ -149,11 +167,11 @@
       "actual_roi_contribution": null,
       "is_major": true,
       "created_at": "2026-11-26T21:15:58Z",
-      "updated_at": "2026-11-26T21:37:51Z",
+      "updated_at": "2026-11-26T21:42:53Z",
       "last_verified_at": "2026-11-26T21:15:58Z",
       "verification_status": "IN_PROGRESS_PENDING_FINAL",
       "revision_history": [],
-      "audit_explanation": "Pertandingan 401915504 masih berstatus Second Half (Skor saat ini: 1-1). Menunggu status Final resmi dari provider (PENDING).",
+      "audit_explanation": "Pertandingan 401915504 masih berstatus Second Half (Skor saat ini: 2-1). Menunggu status Final resmi dari provider (PENDING).",
       "audit_passed": true
     },
     {
@@ -204,7 +222,7 @@
       "actual_roi_contribution": null,
       "is_major": true,
       "created_at": "2026-11-26T21:15:58Z",
-      "updated_at": "2026-11-26T21:37:51Z",
+      "updated_at": "2026-11-26T21:42:53Z",
       "last_verified_at": "2026-11-26T21:15:58Z",
       "verification_status": "IN_PROGRESS_PENDING_FINAL",
       "revision_history": [],
