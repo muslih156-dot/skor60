@@ -1,6 +1,6 @@
 {
   "trading_day": "2026-11-26",
-  "last_updated_utc": "2026-11-26T20:07:49Z",
+  "last_updated_utc": "2026-11-26T20:13:00Z",
   "total_records": 4,
   "matches": [
     {
@@ -44,23 +44,53 @@
           "score": "1-0",
           "match_status": "Second Half",
           "note": "GOAL DETECTED"
+        },
+        {
+          "timestamp_utc": "2026-11-26T20:13:00Z",
+          "timestamp_wita": "2026-11-27T04:13:00.809021+08:00",
+          "clock": "90'+4'",
+          "minute": 90,
+          "score": "2-1",
+          "match_status": "Second Half",
+          "note": "GOAL DETECTED"
         }
       ],
       "goal_events": [
         {
           "minute": 75,
           "clock_display": "75'",
-          "period": 0,
-          "team_id": "1895",
+          "period": 2,
+          "team": "Besiktas",
           "scorer": "Junior Olaitan",
           "type": "Goal",
-          "is_own_goal": false,
-          "is_penalty": false,
+          "text": "Goal! Besiktas 1, Hapoel Be'er Sheva 0. Junior Olaïtan (Besiktas) right footed shot from the centre of the box to the bottom right corner.",
           "time_approximate": false,
-          "source": "ESPN_OFFICIAL_DETAIL"
+          "source": "ESPN_SUMMARY_KEY_EVENTS"
+        },
+        {
+          "minute": 90,
+          "clock_display": "90'",
+          "period": 2,
+          "team": "Besiktas",
+          "scorer": "Orkun Kökçü",
+          "type": "Goal",
+          "text": "Goal! Besiktas 2, Hapoel Be'er Sheva 0. Orkun Kökçü (Besiktas) right footed shot from the centre of the box to the bottom left corner. Assisted by Dusan Vlahovic following a fast break.",
+          "time_approximate": false,
+          "source": "ESPN_SUMMARY_KEY_EVENTS"
+        },
+        {
+          "minute": 90,
+          "clock_display": "90'+3'",
+          "period": 2,
+          "team": "Hapoel Be'er",
+          "scorer": "Javon East",
+          "type": "Goal",
+          "text": "Goal! Besiktas 2, Hapoel Be'er Sheva 1. Javon East (Hapoel Be'er Sheva) right footed shot from the centre of the box to the centre of the goal. Assisted by João Victor.",
+          "time_approximate": false,
+          "source": "ESPN_SUMMARY_KEY_EVENTS"
         }
       ],
-      "current_score": "1-0",
+      "current_score": "2-1",
       "final_score": null,
       "match_status": "Second Half",
       "settlement_status": "PENDING",
@@ -73,11 +103,11 @@
       "actual_roi_contribution": null,
       "is_major": true,
       "created_at": "2026-11-26T19:39:40Z",
-      "updated_at": "2026-11-26T20:07:49Z",
+      "updated_at": "2026-11-26T20:13:00Z",
       "last_verified_at": "2026-11-26T19:39:40Z",
       "verification_status": "IN_PROGRESS_PENDING_FINAL",
       "revision_history": [],
-      "audit_explanation": "Pertandingan 401915506 masih berstatus Second Half (Skor saat ini: 1-0). Menunggu status Final resmi dari provider (PENDING).",
+      "audit_explanation": "Pertandingan 401915506 masih berstatus Second Half (Skor saat ini: 2-1). Menunggu status Final resmi dari provider (PENDING).",
       "audit_passed": true
     },
     {
