@@ -1,7 +1,7 @@
 {
   "system": "TRADING BOLA MENIT 60 - LAST GOAL SYSTEM",
   "version": "2.1",
-  "last_updated_utc": "2026-11-26T03:47:52Z",
+  "last_updated_utc": "2026-11-26T03:53:04Z",
   "total_records": 357,
   "matches": [
     {
@@ -60,13 +60,26 @@
         {
           "minute": 76,
           "clock_display": "76'",
-          "period": 2,
-          "team": "Internacional Santa Tecla",
+          "period": 0,
+          "team_id": "131295",
           "scorer": "Emerson Mauricio",
           "type": "Goal",
-          "text": "Emerson Mauricio (Internacional Santa Tecla) Goal at 76'",
+          "is_own_goal": false,
+          "is_penalty": false,
           "time_approximate": false,
-          "source": "ESPN_SUMMARY_KEY_EVENTS"
+          "source": "ESPN_OFFICIAL_DETAIL"
+        },
+        {
+          "minute": 83,
+          "clock_display": "83'",
+          "period": 0,
+          "team_id": "131295",
+          "scorer": "Marcel Hernandez",
+          "type": "Goal",
+          "is_own_goal": false,
+          "is_penalty": false,
+          "time_approximate": false,
+          "source": "ESPN_OFFICIAL_DETAIL"
         }
       ],
       "current_score": "2-0",
@@ -82,7 +95,7 @@
       "actual_roi_contribution": null,
       "is_major": false,
       "created_at": "2026-11-26T03:25:56Z",
-      "updated_at": "2026-11-26T03:47:52Z",
+      "updated_at": "2026-11-26T03:53:04Z",
       "last_verified_at": "2026-11-26T03:25:56Z",
       "verification_status": "IN_PROGRESS_PENDING_FINAL",
       "revision_history": [],
