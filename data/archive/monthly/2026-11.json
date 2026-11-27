@@ -1,6 +1,6 @@
 {
   "trading_month": "2026-11",
-  "last_updated_utc": "2026-11-27T19:12:55Z",
+  "last_updated_utc": "2026-11-27T19:18:02Z",
   "total_records": 328,
   "matches": [
     {
@@ -50,13 +50,14 @@
         {
           "minute": 75,
           "clock_display": "75'",
-          "period": 2,
-          "team": "Al Ittihad",
+          "period": 0,
+          "team_id": "2276",
           "scorer": "Youssef En-Nesyri",
           "type": "Goal",
-          "text": "Youssef En-Nesyri (Al Ittihad) Goal at 75'",
+          "is_own_goal": false,
+          "is_penalty": false,
           "time_approximate": false,
-          "source": "ESPN_SUMMARY_KEY_EVENTS"
+          "source": "ESPN_OFFICIAL_DETAIL"
         }
       ],
       "current_score": "1-0",
@@ -72,7 +73,7 @@
       "actual_roi_contribution": null,
       "is_major": false,
       "created_at": "2026-11-27T18:55:54Z",
-      "updated_at": "2026-11-27T19:12:55Z",
+      "updated_at": "2026-11-27T19:18:02Z",
       "last_verified_at": "2026-11-27T18:55:54Z",
       "verification_status": "IN_PROGRESS_PENDING_FINAL",
       "revision_history": [],
@@ -111,10 +112,31 @@
           "score": "0-0",
           "match_status": "Second Half",
           "note": "ENTRY"
+        },
+        {
+          "timestamp_utc": "2026-11-27T19:18:02Z",
+          "timestamp_wita": "2026-11-28T03:18:02.857959+08:00",
+          "clock": "88'",
+          "minute": 88,
+          "score": "1-0",
+          "match_status": "Second Half",
+          "note": "GOAL DETECTED"
         }
       ],
-      "goal_events": [],
-      "current_score": "0-0",
+      "goal_events": [
+        {
+          "minute": 81,
+          "clock_display": "81'",
+          "period": 2,
+          "team": "VfL Bochum",
+          "scorer": "Philipp Hofmann",
+          "type": "Goal",
+          "text": "Philipp Hofmann (VfL Bochum) Goal at 81'",
+          "time_approximate": false,
+          "source": "ESPN_SUMMARY_KEY_EVENTS"
+        }
+      ],
+      "current_score": "1-0",
       "final_score": null,
       "match_status": "Second Half",
       "settlement_status": "PENDING",
@@ -127,11 +149,11 @@
       "actual_roi_contribution": null,
       "is_major": false,
       "created_at": "2026-11-27T18:51:02Z",
-      "updated_at": "2026-11-27T19:12:55Z",
+      "updated_at": "2026-11-27T19:18:02Z",
       "last_verified_at": "2026-11-27T18:51:02Z",
       "verification_status": "IN_PROGRESS_PENDING_FINAL",
       "revision_history": [],
-      "audit_explanation": "Pertandingan 401885045 masih berstatus Second Half (Skor saat ini: 0-0). Menunggu status Final resmi dari provider (PENDING).",
+      "audit_explanation": "Pertandingan 401885045 masih berstatus Second Half (Skor saat ini: 1-0). Menunggu status Final resmi dari provider (PENDING).",
       "audit_passed": true
     },
     {
