@@ -1,6 +1,6 @@
 {
   "trading_day": "2026-11-28",
-  "last_updated_utc": "2026-11-28T14:07:46Z",
+  "last_updated_utc": "2026-11-28T14:13:05Z",
   "total_records": 5,
   "matches": [
     {
@@ -51,7 +51,7 @@
       "actual_roi_contribution": null,
       "is_major": false,
       "created_at": "2026-11-28T13:51:01Z",
-      "updated_at": "2026-11-28T14:07:46Z",
+      "updated_at": "2026-11-28T14:13:05Z",
       "last_verified_at": "2026-11-28T13:51:01Z",
       "verification_status": "IN_PROGRESS_PENDING_FINAL",
       "revision_history": [],
@@ -105,13 +105,14 @@
         {
           "minute": 77,
           "clock_display": "77'",
-          "period": 2,
-          "team": "Blackburn Rovers",
+          "period": 0,
+          "team_id": "365",
           "scorer": "Kristi Montgomery",
           "type": "Goal",
-          "text": "Goal! Blackburn Rovers 1, Charlton Athletic 0. Kristi Montgomery (Blackburn Rovers) right footed shot from the centre of the box to the bottom right corner. Assisted by Todd Cantwell.",
+          "is_own_goal": false,
+          "is_penalty": false,
           "time_approximate": false,
-          "source": "ESPN_SUMMARY_KEY_EVENTS"
+          "source": "ESPN_OFFICIAL_DETAIL"
         }
       ],
       "current_score": "1-0",
@@ -127,7 +128,7 @@
       "actual_roi_contribution": null,
       "is_major": false,
       "created_at": "2026-11-28T13:51:01Z",
-      "updated_at": "2026-11-28T14:07:46Z",
+      "updated_at": "2026-11-28T14:13:04Z",
       "last_verified_at": "2026-11-28T13:51:01Z",
       "verification_status": "IN_PROGRESS_PENDING_FINAL",
       "revision_history": [],
@@ -182,7 +183,7 @@
       "actual_roi_contribution": null,
       "is_major": false,
       "created_at": "2026-11-28T13:51:01Z",
-      "updated_at": "2026-11-28T14:07:46Z",
+      "updated_at": "2026-11-28T14:13:04Z",
       "last_verified_at": "2026-11-28T13:51:01Z",
       "verification_status": "IN_PROGRESS_PENDING_FINAL",
       "revision_history": [],
@@ -237,7 +238,7 @@
       "actual_roi_contribution": null,
       "is_major": false,
       "created_at": "2026-11-28T13:45:58Z",
-      "updated_at": "2026-11-28T14:07:46Z",
+      "updated_at": "2026-11-28T14:13:05Z",
       "last_verified_at": "2026-11-28T13:45:58Z",
       "verification_status": "IN_PROGRESS_PENDING_FINAL",
       "revision_history": [],
