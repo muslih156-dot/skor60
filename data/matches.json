@@ -1,7 +1,7 @@
 {
   "system": "TRADING BOLA MENIT 60 - LAST GOAL SYSTEM",
   "version": "2.1",
-  "last_updated_utc": "2026-11-28T18:27:46Z",
+  "last_updated_utc": "2026-11-28T18:33:27Z",
   "total_records": 390,
   "matches": [
     {
@@ -69,35 +69,38 @@
         {
           "minute": 67,
           "clock_display": "67'",
-          "period": 2,
-          "team": "Uzbekistan",
+          "period": 0,
+          "team_id": "20908",
           "scorer": "Maftuna Shoyimova",
           "type": "Penalty - Scored",
-          "text": "Maftuna Shoyimova (Uzbekistan) Penalty - Scored at 67'",
+          "is_own_goal": false,
+          "is_penalty": true,
           "time_approximate": false,
-          "source": "ESPN_SUMMARY_KEY_EVENTS"
+          "source": "ESPN_OFFICIAL_DETAIL"
         },
         {
           "minute": 88,
           "clock_display": "88'",
-          "period": 2,
-          "team": "Uzbekistan",
+          "period": 0,
+          "team_id": "20908",
           "scorer": "Raynata Samuel",
           "type": "Own Goal",
-          "text": "Raynata Samuel (Papua New Guinea) Own Goal at 88'",
+          "is_own_goal": true,
+          "is_penalty": false,
           "time_approximate": false,
-          "source": "ESPN_SUMMARY_KEY_EVENTS"
+          "source": "ESPN_OFFICIAL_DETAIL"
         },
         {
           "minute": 90,
           "clock_display": "90'+3'",
-          "period": 2,
-          "team": "Uzbekistan",
+          "period": 0,
+          "team_id": "20908",
           "scorer": "Lyudmila Karachik",
           "type": "Penalty - Scored",
-          "text": "Lyudmila Karachik (Uzbekistan) Penalty - Scored at 90'+3'",
+          "is_own_goal": false,
+          "is_penalty": true,
           "time_approximate": false,
-          "source": "ESPN_SUMMARY_KEY_EVENTS"
+          "source": "ESPN_OFFICIAL_DETAIL"
         }
       ],
       "current_score": "3-0",
@@ -113,7 +116,7 @@
       "actual_roi_contribution": null,
       "is_major": false,
       "created_at": "2026-11-28T17:55:53Z",
-      "updated_at": "2026-11-28T18:27:46Z",
+      "updated_at": "2026-11-28T18:33:26Z",
       "last_verified_at": "2026-11-28T17:55:53Z",
       "verification_status": "IN_PROGRESS_PENDING_FINAL",
       "revision_history": [],
@@ -1426,7 +1429,7 @@
       "actual_roi_contribution": null,
       "is_major": false,
       "created_at": "2026-11-27T21:31:00Z",
-      "updated_at": "2026-11-28T18:27:46Z",
+      "updated_at": "2026-11-28T18:33:27Z",
       "last_verified_at": "2026-11-27T21:31:00Z",
       "verification_status": "IN_PROGRESS_PENDING_FINAL",
       "revision_history": [],
