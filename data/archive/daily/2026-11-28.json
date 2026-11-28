@@ -1,6 +1,6 @@
 {
   "trading_day": "2026-11-28",
-  "last_updated_utc": "2026-11-28T14:37:52Z",
+  "last_updated_utc": "2026-11-28T14:42:54Z",
   "total_records": 6,
   "matches": [
     {
@@ -50,13 +50,14 @@
         {
           "minute": 72,
           "clock_display": "72'",
-          "period": 2,
-          "team": "Rayo Vallecano",
+          "period": 0,
+          "team_id": "101",
           "scorer": "Jorge de Frutos",
           "type": "Goal",
-          "text": "Goal! Real Betis 0, Rayo Vallecano 1. Jorge de Frutos (Rayo Vallecano) right footed shot from the centre of the box to the bottom left corner. Assisted by Isi Palazón.",
+          "is_own_goal": false,
+          "is_penalty": false,
           "time_approximate": false,
-          "source": "ESPN_SUMMARY_KEY_EVENTS"
+          "source": "ESPN_OFFICIAL_DETAIL"
         }
       ],
       "current_score": "0-1",
@@ -72,7 +73,7 @@
       "actual_roi_contribution": null,
       "is_major": true,
       "created_at": "2026-11-28T14:25:46Z",
-      "updated_at": "2026-11-28T14:37:51Z",
+      "updated_at": "2026-11-28T14:42:53Z",
       "last_verified_at": "2026-11-28T14:25:46Z",
       "verification_status": "IN_PROGRESS_PENDING_FINAL",
       "revision_history": [],
