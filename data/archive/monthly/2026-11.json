@@ -1,6 +1,6 @@
 {
   "trading_month": "2026-11",
-  "last_updated_utc": "2026-11-28T16:42:59Z",
+  "last_updated_utc": "2026-11-28T16:48:06Z",
   "total_records": 346,
   "matches": [
     {
@@ -50,13 +50,14 @@
         {
           "minute": 71,
           "clock_display": "71'",
-          "period": 2,
-          "team": "West Ham United",
+          "period": 0,
+          "team_id": "371",
           "scorer": "Konstantinos Mavropanos",
           "type": "Goal - Header",
-          "text": "Goal! West Ham United 1, Stoke City 0. Konstantinos Mavropanos (West Ham United) header from the centre of the box to the high centre of the goal. Assisted by Arne Engels with a cross following a corner.",
+          "is_own_goal": false,
+          "is_penalty": false,
           "time_approximate": false,
-          "source": "ESPN_SUMMARY_KEY_EVENTS"
+          "source": "ESPN_OFFICIAL_DETAIL"
         }
       ],
       "current_score": "1-0",
@@ -72,7 +73,7 @@
       "actual_roi_contribution": null,
       "is_major": false,
       "created_at": "2026-11-28T16:30:59Z",
-      "updated_at": "2026-11-28T16:42:58Z",
+      "updated_at": "2026-11-28T16:48:05Z",
       "last_verified_at": "2026-11-28T16:30:59Z",
       "verification_status": "IN_PROGRESS_PENDING_FINAL",
       "revision_history": [],
@@ -161,7 +162,7 @@
       "actual_roi_contribution": null,
       "is_major": false,
       "created_at": "2026-11-28T16:25:56Z",
-      "updated_at": "2026-11-28T16:42:58Z",
+      "updated_at": "2026-11-28T16:48:05Z",
       "last_verified_at": "2026-11-28T16:25:56Z",
       "verification_status": "IN_PROGRESS_PENDING_FINAL",
       "revision_history": [],
@@ -216,7 +217,7 @@
       "actual_roi_contribution": null,
       "is_major": false,
       "created_at": "2026-11-28T16:20:57Z",
-      "updated_at": "2026-11-28T16:42:59Z",
+      "updated_at": "2026-11-28T16:48:05Z",
       "last_verified_at": "2026-11-28T16:20:57Z",
       "verification_status": "IN_PROGRESS_PENDING_FINAL",
       "revision_history": [],
@@ -271,7 +272,7 @@
       "actual_roi_contribution": null,
       "is_major": false,
       "created_at": "2026-11-28T16:20:57Z",
-      "updated_at": "2026-11-28T16:42:58Z",
+      "updated_at": "2026-11-28T16:48:05Z",
       "last_verified_at": "2026-11-28T16:20:57Z",
       "verification_status": "IN_PROGRESS_PENDING_FINAL",
       "revision_history": [],
@@ -325,13 +326,14 @@
         {
           "minute": 79,
           "clock_display": "79'",
-          "period": 2,
-          "team": "West Bromwich Albion",
+          "period": 0,
+          "team_id": "383",
           "scorer": "Jimmy Morgan",
           "type": "Goal",
-          "text": "Goal! West Bromwich Albion 1, Bristol City 0. Jimmy-Jay Morgan (West Bromwich Albion) right footed shot from very close range to the bottom left corner.",
+          "is_own_goal": false,
+          "is_penalty": false,
           "time_approximate": false,
-          "source": "ESPN_SUMMARY_KEY_EVENTS"
+          "source": "ESPN_OFFICIAL_DETAIL"
         }
       ],
       "current_score": "1-0",
@@ -347,7 +349,7 @@
       "actual_roi_contribution": null,
       "is_major": false,
       "created_at": "2026-11-28T16:20:57Z",
-      "updated_at": "2026-11-28T16:42:58Z",
+      "updated_at": "2026-11-28T16:48:05Z",
       "last_verified_at": "2026-11-28T16:20:57Z",
       "verification_status": "IN_PROGRESS_PENDING_FINAL",
       "revision_history": [],
@@ -1106,7 +1108,7 @@
       "actual_roi_contribution": null,
       "is_major": false,
       "created_at": "2026-11-27T21:31:00Z",
-      "updated_at": "2026-11-28T16:42:59Z",
+      "updated_at": "2026-11-28T16:48:06Z",
       "last_verified_at": "2026-11-27T21:31:00Z",
       "verification_status": "IN_PROGRESS_PENDING_FINAL",
       "revision_history": [],
